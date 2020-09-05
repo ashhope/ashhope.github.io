@@ -1,0 +1,3338 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ε≡ﾍ( &#180;∀`)ﾉ跑起來 - 【ash希】尋紙者（coc7）</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discord.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discord.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discord.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discord.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discord.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    width: fit-content;
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image img {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 0.5em 0.7em;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">ε≡ﾍ( &#180;∀`)ﾉ跑起來</div>
+        <div class="preamble__entry">【跑團頻道】請不要跑錯頻道喔！ / 【Ash希】尋紙者（CoC7）</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 04:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="751720646324518953" id="message-751720646324518953">
+                <div class="chatlog__content">
+                    <div class="markdown">時值暮夏，空氣中充滿了水氣的潮濕，燥熱的使人難以靜下心來思考，你一個站在一棟外墻已經有些斑駁的二層小房子前，庭院中蔓生的雜草和信箱裡面胡亂塞滿的宣傳單都暗示著已經很久沒人好好整理了。 <span class="chatlog__edited-timestamp" title="05-Sep-20 04:37 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751721178430832772" id="message-751721178430832772">
+                <div class="chatlog__content">
+                    <div class="markdown">你之所以會來到這裡，是收到是Thomas Kimball，也就是Douglas的侄子的拜託，他表示Douglas已經失蹤了好幾年，因此以前住的房子也被他給繼承了，雖然他還沒抽出時間來整理就是了。 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751721561299615786" id="message-751721561299615786">
+                <div class="chatlog__content">
+                    <div class="markdown">他最近收到了附近警察局的通知，說有人報案說好像看到人闖進去這棟房子，警察來到現場時也只能遠遠的看到雜亂不堪的書房而已，在沒有獲得主人的同意下，他們也無法擅自進入現場，於是才聯絡了Thomas </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751722145670889483" id="message-751722145670889483">
+                <div class="chatlog__content">
+                    <div class="markdown">接到消息的Thomas只好拜託你過來這裡，幫忙調查一下究竟是怎麼回事，要是能夠找到失蹤的Douglas的任何消息就更好了，不管他究竟是死是活都好，Thomas只想確認Douglas到底去哪裡了。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 04:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="751723954862948383" id="message-751723954862948383">
+                <div class="chatlog__content">
+                    <div class="markdown">作為道格拉斯（Douglas）為數不多有著友好來往的朋友，我來到小房子前，先是打開了信箱，見到自己的名字——Akacia寄來的信，似乎道格拉斯已經很久沒翻過信箱了。 <span class="chatlog__edited-timestamp" title="05-Sep-20 04:59 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751724129782071348" id="message-751724129782071348">
+                <div class="chatlog__content">
+                    <div class="markdown">「也只好進去了吧……」我拿著我那未被打開的信件，決意走進房子的裡頭。 <span class="chatlog__edited-timestamp" title="05-Sep-20 04:43 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 04:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="751725662167105566" id="message-751725662167105566">
+                <div class="chatlog__content">
+                    <div class="markdown">你推開了厚重的木門，軸承發出嘎吱的一聲，似乎已經多年沒有人使用過了，門後的蜘蛛也被你的開門動作給摧毀了它精心構築許久的巢，當然你一點也沒有注意到就是了，玄關的地板和鞋櫃都被厚厚的灰塵覆蓋住了，順著開門的動作，塵埃也隨之在空氣中飛舞起來，午後的陽光將塵埃的軌跡清晰的投射進你的瞳孔之中。開門時那些灰塵的味道也順著氣流流入了你的鼻子，充斥著你的鼻腔。
+
+玄關後頭接著短短的走廊，看起來一樓大概就是客廳書房廚房這幾個小空間而已，藉著陽光，室內雖然有些昏暗，但還是看得清絕大多數東西的。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 04:53 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 04:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="751726945074544650" id="message-751726945074544650">
+                <div class="chatlog__content">
+                    <div class="markdown">我環顧一下一樓，這裡完全沒有人的氣息——「這也是寫作靈感題材的一部份嗎……？」想起道格拉斯寫的書，決定先進去書房，看看有沒有甚麼線索。 <span class="chatlog__edited-timestamp" title="05-Sep-20 04:54 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="751728366444478555" id="message-751728366444478555">
+                <div class="chatlog__content">
+                    <div class="markdown">書房裡面的三面墻都陳列著擺滿了書的高大書櫃，窗戶前則是一張書桌，從上面的文具和紙張來看道格拉斯大概是在這邊進行工作的，窗戶現在大大敞開著，一陣風吹過，將窗簾吹的高高揚起。
+
+地板上也堆滿了各種書籍和參考的紙張，或許是道格拉斯寫作時的參考資料和讀的書吧，書架和地板上的那些書似乎是被誰胡亂翻找過了，顯得雜亂不堪嗎，有些書架上的書也被隨手撥到地板上了，書脊朝天的癱倒著。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="751729338231029823" id="message-751729338231029823">
+                <div class="chatlog__content">
+                    <div class="markdown">我嘗試拿起地板上的參考紙張，想要知道他最近的寫作題目，說不定能看出甚麼端倪。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="751730303114018896" id="message-751730303114018896">
+                <div class="chatlog__content">
+                    <div class="markdown">從那些參考紙張來看，他失蹤前大概是在寫一篇有關異世界的小說吧，然而潦草的字跡與時間的摧殘讓你看不清上面到底寫了些什麼，有些或許還只是道格拉斯自己才懂的靈感跟記號吧。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 05:07 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="751731530887462953" id="message-751731530887462953">
+                <div class="chatlog__content">
+                    <div class="markdown">——道格拉斯會不會在相關的書藉上留下了甚麼…？這樣想的我想要利用「異世界」這個關鍵字，掃視一下書櫃和散落在地上的書本。 <span class="chatlog__edited-timestamp" title="05-Sep-20 05:15 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="751731708507717742" id="message-751731708507717742">
+                <div class="chatlog__content">
+                    <div class="markdown"><span class="mention" title="cecidicia#8521">@Akacia</span> 
+請過一個圖書館使用
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="751731851478958120" id="message-751731851478958120">
+                <div class="chatlog__content">
+                    <div class="markdown">cc 50 圖書館使用 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="HKTRPG#4989" data-user-id="544462904037081138" style="color: rgb(26,188,156)">HKTRPG</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">05-Sep-20 05:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="751731851676090369" id="message-751731851676090369">
+                <div class="chatlog__content">
+                    <div class="markdown"><span class="mention" title="cecidicia#8521">@Akacia</span>
+1D100 ≦ 50：
+39 → 通常成功：圖書館使用 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="751732568654741505" id="message-751732568654741505">
+                <div class="chatlog__content">
+                    <div class="markdown">你大略的掃視了一下書櫃，其中大多都是各式各樣的經典小說和各種學科都有的專業書籍，不過眼尖的你從中發現一本和心理學相關的書，大概是關於社恐想要逃離這個世界的內容，其他有關異世界的可能就是一些奇幻小說了。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="751733830225887264" id="message-751733830225887264">
+                <div class="chatlog__content">
+                    <div class="markdown">掃視到社恐和逃離世界的書本的時候，我開始思索道格拉斯的失蹤是自願、精神失常下的自我軀動行為、還是他人誘拐？不過以現有的資訊還是無法得出結論，於是我拿起那本有關社恐和逃離世界的書，開始翻起來。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="751734755053142046" id="message-751734755053142046">
+                <div class="chatlog__content">
+                    <div class="markdown">你大略的翻看了那本書的內容，作者是一個名不見經傳的人，至少你從來沒有聽過作者的名字就是了，作者主要是將他自己身為一個嚴重的社恐，心裡面的想法和一些想象用半散文半小說的方式寫了出來，大多都是他的心路歷程吧，不過在書在最後，作者似乎能夠回到社會與其他人正常交流了呢。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 05:25 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="751735349952118784" id="message-751735349952118784">
+                <div class="chatlog__content">
+                    <div class="markdown">我的第一反應是猜想這本書會不會是道格拉斯用化名寫的作品，我開始回想起我曾經看過一、兩本道格拉斯寫過的書，在腦內比對文筆上有沒有一致性的地方。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="751735936794230795" id="message-751735936794230795">
+                <div class="chatlog__content">
+                    <div class="markdown">從字裡行間透露的語氣和習慣的筆法來看，這本書顯然並非道格拉斯的作品，而且那個作者從介紹來看也不是道格拉斯的其他化名。道格拉斯可能只是將這本書當成休閒讀物或是寫作參考之一吧。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="751736654531788830" id="message-751736654531788830">
+                <div class="chatlog__content">
+                    <div class="markdown">——無法從書本裡頭取得線索呢……我離開書房，開始探索這間房子，並準備前往客廳。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="751736941237764147" id="message-751736941237764147">
+                <div class="chatlog__content">
+                    <div class="markdown">客廳比起書房來說可說是整齊多了，除了一張沙發和電視之外幾乎就沒有別的東西了，看起來前主人大概是很少在這個地方逗留吧。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="751737716357464064" id="message-751737716357464064">
+                <div class="chatlog__content">
+                    <div class="markdown">這種整齊跟書房的凌亂對比之深。令我不禁懷疑書房的狀況是有人（道格拉斯還是別人）在趕急地找些甚麼東西、還是精神失常地想要摧毀一切……我就這樣想著想著離開客廳，想要往二樓去。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="751738157799571456" id="message-751738157799571456">
+                <div class="chatlog__content">
+                    <div class="markdown">你走上二樓，二樓的佈局大概就是主臥室和副臥室兩間而已，而從副臥室的裝潢和陳列來看大概是因為沒有人來拜訪道格拉斯所以已經被他當成堆放雜物的儲藏間了。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 05:39 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="751738452952875038" id="message-751738452952875038">
+                <div class="chatlog__content">
+                    <div class="markdown">我直接進入了主臥室。 <span class="chatlog__edited-timestamp" title="05-Sep-20 05:40 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="751739524719050762" id="message-751739524719050762">
+                <div class="chatlog__content">
+                    <div class="markdown">主臥室中擺放著一張大大的雙人床，上頭同樣也覆蓋了厚厚的一層灰塵。一旁則是衣櫃和一張書桌，衣櫃敞開著，裡頭只有簡單的幾套日常衣服。書桌上還擺著一隻鋼筆，是你記憶中道格拉斯最喜歡的那隻，印象中他總是片刻不離的佩戴在身上，然而從鋼筆上的灰塵來看他的主人也同樣已經多年沒有碰過它了。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 05:50 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="751740589703299152" id="message-751740589703299152">
+                <div class="chatlog__content">
+                    <div class="markdown">我開始在腦裡排除了「自願消失」這個可能性，愛筆可算是作家的生命，會讓它塗上灰塵也是怪異之事，既然鋼筆沒有離開臥室，我甚至開始猜想，會不會道格拉斯仍在這房子裡面……？ </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751741769338847303" id="message-751741769338847303">
+                <div class="chatlog__content">
+                    <div class="markdown">我開始仔細地探索主臥室，包括舖滿灰塵的地板。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="751742661765103706" id="message-751742661765103706">
+                <div class="chatlog__content">
+                    <div class="markdown">你仔細的一步一步探查著地板，然而你除了灰塵多了一點之外實在看不出來這房間有什麼特別的地方。
+其他地方的話，你注意到了衣櫃裡面和書桌下的抽屜或許有放什麼東西也說不定？
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 05:57 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 05:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="751742836197818399" id="message-751742836197818399">
+                <div class="chatlog__content">
+                    <div class="markdown">於是我開始調查書桌，以及書桌下的抽屜。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="751743580258959402" id="message-751743580258959402">
+                <div class="chatlog__content">
+                    <div class="markdown">書桌下的抽屜裡面擺了一小疊的稿子，上面看起來似乎是道格拉斯正在寫的小說，字跡和墨水顏色看起來都是出自於道格拉斯之手和他最愛的那隻鋼筆無誤。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 06:00 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="751743832512528406" id="message-751743832512528406">
+                <div class="chatlog__content">
+                    <div class="markdown">我仔細查看他正在寫的小說是關於甚麼題材。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="751745779483410493" id="message-751745779483410493">
+                <div class="chatlog__content">
+                    <div class="markdown">那是一篇小說，講著一個逃離原生家庭，害怕人群喧囂的少年在某天遇見了一個來自另一個世界的少女，那個少女帶他去了另一個世界遊玩，在那邊他不需要逼迫自己與其他人講話，也不會被其他人誤解與敵視。從此之後少年就常常在下課之後和那個少女一起遊戲，在這個過程中他也逐漸能夠正常的和其他人社交，原本在學校總是一個人孤僻的他也遇見了一些志同道合的好朋友，直到某一天那個少女告訴少年往返兩個世界的門因為能量不夠的緣故已經即將關閉，從此兩個世界將斷去一切連結，於是她在櫻花樹下詢問著少年要不要和他一起離去...
+
+故事就斷在這裡，留下一個未完的結局...
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="751746504867315712" id="message-751746504867315712">
+                <div class="chatlog__content">
+                    <div class="markdown">——道格拉斯該不會就這樣跟著那名少女離開了現世吧……我如此猜想。
+我看看抽屜除了手稿還有沒有別的東西。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="751746998566256690" id="message-751746998566256690">
+                <div class="chatlog__content">
+                    <div class="markdown">抽屜中除了稿子還有一本日記，說是日記不過看起來道格拉斯只有想到什麼的時候才會隨手寫上一些，日期也是跳來跳去。 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751747352922030190" id="message-751747352922030190">
+                <div class="chatlog__content">
+                    <div class="markdown">不過從大致的時間上來看，道格拉斯先是抱怨著跟人交流很累，總是看不清其他人表面背後的真實意圖，以及總是無法理解大家拐彎抹角的暗示與隱喻。 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751747708926296105" id="message-751747708926296105">
+                <div class="chatlog__content">
+                    <div class="markdown">從某一篇開始，他提到他發現附近的一個墓園平常幾乎不會有人出沒，是一個絕佳的閱讀所在。微風拂過樹梢的響動和明朗的月光都使他得以擺脫俗世的紛擾。 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751748209306501211" id="message-751748209306501211">
+                <div class="chatlog__content">
+                    <div class="markdown">然後道格拉斯說起了他在墓地遇見了一些特別的朋友，和他們交流一點也不需要花費心力，自在極了。比起來跟其他人說話根本就是一種永不止息的折磨，就像是薛西弗斯的懲罰一樣。
+
+日記就寫到了這裡，從他深深刻下透過紙張印到紙背的鋼筆筆跡和飛舞的筆畫，你可以清楚的感受到道格拉斯寫這些日記時的強烈情緒。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 06:20 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="751749001161736232" id="message-751749001161736232">
+                <div class="chatlog__content">
+                    <div class="markdown">我暗自竊喜，因為終於得到了第一個具體的線索。我拿起他的日記，想要前往那個墓園調查。在動身之前，我打算督看一下他的衣櫃——一個主臥室內我尚未調查的地方。 <span class="chatlog__edited-timestamp" title="05-Sep-20 06:22 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="751749412149002309" id="message-751749412149002309">
+                <div class="chatlog__content">
+                    <div class="markdown">裡面就是一個獨身男子的衣櫃，只有簡單的幾套衣服而已，其他什麼也沒有。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="751749864601288754" id="message-751749864601288754">
+                <div class="chatlog__content">
+                    <div class="markdown">於是，我拿起他的日記，動身前往那個附近的墓園。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="751751012401807401" id="message-751751012401807401">
+                <div class="chatlog__content">
+                    <div class="markdown">當你踏出屋門時，太陽已經不復你進房之前的高掛在天上，已經半隱沒進遠處的群山之中，夕陽的餘暉為廣袤的大地覆上了橙紅的面紗。
+附近的居民似乎也在這個時間出現在了道路上，踏上了回家的歸途。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="751751467748294706" id="message-751751467748294706">
+                <div class="chatlog__content">
+                    <div class="markdown">說不定能從附近的居民打聽到甚麼，於是我決定先跟某位附近正在回家的居民打聽有關道格拉斯的事情。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="751751955751370794" id="message-751751955751370794">
+                <div class="chatlog__content">
+                    <div class="markdown">你攔下了正要踏入家門的隔壁鄰居，那女子遲疑的向你問道「呃...你好？請問...有什麼事嗎？」
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="751753204513112144" id="message-751753204513112144">
+                <div class="chatlog__content">
+                    <div class="markdown">「你好，我叫亞卡西雅（Akacia），亞卡西雅．柏卡，是佐州大學的教授，也是小說家道格拉斯的朋友。我受到他的侄子委託過來看看，請問可以問一些有關道格拉斯的事情嗎？」我帶著友善的微笑跟女子直接表明來意。 <span class="chatlog__edited-timestamp" title="05-Sep-20 08:17 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="751753953284194365" id="message-751753953284194365">
+                <div class="chatlog__content">
+                    <div class="markdown">「呃...？你好...我是萊拉，萊拉&#183;奧戴爾。」住在鄉下沒什麼見過世面的女子聽見你是教授怯生生的說道。「可...可以的，沒問題！」
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 06:41 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="751754911300976710" id="message-751754911300976710">
+                <div class="chatlog__content">
+                    <div class="markdown">「萊拉很高興認識你！」我指向他那破舊的房子：「請問你認識住在這房子的道格拉斯嗎？他近來看起來怎樣？」 <span class="chatlog__edited-timestamp" title="05-Sep-20 06:48 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="751756111417311233" id="message-751756111417311233">
+                <div class="chatlog__content">
+                    <div class="markdown">「呃...你是說那個都不太出門的大叔嗎？他不是已經失蹤很久了嗎？」萊拉遲疑了一下才回答道。
+
+「雖然他都不太說話，不過好像是個好人呢，有一次我不小心把錢包掉在地上他還追上來遞給我。不過...他有時候好像也有點怪怪的就是了...」
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 06:57 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="751757096134901780" id="message-751757096134901780">
+                <div class="chatlog__content">
+                    <div class="markdown">「哦？大概是怎樣怪怪的？你對上一次見到道格拉斯是甚麼時候呢？三年前嗎？」 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="751757886212014179" id="message-751757886212014179">
+                <div class="chatlog__content">
+                    <div class="markdown">「五...不，應該是六年前了吧，好像哪天開始就有人說他已經失蹤了，詳細的情況我也不知道就是了。」女子皺了皺眉，歪著頭思考了良久才說出口。
+
+「怪怪的話就...我有一次在我房間讀書的時候從窗戶看到他胳膊夾著一本書往墓園的方向走去？你懂的，正常人應該不會這樣的吧。不過話說回來，每次看到他時他好像總是帶著他的那些書呢。」
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 06:57 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="751758190944977018" id="message-751758190944977018">
+                <div class="chatlog__content">
+                    <div class="markdown">「原來如此，我待會也打算去那個墓園看看呢。說起來，他的侄子跟警察局跟我說最近有人闖進去呢。你可以告訴我你知道的事嗎？例如有沒有目擊或聽到甚麼？」 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 06:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="751758477436780582" id="message-751758477436780582">
+                <div class="chatlog__content">
+                    <div class="markdown">「有人闖進去？」女子緊張的看了看四周「我們這裡治安很好的不會發生這種事吧...」
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="751759584506544168" id="message-751759584506544168">
+                <div class="chatlog__content">
+                    <div class="markdown">「嗯……原來如此，連箂拉都不知道的話就沒有辨法了。」我一付準備離開的樣子：「謝謝你，箂拉，我這就去墓園看看。」 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="751760205649281035" id="message-751760205649281035">
+                <div class="chatlog__content">
+                    <div class="markdown">你告別了萊拉，繼續踏上前往墓園的路途。墓園在道格拉斯家不遠處，穿過一個小樹林就到了，罕無人跡的墓園只有一個駝著背的老頭坐在門口附近看守著。此時太陽已經幾乎完全沒入地平線了，靛藍色的天幕在你頭上舒展著。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 07:07 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="751760490455236669" id="message-751760490455236669">
+                <div class="chatlog__content">
+                    <div class="markdown">我上前跟老頭打招呼，我直覺覺得他會知道不少有關道格拉斯的事情，所以先決定友好地交流一下。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="751760807406338069" id="message-751760807406338069">
+                <div class="chatlog__content">
+                    <div class="markdown">「...」老人一言不發的看向你，並沒有主動開口說話。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="751761427785580644" id="message-751761427785580644">
+                <div class="chatlog__content">
+                    <div class="markdown">「看守墓園的工作會很辛苦嗎？」我還是決定了先跟他閒話家常。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="751761632820068484" id="message-751761632820068484">
+                <div class="chatlog__content">
+                    <div class="markdown">「還好。」老人簡短的回道。「平常也沒人會來。」
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="751761920415236158" id="message-751761920415236158">
+                <div class="chatlog__content">
+                    <div class="markdown">「我認識一個叫道格拉斯的朋友聽說他很常來這裡呢。你對他有印象嗎？」 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="751762180617142363" id="message-751762180617142363">
+                <div class="chatlog__content">
+                    <div class="markdown">「道格拉斯？他已經很久沒來了。」老人還是一副不冷不熱的樣子。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="751763232561299586" id="message-751763232561299586">
+                <div class="chatlog__content">
+                    <div class="markdown">「對啊……友人的失蹤令我很大打擊呢。所以我才過來看看回憶一下他的身影，看看他平常來墓園坐的位置，打聽他主要都在這裡幹些甚麼。」我跟老人用一付懷念的語氣說道。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="751763754408214649" id="message-751763754408214649">
+                <div class="chatlog__content">
+                    <div class="markdown">「他都在這邊讀書阿，我們也沒講過幾句話就是了。至於坐哪裡...他好像都隨便坐吧太久以前我也有些記不清了。」老頭轉了轉他那渾濁的雙瞳思考著，緩緩說道。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="751764353102905416" id="message-751764353102905416">
+                <div class="chatlog__content">
+                    <div class="markdown">「原來如此呢，那我就在這裡蹓躂一下吧。」我拿出手機看看時間，看距離入夜還有多久。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 07:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="751764803734994956" id="message-751764803734994956">
+                <div class="chatlog__content">
+                    <div class="markdown">老頭又坐回椅子上，繼續喝著他的啤酒。
+
+現在時間已經是7點了，銀白的月亮已經從地平線上探出頭來，清晰的照在你四周的墓碑上。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="751775837006594048" id="message-751775837006594048">
+                <div class="chatlog__content">
+                    <div class="markdown">於是我就開始探索起墓園來。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="751777071411363861" id="message-751777071411363861">
+                <div class="chatlog__content">
+                    <div class="markdown">依靠著月光，你在墓園中四處轉悠著，這裡和你見過的其他墓園並沒有什麼分別，晚風吹在附近的枝枒上，沙沙的聲音傳進你的耳朵。就在這時你看見了月光恰好落在一個墓碑上，你定睛一看才發現上面寫的名字正是道格拉斯&#183;金博爾。墓志銘短短的寫著“真正的寧靜”。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="751777933835894874" id="message-751777933835894874">
+                <div class="chatlog__content">
+                    <div class="markdown">「嘛，原來不是失蹤而是死掉了……」我自言自語地道，走近查看墓碑，看看有沒有生卒年月日的資訊。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="751778267325005955" id="message-751778267325005955">
+                <div class="chatlog__content">
+                    <div class="markdown">上面只寫了生年並沒有卒年，或許是失蹤太久之後才被其他人立起來的。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="751778685497114824" id="message-751778685497114824">
+                <div class="chatlog__content">
+                    <div class="markdown">沒有卒年……嗎？那到底是誰立的呢？抱著這個想法，我決定去問一下看守墓園的老人。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="751779412676182036" id="message-751779412676182036">
+                <div class="chatlog__content">
+                    <div class="markdown">關於誰立了那個墓碑，老人回答道「我也不知道，大概就幾年前有人付錢給葬儀社立的吧？反正這問題也不重要就是了，反正他也失蹤那麼久了到底死沒死很重要嗎？」
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="751780179713589300" id="message-751780179713589300">
+                <div class="chatlog__content">
+                    <div class="markdown">「葬儀社為他立碑的時候，你不在這裡嗎？」我對這個墓碑的事情愈是好奇。甚至在幻想，墓碑裡頭有沒有名為道格拉斯的人、或是屍體、或是別的東西。 <span class="chatlog__edited-timestamp" title="05-Sep-20 08:26 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="751780535973445662" id="message-751780535973445662">
+                <div class="chatlog__content">
+                    <div class="markdown">「我在阿，我只是不在意而已，那可不是我的工作範圍。」老人不以為意的回答道，又從腰間拿出酒瓶來喝了口酒。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="751781032335769620" id="message-751781032335769620">
+                <div class="chatlog__content">
+                    <div class="markdown">「我沒有帶瓶好酒來墓園實在太不識趣了。」我笑道：「那我不打擾你的酒興了吧，我繼續四周看看。」
+就這樣，我回到了道格拉斯的墓前。 <span class="chatlog__edited-timestamp" title="05-Sep-20 08:35 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751781272506073098" id="message-751781272506073098">
+                <div class="chatlog__content">
+                    <div class="markdown">我拿出了他的日記，放在他的墓前，跟墓碑說：「道格拉斯，是我，亞卡西雅。」 <span class="chatlog__edited-timestamp" title="05-Sep-20 08:37 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751781503528075355" id="message-751781503528075355">
+                <div class="chatlog__content">
+                    <div class="markdown">「你會介意我偷看你的筆記嗎？」我看著道格拉斯的墓碑問道。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:31 PM</span>
+
+            <div class="chatlog__message " data-message-id="751781672646606919" id="message-751781672646606919">
+                <div class="chatlog__content">
+                    <div class="markdown">你的聲音在墓園之中迴響著，然而並沒有人回應你。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="751782182787219479" id="message-751782182787219479">
+                <div class="chatlog__content">
+                    <div class="markdown">「我像個笨蛋一樣跟墓碑說話呢，」我自言自語地道，在他的墓碑旁坐下，打開了道格拉斯的日記本，翻到描述墓園那一頁。 <span class="chatlog__edited-timestamp" title="05-Sep-20 08:36 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751782409523167273" id="message-751782409523167273">
+                <div class="chatlog__content">
+                    <div class="markdown">再比對一下四周的環境，看看有沒有值得調查的地方。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="751782967579246683" id="message-751782967579246683">
+                <div class="chatlog__content">
+                    <div class="markdown">墓園差不多就這樣吧，你把能看的地方都看了遍，然而並沒有什麼其他特別的地方了。
+Thomas拜託你前來時還跟你交代了晚上可以直接睡在道格拉斯的家沒關係。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="751784020022394890" id="message-751784020022394890">
+                <div class="chatlog__content">
+                    <div class="markdown">雖然湯馬斯有跟我說可以睡在道格拉斯的家，但我對那充滿刺鼻氣味的房子實在沒太大好感，反倒在墓園還來得輕鬆自然。 <span class="chatlog__edited-timestamp" title="05-Sep-20 08:44 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751784604683337748" id="message-751784604683337748">
+                <div class="chatlog__content">
+                    <div class="markdown">我打開了手提包，從裡頭拿出我的便攜充電器，按了兩下，開啟了手電筒功能。決定再仔細調查一下道格拉斯的墓碑——上頭有沒有塵？有沒有泥濘？有沒有任何值得在意的地方？ </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="751785131970265139" id="message-751785131970265139">
+                <div class="chatlog__content">
+                    <div class="markdown">這真真切切就是一個普通的墓碑，並沒有什麼特別的地方。
+
+月亮已經慢慢的升到樹梢之上了，鳥鳴聲也逐漸了靜下來，或許是都歸巢了吧。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="751786363510194246" id="message-751786363510194246">
+                <div class="chatlog__content">
+                    <div class="markdown">「那就沒有辨法了……」我關上手電筒，拍拍身上的泥土，跟老人打個招呼後就步出墓園。我看看四周，也不像有旅館之類的東西，可是卻不想就這樣結束搜索，我就這樣回到了道格拉斯的房子前面。 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751786928164307035" id="message-751786928164307035">
+                <div class="chatlog__content">
+                    <div class="markdown">先進去還未探索過的副臥室看看環境怎樣吧。 <span class="chatlog__edited-timestamp" title="05-Sep-20 08:55 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 08:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="751788039176585268" id="message-751788039176585268">
+                <div class="chatlog__content">
+                    <div class="markdown">副臥室裡面就只是一堆雜物而已，你隨意看了幾眼就可以得到不值得仔細調查的結論。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="751788766292869150" id="message-751788766292869150">
+                <div class="chatlog__content">
+                    <div class="markdown">我試著調查一下整個房子有沒有床或是沙發可以讓我睡個好覺的地方。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="751788934014697542" id="message-751788934014697542">
+                <div class="chatlog__content">
+                    <div class="markdown">比較適合休息的地方大概就是道格拉斯睡的主臥室或是樓下客廳的沙發吧。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="751789849631129612" id="message-751789849631129612">
+                <div class="chatlog__content">
+                    <div class="markdown">既然我是來調查房子闖入事件，睡在二樓也太沒警覺性了。於是我從主臥室偷來了被子，拍拍沙發上的塵埃，開始躺在沙發上面，打算當起房子的一夜警衛。 <span class="chatlog__edited-timestamp" title="05-Sep-20 09:06 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="751790280587608064" id="message-751790280587608064">
+                <div class="chatlog__content">
+                    <div class="markdown">不知何時你已經悠悠的沉入夢鄉，直到一聲異樣的腳步聲打破寂靜的夜幕將你喚醒，那腳步聲似乎是從書房那傳出來的。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="751791016947875900" id="message-751791016947875900">
+                <div class="chatlog__content">
+                    <div class="markdown">我開始忍著氣息，攝手攝腳地查看目前附近有沒有能作為以防萬一用的自衞武器。 <span class="chatlog__edited-timestamp" title="05-Sep-20 09:09 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="751791300910514237" id="message-751791300910514237">
+                <div class="chatlog__content">
+                    <div class="markdown">沙發旁的壁爐邊有一支撥火棍，那是你觸目所及最適合的武器了。
+// <span class="chatlog__edited-timestamp" title="05-Sep-20 09:10 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="751792298685104169" id="message-751792298685104169">
+                <div class="chatlog__content">
+                    <div class="markdown">我拿起壁爐旁的撥火棍，攝手攝腳地意圖走近聲音的來源，並專注地聽留意書房那邊傳出來聲音，嘗試推測房間內正在發生的事情。 <span class="chatlog__edited-timestamp" title="05-Sep-20 09:15 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="751792765616128052" id="message-751792765616128052">
+                <div class="chatlog__content">
+                    <div class="markdown"><span class="mention" title="cecidicia#8521">@Akacia</span> 
+過個聆聽吧~
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="751792857282772992" id="message-751792857282772992">
+                <div class="chatlog__content">
+                    <div class="markdown">cc 40 聆聽 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="HKTRPG#4989" data-user-id="544462904037081138" style="color: rgb(26,188,156)">HKTRPG</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">05-Sep-20 09:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="751792858117177394" id="message-751792858117177394">
+                <div class="chatlog__content">
+                    <div class="markdown"><span class="mention" title="cecidicia#8521">@Akacia</span>
+1D100 ≦ 40：
+25 → 通常成功：聆聽 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="751793226264084500" id="message-751793226264084500">
+                <div class="chatlog__content">
+                    <div class="markdown">聽起來房間裡面似乎是有誰正在翻找著什麼的樣子，書籍翻動的聲音在靜謐的夜裡顯得特別明顯。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="751793780977434716" id="message-751793780977434716">
+                <div class="chatlog__content">
+                    <div class="markdown">——所以感興趣的東西就只有書啊。該不會是道格拉斯回來看書吧？我這樣猜想。 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751794480746594394" id="message-751794480746594394">
+                <div class="chatlog__content">
+                    <div class="markdown">要是以小說的設定來說，他是想要擺脫俗世的紛擾才想要消失多年，這樣的道格拉斯還會想見自己嗎？我開始在妄想有的沒的的事情。 <span class="chatlog__edited-timestamp" title="05-Sep-20 09:27 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751794887610990622" id="message-751794887610990622">
+                <div class="chatlog__content">
+                    <div class="markdown">書房裡頭有著某個未知的偷書賊，或是想要回來看書的道格拉斯，我作出了這兩個假說。 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="751795285281210368" id="message-751795285281210368">
+                <div class="chatlog__content">
+                    <div class="markdown">於是我躲在走廊某個能夠看到書房門口的地方，靜待裡頭的人翻到他想要的東西離開的一瞬間。那我就知道他是誰、要不要迎擊了。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="751795522850914414" id="message-751795522850914414">
+                <div class="chatlog__content">
+                    <div class="markdown">你靜靜等了一陣子，然而裡面的人卻絲毫沒有要出來的跡象。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="751796402409046056" id="message-751796402409046056">
+                <div class="chatlog__content">
+                    <div class="markdown">我拿起撥火棍，慢慢推開書房的門的小縫隙，試圖偷看書房裡面的情況。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="751797283749757020" id="message-751797283749757020">
+                <div class="chatlog__content">
+                    <div class="markdown">透過門縫，映入你眼簾的是一個非人生物，那生物和人有些相似，卻又截然不同，皮膚像橡膠一樣的皮膚，而理論上是腳的地方如蹄一般，雙手也被爪子給取代了。
+請SAN CHECK。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="751798006717874208" id="message-751798006717874208">
+                <div class="chatlog__content">
+                    <div class="markdown">cc 80 SAN </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="HKTRPG#4989" data-user-id="544462904037081138" style="color: rgb(26,188,156)">HKTRPG</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">05-Sep-20 09:36 PM</span>
+
+            <div class="chatlog__message " data-message-id="751798007195893762" id="message-751798007195893762">
+                <div class="chatlog__content">
+                    <div class="markdown"><span class="mention" title="cecidicia#8521">@Akacia</span>
+1D100 ≦ 80：
+51 → 通常成功：SAN </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="751798601310666903" id="message-751798601310666903">
+                <div class="chatlog__content">
+                    <div class="markdown">在你看到他的那瞬間，他也看到你了。
+他慌張的扔下手中的書本，從窗戶一躍而出，在月光下劃出一道長長的身影，消失在了樹林之中。
+你楞了一下，這才驚覺那個生物和道格拉斯有著如此多的相似之處...
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="751799507850887198" id="message-751799507850887198">
+                <div class="chatlog__content">
+                    <div class="markdown">「道格拉斯……已經不是人類了……」我留在原地自言自語。我望出窗，意圖從樹林的晃動得悉他逃跑的方向。 <span class="chatlog__edited-timestamp" title="05-Sep-20 09:48 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="751799781608914975" id="message-751799781608914975">
+                <div class="chatlog__content">
+                    <div class="markdown">從足跡和樹林的晃動來看，你可以清楚的觀察到他沿著樹林之中的小徑往墓園的方向逃去了。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="751800065672085524" id="message-751800065672085524">
+                <div class="chatlog__content">
+                    <div class="markdown">——果然是墓園……！我趕快離開房子，奔向墓園的方向。 <span class="chatlog__edited-timestamp" title="05-Sep-20 09:45 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="751801248570802207" id="message-751801248570802207">
+                <div class="chatlog__content">
+                    <div class="markdown">你趕緊跑出大門，沿著同樣的小徑往墓園的方向奔去，當你總算跑出了樹林，到了可以看見墓園的地方時，你看見那個身影坐在道格拉斯的墓碑上，傴僂著背朝你望來。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="751801602410545253" id="message-751801602410545253">
+                <div class="chatlog__content">
+                    <div class="markdown">「是你嗎——道格拉斯！」我對那個身影大喊。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="751802113348206624" id="message-751802113348206624">
+                <div class="chatlog__content">
+                    <div class="markdown">他點了點頭，似乎想說些什麼，話音在嘴邊卻又突然收回了，一副欲言又止的樣子。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="751802834290212966" id="message-751802834290212966">
+                <div class="chatlog__content">
+                    <div class="markdown">我張開手，慢慢走近眼前那名為道格拉斯的非人生物：「好久沒見了，道格拉斯——」 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 09:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="751803238063407224" id="message-751803238063407224">
+                <div class="chatlog__content">
+                    <div class="markdown">「是呢...好久不見了，Akacia，你過得還不錯吧。」道格拉斯，又或是那個本來是道格拉斯的生物悠悠的說道。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="751803953561337939" id="message-751803953561337939">
+                <div class="chatlog__content">
+                    <div class="markdown">「還好吧，還是老樣子。你沒有回信我就過來看看了，」我凝視著那非人生物的身影，把他當作是道格拉斯一樣聊天：「你變了好多啊，發生了甚麼事情嗎？」 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="751805154264744018" id="message-751805154264744018">
+                <div class="chatlog__content">
+                    <div class="markdown">「沒。」他輕描淡寫的回答道，然後配上他那非人的臉孔只顯得莫名的違和。
+
+「我只是累了，跟人說話什麼的我已經撐不下去了，我想要的只是能夠安安靜靜的讀我的書而已。就在這時我遇到了一些來自地底的好朋友，他們帶我去了另一個世界，在那裡我不再需要煩惱金錢，不再需要思考晚餐時要穿什麼或是措辭要怎麼說才得體不冒犯人，除了用餐時間之外，我不再需要和其他人相見，我可以隨心所欲的讀我的書，不論是艷陽高照的白天或是星光熠熠的黑夜。」
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="751805943666442340" id="message-751805943666442340">
+                <div class="chatlog__content">
+                    <div class="markdown">「可是這個狀態就無法執起鋼筆寫小說吧？」我故意提起他還是人類的時候熱衷的事情。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="751806550775038072" id="message-751806550775038072">
+                <div class="chatlog__content">
+                    <div class="markdown">「還是可以的，只是媒介不一樣了而已，從人類的鋼筆與墨水換成了另一種東西。不過，那並不是重點吧。」他咧開嘴笑著說道，血盆大口顯得更加恐怖了。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="751807352331829262" id="message-751807352331829262">
+                <div class="chatlog__content">
+                    <div class="markdown">「我倒是有點好奇換成了甚麼呢？能給我看看成品嗎？」我開始有點警戒，但卻又止不住好奇心。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="751807748047372299" id="message-751807748047372299">
+                <div class="chatlog__content">
+                    <div class="markdown">「那個你看了也看不懂啦。」他爽朗的邊笑邊說道。「而且我可沒帶出來吶。」
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="751808486450528312" id="message-751808486450528312">
+                <div class="chatlog__content">
+                    <div class="markdown">「那有機會絕對要帶出來，我還會來找你的。」我也用上他的爽朗語氣回話。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="751808802466037801" id="message-751808802466037801">
+                <div class="chatlog__content">
+                    <div class="markdown">「啊...」道格拉斯突然長長歎了口氣。
+「事實上...這應該是我們最後一次見面了...之後我就不會再出來了。」
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="751808932577673257" id="message-751808932577673257">
+                <div class="chatlog__content">
+                    <div class="markdown">「為甚麼？已經在家裡找到要找的書嗎？」 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="751809649497604206" id="message-751809649497604206">
+                <div class="chatlog__content">
+                    <div class="markdown">「最近越來越多人類發現我們的蹤跡了...為了不必要的紛擾，我們已經決定要永久封閉這個出入口了，所以...我才會在這個最後時刻回去拿書，唯有那些是我割捨不掉的念想。」他的語氣裡夾雜了一些難以言喻的落寞。
+「另一個世界中有太多可以去看，可以去體驗的事情了，可惜我不能一一和你分享了，我的朋友...」
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="751810496834830386" id="message-751810496834830386">
+                <div class="chatlog__content">
+                    <div class="markdown">「是……這樣嗎，至少我知道你沒有死掉，還活蹦蹦的——」我開始回憶跟道格拉斯認識的畫面，難過地跟朋友道別：「只希望你在另一個世界過得快樂。」 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="751811279253012590" id="message-751811279253012590">
+                <div class="chatlog__content">
+                    <div class="markdown">「嗯...也祝你愉快呢，我想我會很快樂的。」他的嘴角不由自主的彎了起來。
+
+「如果有人問起我的話，還是說我死了就好吧，事實上這個墓碑也是我偷偷請人立的。」說到這裡的時候，道格拉斯還露出了一個滑稽的表情。
+// </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="751812152867684398" id="message-751812152867684398">
+                <div class="chatlog__content">
+                    <div class="markdown">「好的，我會替你請人在墓碑上寫下卒年的，這個世界的事情也儘管交給我吧……」我開始感到不捨的難過。 </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/428481550510850070/b4b56980e4b6032bcb00e804aa2d756e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Ash希#1932" data-user-id="428481550510850070" style="color: rgb(241,196,15)">KP（Ash希）</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="751815060124467280" id="message-751815060124467280">
+                <div class="chatlog__content">
+                    <div class="markdown">初升的朝陽從地平線的邊緣露出了一角，流光驚醒了枝枒上熟睡的烏鴉，它振翅一撲飛到了天空之中，道格拉斯也不知何時消失在了地上，只有幾個淺淺的足跡證明了這一切並非你的幻想。
+
+【THE END】 </div>
+                </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#127881;" title="&#127881;" src="https://twemoji.maxcdn.com/2/72x72/1f389.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://i.imgur.com/XzZMsc0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cecidicia#8521" data-user-id="739036856716492800" style="color: rgb(31,139,76)">Akacia</span>
+
+
+        <span class="chatlog__timestamp">05-Sep-20 10:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="751818024193097789" id="message-751818024193097789">
+                <div class="chatlog__content">
+                    <div class="markdown">就這樣，名為道格拉斯的人類已經不存在於世上了。我也守道格拉斯的諾言跟他的侄子說他已經死了，並在墓碑上填了卒年月日。
+
+有些人就是死後方生，而我也從不反對這一點。 <span class="chatlog__edited-timestamp" title="05-Sep-20 11:06 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 129 message(s)</div>
+    <div class="postamble__entry">PC image credit to https://picrew.me/share?cd=eLSNpLtmfi </div>
+</div>
+
+</body>
+</html>
