@@ -1,8 +1,11 @@
+h1 {
+    display:inline;
+}    
 a {
-    text-decoration:none
+    text-decoration:none;
 } 
 a:hover {
-    text-decoration:none
+    text-decoration:none;
 }
 .btn {
     border: 2px solid #0099CC;
