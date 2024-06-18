@@ -1,0 +1,5038 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>尋紙者（Paper Chase）</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-family: Whitney;
+            font-weight: 300;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-family: Whitney;
+            font-weight: 400;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-family: Whitney;
+            font-weight: 500;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-family: Whitney;
+            font-weight: 600;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-family: Whitney;
+            font-weight: 700;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+            image-rendering: high-quality;
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        .preamble {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 1rem;
+        }
+
+        .preamble__entry {
+            margin-bottom: 0.15rem;
+            color: #ffffff;
+            font-size: 1.4rem;
+        }
+
+        .preamble__entry--small {
+            font-size: 1rem;
+        }
+
+        .chatlog {
+            padding: 1rem 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chatlog__message-group {
+            margin-bottom: 1rem;
+        }
+
+        .chatlog__message-container {
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message-container--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message-container--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__message {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            padding: 0.15rem 0;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__message:hover {
+            background-color: #32353b;
+        }
+
+        .chatlog__message:hover .chatlog__short-timestamp {
+            display: block;
+        }
+
+        .chatlog__message-aside {
+            grid-column: 1;
+            width: 72px;
+            padding: 0.15rem 0.15rem 0 0.15rem;
+            text-align: center;
+        }
+
+        .chatlog__reference-symbol {
+            height: 10px;
+            margin: 6px 4px 4px 36px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .chatlog__short-timestamp {
+            display: none;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__message-primary {
+            grid-column: 2;
+            min-width: 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            margin-bottom: 0.15rem;
+            align-items: center;
+            color: #b5b6b8;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-avatar {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25rem;
+            border-radius: 50%;
+        }
+
+        .chatlog__reference-author {
+            margin-right: 0.3rem;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link .hljs {
+            display: inline;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+            color: inherit;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25rem;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__header {
+            margin-bottom: 0.1rem;
+        }
+
+        .chatlog__author {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__bot-label {
+            position: relative;
+            top: -0.1rem;
+            margin-left: 0.3rem;
+            padding: 0.05rem 0.3rem;
+            border-radius: 3px;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3rem;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__content {
+            padding-right: 1rem;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15rem;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .chatlog__attachment {
+            position: relative;
+            width: fit-content;
+            margin-top: 0.3rem;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 999;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #dcddde;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05rem;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            max-width: 45vw;
+            max-height: 500px;
+            vertical-align: top;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            max-width: 520px;
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            background-color: #2f3136;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3rem;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25rem;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0.6rem;
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            background-color: rgba(46, 48, 54, 0.3);
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author-container {
+            display: flex;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author {
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__embed-author-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .chatlog__embed-description {
+            color: #dcddde;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5rem;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6rem;
+            font-size: 0.875rem;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 50px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .chatlog__embed-field-value {
+            color: #dcddde;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            max-width: 80px;
+            max-height: 80px;
+            margin-left: 1.2rem;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6rem;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6rem;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.2rem;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            max-width: 45vw;
+            max-height: 500px;
+            vertical-align: top;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6rem;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__sticker {
+            width: 180px;
+            height: 180px;
+        }
+
+        .chatlog__sticker--media {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            margin: 0.35rem 0.1rem 0.1rem 0;
+            padding: 0.125rem 0.375rem;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background-color: #2f3136;
+            align-items: center;
+        }
+
+        .chatlog__reaction:hover {
+            border: 1px solid hsla(0,0%,100%,.2);
+            background-color: transparent;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35rem;
+            color: #b9bbbe;
+            font-size: 0.875rem;
+        }
+
+        .chatlog__reaction:hover .chatlog__reaction-count {
+            color: #dcddde;
+        }
+
+        .chatlog__markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .chatlog__markdown-preserve {
+            white-space: pre-wrap;
+        }
+
+        .chatlog__markdown-spoiler {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chatlog__markdown-spoiler--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .chatlog__markdown-spoiler--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .chatlog__markdown-spoiler--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .chatlog__markdown-quote {
+            display: flex;
+            margin: 0.05rem 0;
+        }
+
+        .chatlog__markdown-quote-border {
+            margin-right: 0.5rem;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .chatlog__markdown-pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .chatlog__markdown-pre--multiline {
+            margin-top: 0.25rem;
+            padding: 0.5rem;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .chatlog__markdown-pre--multiline.hljs {
+            background-color: inherit;
+            color: inherit;
+        }
+
+        .chatlog__markdown-pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+
+        .chatlog__markdown-mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(88, 101, 242, .3);
+            color: #dee0fc;
+            font-weight: 500;
+        }
+
+        .chatlog__markdown-mention:hover {
+            background-color: #5865f2;
+            color: #ffffff
+        }
+
+        .chatlog__markdown-timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #a3a6aa;
+        }
+
+        .chatlog__emoji {
+            width: 1.325rem;
+            height: 1.325rem;
+            margin: 0 0.06rem;
+            vertical-align: -0.4rem;
+        }
+
+        .chatlog__emoji--small {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .chatlog__emoji--large {
+            width: 2.8rem;
+            height: 2.8rem;
+        }
+
+        .postamble {
+            padding: 1.25rem;
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.chatlog__markdown-pre--multiline').forEach(e => hljs.highlightBlock(e));
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
+                const imageDataUrl = e.getAttribute('data-source');
+
+                const anim = lottie.loadAnimation({
+                  container: e,
+                  renderer: 'svg',
+                  loop: true,
+                  autoplay: true,
+                  path: imageDataUrl
+                });
+
+                anim.addEventListener('data_failed', () =>
+                    e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>'
+                );
+            });
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('chatlog__message-container-' + id);
+            if (!element)
+                return;
+
+            event.preventDefault();
+            element.classList.add('chatlog__message-container--highlighted');
+
+            window.scrollTo({
+                top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                behavior: 'smooth'
+            });
+
+            window.setTimeout(function() {
+                element.classList.remove('chatlog__message-container--highlighted');
+            }, 2000);
+        }
+
+        function showSpoiler(event, element) {
+            if (!element)
+                return;
+
+            if (element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+
+            if (element.classList.contains('chatlog__markdown-spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__markdown-spoiler--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="attachment-icon" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"/>
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"/>
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"/>
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"/>
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://i.imgur.com/KjRkkZH.jpg" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">【Ash希】尋紙者（Paper Chase）</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1133455900405932032" class="chatlog__message-container " data-message-id="1133455900405932032">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">07/26/2023 01:49:05 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">時值暮夏，七月流火，溽暑的空氣中充斥了水氣，沾付在露在衣服外頭的肌膚上，顯得格外潮濕黏膩，週末的青空下萬里無雲，無風的悶熱令人壓抑，燥熱的太陽燒灼在身上，使人難以靜下心來思考。
+
+你獨身一人站在一棟外墻已經有些斑駁的二層樓高的老舊透天厝前，庭院中蔓生的雜草，和信箱裡面胡亂塞滿的宣傳單都暗示著眼前的房子似乎已經很久沒有人居住在這裡，許久未曾有人好好打理了。
+
+看著眼前藤蔓恣意生長，屋頂已經佈滿了歲月滄桑的洋風老宅，你腦海中也只殘存著很小很小時候，似乎來過幾次的模糊印象，要不是因為繼承了遺產，而且又收到了據說好像老宅有人闖入的消息，附近警察局在你上班的時候，突然通知說有人報案說好像看到人闖進去這棟房子，警察來到現場時也只能遠遠的看到雜亂不堪的書房而已，在沒有獲得主人的同意下，他們也無法擅自進入現場，你這才不得不百忙之中從台北輾轉轉了好幾次車，回到了鄉下的老家，想趕快解決掉這種煩人的瑣事，繼續回去你一成不變的日常社畜生活。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/26/2023 01:53:33 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1133775489698377868" class="chatlog__message-container " data-message-id="1133775489698377868">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">07/26/2023 22:59:01 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雜草叢生的環境讓劉槿綿想起以前在桃園居住時的回憶。那時的城市還不是城市，高樓未被建起，科技沒有那麼發達，她記得那時的農田或稍微市區一點的地方都還有四合院的存在，不過現在若要尋找，那些記憶中的紅磚房幾乎成為了景點餐廳或是廢棄房屋，就算有，也幾乎只剩老人與小孩在居住。
+
+但那都是過去的事情了，以前的小槿棉還會在草地中翻滾、搭窯烤魚、泥土中翻蚯蚓、偷摘隔壁農村阿伯種的芭樂。可現在的劉槿棉已經被都市的堅硬建築所傳染，骨子裡的熱情或許還存在，不過那股冒險的精神似乎隨著搬家與工作而被折磨殆盡，她的腦袋在上班時裝滿了數據，下班時裝滿了休息與弟弟。從一開始的疲憊到現在的隨波逐流，劉槿棉認為自己改變了，但也沒改變得那麼多。
+
+「這裡喔......」劉槿棉站在透天厝前，嘴中喃喃自語。除了幼時的零碎記憶之外，就是前幾年在麥當勞時的會面，雖然想記清楚，但那張臉被時間的洪流給無情帶走，清晰的臉龐只剩下「跟爸爸長得挺像的帥大叔」這種膚淺的印象，那輪廓模模糊糊，每當劉槿棉試圖想起，爸爸的臉卻總會闖進她的記憶中，隨後媽媽也會一同出現，他們相依在一起，死時相同，死後亦然。
+
+劉槿棉站在屋子前放空了一下──反正這房子現在也是她的了，當然書昌也算一份──她愛站多久就站多久──隨即她才皺著眉頭回過神。
+
+老宅的外觀被風雨侵蝕，若是貿然進門一定會被灰塵給襲擊。劉槿棉戴上了口罩，她上前一步，走到信箱前，打算把信箱中的廣告傳單先清理一下，或許會有些信件也說不定。</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/27/2023 01:31:24 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1133813046897295451" class="chatlog__message-container " data-message-id="1133813046897295451">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">07/27/2023 01:28:15 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你隨手打開信箱，輕輕一碰，年久失修的生鏽鉸鏈便嘎吱作響，緊接著哐當一聲，信箱的開口，那整塊金屬板子便這麼掉落在地板上，嚇了你一大跳，裡頭那些堆積如山的傳單信件什麼的也隨之就此散落一地，一看就知道已經許久許久未曾有人打開過這個信箱了。
+
+最下層的那些傳單都已經泛黃褪色了，甚至因為可能有些雨水因為暴雨落進信箱裡頭的緣故吧，好些傳單都就這麼疊在一起，無法分開亦或是分辨上面的字跡了。
+
+你順手抓住一張在風中恣意飄蕩的傳單，那看上去是某家出版社每個季度例行寄出的廣告宣傳，只是上面的書看起來都不怎麼大眾就是了，至少都是些你從未在誠品、博客來之類暢銷榜上聽聞的文學作品。
+
+你彎下腰，從塵土中撿起飄散四處的信件中，看起來不像是傳單，比較不同的一封信簡，雖然說是比較特別，但實際上也只不過是那些書店都會賣的、隨處可見的制式信封，雖然上頭的字跡已經有些被雨水暈染開了，但還是能夠辨認出內容，信封上寫著
+<div class="chatlog__markdown-quote"><div class="chatlog__markdown-quote-border"></div><div class="chatlog__markdown-quote-content">蠹宇（劉雲帙）老師 鈞啟
+</div></div>摸上去還出乎意料的有些厚度，感覺有幾分沉甸甸的，而在寄件人的地方，則似乎是某個你沒聽過的獨立出版社。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/27/2023 22:13:14 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1133847062874701914" class="chatlog__message-container " data-message-id="1133847062874701914">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">07/27/2023 03:43:25 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">在劉槿棉的印象中，他們家並沒有看書的習慣......但那或許也只是因為她以前沒有去留意罷了。她的手指輕輕地磨蹭著那些泛黃發舊的紙張，已經太久了，她的記憶晦澀不明，明明在家門外的記憶那麼明確，可門內的畫面就只剩下父母的背影，哇哇啼哭的嬰兒，而她自己？抱著洋娃娃，彷彿她的世界只剩下它。
+
+「難道是他......？」那個模糊不清的臉孔又出現了，劉槿棉並不清楚在他們家搬離桃園之後，這個住宅有誰居住，有可能是那位男人，可就現在來看，對方也沒有好好對待這個家。
+
+這不免讓她有點氣憤，可論到最後，她也沒資格氣憤。畢竟她以前的生活一團混亂，她沒有時間來看，也不想回顧那個過去；過去造就了自己，但她卻活在現在，可冥冥之中總有定數，她必須面對以往逃避之事。──總而言之，要不是突然的消息，她今天可能還保持著全勤女王的稱號。
+
+將那些傳單整理好，劉槿棉把這些東西放回原位，獨拿那封有些厚度的信件。至於其他的傳單她打算回家時再將紙張帶走，一起丟到回收。
+
+她好奇地看著這封信，雖然她對這名字沒有印象，不過姓氏也姓劉，這應該就是她的叔叔了。現在也沒人會拆開這封信了，劉槿棉將信件放進包包。『就由我來幫忙代收吧。』她想，畢竟那位男人已經失蹤已久，除了她或是好事的怪人之外，或許也沒人會再來拆閱這封信了。
+
+收拾好了信箱，踏上了用水泥製成的台階，劉槿棉在上頭將剛剛沾在鞋子與鞋底上的泥土刮掉。雖然這地方看起來荒廢許久，可是她還是不想讓太多的髒污帶進屋內，就好像以往媽媽會在她用髒兮兮的腳丫踏進房內的時候，抓住打算越過媽媽的她，一邊碎碎念一邊幫她擦拭腳底。</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/27/2023 22:17:47 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1134133151401250897" class="chatlog__message-container " data-message-id="1134133151401250897">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">07/27/2023 22:40:14 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你掏出從家裡某個角落好不容易才翻出來的鑰匙，插進門鎖裡頭，輕輕一轉。
+
+只聽見「喀嚓」一聲，屋門便在你面前緩緩開啟，鞋子踩在老舊的木地板上，吱呀作響的回音在狹窄的室內徘徊不止，雖然你的動作帶起了一些灰塵，憑藉著穿透進門縫的陽光與帶起來的微風，在空氣中飄蕩盤旋。
+
+只不過你倒是有些意外，推開門的瞬間，幾乎沒有聞到那種老房子太久沒有人打理而獨有的，灰塵與霉味交雜在一起的陳腐氣味，迎面而來的反倒是一股淡淡的，上了年頭的紙張書頁香氣，與木頭家具裝潢常有的溫潤嗅感。
+
+狹窄的走廊上，隨處可見整整齊齊堆起來的、各種新舊不一的書籍，伸手在旁邊一摸，屋子裡的東西上雖然都覆上了一層薄薄的塵埃，不過感覺並沒有積累的太厚，雖然你完全沒有什麼鑑試專業，但感覺至少前一兩年可能都還有人住在這地方，除此之外，雖然從走廊上看起來，屋內的裝飾擺設並不太多，但還稱得上整潔有條理就是。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/27/2023 22:42:35 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1134180401888370749" class="chatlog__message-container " data-message-id="1134180401888370749">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">07/28/2023 01:47:59 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">劉槿棉踏進家中，空氣中沒有她之前預想的遍地塵埃，但她還是戴著口罩，沒有摘下。
+
+她原先以為自己會記起幼時在家中的點滴，但人的大腦卻是這麼的不牢靠。她可以記得複雜的數字跟數不清的工作事項，但卻無法好好記住在這個家好好吃一頓飯的回憶，但神奇的，縱使大腦不記得，身體卻總會記住什麼。她記得在玄關前的地方有個微微的凹陷，那裏以前放著一塊沉重的紫水晶洞，她曾沉迷於被光線折射下散發出美麗光澤的不規則切面，而趴在那裏看了很久；而她也記得在廚房處的冰箱前，只要踩踏上去，那裏總會發出微妙的聲音，小時候她曾以為在木頭底下住著小矮人，因為不滿上頭傳來的噪音，所以時不時就要發出詭異的聲響來警告他們。
+
+第一眼沒辦法回憶起來的事情，卻在身體的體驗過後緩慢回歸。劉槿棉很輕易地就分辨出來什麼是屬於她的回憶，什麼不是。比如說纏繞在鼻尖的書香與油墨的氣息，比如說從這窗戶外頭看見的景色。
+
+這裡曾經是屬於劉槿棉一家的家，但現在卻不是了，無論有多少地方相似。
+
+但是這裡的書籍可能書昌會喜歡吧。她想著，稍微看過書房發生什麼事情之後，她就把這地方鎖起來，找一天排休、再讓書昌也空一天出來，她可以跟弟弟來個好久沒度過的假期，他們可以一起整理這個地方，或許對方會想挑幾本書走，誰知道呢，說不定他們還會找到一些屬於父母的東西。
+
+想到這裡，劉槿棉的嘴角輕輕勾起了一抹笑，她的腳步輕快了一點，但她也沒忘記來這裡的目的，她用雙眼環繞四周，想尋找一些最近是否有他人留下的蛛絲馬跡。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1135797340834365561" class="chatlog__message-container " data-message-id="1135797340834365561">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">08/01/2023 12:53:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+請過偵察。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1135800945767362610" class="chatlog__message-container " data-message-id="1135800945767362610">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">08/01/2023 13:07:27 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">CC 45 偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1135800947222794302" class="chatlog__message-container " data-message-id="1135800947222794302">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(186, 197, 197)" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">08/01/2023 13:07:27 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+1D100 ≦ 45　
+72 → 失敗：偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1135851724649807893" class="chatlog__message-container " data-message-id="1135851724649807893">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">08/01/2023 16:29:14 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">即使逼仄的走廊內，四處塞滿了壘起來的書籍，但看著玄關墻壁上那泛黃的壁紙和褪色黯淡的菱形方格花紋、不知停擺多久的卻還是與記憶中依稀仿佛的圓形老時鐘，似乎將時間滯留於曾經的某日，再也沒被撕下一頁的日曆，模糊的窗玻璃外那棵歪歪斜斜的老榕樹，以及隨著你的腳步吱呀作響的木頭地板。那些過往幼時你以為早已消失的無影無蹤，在腦海重重迷霧遮掩下渺然無跡、再也尋不回的回憶，剎那間仿佛被投下了深水炸彈似的，波瀾不驚的海面下霎時間一陣波濤洶湧，從深處翻騰而出。
+
+靜謐的屋子裡頭闃暗無聲，只有點點微塵在金黃的陽光下蒸騰而起，仿佛是不知何人從漫漫時光長河截下的一抹切片標本，卻也恰好保留住了屬於你的，昔日的點點滴滴。
+
+那棵老榕樹曾經是你的樂園，遇到討厭的事情就可以一個人爬上枳枒，躲在樹窩裡頭的理想鄉，茂盛的林蔭下灑落的陽光，被你藏在樹洞裡頭的彈弓、糟蹋過不知幾次的鳥窩，讀完《湯姆歷險記》之後午睡時暢想著四處玩耍的白日夢，只是樹下永遠沒有你的哈克，只有爬不上來的書昌那瘦小無力的四肢和總是睜大著的、滿是哀求，卻總是收獲你無視的雙眼，你以為你已經忘的一乾二淨的事物，如今卻是那般歷歷在目。
+
+只是記憶中那高聳的形象，是因為已經長高長大了嗎，如今看起來卻格外迷你，而且當初的大樹可有如此歪斜，究竟是陳年的記憶保存時出了紕漏，亦或是是在你離開的多年之間，被不知道哪次颱風吹歪的呢？諸如此類的、種種襲上心頭的回憶糅雜著現實，讓人感覺有些魔幻。
+
+還有記憶中那在搬家前夕的某一日，一大堆穿著黑色西裝的人來來往往，個個都帶著比平常更加嚴肅無趣，不帶任何笑意的臉龐，當然，現在的你已經知道那叫做「告別式」，然而當時你只記得你被迫要穿著僵硬不適的衣服，頸上高高的衣領讓你難以自在的呼吸，當然，最過分的還是不能出去玩，什麼也不能做，要「乖乖的陪妳弟弟」，照顧好那個又黃又瘦，醜不拉幾又笨拙無比，連話都說不好，整天一把鼻涕一把眼淚，什麼都不會就只會告狀的小傢伙，只是如今回想起來，書昌當時的身影反倒有幾分可愛。
+
+你甚至還回想起了，在喪禮上不知為何盛怒無比，破口大罵，整個人氣壞到連話都說不太好的爸爸，「你、你、你這個不孝子！以前就算了，現在連基、基本的儀式跟接待什麼的，都不願意嗎？」，父親當時好像是這麼罵的吧，被罵的人是誰你早已記不清了，還有那響徹整個庭院，引起人們側目和尷尬死寂的耳光。想來大概就是那個叔叔吧，記憶中那人的輪廓依稀和父親的臉孔有幾分肖似，雖然你如今當然也無從確認這究竟是不是只是自己對回憶的修飾與改編就是了。
+
+你走在走廊上，玄關和客廳的四處還可以看見一些生活痕跡，只是東西大多都已經被收拾整齊了，並沒有留下太多的線索。而且即便是比較日常的居家用品，上頭仍覆上了一層薄薄的灰塵，看起來直接不久前應該還有人居住如此，只是最近一陣子，唯一進來過這的人應該只有你而已，想來的確也是如此，除了你之外還有誰會有這裡的鑰匙呢？就連你自己都是從房間角落好不容易才挖出來的。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1143870352959750245" class="chatlog__message-container " data-message-id="1143870352959750245">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">08/23/2023 19:32:24 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">尚若將回憶比喻成潮汐，那現今定是漲潮的時候了。劉槿棉經過了全新的書架、相其相對的老舊木櫃，她的記憶曾有劉書昌在看完她攀爬樹木之後，也不甘示弱地要爬上那個木櫃的記憶，可卻在過程中滑倒，整個人直直的墜落下來，不幸中的大幸或許是那小子不是頭著地的，卻也免不了摔了個頭破血流。劉槿棉發誓她從沒在母親的嘴中聽過如此巨大的尖叫，而就連學校中最會哭的小孩也沒有林書昌嚎得大聲。
+
+『妳怎麼不看好妳弟弟！』心力交瘁的媽媽教訓著她，劉槿棉看著她眉眼間的疲憊，原本的愧疚之意在話語結束之後消散得無影無蹤，她的視線越過還在開口訓話的媽媽，看著抽抽搭搭的劉書昌，惡毒地想著：你剛剛如果是頭著地就好了。
+
+曾經她以為生命中最恨的人是她的弟弟，可是生命起起伏伏，看看怎麼樣？現在她的人生最討厭的是說話不算話的客戶，最惡毒的詛咒也只是在心中默念對方吃到泡麵沒有附送料理包、上廁所沒有衛生紙；而最喜歡的則是她的弟弟，她想到的時候就喜歡帶著劉書昌到外面走走晃晃。
+
+劉槿棉也看到了客廳中的木製長椅，鋪著柔軟的坐墊以及小毯子，但她還記得坐墊底下的木頭有些被焚燒過的點點痕跡。劉槿棉在很小的時候曾經問過爸爸，為什麼這上面會有這些圖案，這是什麼意思啊？然後她的爸爸回答她，那是你叔叔留下來的。聲音之中帶有一絲懷念，一絲怨懟。
+
+只是當時的她不可能知道呀，或許連「叔叔」是什麼都沒有概念。於是她似懂非懂的點點頭，直到現在這個回憶如同洄游的鮭魚一般游回了她的腦中。
+
+「那這樣該怎麼進去啊......」雖然想起了這些，但那就是一閃而過的念頭，劉槿棉喜歡她在這裡成長的記憶，卻不喜歡那些記憶像沼澤似的會將她拉下去，於是她站在一扇門前，有點困擾的自言自語著：「我可不想破壞這裡，也可不想爬窗啊。」
+
+還是要請鎖匠？只是這麼偏僻的地方，真的能找得到人嗎？劉槿棉深感懷疑。</span>
+
+                            <span class="chatlog__edited-timestamp" title="08/24/2023 20:52:50 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1144306794940858378" class="chatlog__message-container " data-message-id="1144306794940858378">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">08/25/2023 00:26:40 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">往事如風，總在不經意間悄然吹過，無孔不入地穿過結實的心墻，滌去回憶上的厚厚塵埃，勾起你腦海裡頭，那以為早已拋在腦後，忘卻的一乾二淨的種種往事，曾經的點點滴滴此刻想來卻仍歷歷在目，甚至許多你當時未曾注意到的零碎細節，當時的光景、那天天空的顏色、鄰里巷間孩童的哭鬧聲，此刻都穿連起來，猝不及防地襲上心頭。
+
+你一邊自言自語著，一邊不抱什麼期望的在手中緊握的鑰匙串中翻了翻，看有沒有剛剛好的鑰匙，能夠打開通往那閉上門扉的房間，在你模糊的印象中，那似乎是專屬於父親的基地，父親總是在裡頭忙到深夜，好幾次你都曾在起床上廁所時，看見門縫底下透出的一絲昏黃，而且大概是因為害怕小孩子打擾吧，那扇門總是緊緊關上，只有在吃飯時間，父親拖著疲憊的身子，從裡頭走出來時，才能偷偷瞥上一眼，看見裡頭亂七八糟，四處堆疊起的書本和書桌上雜亂壓著的各種資料文件。
+
+翻找著時，你也做好了最壞的打算，雖然這老宅地處荒郊野外，附近的村民大多也都和房子一同垂垂老矣，在時光中傾頹腐朽，而年輕一輩的人也都和你一樣，早已離開此處，背井離鄉多年了，但真的要找的話，鎖匠什麼的應該還是不難找吧，不管是從鄰近的城鎮尋覓，亦或是說不定村裡頭的哪個尚未故去的老人還保留著這門手藝呢。
+
+就在你這麼思忖著，低著頭，試圖比對著鑰匙和鎖孔形狀時，那隨意放在一旁門板上的右手，只是輕輕一施力，便聽見「吱呀」一聲，黃銅製的陳舊門軸生澀的微微轉動著，也讓你立刻便意識到，那書房的房門並沒有上鎖，只是輕輕的虛掩著而已。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="08/25/2023 00:27:40 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1146860730864386169" class="chatlog__message-container " data-message-id="1146860730864386169">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">09/01/2023 01:35:05 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯？」幼時的禁地居然沒有被鎖上，劉槿棉意外地看著半掩著的門，不過想想也是，假如在他們離開桃園之後，這個家都是那男人──叔叔──居住的話，那麼他不會鎖上家裡的門也不奇怪了。畢竟這棟房子雖然是透天，屋內也十分寬敞，但怎麼看都沒有太多人生活的痕跡，這位叔叔平時的生活一定很單調，她想。
+
+聳聳肩，她原本打算就這樣直接打開門進去書房內，但是在手伸到一半的時候，劉槿棉的手在半空中微微的頓了一下，接著她動作輕了一些，推門的手改成敲擊。
+
+「嘿。」她說：「爸，打擾了。」
+
+不知道現在她的爸爸看到她進房門前居然會有敲門的這個舉動會作何感想？劉槿棉想道，她可沒少聽來自父親的敦敦教誨，只是沒想到要在對方已經看不到的時候才真的實施──不過至少在現在，她總算是聽話了一次，對方該驕傲一下吧。
+
+假如未來還有機會再來這裡居住的話，那一定是她賺到錢、好好整修過這棟房子，到了可以頤養天年的時候了。這樣想著，劉槿棉推開了門。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1147642274335957164" class="chatlog__message-container " data-message-id="1147642274335957164">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">09/03/2023 05:20:40 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">槿棉動作略顯生澀的伸出手在門上，遲疑地試探性似的敲了敲，停頓了半晌後，裡頭毫不意外的，並沒有傳來任何一點動靜，只有你輕扣門扉的低聲回音在走廊上迴響，那曾經存在於過往記憶裡頭，每次傍晚放學回到家後，母親煮好晚餐，叫你去叫父親來吃晚餐時，你在書房門口大聲喊叫，當時的那股倔強勁對敲門這種事情可是深惡痛絕呢，書房裡頭那總會透過薄薄木門傳進你耳朵的，父親那溫柔低沉的聲音和一成不變的語句——「我閣咧做代誌無閒啦，啊袂夭、恁先呷吧.....」，腦海中的那一幕瞬間仿佛和眼前的情景有剎那重合，那時母親在飯廳忙碌地上菜、書昌在客廳裡哭鬧、以及父親的聲音言猶在耳，裊裊餘音似乎還駐足於這片空間之中，甚至飯菜的香味似乎都縈繞在鼻梢，但轉瞬槿棉也發覺那一切回憶的情景終究也只是留存在時光長河與腦海之中，明明知道門後不再會有那應門聲了，但輕敲門扉的瞬間槿棉心中仍還有些五味雜陳，悵然若失與想到當初的啞然失笑，各種情感夾雜成毛線團、難以辨明。時至今日，槿棉才恍然發覺父親那聲音中無從掩蓋、滿溢而出的疲憊與憂慮。
+
+你緩緩推開了通往書房的門，在門軸的「吱呀」聲中，迎面而來的並沒有隨氣流揚起的灰塵，反倒是充斥在整個書房的紙墨香、以及略顯突兀的，那夏日青草雨水陽光混雜的獨特氣味。
+
+你迅速環視了書房一周，明明和記憶中的格局並沒有太大的變化，但乍見的風格卻是那麼的完全不同，書房內最大的改變也只有那原本擺在正中間，對著房門的櫻桃木辦公桌被調轉了一百八十度，移到了窗前，夏日金澄的陽光從大大敞開的窗戶灑落，反射在木地板上還有些刺眼，伴隨著熏風拂面的暖意，想來那大概便是夏日氣味的來源吧。那結實的書桌上，放置著兩瓶寫樂的露草色墨水，一支沾水筆，以及小巧金屬雕飾紙鎮下壓著的幾頁空白稿紙，書櫃下頭也有幾個關上的抽屜。
+
+和那記憶中截然不同的是，那佔滿了書房四面墻、直頂天花板的書櫃上的書都被細心的擺放整齊了，不再是父親那亂糟糟的辦公室風格，從最老的線裝書、泛黃褪色的陳年舊書一直到最近幾年的書籍，從書背上的字體改變都幾乎可以暢想到這些文字刻印下的時光間隔，一本本書籍都按照圖書分類法，放在相應的位置上。地板上也沒有像父親當時那樣，散落著雜七雜八的報表資料，唯一略顯突兀的，大概只有丟在房間一角，厚厚一疊用束帶捆起來的文件。</span>
+
+                            <span class="chatlog__edited-timestamp" title="09/03/2023 21:34:44 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1147646608465477632" class="chatlog__message-container " data-message-id="1147646608465477632">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">09/03/2023 05:37:53 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">待得你再仔細觀察書房裡頭的情況，才發現乾淨整潔的書房裡頭似乎有零星幾點看起來不那麼自然的水漬泥濘散落在地板上，桌面上的空白稿紙也沾染上了些泥印，雖然不確定是否有關，但你也想起在來時的路上，昨夜似乎下了場驟雨。
+
+另外，在書桌正旁邊的書櫃上，有幾本書很明顯的被抽出來了，留下了墻上的空位和翻找的痕跡，那書櫃前的地上也隨意疊放著幾本書，斜斜的堆放著。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1156960666276601856" class="chatlog__message-container " data-message-id="1156960666276601856">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">09/28/2023 22:28:38 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雖然總想著，不要被拉入記憶的泥沼，任由一切都在時光之中淡卻，但是這畢竟是她於整個童年時期度過的家庭，那些畫面如同靈巧的精靈一般跳動在她的眼前，爸爸教育了些什麼、媽媽說了些什麼，這些好像不是那麼重要了，只是他們的聲音、氣息、溫度都一次又一次的纏繞住她，那是溫暖的陪伴，就如同劉書昌幼時總會抱著的毛毯，上頭令人眷戀的溫度。
+
+在來到這裡之前，劉槿棉一直以為自己沒有紮根的地方。這麼說好了，就算是踏入房子內的不久前，她對這間屋子最深的印象即是口不擇言的爭吵，一次又一次地破口大罵，來自爸爸的指責與媽媽的失望，弟弟抱病的臉龐，在每次回想時都無法讓她開心，反而更覺憤怒，因為這些都是她不成熟的證明，不斷的消磨著他們之間的感情。
+
+或許就是因為這樣，劉槿棉才會避免回想起來這個家吧？就算是在他們最艱難的時刻，就算是在他們重新振作起來之後──老實說，若不是那則通知，不然她是不會回來的。
+
+回憶的敲擊讓她頓然醒悟，可是她又覺得這樣有點傻。吸了吸鼻子，劉槿棉拿出手帕擦了擦臉，上面有一些不小心抹到的灰黑痕跡，她將其重新放回包包，用視線環繞整間書房。
+
+「果然是個喜歡書的人啊......」手插著腰，劉槿棉瞇著眼睛，午後的陽光雖然溫暖但也刺眼。為了看得再清楚一些，她走過去稍微看了幾眼，皺起了眉頭。
+
+所以這裡真的遭小偷啦，為什麼要偷書呢？她翻了翻桌上的書籍，有些不解，不過還是拿出手機拍了幾張照片，也在仔細查看這些書本之前去窗台那裏看了一下是否有腳印的痕跡。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1157740186067800074" class="chatlog__message-container " data-message-id="1157740186067800074">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">10/01/2023 02:06:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你大略翻看了一下桌上那幾本凌亂的書籍，那些書的封面都有些泛黃、磨損了，那些卷起的書頁角落和打開便可看見的多處眉批與筆記，也都再次驗證了原主人對這些書籍的愛不釋手，即使再怎麼愛惜也滿是時常翻閱的痕跡。從書架上那些缺漏部分的周圍來看，這些書看起來都是些有關於奇幻國度、異世界、與人生哲理的種種圖書，看起來失竊的那幾本書同樣也是這個主題的。只是奇怪的是，比起這些不只沉重，而且如今只能當成回收，賣不上幾個錢的紙張來說，小偷理應會注意到房子裡頭那些更多值錢、而且也沒有特別隱藏起來的物品的，甚至就連書房裡頭，都有一眼看上去明明就更有價值的鋼筆墨水，讓人不禁感到有些匪夷所思。
+
+很明顯的，在你離開這間屋子之後，這間書房的主人的品味和你那講求實務、書櫃裡頭只會塞滿各種理財與工作相關的父親截然不同，要是是父親的話，大概一看到這種書本，諸如幻想、思考、哲學之類的封面，就會直接嗤之以鼻，認為是不務正業的荒誕故事扔到一旁吧。對於記憶中的父親來說，眼裡頭最重要的只有一般人的社會，現實世界中的柴米油鹽，以及如何才能掙到更多的鈔票，照顧好家人，特別是你那打小就體弱多病的弟弟吧。
+
+走到書桌前面，午後熾熱的艷陽從萬里無雲的湛藍天穹投下灼熱的光彩，在窗外的翠綠葉片上反射進屋，耀眼奪目。書桌正前方的窗戶敞開著，窗台的木檻和窗戶下的空地上，都有些看起來前不久才留下，尚未被夏日那常見的午後雷陣雨洗去，乾掉的泥土痕跡，像是什麼東西的印子，在地面上頭也都能看見許多亂糟糟的泥點，從不遠處的樹林一路延伸到屋子這兒。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1161346490007035965" class="chatlog__message-container " data-message-id="1161346490007035965">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">10/11/2023 00:56:19 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「啊、真的是闖空門耶。」
+
+困擾的雙手抱胸，雖然她不知道這間書房裡有什麼東西好偷的，但說不定自己叔叔在文學界是叱吒風雲的存在，有幾個狂熱粉也不為過，畢竟每個人的價值觀不同，劉槿棉對這東西沒興趣，但不代表其他人沒有。只是現在要清點失竊物的時候她就比較困擾了，畢竟這間書房若是去除掉格局與幼時的記憶，其餘的對她而言都是陌生的，像是她父親放置珍藏的郵票收集的位置已經被取下，剩下牆上泛白的痕跡留下了記憶。在陌生人的房間盤點只見過一次面的親戚的失竊物，怎麼想都怎麼奇怪。
+
+劉槿棉能做到的也只是用手機拍照存證，她拍下那些小偷殘存的痕跡、凌亂的書籍。或許是因為事不管己的關係，她還有餘裕去稍微翻閱那些奇幻的小說。這些書昌應該會喜歡吧？她這樣想著，但不太確定，她只知道弟弟有著自己的小愛好，但她不會去侵犯，就跟書昌也不知道自己喜歡看愛情小說一樣。說真的，對於她這種已接近而立卻又單身的女人來說，下班之後看其他人談場甜蜜又曲折的戀愛真是一大享受，畢竟自己沒體驗過，只能依靠文字想像。她大略看過了書架上的書，發現上面的書大多都與自己偏好的類型沒什麼太大的關係，不禁癟了癟嘴。
+
+她將窗戶關好，嘆了一口氣。她希望今天能解決完這件事情，只是在回去之前她可以稍微看一下整棟房子，這樣未來再帶書昌回來的時候自己就不會那麼生澀，還可以跟對方講一些無傷大雅的小趣事，她絕對會記得一些能讓弟弟尷尬的事情。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1161666049314410587" class="chatlog__message-container " data-message-id="1161666049314410587">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">10/11/2023 22:06:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+請過EDU。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1161671423669043281" class="chatlog__message-container " data-message-id="1161671423669043281">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">10/11/2023 22:27:30 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">CC 68 EDU</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1161671431344640030" class="chatlog__message-container " data-message-id="1161671431344640030">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(186, 197, 197)" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">10/11/2023 22:27:32 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+1D100 ≦ 68　
+100 → 啊！大失敗！：EDU</span>
+
+                    </div>
+
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="wow">
+                                <img class="chatlog__emoji chatlog__emoji--small" alt="wow" src="https://cdn.discordapp.com/emojis/763827869629546536.png" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1163146289530273832" class="chatlog__message-container " data-message-id="1163146289530273832">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">10/16/2023 00:08:05 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你看著書房裡的一切，那些腦海中的回憶早已在歲月流逝下無情的風化褪色，曾經父親書房的種種佈局，也幾乎難以從眼前改變如此劇烈的事物中窺見一二，只有那張厚實的書桌與門窗的位置，勉強還殘留著些許記憶中的光景，而餘下的一切皆已停滯在離去時的最後一刻，那在時光長河沖刷下截取的三兩切片。
+
+當時的那些東西大概都被父親帶到新家，最後不知道被遺忘在哪個角落了吧，就像是要不是眼前場景勾起，也被你埋藏在內心深處的兒時回憶。看著眼前不熟悉的許多東西，心情有些疲累煩躁的你只是用手機隨手拍了幾張照片，確保被警察問起時，還可以搪塞過去，自己沒有破壞犯罪現場什麼的。
+
+當然，也沒有那個閒功夫去仔細觀察那凌亂的書堆和散落四周的泥印是否有什麼特殊之處，你並沒有多理會那綿延至遠方樹林的泥土痕跡，簡單的把窗戶給帶上，將午後的微熱熏風與空氣中的青草氣味隔絕在玻璃之外，順帶阻絕了那嘈雜的蟬鳴鳥叫，讓耳際只留下你一人獨處在書房裡頭，與世隔絕般的那寧靜安詳。
+
+信手翻閱著架上和桌上那些奇幻小說與哲學書籍，那麼多哲學和奇幻小說搞的你腦袋發脹，裡頭塞滿的各種設定和需要思考的地方，對下班之後腦漿已經被榨乾，只想放空輕鬆看點文字的人類，實在是一點也不友好。想著想著，你不由得心神遄飛，思緒發散到了外太空，各種天馬行空的奇思妙想竄過你的腦袋——眼前這麼多哲學思考的古怪書籍，又聯想到你曾經閱讀過的，那些曲折離奇，什麼男女主角事實上是失散多年的親兄妹阿之類的，故事一個比一個狗血的言情小說，腦海中忍不住飄過一個念頭，叔叔的失蹤說不定是讀這些東西，思考到『阿達罵恐固力』，跑去學少年維特或是太宰治什麼的，自殺還是殉情了吧......
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1196325080393850890" class="chatlog__message-container " data-message-id="1196325080393850890">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">01/15/2024 13:28:45 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">說到底這也不是不可能的事情，俗話說戲劇原始於生活，劉槿棉生活中的「戲劇」已在前半生詮釋得淋漓盡致，那種失去父母的痛苦只要體驗一次就好，她現在所要做的，就是好好照顧體弱多病的弟弟──好吧，歸功於發達的科技與現代醫學，林書昌已經沒有那麼容易生病了，甚至現在還在生龍活虎的在上完課之後生龍活虎的做夜間外送，但以往的弟弟實在是太過羸弱，那個印象實在是抹不去、揮不掉，她可能永遠都會過度照顧自己的弟弟。
+
+所以就算叔叔無論是因為情殺還是啥地而離開這個世界，憑著記憶中的那傢伙的長相，只要對方對待感情再不嚴謹一些，劉槿棉覺得並無不可能。
+
+想像力便是劉槿棉在了解一個人之前產生的現實。過往的記憶在她的腦海中碰撞著，構出一段曲折離奇的劇情。劉槿棉暗暗點了點頭，為自己遭遇不測的叔叔暗嘆了一口氣，卻也僅僅是一口氣。
+
+至於現在要做什麼──總之，照片也拍了，書房也看了，這裡的回憶若是只有她一人回想並無其餘樂趣，或許可以等到未來她與林書昌的休假再來重看一次？
+
+雖然說是這麼說，但是假都請一天了，她也千里迢迢地開了那麼久的車到桃園，這麼簡單就回家似乎不太划算，還是她去其他房間看看呢？這樣盤算著，劉槿棉踏出了書房門口。</span>
+
+                            <span class="chatlog__edited-timestamp" title="01/15/2024 13:33:44 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1196422584145821748" class="chatlog__message-container " data-message-id="1196422584145821748">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">01/15/2024 19:56:12 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">就在你踏出書房門口，想著去其他房間查看一番時，『嗡——』，門廊處那老式電鈴乍然作響，那刺耳的嗡鳴聲正如回憶裡頭一般擾人不已，煩躁的聲波在侘寂無聲的走廊上迴響。
+
+『嗡——嗡——嗡——』
+而且在你還來不及做出什麼反應以前，那門口的人便又不耐煩地飛快連按了好幾次，層層回聲在混凝土壁面上反射，於狹小的空間中交疊，令人心頭更添幾絲煩悶。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="01/15/2024 19:56:30 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1196688526381678714" class="chatlog__message-container " data-message-id="1196688526381678714">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">01/16/2024 13:32:58 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「欸？這傢伙還是有朋友的嗎？」
+
+聽到意外的電鈴聲，劉槿棉挑了挑眉，她把手上的手機好好地放在包包裡，聽著熟悉又老舊的聲響，心道不愧是幼時的記憶，連這樣讓人煩躁的聲音都完美重現。雖然說是這麼說，但她還記得自己以前很期待這樣聲音的到來，因為來的叔叔阿姨都會給她好吃的糖果，或是帶小孩來玩。這可不是她自吹自擂，小時候的她是孩子王，一個號令就可以當騎馬打仗的馬。
+
+「來──啦──」像是為了響應那拖長的門鈴聲，劉槿棉懶洋洋地大聲回應著，完全不像是一位都市小姐。她慢慢地走過去，「是誰啊？」</span>
+
+                            <span class="chatlog__edited-timestamp" title="04/08/2024 20:48:23 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1196885378058166395" class="chatlog__message-container " data-message-id="1196885378058166395">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">01/17/2024 02:35:11 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嘿——係哇啦——」（「嘿——是我啦——」）
+在你推開門時，只見門口站著一個戴著桃紅袖套，有些傴僂著背的豐腴歐巴桑，即使歲月在她臉上留下了諸多滄桑，但你依舊能夠認出，記憶中那住在附近的，總是熱情地打招呼、送各種自己種的青菜過來的大嬸，當然還有她那聞名鄉里的大嘴巴跟八卦的個性。
+
+「聽阮尪講有人轉來恁厝吼，我就想說來看覓一下，是不是恁轉來啦——啊閣有一寡我栽的水果，沒有農藥的，送予你吃！」（「聽我老公說看到有人回來你家這邊吼，我就想說過來查看一下，是不是你回來了——啊這邊還有一些我種的水果，沒有農藥的，送給你吃！」）
+
+還沒等你回話，她那熟悉的大嗓門便又再次在你耳邊響起。
+
+「啊遮久沒見了，這馬槿棉你哪會按呢媠噹噹，遮呢好看啦，啊甘有嫁人啊？」
+（「啊這麼久沒見了，現在槿棉你怎麼會這麼漂亮，這麼好看啦，啊你現在已經嫁人了嗎？」）
+
+「若是無代誌的話，暗時就來阮兜呷暗頓吼，欲食啥也可以佮哇講，免客氣啦——」
+（「要是沒有什麼事情的話，晚上就來我家吃晚飯吼，想吃什麼也可以跟我說，不用客氣——」）
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="01/21/2024 02:07:51 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1226877665445675018" class="chatlog__message-container " data-message-id="1226877665445675018">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">04/08/2024 20:53:49 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「啊......」也是，走在所有人之前的時間歲月不會放慢步伐，祂會在所有事物之前刻下屬於自己的痕跡，無論是過去他們居住的房子、隔壁的鄰居，他們自己，都是一點一滴、毫不留情的變化著，時間改變了什麼，又沒改變什麼，就連眼前的歐巴桑縱使由於歲月變得蒼老，可是個性卻一點都沒變。
+
+劉槿棉記得她小時候不太喜歡這位歐巴桑，因為她的那張嘴巴總是叨叨念念，講個不停，具體的她早已記不清，只是聒噪的嗓音仍盤旋在她的耳邊。但是到了現在，有些沒被改變的東西倒是讓她鬆了口氣，被工作折磨過的劉槿棉現在反倒覺得什麼都說出來的歐巴桑有著她自己的可愛地方，只是這個可愛不會被小時候的她所喜歡。
+
+「好久不見啦，阿姨。」劉槿棉勾起一個笑容：「沒有啦，還沒嫁人，要賺錢養家啊！今天就不麻煩阿姨了，之後帶書昌回來的話再打擾一下啦，我回來的比較突然。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1226884612257480865" class="chatlog__message-container " data-message-id="1226884612257480865">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">04/08/2024 21:21:25 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「噢這袂勞煩啦，厚啦毋關係，我知影你閣有你的代誌欲無閒，但是說你愛呷蝦米水果，抑是恁轉來欲蝦米青菜擱鹽同款的煮菜，攏會使佮哇提，阮兜應該攏有啦。」
+（「噢這不會打擾啦，好啦沒關係，我知道你還有你的事情要忙，但是說你愛吃什麼水果，或是你回來想要青菜或鹽之類的煮菜，都可以跟我拿，我靠應該都有啦。」）
+
+雖然被你委婉地拒絕了，但王阿姨的熱情依舊不減多少，想來或許是在鄉下的村落裡頭，隨著時間流逝，大家不是搬去大城市，就是隨著歲月凋零，曾經的那些故人也搬進了墳墓，只留一培黃土，以往總是能看見許多人熱鬧聊天著的廟宇前、榕樹下的廣場，和塞滿學生們水汪汪的大眼，殷殷企盼目光的柑仔店也都日漸冷清，當微風吹過，那些歡聲笑語已僅存於記憶中，卷起的只有灰塵與寂寥。往日都只有人們離開的身影，難得有人回來，想來大概令她忍不住暗自開心不已吧。
+
+只不過兩三句話過後，她內心的八卦之魂猶不改往日風采，很快又再次熊熊燃起，滿臉好奇地詢問道。
+
+「是講你那欸轉來啊，甘是發生安怎代誌啊？是佮恁阿叔有蝦米關係覓？」
+（「是說你怎麼會回來啊，難道是發生什麼事情了？還是跟你叔叔有什麼關係嗎？」）
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="04/08/2024 21:28:41 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1226888283489833022" class="chatlog__message-container " data-message-id="1226888283489833022">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">04/08/2024 21:36:01 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「好啊，書昌還在長個子，我之後再跟阿姨講，謝謝。」笑瞇瞇的接受對方的好意，劉槿棉已經不是多年前的那位離家不回的叛逆少女，在外打拼那麼多年，她早已學會如何與他人進行交流，懂得進退分寸。雖然很不想承認，但劉槿棉已經成為了自己以前不願意成為的大人，但如果是因為這樣可以將劉書昌毫無負擔的送進大學，那劉槿棉就不後悔。
+
+「對啊，最近收到警察通知，說是有小偷闖進家裡來啦，但是我叔叔不知道跑去哪裡了，警察沒辦法聯絡他，只能找我啦。」對抗八卦最好的方式就是把對方想知道的東西都跟她說，更何況她自己已經那麼久沒回來了，知道的東西不一定比王阿姨多。只是劉槿棉一提起叔叔兩個字還是覺得有那裡不太對勁，畢竟在她的記憶之中，沒怎麼將這兩個字給喊出口，說出口的時候還是有數不清的彆扭。「阿姨您跟叔叔熟嗎？最後一次看到他是什麼時候啊？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1226894302320267334" class="chatlog__message-container " data-message-id="1226894302320267334">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">04/08/2024 21:59:56 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「啊丟厚，書昌彼个囡仔嘛大漢啊，今嘛身體甘有卡厚啊，蝦米時陣娶新娘嘛娭佮阮講捏！某一定足水欸厚，到時阿姨一定予恁大大的紅包！」
+（「啊對吼，書昌那個小孩也長大了，現在身體有比較好嗎，什麼時候娶新娘也要跟我說耶！老婆一定很漂亮！到時候阿姨一定給你們恁大大的紅包！」）
+
+當你提及書昌時，似乎又勾起了眼前的婦人過往的回憶，只見她興奮又好奇地大聲說著，並順手將懷中抱著的、剛剛一直說要給你的那一大袋用紅白塑膠袋裝的，那滿滿當當的水果塞到你的手中。
+
+「誒，你講你阿叔啊？你也知影伊那款人就是奇奇怪怪的，雖然伊住在這邊足久啊，但是攏毋想要佮阮講話，整天不知道一個人咧創啥，半暝仔閣看到伊去後面那個墓仔埔那邊，金正是足奇怪欸......毋災伊到底是去遐創蝦米代誌，阮看到足多次捏。阮也不記得最後一次看到伊是蝦米時陣啊，有一天就看不到人影啊。」
+（誒，你說你叔叔啊？你也知道他那種人就是奇奇怪怪的，雖然他住在這裡很久了，但是都不怎麼跟我們說話，一個人整天不知道在幹嘛，三更半夜還會看到他跑去後面的墳墓那邊，真的是很奇怪耶......也不知道他到底是去那邊幹什麼的，我看到好多次耶。我也不記得最後一次看到他是什麼時候了，好像有一天就沒看到他了。」）
+
+只不過當你提及叔叔時，她的臉色忍不住有些變化，不過想來似乎也挺合理的，記憶中叔叔那獨來獨往的個性，和八卦熱情的王阿姨怎麼樣都處不到一塊，她神經兮兮地看了下四周，聲音也減小了些，那表情疑神疑鬼地向你說道。
+
+「誒......恁兜進賊仔啊！啊恁厝甘有蝦米物件無去啊！？阮攏沒聽到聲捏......歹謝......」
+（「誒......你們家遭小偷了啊！啊你們家有什麼東西不見的嗎！？我都沒聽到聲耶......不好意思......」）
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="04/08/2024 22:04:44 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1226898365216854027" class="chatlog__message-container " data-message-id="1226898365216854027">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">04/08/2024 22:16:04 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「他喔，大學都還沒畢業，想要娶老婆還要很久啦！」老實說劉槿棉也有一點擔心自己弟弟的婚姻大事，但她自己都沒一個下文了，就還是別強迫對方了，不過她從沒跟書昌聊過他喜歡的類型，或許這次回去、找個時間，可以來問問看對方？「謝謝王阿姨內，之後有結婚一定會把那個紅色炸彈寄到妳家的！」劉槿棉比了一個大拇指。
+
+「哈哈，雖然是我叔叔，但我們也很少連絡啦......」何止很少見面，應該更正確來說，除了幼時那些模糊的印象之外，只剩下麥當勞的一面之緣，對方雖然奇怪，但也像是來送錢的神仙教母......教父，光是幫助他們解決生活的燃眉之急的這點，劉槿棉再怎麼樣都得趕過來處理這件事情，但她不會跟眼前的阿姨說，有些八卦還是不能外揚的。「欸，我們家後面還有墳墓嗎？」
+
+記憶實在飄的太遠，劉槿棉一時之間想不起來這個地方究竟在哪，但再她回想的時候反倒是有段記憶竄了出來：有一次他們那群猴死囡仔想朝哪個方向跑去，卻被不知從哪來的爸爸在路邊逮住了，她的手臂被握住，直直的拖回家，而同行的小鬼則是做鳥獸散──她回家之後被爸爸罰跪了一個小時，但其他有去探險的小孩回家之後渾渾噩噩，半夜大哭不止，好說歹說也安慰不來。帶去廟裡收驚了之後才稍微正常了一點。
+
+想來他們當時要去探險的地方便是墳墓了......她從來都沒去過，那裡埋的都是什麼人呢？
+
+「啊，沒事沒事，這不是阿姨你的錯啦，是小偷的問題，不要道歉。」還在回憶著，劉槿棉便被王阿姨愧疚的聲音喚了回來，她擺了擺手：「倒是阿姨你們最近也要小心喔，我也會請警察先生加強這附近的巡邏的。」</span>
+
+                            <span class="chatlog__edited-timestamp" title="04/08/2024 22:36:55 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1226903479277064242" class="chatlog__message-container " data-message-id="1226903479277064242">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">04/08/2024 22:36:24 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「著是恁厝後壁彼爿啊，彼個陰陰的所在，細漢時陣攏誒叫恁毋通去遐耍，里沒印象了嗎？」
+（「就是你們家後面那邊啊，那個陰陰的地方，小時候都會叫你們不要去那邊玩耍，你沒印象了嗎？」）
+
+大嬸大聲的向你說道，你這才想起，似乎小時候那些大人總是會耳提面命，一而再再而三地向你們說不要去後面的墳墓那邊玩，小孩子玩耍的時候也會流傳一些離奇的鬼故事，像是什麼半夜會有沒有頭的日本軍人拿著槍在那邊巡邏，還是想出草的原住民，被漢人埋伏大屠殺之後，屍體隨意丟棄的亂葬崗，晚上路過的時候風中常常會夾雜著幽怨的山歌，諸如此類的誇張故事，雖然你後來到外地上學讀書之後，才發現似乎大家小時候都是被各種類似的故事騙大的就是了。
+
+阿姨說著一些你小時候的記憶，或許是那些曾經喧囂的回憶沖淡了時間流淌的哀傷和緊張的心情吧，她忍不住提到了一些無關緊要的小事，正如你記憶中的那樣。
+
+「嗯嗯我知影啦，阮會叫阮尪多注意的，阮兜的狗仔也會放出來趕壞人的，里細漢時閣有抱過他捏，毋知恁還記得覓？彼個小小的黑狗，這馬嘛足大漢啊，但是嘛足古錐捏。」
+（「嗯嗯我知道啦，我會叫我老公多注意的，我家的小狗也會放出來趕壞人的， 你小時候也有抱過他捏，不知道你還記不記得？ 那隻小小的黑狗，現在也長的好大了，但還是很可愛捏。」）
+
+只不過當她說著說著時，不知是不是聯想到了什麼，眼神中流露出了淡淡的恐懼，又滿臉害怕，下意識地四處張望，已如溝豁般的抬頭紋和魚尾紋，又更深地皺了起來。
+
+「但是講到恁阿叔佮伊彼個人無去啊...誒夭壽噢.....甘是撞到『魔神仔』啊...」
+（「但是講到你叔叔跟他那個人不見啊...誒夭壽噢.....會不會是撞到『魔神仔』了...」）
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="04/08/2024 22:39:00 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1226908340437782568" class="chatlog__message-container " data-message-id="1226908340437782568">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">04/08/2024 22:55:43 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聽到王阿姨繪聲繪影、彷彿煞有其事地描述，讓劉槿棉不知怎麼的也感受到了一絲緊張，山間之中總是流傳著許多恐怖的故事，包括遇到奇異的樓梯不要登上去、也不要仔細看被鑲嵌在山壁之中的京譜面具......之類的，到現在她常常聽著有在照顧小孩的同事的哀號，發現比起正常教育，讓小孩留下心理陰影確實是比較便捷的方法，也難怪鄉下的人會如此迷信了。
+
+在這方面，劉槿棉算是比較幸運的那個，相關的傳說她還是有接觸過，但可能是因為她本身的八字比較重，或是其他什麼，那些神神怪怪的東西她從沒看過──但她也不清楚這是她的幸運還是不幸，至少她從沒在夢中看見她父母的身影，日常生活也沒有其他的徵兆。她就只是......普通的活著，連一句遺言、一封遺書都沒能從父母那裡得到。
+
+雖然是這樣，不過每年的清明節劉槿棉都還是會去幫父母掃墓，逢年過節也會去廟中拜拜，希望在上頭聽著大家許願的神明能好好的照顧因為意外而離開的父母，不只是為了讓她的精神能有寄託，也是為了能書昌好好健康的長大。
+
+「以前阿爸都不會讓我去那裡嘛，阿姨您也知道我爸很嚴格的。」劉槿棉想起了自己的父母，她雖然臉上已經可以正常的談論著自己已經去世的家人，但是內心總還是會有那麼一個小小的地方是空落落的，誰都無法填補。「那隻小狗狗已經變成大狗了啊？真懷念啊。」以前劉槿棉記得因為劉書昌的身體不佳，所以沒有養寵物，就算她再怎麼懇求都......因此她在吃飯的時候總是會留下排骨上燉爛的肉，偷偷帶去給隔壁的小狗加菜。這種事情她可不會說，不過劉槿棉覺得小狗能健健康康的成長，也一定有她的一份功勞在。
+
+「『魔神仔』......怎麼會這樣說，是因為叔叔常常去後面的......」村子裡的人都比較忌諱這些東西，劉槿棉在講話的時候也帶上了一些保留。</span>
+
+                            <span class="chatlog__edited-timestamp" title="04/08/2024 23:22:33 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1226914791663337542" class="chatlog__message-container " data-message-id="1226914791663337542">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">04/08/2024 23:21:21 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯啊，伊那是看到恁，一定是足歡喜欸！恁細漢時陣常常予伊呷物件、佮伊耍捏。」
+（「嗯啊，他要是看到你，一定很開心呢！你小時候還常常給他東西吃、跟他玩的說。」）
+
+或許是阿姨家裡的小孩也和大多數人一樣，都已經離開家裡，到一棟棟水泥高樓構成的冰冷森林，那些大城市裡頭為了養家糊口認真打拼了，只有逢年過節才會短暫回來一下下吧，那陪伴在身邊的身影已經成了思念的寄託，提到家中養的那隻小狗時，眼前的阿姨語調中滿是揮之不散的關心疼愛之情。
+
+「丟阿，哪沒伊那誒三更半暝走去遐......」
+（「對阿，要不然他怎麼會三更半夜走去那邊......」）
+
+「阮看吼，恁阿叔應該毋是失蹤啦，是予彼個魔神仔掠去啊啦！丟是彼個底家大家攏知影的，庄頭裡邊流傳的魔神仔...恁厝嘛有可能毋是著賊偷，是魔神仔走進來啦！」
+（「我看吼，你叔叔應該不是失蹤啦，是被那個魔神仔抓走了啦！就是那個在這邊大家都知道的，村子裡頭流傳的魔神仔...你家也有可能不是遭小偷，而是那個魔神仔跑進去啦！」）
+
+阿姨仿佛要壓低音量，害怕被人聽到說著什麼悄悄話似的，身體也微微駝背，雖然那壓低的音量和你的聲音相比仍是那樣的大聲就是了，她的語調或許也因為內心的害怕和恐懼而不自覺的高了八度，眉毛豎起，雙手連連揮舞。
+
+「以前阮庄裡這旁吼，丟定定有人被魔神仔抓走啦，有一個尬共恁鬥陣耍過，恁可能太小抑是無啥物尬伊耍過，所以沒記憶了。嘛有人看過彼個長得足像妖怪的歹物仔，毋知是不是魔神仔的物件，半暝佇彼個墓仔埔遐跳舞捏！阮看丟是安捏啦！」
+（「以前我們村子這邊吼，就常常有人被魔神仔抓走啦，有一個還跟你一起玩過的樣子，你可能太小或是沒什麼跟他玩過，所以沒太多記憶了。還有人看過有個長得很像妖怪的髒東西，不知道是不是魔神仔的東西，半夜在那個墓仔埔那邊跳舞捏！我看就是這樣啦！」）
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="04/08/2024 23:26:01 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237387055345045534" class="chatlog__message-container " data-message-id="1237387055345045534">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 20:54:23 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「跟我一起玩......？」這倒是劉槿棉第一次聽到，她的眼睛瞪大。幼時的記憶如同流水，由水滴滴入大湖之中，或是一片汪洋，迷失在眾多的碎片之內，怎麼撈也撈不回來。
+
+她還以為自己沒什麼這種體質，原來只是因為隨著成長而消失。難怪有人說小孩是最好的靈媒，因為隨著成長，那些太幼小的記憶會慢慢淡去，幫助過什麼的痕跡始終還在。
+
+對於鄉下人的迷信，劉槿棉不好對此做出評論，她本人對這方面也是秉持著「寧可信其有，不可信其無」的態度，只是這些八卦扯到她的家人時，就讓她覺得有些尷尬了。看著王阿姨神神叨叨的表情，她覺得有些好笑，只是表面上她還是保持著嚴肅，她看著對方，認真的點點頭。
+
+「謝謝妳跟我講那麼多，王阿姨，我還有事情，等等就要走了，來我給妳一下我的電話號碼。」劉槿棉從包包裡面拿出一張白紙，用原子筆在上面寫上了自己的電話號碼遞給對方。「之後我再帶書昌回來會跟王阿姨講，他現在真的長很大了。」
+
+等等王阿姨離開之後她打算去那座墳墓那裡逛一下......雖然她身上沒有供品，不過之後若要將房子再易主一次，一定要去打聲招呼，不然她也怕被無名的神明作祟。</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/07/2024 20:56:52 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237396749711183872" class="chatlog__message-container " data-message-id="1237396749711183872">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 21:32:54 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「丟是庄頭彼爿，嘛是姓劉的彼个查埔囡仔阿，伊丟是某一眠足暗攏猶未轉去厝內，伊阿爸阿母四界揣伊攏揣袂著，最後才在墓仔埔遐看到伊躺在遐，帶回厝內底就著猴仝款，丟是撞著魔神仔啊啦，恁真正沒印象了吼，後來毋管按怎攏怪怪誒捏，帶去佗一間宮廟師公都沒法度，最後歸家人也搬走了，彼嘛是足久以前的事情了。」
+（「就是村頭那邊，也是姓劉的那個男生阿，他某一天晚上就很晚都沒回到家，他家人到處去尋找，最後才在墳墓那邊找到人，帶回家之後一副中邪的模樣，就是遇到魔神仔了啦，你真的沒印象了噢，後來怎麼樣都怪怪的，不管帶去哪間廟師公都救不好，最後整家人都搬走了，那也是好久以前的事情了。」）
+
+也不管你到底對這有沒有興趣，太久沒人能夠聊這些八卦的劉阿姨自顧自地說了下去，但即便她說了再多，小時候本來就因為弟弟和自己個性的原因，不怎麼和大家玩在一起的你，對這些也只升起了一絲朦朧的印象，而且也說不定只是記憶的幻象在作祟，將劉阿姨記憶有些衰退的故事與模糊不清的童年往事攪和在一起，那故事中和小孩一起玩的玩伴也不是你，只是某一個同樣長大之後搬走的後輩而已。
+
+「而且真正有人看到好幾個魔神仔在墓仔埔遐跳舞抑是創啥欸呢！李太太有一擺走暗路就無持防遇著，伊共伊遠遠看本來閣想說遮爾晚了那誒閣有人在那邊，歸尾走近一看才發現是個看起來親像徛起來的狗仔、長的實在很恐怖的物件，而且身上還散發著臭爛的臭味，她嚇到連買的菜攏丟在地上，破病大半年才好一屑屑仔。」
+（「而且真的有人看到好幾個魔神仔在墓地那邊跳舞還是幹嘛的呢！李太太有一次走夜路就不小心碰到，她說她遠遠看本來還想說這麼晚了怎麼還有人影在那邊，結果走近一看才發現是個看起來像是站起來的大狗、長的真的很恐怖的怪物，而且身上還散發著腐爛的惡臭，她嚇到連買的菜都丟在地上，生了大半年的病才比較好。」）
+
+「恁兜離墓仔埔遐熊近，哩哎注意捏！雖然轉來幾天而已，但暗時嘛是莫亂走啦，畢竟你也是哇看著大漢的。厚啦厚啦，哇先轉去煮菜了，有需要啥貨你再跟佮我講，真正免客氣！」
+（「你們家離墓地那邊最近，你真的要注意耶！雖然回來幾天而已，但晚上還是不要亂跑啦，畢竟你也是我看著長大的。好啦好啦，我先回去煮菜了，有需要什麼你再跟我說，真的不要客氣！」）
+
+「厚啦，哇足期待捏，到時陣嘛哎記得帶女朋友抑是男朋友轉來，予阿姨哇看覓一下捏！」
+（「好啦，我很期待哦，到時候也要記得帶女朋友或是男朋友回來，讓阿姨我看一下誒。」）
+阿姨絮絮叨叨地嘮叨了好多，用沾滿泥土的手接過紙條之後，把要給你的水果青菜什麼的放在門前的地上，看了看天邊的太陽，這才意猶未盡的離開。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237401592202793030" class="chatlog__message-container " data-message-id="1237401592202793030">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 21:52:09 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「謝謝啦，王阿姨！下次再來看妳啦！」
+
+聽見熟悉的人叨叨唸唸的說了那麼多，即使自己沒有插進話題的機會，但未含惡意的友善讓她笑著揮揮手。有些地方與她的記憶重和，但也有些沒有。改變是好事情嗎？劉槿棉不知道，但她很感謝時間的蹉跎並未讓世界改變到讓她認不出來的程度，對此她是感激的。
+
+雖然現在的時間尚早，但王阿姨說的故事實在過於繪聲繪影，劉槿棉打算趁著天邊的太陽打著哈欠、還在盡忠職守的進行一天即將到尾的工作時去拜訪墳墓。畢竟要去的地方不太乾淨，能早去早回是最好。
+
+看著王阿姨留下來的袋子，劉槿棉呼出一口氣，那些水果青菜的表面上還殘留著泥沙，葉片上也殘留著被蟲子啃咬的坑坑洞洞，雖然賣向不好，可這種由農地採出的食物是最健康不過的，看來這幾天可以好好的吃東西、好好的睡覺了。
+
+雖然這裡的人互相認識，把菜擺在外頭也沒什麼關係，可劉槿棉畢竟也在都市生活久了，該有的防人之心一點都不少，更何況這地方才剛出過小偷。她轉身打開自家大門，將那個袋子放置玄關，想了想拿了幾顆水果之後又走到廚房那，將水果洗乾淨，裝在盤子之後他出了門，之後又鎖起了家門。
+
+「沒有供品感覺還是怪怪的......」雖然這樣頗有借花獻佛的感覺，不過她在出門前也沒想到回老家需要拜拜，「好啦，那在天黑之前要回來呢。」
+
+她說著，幫自己加油打氣了一下，就朝著王阿姨所說的、常發生靈異事件的墓地走去──在手上端著一個盤子的情況下。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237406364695920681" class="chatlog__message-container " data-message-id="1237406364695920681">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 22:11:07 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">已過了正午時分，天空中的太陽已朝著地平線緩緩進發，東君落下的光輝不似先前那般耀眼奪目，也不似更晚些黃昏的橘紅彩霞，而是金光中帶著一股午後慵懶的氛圍，催眠得人有些昏昏欲睡，徐徐清風穿過門廊，那門邊的風鈴雖已老舊卻還是清脆地叮噹作響，溽暑帶著濕氣的氣流一路拂過雙頰，吹亂你的瀏海與長髮。
+
+將那些收到的東西在廚房簡單找了個地方擺放好以後，妳繫好鞋帶、踏起腳步朝著墳墓的方向走去，沿路的雜草生長地更加恣意狂放，那凹凹凸凸的路面也由柏油路、開裂的水泥產業道路逐漸轉變為崎嶇不平的泥土小路，好些地方還有些坑坑窪窪的水灘以及枯黃腐爛的落葉，而且單手端著一個盤子的情況下，有些時候你甚至因那亂糟糟的路面而走得有些踉蹌，許是實在太不常有人經過了，縱使穿了長褲，那路邊的鬼針草依舊毫不留情地用帶刺的種子挽留著你的離去。只不過雖是稍顯炎熱的天氣，但走進山道以後，或許是因為那樹林的庇蔭，倒是揮去了難耐的暑氣，又或許是因為剛剛才聽見的，王阿姨講的魔神仔的故事影響，上身穿著的薄薄短袖在風吹過時反倒讓你覺得有幾分微涼。
+
+靠近了墓地以後，還沒走近你便聽見了那在都市裡頭，絕對不會聽見的、竹掃帚掃著落葉，沙沙作響的聲音，墳墓區的生鏽鐵柵欄後，一個兩鬢斑白、上了年紀的男性正百無聊賴地整理著周圍的環境，或許是這裡的管理員吧？在聽見你靠近的聲響以後，他不由得露出了有些不解的神情，停下原本掃地的動作，拿著掃帚疑惑地朝你望了過來。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/07/2024 22:44:11 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237410573524795423" class="chatlog__message-container " data-message-id="1237410573524795423">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 22:27:50 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">帶著暑氣的空氣讓劉槿棉用手背擦著自己額頭上的汗水，縱使樹木幫忙抵擋了大部分的烈陽，但還是讓劉槿棉有點吃不消。<em>我還真佩服以前的自己啊</em>。她想，畢竟以前的自己會在這樣的天氣下跑跑跳跳，跟著一群小孩子在泥地裡打滾，又或是爬著樹幹離天空更近。那時的她雖然知道什麼是炙熱，可小孩子嘛，玩樂總是被擺在最前面，家人耳提面命的避暑反而讓她沒那麼在意。
+
+對於現在的劉槿棉來講，少了都市汽車的吵雜、人群的喧鬧，樹木的聲響帶著穩定與平靜，讓人不自覺想睡在大自然由樹葉鋪成的床舖上。以前她或許會這樣做，但現在她不會了，畢竟在樹林之間休息舒服是舒服，可擾人的蚊蠅不會消失，尤其是感受到香噴噴的食物就潛藏在皮膚之下的時候。
+
+走出了樹林遮掩的道路，劉槿棉沒想到在這個時間居然會有其他人待在這裡，雖然掃帚掃地的聲音預告了存在，但王阿姨離開前的話語實在是過於繪聲繪影，讓她以為沒什麼人敢靠近，而墓地也會是一副雜草叢生的荒地。
+
+「啊，我是住在前面那棟劉家的小孩，叫劉槿棉，只是很久以前搬走了。」看到那位男性，劉槿棉說明了自己的來意，她的一手端著盤子，看起來十分奇怪。她有點尷尬的看著對方。「我聽說我叔叔之前常來這裡拜拜，所以來看一下，你好。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237413806964215828" class="chatlog__message-container " data-message-id="1237413806964215828">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 22:40:41 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">原本臉上還有些警惕的管理員看了看你的裝扮，又看了眼你手中的盤子，不由得啞然失笑，佈滿皺紋的臉龐也露出了缺牙的、有些和藹的笑容，只是看著你的臉，他不免還是楞了一下，仿佛是在腦海中絞盡腦汁、思索了好一會後，也不確定到底有沒有想起你來，這才開口說道。
+
+「哦——你是那個雲帙的姪女啊，我還想說是不是哪個外地來的人，不小心迷路跑來這裡了，你好你好。」
+
+「我只是算是這邊的管理員啦，就退休了嘛、也沒什麼事情好做的，所以有時候白天無聊就會來這裡打掃一下路什麼的，不然都要被雜草跟落葉掩埋了捏，而且每年好像都只有清明附近才會有點人，想說還是要偶爾來這邊巡邏一下，怕要是有什麼小偷還是不懂事的小孩來這裡偷東西之類的，而且墳墓裡的人平常說不定也有點孤單，畢竟有一些都還是以前一起聊天的同學、朋友之類的。如果你有什麼需要幫忙的事情的話，我應該還會再掃一下地，等等才要回家吃晚餐，要是有需要，都可以找我的。」
+
+說完之後，他本來要繼續拿起掃帚掃起落葉，但又忍不住停頓了一下，一本正經地朝你說道，那內容倒是與小時候大人們的告誡和王阿姨剛剛說的事情，並沒有太大的差異。
+「唔、只不過小姐你還是要注意捏，白天這裡雖然感覺有點陰陰的，但基本上就還是還好啦，但晚上就不要隨便跑過來這裡誒，這附近晚上真的有髒東西的，等等天色就要黑了，不要在這邊逗留太久哦。」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/07/2024 22:53:06 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237418519260434494" class="chatlog__message-container " data-message-id="1237418519260434494">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 22:59:25 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「我晚上就要回家了，所以趁現在有時間來拜一下。」雖然眼前的大叔在劉槿棉的記憶之中沒有出現，但她也不是記得所有小鎮上的人，畢竟鎮上的人來來去去，誰知道呢？但幸好大叔人還不錯，這讓劉槿棉鬆了口氣，她重新讓笑容出現在自己的臉上。「大叔你好，我叫劉槿棉，你認識我叔叔嗎？」
+
+雖然這樣跟陌生人詢問自己叔叔的事情有點奇怪，不過她真的對管理員口中的「雲帙」沒有除了初次見面以外的印象，應該說，她甚至連這兩個字含在嘴中都有些陌生......好吧，或許那些認識還得再加上今天在家裡找到的藏書中，得知對方是名小有名氣的小說家，但也僅此於此。
+
+但管理員也跟王阿姨說了一樣的話，那些關於墓地的陰氣沉沉什麼的，看來是在小鎮上口耳相傳。劉槿棉沒有這方面的記憶，她也不會笨到去觸碰禁忌。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237422034661806110" class="chatlog__message-container " data-message-id="1237422034661806110">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 23:13:23 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哦哦好，那樣就好，我知道你們年輕人可能都會覺得這是迷信什麼的，但真的不要不信欸，至少我就、唔......」
+聽見你這麼說，大叔拍了拍胸脯，一副放下心來的模樣，只是說著說著，他又一副欲言又止的模樣，話說到一半又匆匆閤上嘴巴，轉移了話題。
+
+「劉小姐你好你好，你是說你叔叔嗎？不是我要說，但他那個人真的有點孤僻捏，住的房子又離大家的屋子很遠，所以他搬進來之後，也過了好一陣子我們才知道那邊竟然還有住人，平常幾乎也不會看見他離開屋子，基本上也沒有他跟別人說話的印象，只有偶爾可能會有幾封信寄到他那邊，所以、唔、你知道的，因為這地方真的沒有很大，大家三三兩兩聊天的時候才會知道你叔叔的名字。」
+大概是鄉下無聊的人們閒暇時間只能談天聊些八卦什麼的吧，就連眼前的大叔也不免俗，聊著聊著有些碎嘴地如此說道，雖然最後的口吻乍聽之下似乎對於打探別人的隱私有些不好意思，但那語氣倒是一點也聽不出來他心底有半分這樣子的感覺。
+
+「而且、一般人也不會在過世之前就先弄好自己的墓碑跟墓地吧，這樣不是在咒自己死嗎？就真的很奇怪耶，只是因為也沒有人跟他比較熟，所以也不知道你叔叔他是怎麼想的就是了。」
+他咧起嘴巴笑著說道，門牙處那補上的金牙在說話時特別明顯，又聽見他這麼評論你的親人，不知為何莫名擾得你有幾分心煩意亂。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/07/2024 23:31:51 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237425244877230202" class="chatlog__message-container " data-message-id="1237425244877230202">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 23:26:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">劉槿棉在與管理員講話的期間，稍微靠近了樹蔭處，但現在畢竟還是夏天，炙熱的空氣會隨著風一起飄過來，無論有沒有遮擋都一樣，她想著自己下次回來得帶把傘或扇子什麼的，而對方說的話又讓她微微皺起了眉頭。
+
+雖然先弄好了自己的墓碑這點奇怪是奇怪，但對方也說了，他們並不是很熟，或許都沒說過幾句話，這樣隨意的評論才會被天打雷劈吧？
+
+想是這樣想，但劉槿棉也不會朝第一次見面的人破口大罵、或是胡亂指責，她只是略為敷衍的點點頭，「了解了，沒事的大叔，這畢竟是我們家自己的事情，謝謝你跟我說。」
+
+即使再怎麼不熟，但那位叫做雲帙的人還是在她父母去世的時候雪中送炭，也在她無法面對桃園這間房子的時候將其打理得乾乾淨淨。就算奇怪好了，但對劉槿棉來說，這種幾乎是在親人的面前說「你家人很奇怪、很孤僻、沒有朋友」的行為其實挺冒犯的，你又不是對方的誰，連他的名字都是從外人那裏聽來的，那有什麼資格評頭論足？
+
+她轉移了視線。「那再麻煩大叔跟我講一下我叔叔常待的地方，我看一下就回去了。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237426629610045460" class="chatlog__message-container " data-message-id="1237426629610045460">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 23:31:38 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">大概是看見了你有幾分不悅的神色，大叔也就沒再多說些什麼，只是訕訕地勉強苦笑著搪塞過去。在聽見你的問題之後，他也就只是用手簡單朝著墓地的某個方向比了比，便又拿起掃帚，低下頭清掃起落葉來，不敢再有什麼和你交談下去的意思。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/07/2024 23:32:57 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237428016628629616" class="chatlog__message-container " data-message-id="1237428016628629616">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 23:37:09 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">劉槿棉看向了那位大叔指向的方向。不過在這種地方可以隨便亂指嗎？她也曾聽過一些禁忌，可既然在這裡的管理員都直接這樣做了，那遭報應的也不會是她。
+
+「謝謝。」簡短的說了一句，劉槿棉盡到了自己的禮貌。
+
+看看工作與生活都把我摧殘成什麼樣子啦？劉槿棉自嘲的想著，要是以往，她內心有不舒服的話，應該是一個中指或是一句髒話送過去，才不會這樣好聲好氣的與對方說話。
+
+她經過其他墓碑的時候內心默念著阿彌陀佛，也沒有給予太多的視線，並不是說害怕，只是一個尊敬，畢竟她劉槿棉平時不做虧心事，在這點上她沒什麼好怕的。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237431224654499881" class="chatlog__message-container " data-message-id="1237431224654499881">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 23:49:54 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你順著那大叔指的方向走了一小段路，雖然那傢伙的個性實在是挺惹人討厭的，但倘若沒有他打理墓地這邊的枯枝落葉，再加上台灣這種不時就有颱風和暴雨襲來的天氣的話，這些小徑可能會佈滿了更多的泥濘、更加難以通行吧，這麼想來，那人至少好歹也做了些好事。
+
+走了一小段路以後，你便看見了一處相比之下較為嶄新的墓碑，想來或許就是那大叔口中的、叔叔以前就自己建好的墓碑吧，與周圍那些有些墓龜、墓埕以及各種有著自己意義的裝飾構造不同，叔叔為自己弄的墓地倒是十分簡樸，幾乎可以稱得上是一無所有，除了一塊純白的大理石碑之外再沒有其他東西，就連墓碑上的樣式，也沒有什麼多餘的字體，只有純黑的楷書刻印著他的名字『劉雲帙』，以及其下應該是墓誌銘的簡短的一點詩句——『面朝大海，春暖花開』，如此而已。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237432692929466530" class="chatlog__message-container " data-message-id="1237432692929466530">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 23:55:44 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">到底是為什麼要那麼早的就建好自己的墓碑呢？這點劉槿棉不得而知。她靠近那個墓碑，雖然還不確定自己叔叔的生死，但她還是把裝著水果的盤子放到墓碑前，她困惑的看著墓誌銘，這個方位是面向大海嗎？如果選擇葬在這裡的話，應該只有面對樹而已吧？
+
+但，嘿，人家畢竟是小說家，他想到什麼句子啥，想刻在墓碑上什麼字句的都是他的事情，而且對方還常來這裡待著，說不定是已經與這裡的鬼魂打好了關係，對於活人來說，與死人相處對他而言應該更為自在也說不定。劉槿棉沒有去評頭論足的資格，劉雲帙活著也好，死了也罷，都是她的恩人，如果真的離開了，那她會固定來這裡上香，如果活著......她還真希望收到對方活著的消息，畢竟現在她的親人可是越來越少。
+
+沒有雙掌合十，劉槿棉只是低頭，輕輕閉上眼睛思索。高掛在天上的太陽撒在她身上依舊毒辣，她可沒辦法待太久。</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/07/2024 23:57:12 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237433062300586004" class="chatlog__message-container " data-message-id="1237433062300586004">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 23:57:12 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+請過 文學。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237433466669498448" class="chatlog__message-container " data-message-id="1237433466669498448">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/07/2024 23:58:48 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">CC 1 文學</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237433467910754324" class="chatlog__message-container " data-message-id="1237433467910754324">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(186, 197, 197)" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">05/07/2024 23:58:49 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+1D100 ≦ 1　
+52 → 失敗：文學</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237435086815756469" class="chatlog__message-container " data-message-id="1237435086815756469">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:05:15 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你搖了搖頭，試圖在腦海中思考著那詩句究竟是誰人所寫、又或者是叔叔自己落筆時留下的字句、而是否又有著什麼特別的涵義呢？只不過想當然爾，以前總是翹課溜出去學校玩耍，即使被迫待在學校，也總是打瞌睡或是做些別的事情，從沒有認真聽過多少堂課的你對此著實沒有半分印象。即使長大以後會讀一點愛情小說之類的，但涉獵的領域和叔叔寫的那些書籍，仍舊有著不小的距離吧，那詩句究竟在說些什麼、叔叔以此為墓誌銘時心中到底想著什麼，諸如此類的事情半點也不在你腦袋領略的範疇之中。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237436322885402624" class="chatlog__message-container " data-message-id="1237436322885402624">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:10:09 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">怎麼想那些詩句都會在自己的腦中浮現，但也僅僅是浮現。劉槿棉雖然有個挺好聽的名字，但她沒有繼承到叔叔的文學細胞，而自己以前的不學無術在此刻付出了代價，比較看課本的天花亂墜，劉槿棉更擅長在未成年時騎著小綿羊在桃園的大街小巷跑來跑去。於是最終她甩了甩頭，將這些詩句拋諸腦後。
+
+「好啦，叔叔。」劉槿棉的嘴唇動了動，聲音沒有很大。「其實我也不知道你現在是死是活......我希望是活著的，希望之後能再見到你，活著的你。」
+
+她拍拍身上的泥沙，站了起來，在拿起盤子之前習慣性的從口袋中掏出手機，打算看一眼時間。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237438403906375681" class="chatlog__message-container " data-message-id="1237438403906375681">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:18:25 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">走過來的山路和剛剛與大叔的交談又耽擱了一些時間，黃昏時分赭紅的晚霞已於天邊緩緩浮現，將穹頂上的片片雲朵染上一層橘紅的顏料，金烏灑落的最後片羽從林蔭間的縫隙投射在手機上，反射以後直直落入你的眼瞳之中，剎那間讓人不由得有些眩目失神，俄頃換了個角度以後，你便確認了眼下的時間，約莫已經接近酉時，即使是白晝偏長的夏季，再加上下山走回家的時間，距離日落也沒有太多的剩餘了。
+
+<span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+請過 偵察。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237438533782999142" class="chatlog__message-container " data-message-id="1237438533782999142">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:18:56 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">CC 45 偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237438535087296683" class="chatlog__message-container " data-message-id="1237438535087296683">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(186, 197, 197)" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">05/08/2024 00:18:57 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+1D100 ≦ 45　
+14 → 困難成功：偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237439288355065958" class="chatlog__message-container " data-message-id="1237439288355065958">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:21:56 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">只是在低頭收起手機，沉吟思索著是否該是時候踏上回家的路時，你的視線一隅意外看見了距離叔叔的『墓碑』不遠處，似乎有處較為稀疏的樹叢落入了你的眼角餘光之中，像是什麼小徑一般，和周圍茂盛的翠綠灌木顯得略微格格不入。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237441406289580154" class="chatlog__message-container " data-message-id="1237441406289580154">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:30:21 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">那是什麼地方？
+
+雖然已經決定不在墓地處停留太久的時間，但抓到了一些與眾不同的風景時，總會想上前好好的一探究竟。劉槿棉眨了眨眼睛，夏季的白晝拉的特別長，她想，這代表她能抓到一點時間去進行小小的冒險。
+
+王阿姨的耳提面命在她耳中盤旋。「我只是去看看啦。」說出了這句很像恐怖片主角找死前會說的話語，劉槿棉小心翼翼的上前，她抬腳小心的注意不要採到他人的「家」上，然後朝著那額外突兀的樹叢處走去。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237443382901739530" class="chatlog__message-container " data-message-id="1237443382901739530">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:38:13 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你的聲音在空無一人的墓園中盤亙，微風吹過林木，將上頭搖搖欲墜的枝葉吹得沙沙作響，小心翼翼地撥開樹叢，雖然並不是那麼明顯，但仔細觀察一番，還是能從地上被踩扁枯萎的小草痕跡，以及兩側較為茂盛的林木，看出這似乎是條秘密的通道，枯死的雜草和顯露出來的泥土小路，感覺已經也不是一天兩天的事了。
+
+如果你的方向感沒有錯亂，而且小徑一路都是筆直的話，那麼小徑的方向似乎是朝著家裡頭延伸前行的，並不像你走來墓園時要蜿蜿蜒蜒地繞上那麼大一圈才能爬上來後山墓園這裡。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/08/2024 00:42:40 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237445083176112208" class="chatlog__message-container " data-message-id="1237445083176112208">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:44:58 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「所以是捷徑嗎？」這樣她就不用再花上那麼多時間回家了！意識到這點的劉槿棉也注意到了即將要下山的太陽，她看了一眼身後的墓碑，它們被夕陽的黃光壟罩著，也被樹木的陰影遮蓋著。看起來沒有什麼大不了，只是，她想，這地方會有那麼多傳聞，不是沒有原因的。
+
+劉槿棉沒有多做猶豫，她踏上了那條蜿蜒的小徑，雖然是陌生的道路，但她也沒有多害怕，畢竟這裡是她的家，她所在的地方不會害她，她是這麼堅信著。
+
+「沒想到叔叔還特別踩平了這條道路嗎？」
+
+但這是為什麼呢？只是為了更好的去祭拜他自己嗎？類似的疑問繚繞在劉槿棉的心底，而關於叔叔的疑問在今天已經出現了太多，而對方失蹤了，鎮上沒有其他與對方關係好的人，於是這些問題似乎也得不到解答，只能隨著時間，又是時間，將其淡忘掉。
+
+......如果叔叔沒有再出現的話，應該就是會這樣了。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237448506835210391" class="chatlog__message-container " data-message-id="1237448506835210391">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 00:58:34 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">沿著被踩出來的小徑朝著山下走去，不知是想著這或許是叔叔日復一日獨自踏出的道路，亦或是沿路並沒有多少泥濘與碎石，走起來倒是比想像中輕鬆上不少，雖然偶爾也有些從小徑兩側恣意伸出的嫩枝攔住你的去路，但也都只是些簡單撥開會彎下身子就能穿過的小阻礙，隨著傍晚輕輕拂過的晚風，林蔭下又不會受到太多曝曬，倒像是有些愜意的散步之旅。
+
+走了沒幾分鐘，撥開最後一點點藤蔓以後，便看見夕陽那耀眼的餘暉像是阿波羅射出的最後一隻箭矢，正巧命中靶心，落入你的瞳仁，在朱紅的夕陽晚霞下，隱約還能看見一輪滿月的淡淡白色輪廓遙掛在天穹上，而在你的正前方，雖然並不是太過意外，但看見你家正巧落在眼前時，還是有種柳暗花明又一村的感覺，而家裡頭書房那敞開的窗戶正巧就在你的眼前，在從小徑通往住處的路上，你還可以看見白天時從書房往外看去時，那雜亂無章的泥土印子彎彎曲曲地遍佈，想來剛剛走過的小徑或許也有吧，只不過和那些黃土灰塵混雜在一塊，所以一時之間才沒有察覺。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237451919858073630" class="chatlog__message-container " data-message-id="1237451919858073630">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 01:12:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「欸......」難不成，小偷就是從這裡進出的嗎？
+
+要不是下雨天將那些泥巴與塵土的痕跡抹去，否則劉槿棉說不定可以從這之中收穫更多的消息。她並不是偉大的偵探，但從這蛛絲馬跡之間，她也能看到一些端睨。
+
+只是普通的小偷會知道這條小徑嗎？老實說，要不是她心血來潮，碰巧決定去墓園走一圈，否則她也發現不到這條小路，那這就代表小偷是這座小鎮的人嗎？但是，這條路是那麼的隱密，若不是長年待在這棟屋子裡的人，那就是墓園的人了。
+
+「該不會......小偷其實是管理員，不然就是失蹤的叔叔嗎？」
+
+但失竊的並非財物，而是有關叔叔文學類的東西，那位管理員這樣一見面就說三道四，怎麼看也不像是肚子裡有文學涵養的人。
+
+如果是叔叔的話，為什麼不好好地走正門進來，而是要走窗戶呢？而且也太粗糙了，搞到人盡皆知，這不像是對方的個性──雖然認識他不久，但劉槿棉也知道，他的叔叔不是張揚的個性。
+
+但是想的再怎麼多又如何呢？沒有失竊重要的東西，小偷沒有抓到、叔叔也沒回來。劉槿棉收穫到了關於房子滿滿的記憶與一袋新鮮的水果，還有幼時友善的鄰居，噢，或許還有眼前的美景。要知道，在大自然中看著夕陽西下的美景與在都市觀賞的體驗是截然不同，劉槿棉沒有說討厭都市的，但她更喜歡鄉下的。
+
+「好啦，該回家了，不然書昌會擔心的。」
+
+這樣喃喃自語著，她準備繞到前門，拿走那袋蔬果之後開車回家。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237456332794368112" class="chatlog__message-container " data-message-id="1237456332794368112">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 01:29:40 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+請過靈感。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237456934660210730" class="chatlog__message-container " data-message-id="1237456934660210730">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 01:32:04 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">CC 55 INT</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237456936224686210" class="chatlog__message-container " data-message-id="1237456936224686210">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(186, 197, 197)" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">05/08/2024 01:32:04 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+1D100 ≦ 55　
+30 → 通常成功：INT</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1237459218211147932" class="chatlog__message-container " data-message-id="1237459218211147932">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/08/2024 01:41:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">就在你正想走回前門時，注意力意外被那些地上奇怪的泥土痕跡很攫獲了，彎下身子來，定睛一看，那些泥印顯然是某種動物留下的腳印，看形狀似乎是狗類、亦或是什麼犬科動物留下的足跡，然而當你下意識地伸出手掌，與那些痕跡比較大小時，卻發覺那些腳印的大小和你嬌小的手掌相比，幾乎大了快一倍有餘，即使是世界上最大的犬科動物，怎麼想也沒有辦法長到這般尺寸吧，再聯想起早先時候隔壁王阿姨提及的、關於那『魔神仔』的一些描述，即使是在炎熱的夏季，你全身上下也忍不住打了個寒顫。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239926515043537018" class="chatlog__message-container " data-message-id="1239926515043537018">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 21:05:17 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">劉槿棉蹲下身子，原先他認為是洼地的地方在仔細一看，發現並不是這麼一回事，她看著地上的凹凸起伏，一直延伸到屋子之中，她看著靜悄悄的屋子，沒有自己的叔叔，沒有其他人，一片死寂。
+
+但，叔叔真的只是單純失蹤了嗎？
+
+她左顧右盼，先是朝地板拍了一張照片，原先打算就留個紀念，或是發到社交平台上詢問網友之類的──她本來打算轉頭就走的。
+
+只是劉槿棉想起了當初在她走投無路時，那位突然出現的叔叔，遞給她的支票，從來沒有要她兌現的回報。
+
+『書昌，做人不能忘恩負義。』
+
+她曾這樣教導過自己的弟弟，她一直都秉持著這個原則。
+
+「唉。」劉槿棉嘆了一口氣。「要幫你的忙真的很難啊，叔叔。」
+
+她這樣說著，抓了一下自己的頭髮，重新走進了屋子之中。與此同時，她傳了一個簡訊給劉書昌，『書昌，今天不用準備我的晚餐了，我會很晚很晚才回家，不好意思喔&gt;&lt;！』</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239934420849528914" class="chatlog__message-container " data-message-id="1239934420849528914">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 21:36:42 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">穿過前門，蕭瑟的晚風在走廊間吹拂而過，乍聽之下仿佛哀婉嗚咽的哭泣聲，眼前的所見一切想當然耳正和早先時候正要仔細四處觀察、卻被王阿姨前來打攪時並無半分不同，除了天邊紫紅的霞光為房中的事物鋪上了一層慵懶的濾鏡，書房的窗戶與房門同樣大大敞開著，偶爾有幾縷吹過的氣流將凌亂的紙頁吹起，那故事與文字中的小人想來也未曾知曉此刻自己正在風中飄蕩吧。
+
+在發出簡訊之後沒過多久，你也收到了書昌的回音，那孩子大概是趁著打工比較空閒的間隙，抽空回覆吧，通訊軟體上可以看見他習慣用的那個可愛的『瞭解！』貼圖、也提及了姐弟二人有一人會較晚回家時，總會在玄關處留下一盞橘黃的燈火，那習以為常的默契。
+
+思及此處，你突然想起，自己與弟弟之所以會這麼做，或許也是受到回憶中父母親他們潛移默化的影響吧，每當有人夜歸時，剛剛走過的門廊前總是會有那盞暖黃的燈泡盈盈亮著，小時候有時躺在被窩中無法入眠時，常會忍不住從二樓的臥室窗戶，看著門前那微弱的光暈，想著父親何時才要回家，以及好似未曾改變過的，那引擎熄火漸次微弱的轟鳴聲、熄滅的燈影，和在那燈關上後接踵而至、父母親害怕吵醒你倆的輕聲動作與點點聽不清的低語。
+
+那些回憶好似長河中藏匿起來的魚兒，那一片片在時光中切片保存下來的標本，總是在塵封以後，卻又在不經意間被一些小事作餌勾住從河面上躍起，揚起陣陣不止的漣漪與水花。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239937031535071374" class="chatlog__message-container " data-message-id="1239937031535071374">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 21:47:05 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">看著書昌傳給她的貼圖，是多麼平凡的溫暖，她笑了出來。她想起書昌總是會在下班的時候幫她帶一些她喜歡吃的東西，偶爾是新開的，偶爾是他們都喜歡的，弟弟總是為她著想，而她呢，除去過去那段荒誕的日子之外，她都一直在努力做自己弟弟的榜樣──雖然現在她已經鬆懈了，但她相信書昌會成為一個很棒的大人，甚至要比她還要更棒。不用有成就沒關係，他就做他一直以來是的：做個堅強的好人。
+
+劉槿棉踏過了玄關，她將鄰居的好心留在玄關，自己的舉步走進去，這裡的構造雖然陌生，但她也再清楚不過，更何況今天她已經決定想找尋關於叔叔失蹤的蛛絲馬跡，與今日剛踏進的心態便顯得不同了。她嘆了口氣，走進了過去與現在的劉家。
+
+「那先去叔叔的臥室看看吧？」
+
+與其用想的，嘴巴說出口的話更容易好好的幫自己確定目標，劉槿棉走進去，朝記憶中的主臥室踏步向前。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239939066439663626" class="chatlog__message-container " data-message-id="1239939066439663626">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 21:55:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">和書房那雜亂無章卻充滿生活的氣息相比，主臥室可以說是十分乾淨整潔了，甚至可以說是簡約到讓人懷疑此處究竟有沒有住過人，除了那籠罩在房間的各個角落的厚厚灰塵以外，觸目所及幾乎看不見任何特別的東西，小時候父母親還住在這裡時，那床應該是結婚時訂做的大紅錦被以及床邊那總是放滿各種化妝品、保養品的梳妝台，也早就隨著搬家被帶走，徒留在記憶裡頭。
+
+如今的床上也只有簡單的一顆睡了太久有點坍陷的枕頭、以及被折的整整齊齊的如同稿紙一般、本來應該是白色卻已在歲月中有些泛黃的薄薄棉被，幾乎看不出什麼有人生活的痕跡。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/14/2024 21:59:32 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239940803531374653" class="chatlog__message-container " data-message-id="1239940803531374653">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 22:02:04 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哇，他平常沒有休閒娛樂的嗎？」很難想像那樣的帥臉卻沒有其他興趣，但她跟叔叔也只是簡單的一面之緣，更何況從外表評斷她人本來就不是她會做的事情。
+
+而且房間是屬於自己最私密的地方，像是她自己有滿滿一櫃子的言情小說，自己睡前都會看一下，幻想自己未來的愛情──她知道要有一個像是小說中完美的男人可能性不高，但這不妨礙她幻想。而她的嘴巴碎碎念著，劉槿棉繞了一圈這間房間，左顧右盼，卻怎麼也找不到該屬於叔叔的蹤跡。
+
+「衣服呢？鞋子呢？不會吧？」還是叔叔已經搬走了？但樓下那些......不可能啊。
+
+嘗試想從室內的窗戶往外望，從這裡可能看到什麼呢？</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239943646388686848" class="chatlog__message-container " data-message-id="1239943646388686848">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 22:13:22 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你仔細地打量著房間的周遭，墻邊那僅有的衣櫃也被你拉開翻找，但裡頭只有一兩套樸素的衣物，被整整齊齊地疊好，或許原本居住於此的那人，總是過著臥室與書房間兩點一線的生活吧。
+
+輕輕撥開窗簾，拉開窗戶，從花窗那繁複精緻的鐵格子間向外望去，此時那落日已西沉，只剩下紅色的一角還在地平線上苟延殘喘著，正要暗下來的海藍天空上，那輪銀月仿佛珍珠一般遙遙掛著。
+
+雖然以前曾經在這裡住了許多年，但你似乎好像從未從這裡向外探頭看出去過，放眼望去，只見主臥室正巧在書房的正上方，而屋子後院那些恣意橫生的雜草以及蜿蜿蜒蜒朝著遠處墳塋所處的小山延伸而去的那些泥印，在輕柔的月光下都盡收你的眼底。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/14/2024 22:13:27 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239946535563821148" class="chatlog__message-container " data-message-id="1239946535563821148">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 22:24:51 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哇......真可怕。」劉槿棉在她的生命中不是沒遇過嚴謹的人，但是像這種找不到個人私物的人她還是第一次見到。別誤會，她可不是什麼偷窺跟蹤狂，只是......覺得奇妙？更何況她不否認，在挖掘他人的秘密時......很有趣，雖然這人沒有祕密好挖。
+
+她在經過窗戶的時候放任自己停留在窗邊觀賞著日落的遠方，她看著銀光打攪的森林，彷彿已經可以聽見夜晚的聲音，伴隨著蛙聲與貓頭鷹的嗚鳴，全都散落在森林之中，隱藏在樹叢內，歌頌著每一夜的安寧。
+
+當自己將後院的景色都收入眼底之後，劉槿棉才滿足地將視線轉移到那些過大的腳印之中，她瞇著眼睛觀察，嘆了口氣。
+
+「不會吧，等等要走進去嗎？」
+
+劉槿棉已經去過一次，她不怕再去第二次，但是王阿姨跟管理員的耳提面命還殘留在腦中，那些關於「魔神仔」的清晰字句警告著她，劉槿棉這一生沒做過虧心事，不怕有什麼東西騷擾她，但不怕一萬只怕萬一，她還有一個弟弟要養，也在等待自己的未來，現在可不能死掉或受傷。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239948778908422265" class="chatlog__message-container " data-message-id="1239948778908422265">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 22:33:46 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">窗外銀白色的清澈月光透過玻璃窗灑落，望月於蒼穹上遙遙高掛，隨著暮色逐漸黯淡下來，原本就安靜的村落此刻更加寂寥，聽不見半點人聲，那些曾經會在此刻一起在街道上玩耍、等待被家人叫回家吃晚餐的玩伴們，如今也都和你一樣，一個個搬離村莊，孤身一人踏入都市的水泥叢林之中，走進那霓虹燈鑄就的紛亂之地，在大城市裡頭打拼了吧，眼下只有時不時颳過的晚風將落葉吹起的蕭瑟聲響偶爾傳進耳邊，以及那猖狂的蟬鳴蛙唱，在夜晚的舞台上奏響此起彼落的樂章，記憶中的那些歡聲笑語，此刻真真切切只能停留在記憶中，再也不可復見一二。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/14/2024 22:35:18 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239951006209409096" class="chatlog__message-container " data-message-id="1239951006209409096">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 22:42:37 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">劉槿棉瞇起眼睛，那些以前的朋友正在做些什麼呢？以前的時代沒有手機，他們也沒有互留聯絡方式，更何況之後的她就被送走，再也尋不到那些頑皮小鬼的蹤跡，想想還挺可惜的，但是過去的緣分就放著她過去，現在才是最重要的。她看著窗外的景色，思緒又轉到弟弟身上。她想書昌應該會喜歡這裡，也想，說不定書昌會跟叔叔合得來，畢竟他們都喜歡一些東西，只是她不知道弟弟喜歡的是什麼類型的。
+
+臥室空無一物，只有簡單的床鋪與月光陪伴，劉槿棉想其它房間應該也是差不多的情況，或許根本已經積了滿滿的灰塵，她猜叔叔可能只會經過廚房、書房以及臥室，就各個方面而言都是無趣的人。
+
+「但是文學界很有名的樣子......啊。」
+
+她想起剛才只是大略的看過一次對方的藏書，而更私人的物品則沒有翻閱，這勾起了她的好奇心。畢竟比起臥室，書房更有人類生活過的痕跡與味道──雖然是有被小偷──或是狗──光顧過，不過依照叔叔的一絲不苟，他重要的東西應該都有好好地擺放吧？
+
+曬足了望月，劉槿棉將臥室留在她的身後，她拿出手機看了眼現在的時間，不經意地走進亂糟糟的書房。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239954168085614592" class="chatlog__message-container " data-message-id="1239954168085614592">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 22:55:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">清冷的月光如汩汩流水，流過敞開的窗，在書房的地板上灑落一片空明積水，那些凌亂堆積的書本與紙張也被月色勾勒出鮮明的陰影，書桌上的鋼筆與狼藉的陳設與你離開時並沒有半點不同，仿佛有人抽刀斷去那潺潺的逝水，令一切都停駐在某一個瞬間，就此定格。
+
+從口袋裡頭掏出手機時，那刺眼的光線才讓人仿佛轉眼又回到了平凡無奇的沉悶現實，此刻約莫是酉時剛過不久，書昌似乎是剛剛結束打工回到家裡，拍了張晚餐樸實無華的照片，並沒有多帶任何描述，同你報了平安，正似獨屬於你們姐弟倆多年共同生活的默契。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239955883773923480" class="chatlog__message-container " data-message-id="1239955883773923480">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 23:01:59 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哇，肚子餓了。」說起來自己也沒吃什麼東西，但現在她也沒有胃口，劉槿棉嘆了一口氣，她摸了一下自己的臉頰。可不能嘆太多器啊，會老的快的。她想，強迫自己打起精神，回覆給對方一個「好棒喔」的小黃人貼圖。
+
+食慾勾著她，讓她走路速度快了一點。她正努力地回想著桃園是否有什麼令人印象深刻的好吃食物，但不像是彰化有肉圓，台南有碗粿，這塊她小時候住的土地讓她想起的優點似乎只剩下不太會停電這點......至於食物還真的沒有特別的。
+
+「豆乾？花生糖？」她喃喃的念著自己印象中好吃的食物，但這些都不夠特別。她一邊想著，一邊小心地避開那些地上的泥沙，走到叔叔凌亂的書桌之前，打算打開抽屜、一一檢查裡面的文件。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239958618007404554" class="chatlog__message-container " data-message-id="1239958618007404554">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 23:12:51 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">肚子那因饞蟲而擅自蠕動的聲音，和腦海中看見書昌傳來食物時，被勾起來的各種小吃與種種食慾，讓口水忍不住又不受控制地分泌著，少許的飢餓反倒打消了你原本的睏意，讓你的腳步又下意識地不由得加快了幾分。
+
+你輕輕拉開抽屜，大概是因為經常使用的關係，卡榫都已有些鬆脫，裡頭有多本相似的筆記本，寫著應該是日記的記錄，以及一疊厚厚的稿紙，那一行行字跡都是那樣的工整認真、力道仿佛要刻印到紙背一般，目光粗略掃過，看樣子想來應該是叔叔正在撰寫的小說吧。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/14/2024 23:13:38 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239960041281425441" class="chatlog__message-container " data-message-id="1239960041281425441">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 23:18:31 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「寫的字也太工整了吧？」這就跟爸爸不一樣了。她還記得自己父親在書桌上奮筆疾書時的認真，但是字體是如同草寫一般的揮灑，劉槿棉從來都搞不懂對方筆下的書信，但只要銀行買帳就行了，當然啦，她現在也遇見很多類似的客戶，只是記憶中那位總是高大的男人親筆寫下的東西她也沒怎麼再翻閱過，所以她也始終不理解那些內容。
+
+將稿紙放好，劉槿棉拿起那些像是日記的筆記本。「抱歉啦，叔叔。給我一些找到你的線索吧。」畢竟是窺探他人的隱私，劉槿棉小小聲地道了歉，「我看完之後會放好的。」她說著，接著翻開了離最近日期最近的日記。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1239964392179634306" class="chatlog__message-container " data-message-id="1239964392179634306">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">05/14/2024 23:35:48 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">與小說的稿子相比，那日記中的一字一句大概是情緒宣洩而出的流淌吧，雖然字跡還是十分整齊，但還是少了那麼一絲工整，多了一些波動不定的情緒。
+
+雖然說是日記，不過看起來叔叔似乎是只有想到什麼的時候才會隨手寫上一些，那押上去的日期也是跳來跳去。 但那些內容幾乎都大差不差，多是在抱怨些跟人交流很累，總是看不清其他人表面背後的真實意圖，以及總是無法理解大家拐彎抹角的暗示與隱喻等等。 
+從某一篇開始，他倒是寫到他發現附近的一個墓地，平常夜裡幾乎不會有人出沒，是一個絕佳的閱讀所在。那些微風拂過樹梢的響動和明朗澄澈的月光，都使他得以暫時擺脫俗世的紛擾，拋卻紅塵的煩憂。 
+在最新的幾篇裡面，叔叔意外地提及了他在墓地遇見了一些特別的朋友，和他們交流一點也不需要花費心力，自在極了。比起來跟其他人說話根本就像是薛西弗斯的懲罰一樣，是一種永不止息的折磨。
+
+日記尾端就此戛然而止，與其他天的記錄並沒有多少不同，或許是少了一本丟到哪邊，也或許是本來就只是寫到這裡也說不定？
+
+<div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">------
+2016.Oct
+隔壁的那對夫妻又在吵架了，真的是煩死人了，整天都聽得到各種大大小小、無關緊要的摩擦與口角，這實在是令人不解，明明應該是因為彼此相愛才在一起的吧，怎麼卻又會為了這麼支微末節的瑣碎事情吵得不可開交呢？婚禮下定下的誓言與往昔的那些深情與包容，是否都會隨著時間煙消雲散呢？即使是婚姻這樣的誓約也不可避免，人與人之間的交際我果然始終還是無法明白。
+
+只不過雖說如此，那日復一日的爭執與噪音還是打攪了我的清眠，夜不成寐，下筆時的靈感也常常被打斷、消失無蹤。只不過也是因為這個契機吧，我找到了一個可以讓我專心寫作、傾心投注在文字與閱讀間的所在，雖然附近的鄰里對那頗有微詞，說那個墓仔埔有些不乾淨的東西，但即使我寫作了那麼多奇幻小說，對這類怪力亂神之事也沒有不信，只不過至少當我坐在那旁邊讀書時，藉著月光與露營燈寫作閱讀時，我得到的是寧靜與安詳。
+
+------
+2017.Feb
+今年冬天並沒有那麼寒冷，雖然有幾次天氣預報都說有寒流來襲，但這還是不減我獨自去墓仔埔，投身於文字中的閒情逸致，一到晚上就跑到在那邊的生活，不知不覺間也過了好幾個月了呢，或許是那裡的寧靜與絕好的氣氛吧，這段時間靈感總是汩汩浮現，仿佛湧泉一般不止息地冒出。
+
+唔、除了靈感不絕之外，倒是還有一件特別值得記下來的事情，在那個墓仔埔裡頭，我遇到、認識了一個、嗯...有點特別的朋友嗎？他說他就住在墓仔埔裡頭，第一次遇見他時我們彼此都嚇了一大跳呢，我們對彼此為什麼會出現在那裡、在那裡做些什麼都有些好奇，有時會隨口聊些有趣的事情、有時就是靜靜地做著自己的事情，並沒有多做什麼，這樣的感覺好像也不錯呢。
+我想，這或許也可以作為往後下筆的靈感吧。
+
+------
+2019.Jun
+人與人之間的交流，真的是好難呢。前幾天和兄長在電話上又吵了一大架，雖然他打小就很氣我就是了，父母親去世的時候，那應該說是憤怒嗎的情緒好像又更加明顯。但他人即地獄啊，我實在實在無法理解別人在想什麼、無法像是書本裡頭的正常人一樣有著那些親情友情諸如此類的，那些種種我總是感覺不到，說不定別人也感受不到、卻又為了融入而不得不戴上虛偽的假面呢？還是說我本身就是個可笑的殘次品？跟人交際真的好痛苦好困難......
+
+------
+2019.Aug
+兄長過世了、、、、？
+這世界也未免太過荒謬，不管是人與人之間也好，還是這無常的世事也罷。
+
+反正我日常生活也沒有多少花費，晚點把銀行剩下的錢都交給他留下來的小孩好了，希望他們可以好好長大...我這種人實在還是不要摻合進這種事情、影響他們為好，雖然書上的那些正常人好像都會負責撫養他們長大，但這種事情我實在做不來......
+
+------
+2020.Dec
+偶爾會偷偷去探望兄長留下來的那兩個孩子，應該是叫做槿棉跟書昌吧，真是好聽的名字呢，雖然有時會有些不順遂，但總體來說應該過的還行吧，當初我沒有摻合似乎是再正確不過的選擇了，反正我這種人也不配？
+
+------
+2023.Apr
+那奇妙的朋友、陸陸續續與我有些交流呢。談論著他們生活的那個世界、那個被他們稱為『夢幻之域』、總是長年被雲霧所籠罩著的世界，他栩栩如生地介紹著那個神秘而有趣的世界時，總是讓我不免有些好奇，如果能夠去那裡探訪的話，不知會是多麼好玩的事情，而且在那個世界裡，似乎也不需要這種痛苦的人際交流...唔...。
+
+------
+2023.Jun
+神秘的朋友們吃的東西與我們不太一樣，而且他說他們也不太需要進食的樣子，頂多一天、甚至兩三天吃一餐就好，內容也截然不同。雖然我也問過，他們就不會想吃些新鮮的嗎？但他是這麼回答的：為了不被發現、也為了不打擾到別人，還是別這麼做比較好。
+從這點觀察起來，雖然少了那麼多累人的交際，但在他們之中，應該還是有些獨特的生活規範存在呢。這真是有趣。</div>
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="05/15/2024 00:07:01 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247540452534779984" class="chatlog__message-container " data-message-id="1247540452534779984">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 21:20:22 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">該說不愧是小說家嗎？叔叔所撰寫的文字行雲流水，比起單純的記錄心情之外似乎又多了更多的東西，會讓人不自覺得沉浸在文字之中。劉槿棉一字一句的仔細閱讀著，感嘆的呼出一口氣。
+
+所以叔叔過去是有關注著他們的，但......為什麼不說呢？相比他有書昌相伴，對方似乎一直以來都是獨自一人，文字之間雖然充斥著自嘲與自我厭惡，可是劉槿棉卻覺得對方或許也是需要一個相伴的對象也說不定，她不確定，畢竟對那男人的認識始終不深，她不是沒想過，但叔叔不深交的理由是不擅長，也是讓她驚訝地眨眨眼。
+
+「如果還找得到他的話，得跟他說想太多了......」說起來，書昌也是會想很多的類型。劉槿棉想起父親時常皺在一起的眉頭，難不成這是家族遺傳嗎？男人想太多的遺傳？她不自覺得用拇指揉著自己的雙眉之間，那裡在她不自覺的情況也皺在了一起，她嘆了一口氣。「看來是家族遺傳呢。」
+
+劉槿棉跟劉書昌身邊有血緣關係的人已經不多了，當然她不希望再損失一個，而且如果可以的話，她會在這之後時常來拜訪叔叔，分享他們的生活，即使對方尷尬也無所謂，沒有人的一生都需要這樣形單影隻的生活，而且從日記上的紀錄，劉槿棉並不覺得對方也甘願孤獨，更像是受過傷之後決定把周圍的人推開。
+
+「......只是，這位神祕朋友又是誰呢？」
+
+她好奇的喃喃自語，能讓生活乏味、封閉自己的叔叔敞開心扉的，又會是怎樣的人呢？但日記裡面也說了，那位朋友住在墓仔埔裡，是什麼人會住在墓仔埔裡？而且，就連鄰居跟管理員都說了那個地方不乾淨......
+
+「叔叔他，不會是交到鬼朋友了吧？」
+
+這個可能性竄過她的腦海，由嘴巴吐出，劉槿棉再看了一次日記的部分，覺得可能性非常高，她以前看過的故事諸如「白蛇傳」、「倩女幽魂」之類的人鬼(妖)相戀的愛情故事不合時宜的閃過，叔叔這種無依無靠──自己造成的──不易親近他人──也是個性問題──似乎是很好的下手對象。
+
+既然都是在墓地裡、偶爾有與神祕朋友相伴所寫出來的小說，那麼內容又會是什麼呢？已經有開始的窺探，後面再閱讀稿紙上的內容便少了一開始的抗拒，而是逐漸變的順理成章。劉槿棉這次拿取那疊稿紙的動作自然許多。
+
+「就讓我做你的第一......或是第二位讀者吧。」
+
+劉槿棉這樣說道，對叔叔的好奇與憐憫是前所未有的高漲，她低下頭閱讀對方撰寫的小說。</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/04/2024 21:31:38 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247545280510034043" class="chatlog__message-container " data-message-id="1247545280510034043">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 21:39:33 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">如今正是生意盎然的夏夜，窗外蟬鳴陣陣不絕於耳，晚風輕輕拂過樹梢，吹動枝枒沙沙作響作為伴奏，書房裡頭到處壘起了書籍，幾乎找不到落座的地方，你只能就著書房裡頭那滿是年代感的昏黃燈泡，將那些日記速速瀏覽而過。
+
+將日記放回桌上以後，你拿起同樣放在抽屜裡的那疊稿紙，想來應該是叔叔失蹤以前仍筆耕不輟的作品吧，相比起日記那樣簡短的文字，雖然還是尚未完成出版的小說，但篇幅還是長上了不少，雖然同樣是叔叔親筆寫下的文字，但寫在稿紙上也便不似日記那般飄逸隨性，一整天辛苦下來，腿也有些發痠的你仔細地拾起稿紙，穿過走廊在柔軟的沙發上坐下，細細品味起那一個個墨印與其後蘊含的氛圍。</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/04/2024 21:40:36 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247550217453179021" class="chatlog__message-container " data-message-id="1247550217453179021">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 21:59:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你將疲憊的身軀沉入鬆軟的沙發裡頭，不經意間還瞥見了沙發角落，那幼時與書昌在這兒玩耍時，不小心弄破的布料依舊與記憶中一般無二，在放學回家以後，不太喜歡外出活動的書昌常常就是一個人窩在沙發一角讀著自己的書，聞著母親在廚房裡頭煮晚餐時飄散而來、令人飢腸轆轆的香氣，雖然大多數時候你都是跑出家門在外頭玩耍，但也有些被禁足或是下雨的日子，你也會和書昌一起半躺在沙發上，一人佔據一角，或是安靜地讀著自己的書、或是為了一些無足輕重的事情打打鬧鬧著，但，那都已經是好久好久以前的事情了呢。
+
+你輕輕翻閱起稿紙，相比起日記那直白而豐沛的情感，叔叔在寫小說時的文筆反倒是截然不同，那些恰到好處的描繪與形容將字字句句間的所思所想清晰地傳達到讀者心中、輕盈夢幻卻又不會太過浮誇、咬文嚼字的文藻，以及那些讓事物是那樣的清晰、仿佛躍然紙上的文筆與情節，那樣溫柔平和的故事，讓人忍不住一頁接著一頁翻閱下去。
+
+小說裡頭講述著一個逃離原生家庭，害怕又厭惡人群喧囂的少年在某天遇見了一個來自另一個世界的男孩，那個神秘的男孩帶領著他去了另一個世界遊玩，在那邊，他不再需要逼迫自己與其他人講話社交、迎合他人的感受，也不會被其他人誤解與敵視。從那以後，少年就常常在下課時分從塵世的喧囂中遁逃，和那個男孩一起遊戲。而在這個過程中，少年也逐漸成長，能夠正常地和其他人社交，原本在學校總是一個人孤伶伶的他，也遇見了一些志同道合、能夠自在相處的知心好友。直到某一天，那個男孩告訴了少年，往返兩個世界的門扉因為能量不夠的緣故，已經到了即將關閉的邊緣，自此以後兩個世界將斷去一切聯繫，在落英紛飛櫻花樹下，男孩詢問著少年是否要同他一塊離去、亦或是留在這個原本的世界。
+
+而故事就斷在這裡，留下一個未完的結局...在最後一頁處，未完待續的結尾還能夠看見一個重重的墨點，許是叔叔同樣為了結局究竟該如何發展而糾結不已吧。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247553901327286393" class="chatlog__message-container " data-message-id="1247553901327286393">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:13:48 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">綜合日記的內容，這樣看起來就像是叔叔在撰寫他的自傳一樣。
+
+沙發的柔軟包覆住了劉槿棉，至少這個記憶叔叔沒有扔掉，而是擺放在這裡，不知道對方是否常使用這個沙發嗎？劉槿棉希望有，畢竟她希望這是能夠帶給人溫暖以及舒適回憶的地方──至少對於她而言是這樣，就是不知道叔叔是否也這麼認為。
+
+她細細地品嘗著對方的小說，少了幾分壓抑、多了輕鬆的文字閱讀起來是如此順暢，而也有許多需要讓她深思的地方，以往她喜歡看的是能讓她在下班之後舒緩壓力的無腦愛情小說，順著文字走就能輕易地得知劇情大致走向，最終也一定是兩人在一起的快樂結局，但劉槿棉卻無法猜透這本書的結局，一方面是結局的確還沒寫出來，另一方面是......她不知道叔叔會怎麼選擇。
+
+受到叔叔的恩惠之後卻對他不聞不問的人的確是她，劉槿棉甚至沒讓劉書昌知道對方的存在，她嘆了一口氣，把稿紙放在大腿上之後，讓自己陷進沙發之中，自己則抬頭仰望著天花板，日暮後的世界由繁星與黑夜包覆住，星星與月亮的光亮無法投射進屋子之內，因此人類發明了燈泡。無論什麼事情都得要有一個開頭，而叔叔開了頭，她卻沒有接下去，即使是沉浸在悲傷之中也太久了，這是她們的親人，孤單而不被理解，一個人活到了現在。
+
+劉槿棉的眼睛閉上了一會兒，接著她再堅定的張開，她帶著那些稿紙，從沙發上彈起來，伸了一個懶腰。
+
+「他應該會在那裡吧？」劉槿棉喃喃自語著，她看向書房的窗外，髒兮兮的痕跡與過大的腳印。
+
+叔叔的朋友到底是誰呢？</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247554389871165584" class="chatlog__message-container " data-message-id="1247554389871165584">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:15:44 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+請過聆聽。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247554600408580208" class="chatlog__message-container " data-message-id="1247554600408580208">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:16:35 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">CC 40 聆聽</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247554602115792938" class="chatlog__message-container " data-message-id="1247554602115792938">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(186, 197, 197)" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">06/04/2024 22:16:35 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> <img loading="lazy" class="chatlog__emoji " alt="🕯" title="🕯" src="https://twemoji.maxcdn.com/2/svg/1f56f.svg">️
+1D100 ≦ 40　
+56 → 失敗：聆聽</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247555836016857271" class="chatlog__message-container " data-message-id="1247555836016857271">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:21:29 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你理了理那些讀完的稿紙，從沙發上坐起來伸了個大大的懶腰，走回到了書房附近，心神還有些沉浸在故事情節中的你並沒有太多注意眼前的情況，直到銀白的輝月灑落在你身上，在你臉上蒙上一層銀紗之後，你這才豎耳聽見書房裡頭似乎傳來了細微的、窸窸窣窣的聲音，似乎是有什麼人正在翻著書冊的響動，那動靜在靜謐的夜色中顯得格外明顯。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/04/2024 22:28:21 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247556676085616723" class="chatlog__message-container " data-message-id="1247556676085616723">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:24:50 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯？」劉槿棉輕輕地哼了一聲，不會是叔叔回來了？
+
+但或許也有可能是小偷。劉槿棉警覺的皺起眉，她把稿紙放到一邊的桌上，接著左顧右盼，想尋找有什麼可以拿來防身的東西，除此之外，她也將自己的手機按到緊急通話的那一個按鍵，也規劃好了逃生路線，打算一遇到不和善的人或是事，就要直接跑掉。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247557295374733464" class="chatlog__message-container " data-message-id="1247557295374733464">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:27:17 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你瞇起眼睛，在走廊上迅速地四處查看了一番，角落裡頭那把小時候常常被抽出枝條作為體罰工具的竹掃帚仍躺在記憶中相同的位置，雖然不是那麼順手，但掃帚的柄想來還是至少可以作為簡單防身的工具吧。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247558594048561194" class="chatlog__message-container " data-message-id="1247558594048561194">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:32:27 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">劉槿棉拿起那個掃帚，記憶中因為太過調皮搗蛋的母親拿著這東西追著她跑的記憶還殘留著，讓她稍微抖了一下，在她上高中之後她媽媽再也沒拿起這種東西，更正確來說是沒有體罰了，而她也沒有在做過其他需要讓家人追著打的壞事。
+
+深吸一口氣，劉槿棉握住小時候讓她厭惡不已、也沒有碰過的掃帚，她相信這把過去會把她打得哀哀叫的掃帚的功力，眼神堅定了一些。
+
+就這樣，她一隻手按在手機的鍵上，另一隻手握著掃帚，小心翼翼的探出一顆頭，看向書房。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247562685084864563" class="chatlog__message-container " data-message-id="1247562685084864563">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:48:42 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">探出頭的瞬間，一股強烈的、不太對勁的味道瞬間竄進了你的鼻腔，那是你從未聞過的惡臭，就連臭水溝的氣味也不及那古怪氣味的萬一，那是一種朽壞的、腐爛的、肉類的味道，還夾雜著一絲泥土的腥味，那氣味瀰漫在書房裡頭，隨著你的走進變得更加難耐。
+
+透過門縫，映入你眼簾的是一個在月光下的人形剪影——不，那真的能說是人影嗎？
+
+那個身影那生物和人有些相似，卻又截然不同，它傴僂著背，彎著身子坐在書桌上，披掛在身上的衣物看上去只是僅僅能夠蔽體、破爛不堪的布料，下半身的腿雖然大體上看起來還是人的模樣，但卻有著異常粗壯發達的大腿和有些反弓的關節，腳掌的部分也嚴重變形，乍看之下似乎是蹄的模樣卻有著如犬科動物的利爪。
+
+在朦朧的月色下，它嘴角邊露出、尖銳勾起的獠牙泛著青白色的反光，猛然一看便是那樣的兇殘可怖，皮膚也是橡膠一般的質感，全身上下都覆蓋著那沒有多少光澤的墨綠色詭異肌膚，除了尖尖豎起的耳朵以外，絕大部分的臉龐都被粗壯的毛髮給遮住了，但即使如此，你匆匆瞥過時依舊能夠感受到那面容的猙獰恐怖。
+
+這究竟是人類、還是什麼東西？紛亂的腦海中，早上聽到、被你一笑置之的名詞驀地湧現——『魔神仔』。
+
+但這種東西不該只是街談巷議間的故事而已嗎？就像是什麼喜馬拉雅雪人或者是尼斯湖水怪一樣，怎麼可能真的存在在這世界上......
+
+請SC。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247563367170707500" class="chatlog__message-container " data-message-id="1247563367170707500">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:51:25 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">CC 45 SAN</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247563368659681291" class="chatlog__message-container " data-message-id="1247563368659681291">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(186, 197, 197)" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">06/04/2024 22:51:25 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> <img loading="lazy" class="chatlog__emoji " alt="🕯" title="🕯" src="https://twemoji.maxcdn.com/2/svg/1f56f.svg">️
+1D100 ≦ 45　
+17 → 困難成功：SAN</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247563765558280192" class="chatlog__message-container " data-message-id="1247563765558280192">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 22:53:00 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="yaooya4610#0000">@劉槿棉（玉米片）</span> 
+成功不扣 SAN。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247566267498365000" class="chatlog__message-container " data-message-id="1247566267498365000">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 23:02:56 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">只是一眼，劉槿棉就差點尖叫出聲，她用抓住掃帚的手摀住自己的嘴巴，眼睛瞪大，這是什麼東西？就算是魔神仔也太可怕了吧？不應該像是傳說中的黃衣小飛俠、人面魚那樣的東西嗎？但眼前的這個，在她的一生之中絕對沒看過──是怪物，絕對是怪物。
+
+劉槿棉聽到了自己心臟撲通撲通的聲音，她將自己的背貼到牆面上，做了這個動作之後卻又無法動彈了。她就連喘氣也都顯得小心翼翼，那如犬卻似蜥蜴一般的長相於她此生未見，一團混亂的腦袋無法整理出什麼，但即使如此，還是有一個念頭叫她冷靜，跟她說：為什麼這種怪物會闖進她家──闖進叔叔的家？
+
+她可不覺得對方的來意是好的，那張臉是如此的可怕，就連最荒誕的惡夢也無法比擬......劉槿棉想，她會永遠記得這張臉，而且她得離開這裡，遠離怪物。
+
+等到她可以挪動自己的腳步時，她將手機放在口袋──現在她無法講話，只能等跑到安全的地方再報警──接著她小心地抓起方才放置在桌上的稿紙，嘗試不發出任何聲音，踏上了她規劃好的逃生路線。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247568784819093698" class="chatlog__message-container " data-message-id="1247568784819093698">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 23:12:57 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你嚇得重重靠在墻上，被堆積在地上的書本輕輕絆倒，腳步一個輕微踉蹌，雖然很快就恢復了平衡，但在寂靜的夜中，還是發出了細微的響聲，那原本坐在書桌上，手捧著書本沉浸在故事中的怪物，也嚇了一大跳朝你的方向看了過來。
+
+正臉與他四目相對的瞬間，你感覺在那猙獰的五官下，卻有一股莫名的、異常熟悉的感覺，如果刨去那些詭異的特徵來看，那怪物隱隱有幾分父親和叔叔的影子。你楞了一下，這才驚覺那個生物和叔叔有著如此多的相似之處...早上整理時遺失的那些書本、五官的線條和隱藏在青綠色瞳孔下的、那總是有些瑟縮彷徨的眼神。
+
+在你看到他的那瞬間，他也看到你了。
+只見它慌張的扔下手中的書本，從窗戶一躍而出，在月光下劃出一道長長的身影，三步並作兩步地消失在了樹林之中。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247571603001446400" class="chatlog__message-container " data-message-id="1247571603001446400">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 23:24:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「欸、欸？」逃走的人錯了吧？該逃的人應該要是我吧？
+
+劉槿棉目瞪口呆的看著逃離的速度有些過於熟練且快速的怪物，她看了看凌亂的書房，嘴巴張了張，不知道為什麼有點尷尬。
+
+該不會以怪物的眼睛來看，反而是人類比較可怕，說不定對它們而言有什麼不能被人類發現的奇怪規矩之類的......不要天真了！劉槿棉！那個怪物長的超像妳的叔叔的！
+
+蹲在牆邊發出無聲的尖叫，劉槿棉終究沒有昭告天下自己方才看到什麼，她抹著自己的臉，整理好自己的心情之後走進了怪物──或許是叔叔──所待的書房，她環視著地板，查看著腳印，或是其他有何不同的地方。人類怎麼會變成那樣？是關於叔叔那神秘朋友的關係嗎......日記也寫了，他不想要有過多與人類的交集，也想要去所謂的「夢幻之城」，因此叔叔決定最好的辦法是......把自己變成了一個怪物，然後闖自己房子的空門......？
+
+怎麼想都太荒謬了。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247572758259564657" class="chatlog__message-container " data-message-id="1247572758259564657">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 23:28:44 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">那翻閱到一半的小說仍被匆匆丟在地上，雖然書堆有些翻找的痕跡，但不論翻找的人是誰，他似乎都是十分小心翼翼的，非常愛惜書本，並沒有半本書顯得凌亂或是有半點破損。窗簷新沾染的腳印，正和早些時候看見的一模一樣，想來前些日子偷走書本的，大概也是剛剛看見的那個『他』無疑了吧。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247575175801606228" class="chatlog__message-container " data-message-id="1247575175801606228">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 23:38:20 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">怪物是不會那麼珍惜書的──但是劉雲帙會，他是珍惜書本、珍惜文字的人，因為他的世界擁有的東西不多，而這東西會一直陪伴著他。
+
+意外的，對於自己叔叔變成怪物這點，劉槿棉接受的意外的快──應該說太快了，她在心中婉惜著叔叔以前好看的長相，但也僅此。噢不，或許還要加上未來該怎麼探望叔叔的煩惱，還有怎麼與書昌解釋他們的叔叔變成一個不像蜥蜴也不像狗的怪物。
+
+那是家人。
+
+或許只有這個原因吧。再加上叔叔也真的很奇怪、超級奇怪。
+
+劉槿棉這麼想著，她拿起稿紙與日記，爬出了窗戶，走出了夜暮，跟上那慌亂的腳步。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1247576998046335116" class="chatlog__message-container " data-message-id="1247576998046335116">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/04/2024 23:45:35 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">看見地上那深深淺淺的足跡和窸窸窣窣的樹葉晃動，在跨出窗欄以後，你沒有花費多少力氣，便立刻清楚地觀察到那身影沿著樹林之中那條狹窄的捷徑，往墓園的方向大步逃去了。那是你今天傍晚下山時的路，想來同樣應是叔叔日記中曾經反復提過的小徑吧，通往一個人寧靜地待著的，安穩的所在。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/11/2024 20:48:22 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1250079472196255795" class="chatlog__message-container " data-message-id="1250079472196255795">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/11/2024 21:29:31 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">劉槿棉呼出一口氣，從枝繁葉茂的狹窄之間望去，是無法拾回的陌生感，那些她沒有印象的過去，但這不代表她不能不去創造一個新的。
+
+她沒有大聲喧嚷，現在是屬於蛙鳴與夜鶯啼叫的時刻，劉槿棉不想毀了這些，她安安靜靜地前進著，順著這條因太多次踩踏，而形成一條道路的小徑走著、走著。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1250081509017255966" class="chatlog__message-container " data-message-id="1250081509017255966">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/11/2024 21:37:37 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">沿著傍晚時走下山的小徑，你再次踏上了那凹凸不平的泥土和踩踏下去時沙沙作響的落葉，雖然走在一樣的道路上，但此刻的心情卻與先前截然不同，懷揣著未知的心情，明明是相同的路途，卻似乎比當時短了許多。
+
+過不多時，你便走回到了那墓園之中，撥開最後一點擋在面前的枝枒，在寂靜清冷的月色下，那模樣猙獰的怪物正傴僂著背，輕鬆地坐在叔叔那樸實無華的墓碑上，就著銀白的月光和靠在手邊微弱的燭火，以及倏忽即逝、許是螢火蟲的閃爍光點，那身影自然而然地讀著手中剛剛才從房子裡頭盜出來的文字，腳邊還整齊地擺放著幾本書冊，它的動作是那般隨意自然，仿佛司空見慣、時光一如既往一般。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1250083535692238889" class="chatlog__message-container " data-message-id="1250083535692238889">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/11/2024 21:45:40 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聽見了你穿過樹林時帶起的些許聲響，那非人生物緩緩合上手中的書本，轉過頭朝你望了過來。在看見你的瞬間，他先是張開嘴想說些什麼，話語正要說出口，在嘴邊卻又欲言又止的模樣，隨後才深深吐了口氣，清了清嗓子後，沙啞地開口說道，雖然嗓音間還夾雜著一些怪物的駭人，但那抑揚頓挫卻和記憶中那沉默寡言，每一句話都要字斟句酌，思考再三才能緩緩說出口的叔叔別無二致，緩慢卻又溫柔。
+
+「咳咳——果然是槿棉你呢，這麼多年不見，你過的還好嗎？一切都還順利吧，獨自照顧書昌真的是辛苦你了——」
+
+「唔......雖然是夏天的晚上，但還是要注意一下保暖，帶個薄外套在身上，不然著涼了可就不好了呢......」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/11/2024 21:46:56 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1250086852153839657" class="chatlog__message-container " data-message-id="1250086852153839657">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/11/2024 21:58:51 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">──是叔叔呢。
+
+雖然剛剛就已經猜到了，但見到眼前的......生物，是如此溫和地與她說著話的時候，劉槿棉還是忍不住有些哽咽。那樣的情緒很快就被她強硬的壓下，她深呼吸了一口氣，又靠近了一點劉雲帙。「對啊，叔叔，好久不見。」她的嘴角勾起，輕輕地說道。「不會辛苦，我很開心他陪我走到現在，而且他現在也長很大了，會想養姊姊了。」
+
+眼前的景象就像是繪本會出現的場景，像是過去當劉書昌還未出生時，媽媽溫和念著的床邊故事──差別只是在眼前的生物長的真的很可怕，而且她也不是小孩子，而是快要三十的成年女性了。但當劉槿棉與對方說話的時候，她反而想說一些她跟書昌日常的生活瑣事，現在的生活，未來的規劃。
+
+「沒事啦，別看我這樣，我身體很健康的喔！」跟她那體弱多病的弟弟不同，劉槿棉已經快兩年沒感冒過了，她正嘗試挑戰邁進第三年。「倒是叔叔，我都不知道你是小說家呢！」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1250090802558926889" class="chatlog__message-container " data-message-id="1250090802558926889">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/11/2024 22:14:32 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聽見你這麼回答，眼前的怪物忍不住啞然失笑，咧起嘴巴，露出銳利的獠牙，在月色下泛著鋒銳的光澤，那血盆大口是溫柔與恐怖二者矛盾的交織。
+
+「這樣呀......長大了、成熟了就好，不然我的印象中，書昌那孩子還是那樣瘦瘦小小的，整天像個跟屁蟲一樣黏在你這個姐姐後面，在你們倆連走路都走不穩的時候，就常常在房子裡頭到處亂爬——啊，那確實是好久好久以前的事情了，那時候大哥才剛剛升職，忙著處理各種大大小小的公務呢......」
+
+說著說著他似乎回憶起了層層蜘蛛網下的陳年往事，呢喃著回憶起許久以前的曾經。
+
+「不過你的身體倒是一直都很健康沒錯呢，大哥大嫂似乎從來不用為此擔心，甚至還有幾次誇讚過你在這方面上總是不讓人操心，要是其他地方也可以開開心心、只要你可以安安全全地活著、快樂的長大就好了吶。」
+
+「至於我的小說嗎...」
+聽見你提及他的創作，叔叔忍不住苦笑起來。
+「哎......那不過就是一個無趣男子無關緊要的滿腹牢騷而已，不知道也沒有關係的，除了吃些墨水、掉些書袋之外，真的也沒有什麼特別的。」
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1250094986855452733" class="chatlog__message-container " data-message-id="1250094986855452733">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/11/2024 22:31:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哈哈，叔叔你還記得那段日子啊？」其實要不是她回來這棟房子，不然她可能早已忘記幼時的瑣事了也說不定，她感嘆著，虛弱地笑了一下。「我小時候很討厭書昌的，我覺得他搶走了爸媽，但現在想想，也是因為他們為了維持生計，所以真的很忙呢。」
+
+「我可能把書昌的健康細胞都搶走了也說不定。」劉槿棉做了一個鬼臉──雖然比起現在眼前的鬼臉來說不值一提(好吧這個笑話不好笑)，「但是他現在除了上學以外還有在打工，做的是外送員喔！他的毅力比我想像中還堅韌，而且他也喜歡創作故事的樣子──我沒看過就是了──但我想，叔叔看到他一定會欣賞他的。」
+
+劉槿棉叨叨絮絮地說了一些他們生活中的日常瑣事，那些她也不知道為什麼要說這麼多的故事，畢竟就算這樣說了，他們也彌補不了這些年的空白。
+
+「啊，說到叔叔的小說，我想先跟你道歉。」劉槿棉尷尬地抓了一下臉頰，將自己一直拿在手上的稿紙與日記本整理好，雙手捧著走近劉雲帙。「沒有經過叔叔的同意就翻閱了，但我也因此了解了關於你更多的事情，而且叔叔的字很好看喔，就連文字也能將人吸引住呢──要知道，我平常是不讀文學作品的，叔叔很了不起喔。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1250110332257435699" class="chatlog__message-container " data-message-id="1250110332257435699">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/11/2024 23:32:09 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「當然阿，畢竟我這個人實在是百無一用，唯一值得稱道的，也只有還不錯的記憶而已，你們小時候在那邊打鬧、鬧彆扭的情景，我都還歷歷在目呢，還有你不小心掉下來的那棵大樹，被你禍害的那幾窩燕子，雖然你應該都沒有印象了，但我都還記得一清二楚呢。」
+
+叔叔仔細地聆聽著你說的種種生活瑣事，認真地傾聽著你口中的一切，待得你說到一個段落以後，才用那粗糙沙啞、富有磁性的聲音，溫和地娓娓說著。
+
+「不過會這麼想也不是你的錯吶，畢竟你當時還小小年紀的，就要承受這些種種負擔，大哥他們連工作都有些忙不過來了，書昌的身體又不太好......不過他有平安長大真的是太好了、辛苦你了呢！我想，他創作出來的故事，想必也跟那孩子一樣溫柔吧——唔、不瞞槿棉你說，他發表在雜誌跟文學獎上的作品，我事實上都有偷偷看過就是了，書昌那孩子真的很有天分呢，而且也不像我這樣不食人間煙火，以後肯定可以成為炙手可熱的大作家的。」
+
+「唔、槿棉啊，你真的不用跟我說抱歉的，對於我來說，創作與閱讀是我這渺小的人生中僅存的兩件、有意義的事情，而在創作以後，那些作品在我看來就是獨立的個體了，每個人讀到的時候，或許都會有自己的理解方式吧，不過啊、如果我的作品，那孩子它能夠觸動人心、即使只是一點點也好，給予閱讀的人任何一絲共鳴的話，那麼我想他也就不會寂寞了吧...不會僅有我記得、想嘗試了解它，這樣就很足夠了。所以這麼說來，我才應該要謝謝槿棉你才對呢——」
+
+「而且呀，真的該說抱歉的人，我想是我才對呢。從小到大，我都是這麼一個不盡責的人，也難怪哥哥，唔，也就是槿棉你的父親，常常對我那樣的生氣，一副恨鐵不成鋼的模樣，雖然我也理解他的想法，但我的的確確就是做不到......連在哥哥跟大嫂過世之後，我也沒有負起照顧你們兄妹倆的責任，甚至到了此刻，還要麻煩槿棉你回來處理這些繁雜的瑣事，我本來想說要是可以悄無聲息消失的話，說不定也不會給你帶來多少麻煩吶——至少，我是這麼想的，雖然現在看起來好像不小心帶給你更多困擾了呢。」
+
+他滿懷歉意、哭笑不得地娓娓說著。只是本來下意識地伸出來、想如同那小時候早已忘卻的記憶那樣，輕柔地撫摸你腦袋的手，卻也在伸出的瞬間意識到此刻已不同於往日，粗糙的手掌已被佈滿漆黑長毛的銳利爪子所取代，在半空中停頓了剎那又縮了回去。
+
+「跟我相比，你真的真的、真的很成熟呢，從小就要負起這麼多的責任、扛起這麼多的重擔，無論是作為姐姐也好、或是在哥哥過世之後作為書昌的照顧者也罷，你一直都很盡心盡力呢，這些年來，真的是難為你了......記得你爸爸他沒有向我生氣的時候，也曾經對我提及因為忙於工作和體弱多病的書昌、而疏於照顧你呢，他當時心疼的模樣，直到現在我還記得清清楚楚呢，本來要是沒有那次意外的話，他們本來已經準備好要牽一輛你期待已久的新車、作為你成年的禮物的，如果那場暴雨、那次土石流沒有發生的話......」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/18/2024 21:43:33 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252624323487862814" class="chatlog__message-container " data-message-id="1252624323487862814">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/18/2024 22:01:51 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">劉槿棉靜靜的聽著屬於劉雲帙的叨叨絮絮，緩慢的吐出這些他不知道藏在心中多久，多少時間，那些他看見的世界，觀察到的情況。世界都錯了，就連劉雲帙自己也錯了，他並非不是不關心週遭的人事物，而是看的太透徹、太關心了，因此才感到痛苦，才講自己封閉，可是他卻又忍不住的想產生聯繫。
+
+「我可從來都沒有看過書昌發表在雜誌上的作品呢，叔叔你到底是從哪裡翻出來的啊？」劉槿棉哭笑不得的說道，他一直以為劉書昌寫的是輕小說之類的東西，畢竟他挺喜歡的，但沒想到居然是文學創作的發表，讓她這個姊姊感到愧疚與失職，但先前也說了，她從不干涉弟弟的興趣與愛好，除非太超過，而她也相信，總有一天她的弟弟會跟她說這件事情：「但我可就不會假裝聽不見了⋯⋯原來那小子之前送了我那麼貴的保養品，我還在想說他哪裡有錢呢⋯⋯」劉槿棉帶著笑容喃喃的說道。
+
+「哎，叔叔啊，請別說抱歉。」察覺到劉雲帙的動作，劉槿棉走向前，她不怕受傷，卻怕溫柔的叔叔在觸碰她之後讓她受到傷害後會愧疚，因此她靠近了對方，輕輕的靠在書堆上，來到與叔叔最近的距離。「我啊，雖然一直以來都很寂寞，可是當我看到書昌的時候，看著他的眼睛、他的疼惜，我也看到了我自己。那分想要堅強下去的勇氣不是單純只有我自己⋯⋯而是書昌給我的。」她輕輕觸摸著某一本書的封面，半垂著眼簾。「但是相較之下，沒有人陪著叔叔，只有你的神秘好朋友⋯⋯在那棟房子一定、一定很孤單吧，辛苦你了，很抱歉我在過去從來沒有想到這點。如果——如果我早點過來找你就好了，帶著書昌，我可以整理家裡，幫忙增添一些讓家中有生活化的傢俱，而你們都能來幫忙。在整理完之後，我們可以一起待在書房，看著自己感興趣的書，寫著自己喜歡的文字⋯⋯」
+
+劉槿棉在訴說的時候，彷彿也看到了那樣的畫面就在眼前上映，她的嘴角勾起笑容，看著那位擁有怪物的身軀、但內心卻比任何人都還要纖細的叔叔，眼神帶著哀傷。
+
+「——我想實現那樣的未來，所以叔叔，我想請問你，你願意再回去那個家裡嗎？成為我跟書昌的家人，我們都不在意你的長相，只想帶給你開心。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252633092418699416" class="chatlog__message-container " data-message-id="1252633092418699416">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/18/2024 22:36:42 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「唔、就只是因為好奇，所以特別多關注了一點而已嗎？我想如果身為姐姐的你開口的話，書昌那孩子應該也會給你看的吧。雖然那或許不是槿棉你喜歡的作品類型，但如果有機會的話，去閱讀看看那打從書昌心裡流淌而出的文字，或許你也會有所觸動......」
+叔叔淡然笑著，如此說道。
+
+聽見你這麼說，眼前的怪物似乎整個人被觸碰到了什麼軟肋，驀地縮了一下，只不過他旋即又斂起厚厚的眼瞼，將原本就傴僂駝背的身子彎的更低了些，令一切心緒流轉都隱藏在軀幹之下，無從辨別，而那明明是粗獷沙啞的聲音，此刻卻似乎微微顫抖著。
+「啊......請、請不要這麼說，那樣只會讓我更抱歉、更心疼槿棉你的......你這孩子實在是太過溫柔了，請不要把那些事情攬在你自己的身上，為了不屬於你的錯誤而抱持哪怕半分歉意，那些本來就是我的選擇——無論是獨自一人的掙扎也好、獨處時耽溺在書鄉中的快樂也罷，一切的一切都是我本來就有所預期也應當承受之事，雖然聽上去或許有些難過，不過就是我人生的選擇吧......我想，槿棉你也長大了，該是時候思考自己的未來，走出屬於你自己的人生了......」
+
+而對於你的提議，叔叔沉默了良久，終究還是緩緩地開口，慎重地吐出一個個文字，儘管並沒有直接拒絕，卻還是婉轉地推開了你的字字句句。
+「實在不好意思呢，槿棉。不過我想，這大概是我們最後一次相見了。據說後山這一帶已經有些開發商看上了，而且似乎也已經有些人注意到了盤踞在這個入口附近的我的朋友們、注意到了通往另一個世界的通道的存在，所以為了不被發現或是打擾到，我和我的朋友們決定該是時候把這個入口給封起來，說來就是今天了呢，從今以後，這地方就會變得再尋常不過了，只是因為一些始終放不下的執念跟書籍，我才會悄悄在半夜溜回去，回到房子那拿回一些我的書本，打擾到你真的很抱歉......」
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252639695247245332" class="chatlog__message-container " data-message-id="1252639695247245332">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/18/2024 23:02:56 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「......叔叔未來是，不會再回來了嗎？」劉槿棉的嘴巴張了張，雖然她嘴上說的是天真的妄想，但她心底深處也知道這份想像不可能會成真，畢竟對方都已經失去了那張帥氣憂鬱的臉龐，被可怖的大嘴與鱗片取代，只剩下那顆純粹而天真的心還存在著，他艱難的吐露言語，會不會有一天，劉雲帙連怎麼說話都會忘記？「叔叔你為什麼要一直跟我道歉呢？那是你的房子，而對於我們，你已經提供了最大的幫助，帶著我們熬過了最困難的一段時間，這是我永遠都無法償還的......應該說，我真的、真的沒有這個機會了嗎？」
+
+劉槿棉咬著下唇，她感受到鼻頭帶來的酸澀感，她不需要忍，也不想忍，她看著劉雲帙，絲毫不畏懼對方的怪顏，她看見了一個孤單的人類，不是怪物，而是不被世界容忍的靈魂，過於悲傷以及孤獨，所以主動選擇了另外一個世界，在那裡的生物都與他志同道合，讓他能溫柔地看著她，吐出最後在這世界生存的話語。
+
+「叔叔你最後的執念是什麼呢？無法滿足的話，你就算去到另一個世界，也終身都會帶有遺憾的，不要讓自己保有遺憾，好嗎？」劉槿棉靜靜地哭著。「──不要像我爸媽一樣，叔叔，你還有選擇。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252643452433469440" class="chatlog__message-container " data-message-id="1252643452433469440">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/18/2024 23:17:52 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「是的吶......不管怎麼說，畢竟還是給槿棉你帶來了困擾嗎，害的你還得從北部趕回來......讓你多跑這麼一趟、給你添了麻煩又讓你看到我這麼醜陋的一面，無論如何，那些歉意還是無法抹滅的呢。」
+叔叔苦澀地笑著說道。
+
+「償還什麼的、這樣的用詞份量太過深重了呢，我真的並沒有做太多事情......但，假使說真的有什麼遺憾、有什麼事情是夢寐以求希冀得以看見的話，那麼我想——大概是你和書昌的未來吧，我希望看見你們能夠過得好好的、或許會遇到困難與阻礙、或許會在荊棘與泥潭中掙扎，但我希望，你們都能朝著你們渴求的未來一步一步前行著，為了你們自己好好的活下去，那大概就是我最後的執念了.....雖然，我大概是看不到那天的到來就是了，畢竟我連明日清晨升起的朝陽也都看不著了呢。」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/18/2024 23:21:42 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252647714081083476" class="chatlog__message-container " data-message-id="1252647714081083476">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/18/2024 23:34:48 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「不管叔叔怎麼想，我能看到叔叔，真的很開心喔。總比什麼都不說，然後離開我們好吧？」劉槿棉靠在書本上，看著愧疚的怪物，眼中閃過的是叔叔那張不苟言笑的臉。真奇怪啊，沒想到是變成怪物之後，才能比較好的展現自己的情緒，這代表那些......叔叔的好朋友，對他而言是有益的吧？至少，他懂得會表達自己了，而且如果他待的地方是與他長得都一樣的物種的話，那應該也不會被欺負吧？
+
+劉槿棉靜靜地透過月光看著叔叔的臉，即使是怪物，但她也想要好好地把叔叔記在心中。這次一別便是永不相見，劉槿棉不懂另一邊流逝的時間與壽命，但是，叔叔現在能在這裡，或許本身就是一個奇蹟了，那下一個奇蹟呢？要多久，有什麼機會？
+
+「叔叔你......怎麼都在為我們著想呢。」劉槿棉低聲笑道，哽咽著，悲傷的，卻不痛苦。「你會懷念太陽的，會懷念我們，而我們也是──叔叔，我答應你，我跟書昌會過著美好的生活，我會找一個有錢善良會尊重我並且愛我的男人結婚，生幾個小孩，開心地過著我的日子。而書昌會學有所成，他會在我的監督下找到自己的人生方向，我會鼓勵他，他也會鼓起勇氣，朝著他天分歸順的方向走去──我答應你，我們都不會孤單。」
+
+「所以叔叔，可不可以也請你答應我，當你有機會再來的時候，可以來探望我們，看到我們快樂的未來，你不用擔心的未來。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252652603800817748" class="chatlog__message-container " data-message-id="1252652603800817748">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/18/2024 23:54:13 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「槿棉你的嘴真的很甜呢，如果真的是這樣的話，那麼、唔...真的很謝謝、也很抱歉......」
+叔叔的聲音漸次低微，許是不知道該再說些什麼、又或許是想說的已經太多了，超出了言語所能容納的極限，只能將一切都盡付於歎息之中。
+
+「請原諒我不想許下些我無從確定的諾言，我無法向槿棉您保證我會有再回來的那天，也無法說出我一定會來探望你和書昌，但無論是在那虛無縹緲、仿佛夢境的異世界中，又或者是在世界的哪一個角落，我都期望、相信著你們會過上那樣的未來的——」
+
+「而如果如果、如果真的有機會的話，我也會讓你知道我曾經來過的，或許是厚厚灰塵上的腳印、或許是深秋時節的一片落英，我無法保證我到時能否有勇氣與你和書昌相見，但如果真的有那樣一天的話，至少，你會知道我曾經來過......」
+
+待得話語落在地上，那些樹葉間的迴響也逐漸平息，天地間只剩下靜謐的月光無聲地照亮大地，偶然間吹過的微風更平添幾分寂寥，而那輪圓月也快要跌落到樹梢之下，無論你多希望這一刻能夠永恆持續下去，但從不因任何人而有所駐足的時間仍自顧自地流逝，遙遠的天際線上，也泛起了淡淡的魚肚白，仿佛是戲曲終章、行將拉起的最後簾幕。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252654864555577414" class="chatlog__message-container " data-message-id="1252654864555577414">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/19/2024 00:03:12 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「我會......我會期待那一天的。」
+
+如果她能夠早一點認識叔叔就好了，劉槿棉用髒兮兮的手腕抹著自己的臉頰，今天的時間過得特別的快，原先劉槿棉還認為她跟這間屋子只剩下懷念的緣分，卻沒想到拓展初其他的東西，隨著日月交替，逐漸染上淡色的天空緩緩地出現，劉槿棉靠在書堆旁，離劉雲帙的距離只有幾公分，但這段距離卻是那麼遠。
+
+「我幫你帶這些東西到門口吧，叔叔。」就這樣過了一段時間後，劉槿棉輕輕地說道，「我不用知道路口，也不用知道我要怎麼過去，但少了這些書，叔叔會很孤單的吧？」
+
+劉槿棉笑著說，我希望能與你在夢境相會，尚若接下來叔叔要去的世界是那麼美好，那我會支持著你，畢竟這是你選擇的道路。
+
+「如果真的有那一天，我會跟書昌說的，我們會在你來臨過的地方低聲對你說著思念，也會讓你知道我們的生活過得多美好，我們敬重你，我們都活在世界的某個角落──這樣我就，很開心了。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252658415864643626" class="chatlog__message-container " data-message-id="1252658415864643626">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/19/2024 00:17:19 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「不必不必，再見了，我最可愛的槿棉......」
+在你轉過頭，看向遠處天際的瞬間，只聽見叔叔的低語在你耳畔迴響，然而等你再次轉過頭時，卻看見那怪物和那些書一起，都在你的視野中，消失地無影無蹤，仿佛未曾出現過似的，初升的朝陽從地平線的邊緣露出了一角，流光驚醒了枝枒上麻雀的烏鴉，它振翅一撲飛到了天空之中，尖銳的鳴叫聲喚醒了沉眠的大地，叔叔不知何時消失在了地上，只有幾個淺淺的足跡、和那些書堆留下的印痕，證明了這一切並非你的幻想。有些人活著，卻與死了沒太大差別，而有些人，或許就是死後方生吧。
+
+等到你恍惚之間走下小山，再次回到叔叔留下的最後一點痕跡、那曾經生活過的老屋時，才發覺或許是因為你早先時候追出門的響動，引起了鄰居阿姨們的注意，王阿姨似乎是以為你被魔神仔給抓走了，滿臉驚慌與緊張地四處尋找著，直到你的再次出沒，這些騷動才總算得以平息。
+
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/19/2024 00:17:52 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252662350239109141" class="chatlog__message-container " data-message-id="1252662350239109141">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/RNtyVzp.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(156, 39, 176)" title="yaooya4610#0000" data-user-id="488764422139936801">劉槿棉（玉米片）</span>
+
+
+                        <span class="chatlog__timestamp">06/19/2024 00:32:57 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「啊，沒有啦，沒遇到魔神仔啦──」但倒是遇到未來可能不會再相見的親人。劉槿棉又請了幾天假，順便把弟弟一起抓過來整理家裡，在途中，她與書昌一同回憶起弟弟記憶不這麼清晰的過去，他們互相吐槽，互相哭泣，互相道歉，又哭又笑的。
+
+她也在第一天晚餐的時候與書昌坦白叔叔現在的長相以及去向，不像是她與警察交代的那樣表現出了自己的渾然不知，面對自己的弟弟，劉雲帙的親人，劉槿棉鉅細靡遺的講述了她從未與劉書昌提起的過去與現在，她看見對方的嘴巴張得大大的，有驚訝、有呆滯，可是沒有恐懼。
+
+「為什麼這種事情都找上我們家啊，是有什麼奇怪的體質嗎......啊、姊姊，我在碎碎念而已，沒事沒事，相信我，我不會被叔叔嚇到的。」
+
+「呃，那就好......？」
+
+劉書昌在最初的驚訝過後，便恢復正常，讓劉槿棉覺得對方的接受速度是否太快──但轉念一想，自己又何嘗不是？或許是劉家對於這種事情的接受度良好吧？
+
+她也順便(噢好吧不是順便)威脅自己弟弟交出了他寫的文學作品，而在對方苦哈哈地給她看之後，劉槿棉得承認──真的像叔叔講的一樣，她看不懂，但在藏有一些稚嫩描述之下的用詞，竟與她曾看過、關於劉雲帙攥寫的書籍有幾分相似，她看了劉書昌幾眼，對方半是期待半是怕受傷害的眼神藏在眼鏡底下，劉槿棉笑著揉起了對方的頭髮。
+
+「姊姊雖然沒有讀過太多書，但我也知道，能讓你繼續念書，真是我做過最幫的決定，沒有之一。」
+
+而要說劉槿棉有什麼改變嗎？她越來越珍惜與家人相處的機會，也在繁忙的城市之中，開始留意起之前並未放太多心思在的自然景色，無論是夏天清澈的水面，秋季飄落的樹葉，她越來越懂得與自然相處，也會在忙碌之餘冥思，想起那一夜叔叔與她的對話。
+
+「叔叔，我還在等你。你看，我跟書昌都過得很好喔。」
+
+現在的時間是下午，劉槿棉坐在公園的長椅上，看著玩樂的小孩與社交的大人，現在的天氣有點涼爽，她穿著薄長袖，看著天空，她輕輕地這樣說道。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1252665430171062293" class="chatlog__message-container " data-message-id="1252665430171062293">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(241, 196, 15)" title="ash_hope#0000" data-user-id="428481550510850070">KP（Ash希）</span>
+
+
+                        <span class="chatlog__timestamp">06/19/2024 00:45:11 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">這一夜短短的插曲就此作結，你無從確認這究竟只是生命中一閃而過的剎那花火，亦或是某個色彩鮮明的轉捩點，或許直到某天驀然回首時，這一切的意義才會在你面前彰顯吧，正如你許要許久以後才會再次看見童年時那叛逆的自己、體驗過生存線上的臨界點才能知曉內心渴望的生活究竟為何、而披著人皮的怪物與那包覆在醜陋外殼中的赤裸真心、到底是什麼決定成了，人類真正的模樣？
+
+<strong>【尋紙者 The End】</strong>
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="06/19/2024 00:51:04 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 117 message(s)</div>
+</div>
+
+</body>
+
+</html>
