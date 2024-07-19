@@ -1,0 +1,4881 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>尋紙者（Paper Chase）</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-family: Whitney;
+            font-weight: 300;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-family: Whitney;
+            font-weight: 400;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-family: Whitney;
+            font-weight: 500;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-family: Whitney;
+            font-weight: 600;
+        }
+
+        @font-face {
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-family: Whitney;
+            font-weight: 700;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+            image-rendering: high-quality;
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        .preamble {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 1rem;
+        }
+
+        .preamble__entry {
+            margin-bottom: 0.15rem;
+            color: #ffffff;
+            font-size: 1.4rem;
+        }
+
+        .preamble__entry--small {
+            font-size: 1rem;
+        }
+
+        .chatlog {
+            padding: 1rem 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chatlog__message-group {
+            margin-bottom: 1rem;
+        }
+
+        .chatlog__message-container {
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message-container--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message-container--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__message {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            padding: 0.15rem 0;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__message:hover {
+            background-color: #32353b;
+        }
+
+        .chatlog__message:hover .chatlog__short-timestamp {
+            display: block;
+        }
+
+        .chatlog__message-aside {
+            grid-column: 1;
+            width: 72px;
+            padding: 0.15rem 0.15rem 0 0.15rem;
+            text-align: center;
+        }
+
+        .chatlog__reference-symbol {
+            height: 10px;
+            margin: 6px 4px 4px 36px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .chatlog__short-timestamp {
+            display: none;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__message-primary {
+            grid-column: 2;
+            min-width: 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            margin-bottom: 0.15rem;
+            align-items: center;
+            color: #b5b6b8;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-avatar {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25rem;
+            border-radius: 50%;
+        }
+
+        .chatlog__reference-author {
+            margin-right: 0.3rem;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link .hljs {
+            display: inline;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.chatlog__markdown-spoiler) {
+            color: inherit;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25rem;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__header {
+            margin-bottom: 0.1rem;
+        }
+
+        .chatlog__author {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__bot-label {
+            position: relative;
+            top: -0.1rem;
+            margin-left: 0.3rem;
+            padding: 0.05rem 0.3rem;
+            border-radius: 3px;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3rem;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__content {
+            padding-right: 1rem;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15rem;
+            color: #a3a6aa;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .chatlog__attachment {
+            position: relative;
+            width: fit-content;
+            margin-top: 0.3rem;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 999;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #dcddde;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05rem;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            max-width: 45vw;
+            max-height: 500px;
+            vertical-align: top;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            max-width: 520px;
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            background-color: #2f3136;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3rem;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25rem;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0.6rem;
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            background-color: rgba(46, 48, 54, 0.3);
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author-container {
+            display: flex;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author {
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+        }
+
+        .chatlog__embed-author-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .chatlog__embed-description {
+            color: #dcddde;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5rem;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6rem;
+            font-size: 0.875rem;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 50px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .chatlog__embed-field-value {
+            color: #dcddde;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            max-width: 80px;
+            max-height: 80px;
+            margin-left: 1.2rem;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6rem;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6rem;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.2rem;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            max-width: 45vw;
+            max-height: 500px;
+            vertical-align: top;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6rem;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__sticker {
+            width: 180px;
+            height: 180px;
+        }
+
+        .chatlog__sticker--media {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: ;
+            margin: 0.35rem 0.1rem 0.1rem 0;
+            padding: 0.125rem 0.375rem;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background-color: #2f3136;
+            align-items: center;
+        }
+
+        .chatlog__reaction:hover {
+            border: 1px solid hsla(0,0%,100%,.2);
+            background-color: transparent;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35rem;
+            color: #b9bbbe;
+            font-size: 0.875rem;
+        }
+
+        .chatlog__reaction:hover .chatlog__reaction-count {
+            color: #dcddde;
+        }
+
+        .chatlog__markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .chatlog__markdown-preserve {
+            white-space: pre-wrap;
+        }
+
+        .chatlog__markdown-spoiler {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chatlog__markdown-spoiler--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .chatlog__markdown-spoiler--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .chatlog__markdown-spoiler--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .chatlog__markdown-quote {
+            display: flex;
+            margin: 0.05rem 0;
+        }
+
+        .chatlog__markdown-quote-border {
+            margin-right: 0.5rem;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .chatlog__markdown-pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .chatlog__markdown-pre--multiline {
+            margin-top: 0.25rem;
+            padding: 0.5rem;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .chatlog__markdown-pre--multiline.hljs {
+            background-color: inherit;
+            color: inherit;
+        }
+
+        .chatlog__markdown-pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+
+        .chatlog__markdown-mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(88, 101, 242, .3);
+            color: #dee0fc;
+            font-weight: 500;
+        }
+
+        .chatlog__markdown-mention:hover {
+            background-color: #5865f2;
+            color: #ffffff
+        }
+
+        .chatlog__markdown-timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #a3a6aa;
+        }
+
+        .chatlog__emoji {
+            width: 1.325rem;
+            height: 1.325rem;
+            margin: 0 0.06rem;
+            vertical-align: -0.4rem;
+        }
+
+        .chatlog__emoji--small {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .chatlog__emoji--large {
+            width: 2.8rem;
+            height: 2.8rem;
+        }
+
+        .postamble {
+            padding: 1.25rem;
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.chatlog__markdown-pre--multiline').forEach(e => hljs.highlightBlock(e));
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
+                const imageDataUrl = e.getAttribute('data-source');
+
+                const anim = lottie.loadAnimation({
+                  container: e,
+                  renderer: 'svg',
+                  loop: true,
+                  autoplay: true,
+                  path: imageDataUrl
+                });
+
+                anim.addEventListener('data_failed', () =>
+                    e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>'
+                );
+            });
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('chatlog__message-container-' + id);
+            if (!element)
+                return;
+
+            event.preventDefault();
+            element.classList.add('chatlog__message-container--highlighted');
+
+            window.scrollTo({
+                top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                behavior: 'smooth'
+            });
+
+            window.setTimeout(function() {
+                element.classList.remove('chatlog__message-container--highlighted');
+            }, 2000);
+        }
+
+        function showSpoiler(event, element) {
+            if (!element)
+                return;
+
+            if (element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+
+            if (element.classList.contains('chatlog__markdown-spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__markdown-spoiler--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="attachment-icon" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z"/>
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z"/>
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z"/>
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z"/>
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://i.imgur.com/KjRkkZH.jpg" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">【Ash希】尋紙者（Paper Chase）</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261294599255883808" class="chatlog__message-container " data-message-id="1261294599255883808">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:14:26 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">時值仲夏，七月流火，溽暑的空氣中充斥了水氣，沾付在露在衣服外頭的肌膚上，顯得格外潮濕黏膩，週末的青空下萬里無雲，無風的悶熱令人壓抑難耐，燥熱的陽光燒灼在身上，使人難以靜下心來思考，遠方大海帶來的海風吹拂至此已失去了力氣，徒留淡淡的鹹味在空氣中，青翠的山巒起起伏伏、連綿在屋後的地平線上，群峰之間還可以看見淡淡的山嵐繚繞。
+
+你獨身一人站在一棟外墻已經有些斑駁的二層樓高的老舊透天厝前，庭院中蔓生的雜草，和信箱裡面胡亂塞滿、甚至已經溢出箱子的宣傳單都顯示著眼前的房子似乎已經很久沒有人居住在這裡，許久未曾有人好好打理了。 看著眼前藤蔓恣意生長，屋頂已經佈滿了歲月滄桑的洋風老宅，你腦海中也只殘存著小時候的零碎記憶，那時你年歲尚幼，每年的春節、清明等節日還是會回老家住上一陣子，只不過隨著年紀漸長，中間又夾雜了出國深造的緣故，到了祖父母都過世以後，你也就比較少回去了。那時的市區還滿是低矮的樓房，高樓未被建起，如今的威秀跟遠百當時還都是甘蔗田，科技沒有那麼發達，你還曾在附近和新認識的小夥伴玩耍打鬧，甚至是騎腳踏車跑到有一段距離的海邊玩水，不過現在若要尋找，那些記憶中的房子幾乎成為了景點餐廳或是改建成了豪華農舎與高級民宿，而僅存的那些也幾乎只剩老人與小孩在居住，那曾經的玩伴們或許也和你一樣北漂到都市了吧。
+
+要不是因為繼承了遺產，而且又收到了據說好像老宅有人闖入的消息，附近警察局在你上班的時候，突然通知說有人報案說好像看到人闖進去這棟房子，警察來到現場時也只能遠遠的看到雜亂不堪的書房而已，在沒有獲得主人的同意下，他們也無法擅自進入現場，雖然並不是什麼大事，不過你還是不得不百忙之中抽空回來調查一下、確認情況，害的你這才不得不百忙之中訂了車票，從台北輾轉轉了好幾次車，回到了鄉下的老家，想趕快解決掉這種煩人的瑣事，繼續回去你水泥叢林中的日常生活。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 20:21:48 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261298607370404010" class="chatlog__message-container " data-message-id="1261298607370404010">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:30:21 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">站在老屋的門口，因為陷入回憶而站著好一段時間。
+不過這棟繼承來的屋子沒有整理過，如果在這裡待得太久，就不得不在旅館多住幾天——即使叔叔留了遺產，也不能這樣揮霍！
+總之先將信箱裡的廣告拿出來整理一下準備丟掉，之後用鑰匙打開門，踏入這棟久無人居的透天厝。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261299398806212670" class="chatlog__message-container " data-message-id="1261299398806212670">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:33:30 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你隨手打開信箱，輕輕一碰，年久失修的生鏽鉸鏈便嘎吱作響，緊接著哐當一聲，信箱的開口，那整塊金屬板子便這麼掉落在地板上，嚇了你一大跳，裡頭那些堆積如山的傳單信件什麼的也隨之就此散落一地，一看就知道已經許久許久未曾有人打開過這個信箱了。
+
+最下層的那些傳單都已經泛黃褪色了，甚至因為可能有些雨水因為暴雨落進信箱裡頭的緣故吧，好些傳單都就這麼疊在一起，無法分開亦或是分辨上面的字跡了。
+
+你順手抓住一張在風中恣意飄蕩的傳單，那看上去是某家出版社每個季度例行寄出的廣告宣傳，只是上面的書看起來都不怎麼大眾就是了，至少都是些你從未在誠品、博客來之類暢銷榜上聽聞的文學作品。
+
+你彎下腰，從塵土中撿起飄散四處的信件中，看起來不像是傳單，比較不同的一封信簡，雖然說是比較特別，但實際上也只不過是那些書店都會賣的、隨處可見的制式信封，雖然上頭的字跡已經有些被雨水暈染開了，但還是能夠辨認出內容，信封上寫著
+<div class="chatlog__markdown-quote"><div class="chatlog__markdown-quote-border"></div><div class="chatlog__markdown-quote-content">蠹宇（戴芸帙）老師 鈞啟
+</div></div>摸上去還出乎意料的有些厚度，感覺有幾分沉甸甸的，而在寄件人的地方，則似乎寫著某個你沒聽過的獨立出版社。
+
+將那些信件簡單收拾好抱著懷中以後，你掏出從家裡某個角落好不容易才翻出來的鑰匙，插進門鎖裡頭，輕輕一轉。
+
+只聽見「喀嚓」一聲，屋門便在你面前緩緩開啟，鞋子踩在老舊的木地板上，吱呀作響的回音在狹窄的室內徘徊不止，雖然你的動作帶起了一些灰塵，憑藉著穿透進門縫的陽光與帶起來的微風，在空氣中飄蕩盤旋，只不過你倒是有些意外，推開門的瞬間，幾乎沒有聞到那種老房子太久沒有人打理而獨有的，灰塵與霉味交雜在一起的陳腐氣味，迎面而來的反倒是一股淡淡的，上了年頭的紙張書頁香氣，與木頭家具裝潢常有的溫潤嗅感，如果真的待上了不只一天的話，或許也可以在此暫住吧。
+
+狹窄的走廊上，隨處可見整整齊齊堆起來的、各種新舊不一的書籍，伸手在旁邊一摸，屋子裡的東西上雖然都覆上了一層薄薄的塵埃，不過感覺並沒有積累的太厚，雖然你完全沒有什麼鑑識專業，但感覺至少前一兩年可能都還有人住在這地方，除此之外，雖然從走廊上看起來，屋內的裝飾擺設並不太多，但還稱得上整潔有條理就是了。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 20:36:40 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261300665473306645" class="chatlog__message-container " data-message-id="1261300665473306645">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:38:32 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">這裡的狀態和預期的不一樣，馬上想起國外有些在屋主不知情的情況下自己跑進來暫住的房客，立刻警惕起來。
+握好手裡的護身符——弱小可憐又無助的女子只能握著沒有殺傷力的護符聊表安慰——走到最近的桌邊，總之先檢查一下手裡的信件吧。剛剛還看到有叔叔的名字，別把重要信件誤丟了。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261302442826403891" class="chatlog__message-container " data-message-id="1261302442826403891">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:45:36 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你走在走廊上，玄關和客廳的四處還可以看見一些生活痕跡，只是東西大多都已經被收拾整齊了，並沒有留下太多的線索。而且即便是比較日常的居家用品，上頭仍覆上了一層薄薄的灰塵，看起來直接不久前應該還有人居住如此，只是最近一陣子，唯一進來過這的人應該只有你而已吧。
+
+你先在客廳隨手找了個位置坐下，翻閱起那些信來，沙發熟悉的觸感又勾起了回憶中的些許波瀾，不過除了那封信件以外，其餘的大多都是些過時的不重要廣告傳單而已，信手拆閱了那封信函，裡面是一疊有一定分量的紙鈔，以及滿是各種稱讚、溢美之詞的謝函，從字裡行間看起來，這些錢應該是叔叔上一部作品的部分稿費，另外你也注意到了，來信的編輯還和叔叔提及了下一本正在寫作中的書籍進度以及是否有出版計劃等等。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 20:45:54 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261303273852239922" class="chatlog__message-container " data-message-id="1261303273852239922">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:48:54 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——竟然敢直接用平信寄錢，這家出版社膽子真大。
+把錢收回信封裡之後，拿出手機搜尋出版社的名字，打算找到聯絡方式之後告知叔叔失蹤的消息。
+總是要讓出版社知道一下，和自己合作的作者失蹤這件事吧。不過都過了這麼久還沒聽說的話，出版社也太不關心作者了吧。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261304065774583860" class="chatlog__message-container " data-message-id="1261304065774583860">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:52:03 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">畢竟寄件人處就寫著出版社的名字，因此你不費多少力氣，便在網路上找到了那位在台北邊陲的小小獨立出版社以及它的聯絡方式，甚至還找到了他們曾經出版過的書籍，大概是因為絕大多數都是些文學性質較重的小說，因此在市場上也談不上暢銷，連新聞都沒有幾篇。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261304517517905930" class="chatlog__message-container " data-message-id="1261304517517905930">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:53:50 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——叔叔到底在這裡出了什麼書啊。
+記下了聯絡方式，打算回台北再去拜訪，接著好奇地查看編輯提到的，關於叔叔下一本書的內容。
+順便看一下這封信是什麼時候寄的。還是不要一下就認定出版社不關心作者吧。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261305281183485962" class="chatlog__message-container " data-message-id="1261305281183485962">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:56:52 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雖然油墨已經有些模糊，但從郵戳上看起來，這封信大概差不多是一年多前寄出的，而關於叔叔下一本書的內容，信上也只是寥寥提到幾句而已，頂多就是編輯詢問叔叔的進度，以及是否有繼續和他們合作的意向，並沒有更詳細的內容就是了。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261306021029085295" class="chatlog__message-container " data-message-id="1261306021029085295">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 20:59:49 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">嘆口氣把信收好，放進自己的隨身包裡。身懷鉅款實在有點緊張。
+抱持著這份緊張，決定從一樓開始巡視，希望那個闖入者不要突然衝出來，否則自己可能會忍不住放聲尖叫。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261307906389835776" class="chatlog__message-container " data-message-id="1261307906389835776">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:07:18 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你小心翼翼地走在陰暗的屋子裡頭，即使逼仄的走廊內，四處塞滿了壘起來的書籍，但看著玄關墻壁上那泛黃的壁紙和褪色黯淡的菱形方格花紋、不知停擺多久的卻還是與記憶中依稀仿佛的圓形老時鐘，似乎將時間滯留於曾經的某日，再也沒被撕下一頁的日曆，模糊的窗玻璃外那棵歪歪斜斜的老榕樹，以及隨著你的腳步吱呀作響的木頭地板。那些過往幼時你以為早已消失的無影無蹤，在腦海重重迷霧遮掩下渺然無跡、再也尋不回的回憶，剎那間仿佛被投下了深水炸彈似的，波瀾不驚的海面下霎時間一陣波濤洶湧，從深處翻騰而出。
+
+靜謐的屋子裡頭闃暗無聲，只有點點微塵在金黃的陽光下蒸騰而起，仿佛是不知何人從漫漫時光長河截下的一抹切片標本，卻也恰好保留住了屬於你的，昔日的點點滴滴。
+
+那棵老榕樹曾經是暑假時你的樂園，遇到討厭的事情就可以一個人爬上枝枒，躲在樹窩裡頭的理想鄉，茂盛的林蔭下灑落的陽光，被你藏在樹洞裡頭的彈弓、糟蹋過不知幾次的鳥窩，讀完《湯姆歷險記》之後午睡時暢想著四處玩耍的白日夢，只是陪你玩耍的並不是哈克，而是當時還要費盡渾身解數才能爬上來的戴雅娜，你以為你已經忘的一乾二淨的事物，如今卻是那般歷歷在目。
+
+只是記憶中樹木那高聳的形象，是因為已經長高長大了嗎，如今看起來卻格外迷你，而且當初的大樹可有如此歪斜，究竟是陳年的記憶保存時出了紕漏，亦或是是在你離開的多年之間，被不知道哪次強颱吹歪了呢？諸如此類的、種種襲上心頭的回憶糅雜著現實，讓人感覺有些魔幻。
+
+你在屋子裡頭四處巡視，除了客廳以外最近的房間便是書房了，記得小時候偶爾回到花蓮老家時，叔叔總是在這裡溫柔地講述著一個又一個天馬行空的故事逗你和妹妹開心，只是在門扉上輕輕一施力，便聽見「吱呀」一聲，黃銅製的陳舊門軸生澀的微微轉動著，也讓你立刻便意識到，那書房的房門並沒有上鎖，只是輕輕的虛掩著而已。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:09:40 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261308991225466922" class="chatlog__message-container " data-message-id="1261308991225466922">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:11:37 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">距離自己上次來到這裡已經那麼久，叔叔也失蹤相當久了，說實在並不記得叔叔是否習慣將書房上鎖。但沒有上鎖的房間仍使人感到緊張。
+何況警方通知有人闖入時，說的就是書房。
+因為膽子太小，緊張兮兮地左右看了看，這才小心翼翼將書房門整個打開。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261310341556600946" class="chatlog__message-container " data-message-id="1261310341556600946">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:16:59 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你緩緩推開了通往書房的門，在門軸的「吱呀」聲中，迎面而來的並沒有隨氣流揚起的灰塵，反倒是充斥在整個書房的紙墨香、以及略顯突兀的，那夏日青草雨水陽光混雜的獨特氣味。
+
+你迅速環視了書房一周，眼前所見和記憶中的格局並沒有太大的變化，那些如風般的種種往事，總在不經意間悄然吹過，無孔不入地穿過結實的心墻，滌去回憶上的厚厚塵埃，勾起你腦海裡頭，那以為早已拋在腦後，忘卻的一乾二淨的種種往事，曾經的點點滴滴，此刻想來卻仍歷歷在目，甚至許多你當時未曾注意到的零碎細節，當時的光景、那天天空的顏色、叔叔說著故事時低沉而溫柔的聲音，此刻都穿連起來，猝不及防地襲上心頭，在模糊的印象中，每次回到老家休息時，並沒有房間的門會上鎖，只不過，那也是很久很久以前的事情了。
+
+書房內的櫻桃木辦公桌坐落在窗前，夏日午後金澄的陽光從大大敞開的窗戶灑落，反射在木地板上再落入眼中還有些刺眼，伴隨著熏風拂面的暖意，想來那大概便是夏日氣味的來源吧。那結實的書桌上，放置著兩瓶寫樂的露草色墨水，一支沾水筆，以及小巧金屬雕飾紙鎮下壓著的幾頁空白稿紙，書櫃下頭也有幾個關上的抽屜。
+
+佔滿了書房四面墻、直頂天花板的書櫃上的書都被細心的擺放整齊了，從最老的線裝書、泛黃褪色的陳年舊書一直到最近幾年的書籍，從書背上的字體改變都幾乎可以暢想到這些文字刻印下的時光間隔，一本本書籍都按照圖書分類法，放在相應的位置上。
+
+待得你再仔細觀察書房裡頭的情況，才發現乾淨整潔的書房裡頭似乎有零星幾點看起來不那麼自然的水漬泥濘散落在地板上，桌面上的空白稿紙和窗框也沾染上了些泥印，雖然不確定是否有關，但你也想起在來時的路上看見的那些水窪，昨夜似乎下了場驟雨。
+
+另外，在書桌正旁邊的書櫃上，有幾本書很明顯的被抽出來了，留下了墻上的空位和翻找的痕跡，那書櫃前的地上也隨意疊放著幾本書，斜斜的堆放著。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:17:45 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261311001580666991" class="chatlog__message-container " data-message-id="1261311001580666991">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:19:36 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">吃了一驚，連忙走向窗戶，將大敞的窗戶關上。
+——叔叔的書都要淋壞了，不能這樣放著不管。
+關上窗後，才有心情轉身檢查被抽出來的書⋯⋯那個闖入者，只是為了翻找叔叔的藏書，才擅自進來的嗎？</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261311169549832253" class="chatlog__message-container " data-message-id="1261311169549832253">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:20:16 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+請過偵查。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261311236826468412" class="chatlog__message-container " data-message-id="1261311236826468412">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:20:32 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">cc 55 偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261311238579818588" class="chatlog__message-container " data-message-id="1261311238579818588">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">07/12/2024 21:20:33 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+1D100 ≦ 55　
+84 → 失敗：偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261311635671482439" class="chatlog__message-container " data-message-id="1261311635671482439">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:22:07 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你大步走到書桌前面將敞開的窗戶關上，午後熾熱的艷陽從萬里無雲的湛藍天穹投下灼熱的光彩，在窗外的翠綠葉片上反射進屋，耀眼奪目。
+
+你大略翻看了一下地上那幾本凌亂的書籍，那些書的封面都有些泛黃、磨損了，那些卷起的書頁角落和打開便可看見的多處眉批與筆記，也都再次驗證了原主人對這些書籍的愛不釋手，即使再怎麼愛惜也滿是時常翻閱的痕跡。從書架上那些缺漏部分的周圍來看，這些書看起來都是些有關於奇幻國度、異世界、與人生哲理的種種圖書，看起來失竊的那幾本書同樣也是這個主題的。只是奇怪的是，比起這些不只沉重，而且如今只能當成回收，賣不上幾個錢的紙張來說，小偷理應會注意到房子裡頭那些更多值錢、而且也沒有特別隱藏起來的物品的，甚至就連書房裡頭，眼前就都還有一眼看上去明明就更有價值的鋼筆與墨水，讓人不禁感到有些匪夷所思。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:23:28 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261312150253867052" class="chatlog__message-container " data-message-id="1261312150253867052">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:24:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——還真的不是來偷東西的？
+困惑著叔叔到底留了什麼比財物更有價值的文件，但實在想不出來，總之先動手鎖上窗戶。並順手將凌亂的書本整理好，免得自己笨手笨腳弄倒了，這才離開書房去看看別的房間。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261312846889750601" class="chatlog__message-container " data-message-id="1261312846889750601">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:26:56 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">關上窗戶時，你隨便一瞥間倒是注意到了那窗台的木檻和窗戶下的空地上，都有些看起來前不久才留下，尚未被夏日那常見的午後雷陣雨洗去，乾掉的泥土痕跡，像是什麼東西的印子，而在地面上也都能看見許多亂糟糟的泥點，從不遠處的樹林一路延伸到屋子這兒。
+
+在簡單整理好那些落在地上的書本以後，就在你踏出書房門口，想著去其他房間查看一番時，『嗡——』，門廊處那老式電鈴乍然作響，那刺耳的嗡鳴聲正如回憶裡頭一般擾人不已，煩躁的聲波在侘寂無聲的走廊上迴響。
+
+『嗡——嗡——嗡——』
+而且在你還來不及做出什麼反應以前，那門口的人便又不耐煩地飛快連按了好幾次，層層回聲在混凝土壁面上反射，於狹小的空間中交疊，令人心頭更添幾絲煩悶。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:27:58 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261313319395135508" class="chatlog__message-container " data-message-id="1261313319395135508">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:28:49 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——誰啊！
+被門鈴狠狠嚇了一跳，隨後下意識確認自己的隨身物品後，快步往玄關走去應門。
+因為自己只有孤身一人，所以謹慎地只開了一條門縫，「⋯⋯請問哪位？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261313852432453653" class="chatlog__message-container " data-message-id="1261313852432453653">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:30:56 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嘿——係哇啦——」（「嘿——是我啦——」）
+你小心翼翼地拉開門縫，只見門口站著一個戴著桃紅袖套，有些傴僂著背的豐腴歐巴桑，即使歲月在她臉上留下了諸多滄桑，但你依舊能夠認出，記憶中那住在附近的，總是熱情地打招呼、送各種自己種的青菜水果過來的大嬸，當然還有她那聞名鄉里的大嘴巴跟八卦的個性，而且明明你每年才回來幾天而已，不知道是不是爺爺奶奶跟她說的，每次遇到的時候卻還是記得你的名字跟一些瑣碎小事。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:32:20 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261314196461846559" class="chatlog__message-container " data-message-id="1261314196461846559">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:32:18 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">見到熟悉的人，驚喜地把門打開。
+「王阿姨！好久不見，你怎麼知道我來了？要不要進來坐？啊可是我才剛來，灰塵很多，不好意思耶。」</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:32:55 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261315212045455371" class="chatlog__message-container " data-message-id="1261315212045455371">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:36:20 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哇丟聽阮尪講有人轉來恁厝吼，我就想說來看覓一下，是誰轉來、是不是歹人啦——啊閣有一寡我栽的水果，沒有農藥的，送予你吃！」
+（「我就聽我老公說看到有人過來你家這邊吼，我就想說過來查看一下，是誰回來了、是不是壞人啦——啊這邊還有一些我種的水果，沒有農藥的，送給你吃！」）
+
+還沒等你回話，她那熟悉的大嗓門便又再次在你耳邊響起。
+
+「啊遮久沒見了，這馬戴安娜你哪會按呢媠噹噹，遮呢好看啦，啊甘有嫁人啊？」
+（「啊這麼久沒見了，現在戴安娜你怎麼會這麼漂亮，這麼好看啦，啊你現在已經嫁人了嗎？」）
+
+「免麻煩啦，我等等還要去田裡。若是無代誌的話，暗時就來阮兜呷暗頓吼，欲食啥也可以佮哇講，免客氣啦——」
+（「不用麻煩啦，我等等還要去田裡。要是沒有什麼事情的話，晚上就來我家吃晚飯吼，想吃什麼也可以跟我說，不用客氣——」）
+
+王阿姨總是叫錯你名字這件事也和記憶當中一模一樣，明明妹妹就會被叫雅娜，但大家總是以為你就叫做戴安娜一樣，這樣叫著你的全名。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:37:34 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261316028667920504" class="chatlog__message-container " data-message-id="1261316028667920504">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:39:35 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">太久沒回來這裡，獨自一人探看叔叔房子的緊張感，都在王阿姨令人安心的連珠砲中化解了，就連婆婆媽媽例行的嫁娶問題，感覺都變得可親可愛。
+「謝謝啦，那我晚餐就過去。對了阿姨，聽警察說我家這邊有人自己跑進來，你們有聽說嗎？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261317417473151016" class="chatlog__message-container " data-message-id="1261317417473151016">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:45:06 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「厚！安捏尚好啊！那我就煮腥臊一點！你甘有蝦米想呷的？」
+（「好，這樣太好了，這樣我就煮豐盛一點，你有什麼想吃的嗎？」）
+
+聽見你答應了邀約，眼前王阿姨變得更加熱情，想來或許是在鄉下的村落裡頭，隨著時間流逝，大家不是搬去大城市，就是隨著歲月凋零，曾經的那些故人也搬進了墳墓，只留一培黃土，以往總是能看見許多人熱鬧聊天著的廟宇前、榕樹下的廣場，和塞滿學生們水汪汪的大眼，殷殷企盼目光的柑仔店也都日漸冷清，當微風吹過，那些歡聲笑語已僅存於記憶中，卷起的只有灰塵與寂寥。曾經滿是故人的地方現在也只剩下了滿滿的觀光客，往日都只有人們離開的身影，難得有並不是觀光客的人回來，想來大概令她忍不住暗自開心不已吧，。
+
+只不過兩三句話過後，她內心的八卦之魂猶不改往日風采，很快又再次熊熊燃起，滿臉好奇地詢問道。
+
+「是講你那欸轉來啊，甘是發生安怎代誌啊？是佮恁阿叔有蝦米關係覓？」
+（「是說你怎麼會回來啊，難道是發生什麼事情了？還是跟你叔叔有什麼關係嗎？」）
+
+「誒......你講恁兜進賊仔啊！啊恁厝甘有蝦米物件無去啊！？嘿丟是我報警誒啦，但是阮聽到聲可能相晏捏......某掠到人金正歹謝捏。」
+（「誒......你說你們家遭小偷了啊！啊你們家有什麼東西不見的嗎！？那就是我報警的啦，只是我聽到聲音可能太晚了......沒抓到人真的不好意思啦。」）
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:48:00 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261318054248185997" class="chatlog__message-container " data-message-id="1261318054248185997">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:47:38 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「原來是王阿姨報警的喔！謝謝你啦，已經很快了。」沒想到是熱心的王阿姨幫忙的，趕快道謝，「我剛剛看了一下，只有幾本書不見了，可是我太久沒來，也搞不清楚叔叔有什麼書，不知道是什麼書不見。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261318821256630377" class="chatlog__message-container " data-message-id="1261318821256630377">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:50:41 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「袂啦袂啦，沒大代誌就好——」
+（「不會啦不會啦，沒出什麼事就好——」）
+
+王阿姨連連擺手，並順手將懷中抱著的、剛剛一直說要給你的那一大袋用紅白塑膠袋裝的，那滿滿當當的水果塞到你的手中。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261319198337142864" class="chatlog__message-container " data-message-id="1261319198337142864">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:52:11 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哎唷！王阿姨怎麼這麼客氣，謝謝欸！」小心地抱著那一大袋水果，「王阿姨晚餐隨便煮就好，煮什麼我都喜歡吃。啊我再看一下家裡，等一下再過去。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261320285794074754" class="chatlog__message-container " data-message-id="1261320285794074754">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:56:30 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「你盡量呷，無夠再佮共！」
+（「你盡量吃，不夠再跟我說！）
+王阿姨爽朗地笑著說道。
+「沓沓仔來丟吼——」
+（慢慢來就好了——」）
+
+「誒，講到你阿叔啊，伊金正是足奇怪欸......」
+（誒，說到你叔叔啊？他真的是很奇怪耶......」）
+
+王阿姨似乎是還想繼續找個話題聊下去的模樣，不過提到你叔叔時，臉上又露出了欲言又止的表情，說到一半又止住了嘴。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:56:40 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261320423304593481" class="chatlog__message-container " data-message-id="1261320423304593481">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 21:57:03 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「叔叔怎麼樣？」露出很有興趣的表情，想聽八卦，「王阿姨你不用怕，叔叔又不在，他聽不到。」</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 21:57:26 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261321178685898833" class="chatlog__message-container " data-message-id="1261321178685898833">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:00:03 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「啊，你阿叔啊？你也知影伊那款人就是奇奇怪怪的，雖然伊住在這邊足久啊，但是攏毋想要佮阮講話，整天不知道一個人咧創啥，半暝仔閣看到伊去後面那個墓仔埔那邊，金正是足足足奇怪捏......毋災伊到底是去遐創蝦米代誌，阮看到足多次捏。阮也不記得最後一次看到伊是蝦米時陣啊，有一天就看不到人影啊。」
+（啊，你叔叔啊？你也知道他那種人就是奇奇怪怪的，雖然他住在這裡很久了，但是都不怎麼跟我們說話，一個人整天不知道在幹嘛，三更半夜還會看到他跑去後面的墳墓那邊，真的是很奇怪耶......也不知道他到底是去那邊幹什麼的，我看到好多次耶。我也不記得最後一次看到他是什麼時候了，好像有一天就沒看到他了。」）
+
+阿姨她神經兮兮地看了下四周，聲音也減小了些，那表情疑神疑鬼地向你說道，臉色也忍不住有了些變化，言談間也只有些不太清楚的八卦，不過想來似乎也挺合理的，記憶中叔叔那獨來獨往的個性，和熱情如火的王阿姨怎麼樣都處不到一塊，只不過她說著說著時，不知是不是聯想到了什麼，眼神中流露出了淡淡的恐懼，又滿臉害怕，下意識地四處張望，已如溝豁般的抬頭紋和魚尾紋，又更深地皺了起來。
+
+「但是講到恁阿叔佮伊彼個人無去啊...誒夭壽噢.....甘是撞到『魔神仔』啊...」
+（「但是講到你叔叔跟他不見啊...誒夭壽噢.....會不會是撞到『魔神仔』了...」）
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 22:14:38 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261321846557638667" class="chatlog__message-container " data-message-id="1261321846557638667">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:02:42 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聽到叔叔會跑去後面墳墓時，瑟縮了一下。
+——叔叔啊⋯⋯你姪女超怕的，跑去那裡我是要怎麼找你啊⋯⋯
+
+「搞、搞不好耶⋯⋯要不然怎麼會一直找不到。」嘆了口氣，「謝謝餒，跟我講這麼多。我之後再去後面墳墓看看啦，要是可以找到叔叔留下來的什麼東西就好了，說不定就能找到他。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261322970136318062" class="chatlog__message-container " data-message-id="1261322970136318062">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:07:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「麥啦！著是恁厝後壁彼爿啊，彼個陰陰的所在，細漢時陣攏誒叫恁毋通去遐耍，里沒印象了嗎？你麥去彼啦！那無嘛欲早點轉來捏！」
+（「不要啦！就是你們家後面那邊啊，那個陰陰的地方，小時候都會叫你們不要去那邊玩耍，你沒印象了嗎？你不要去那邊啦！不然也要早點回來啦！」）
+
+聽見你要去後面墳墓的事情，大嬸連忙大聲的向你說道，你這才想起，似乎小時候假期回來時，那些大人總是會耳提面命，一而再再而三地向你們說不要去後面的墳墓那邊玩，小孩子玩耍的時候也會流傳一些離奇的鬼故事，像是什麼半夜會有沒有頭的日本軍人拿著槍在那邊巡邏，還是想出草的原住民，被來後山開墾的漢人埋伏大屠殺之後，屍體隨意丟棄的亂葬崗，晚上路過的時候風中常常會夾雜著幽怨的山歌，諸如此類的誇張故事，雖然你後來假期結束，回到台北上學讀書的時候，才發現似乎大家小時候都是被各種類似的故事騙大的就是了。
+
+「以前阮庄裡這旁吼，丟定定有人被魔神仔抓走啦，有一個尬共恁鬥陣耍過，恁可能太小抑是無啥物尬伊耍過，所以沒記憶了。嘛有人看過彼個長得足像妖怪的歹物仔，毋知是不是魔神仔的物件，半暝佇彼個墓仔埔遐跳舞捏！阮看丟是安捏啦！」
+（「以前我們村子這邊吼，就常常有人被魔神仔抓走啦，有一個還跟你一起玩過的樣子，你可能太小或是沒什麼跟他玩過，所以沒太多記憶了。還有人看過有個長得很像妖怪的髒東西，不知道是不是魔神仔的東西，半夜在那個墓仔埔那邊跳舞捏！我看就是這樣啦！」）
+
+阿姨仿佛要壓低音量，害怕被人聽到說著什麼悄悄話似的，身體也微微駝背，雖然那壓低的音量和你的聲音相比仍是那樣的大聲就是了，她的語調或許也因為內心的害怕和恐懼而不自覺的高了八度，眉毛豎起，雙手連連揮舞。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 22:13:23 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261324583567491214" class="chatlog__message-container " data-message-id="1261324583567491214">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:13:35 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">怎麼這樣，王阿姨越講越讓人害怕。
+「⋯⋯沒關係！我有這個！」像是要幫自己壯膽一樣，拿出龍山寺的護身符給王阿姨看，「觀音菩薩會保佑我的！我還要去王阿姨家吃晚飯，不會晚回來！」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261326037145485362" class="chatlog__message-container " data-message-id="1261326037145485362">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:19:21 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「吼啦，你家己注意捏...」
+（「好啦，你自己注意哦...」）
+
+眼見你已經打定注意要去墳墓那邊的模樣，勸不動你的阿姨也只好小聲地叫你多注意一點。
+
+「安捏阮兜的狗仔我也會放出來趕壞人的，對魔神仔應該也有一點路用吧...里細漢時閣有抱過他捏，毋知恁還記得覓？彼個小小的黑狗，這馬嘛足大漢啊，但是嘛足古錐捏。唔、要是有蝦米代志你再佮我講！」
+（「這樣我家的那隻小狗也會放出來趕壞人的，對魔神仔應該也有一點用啦...你小時候也有抱過他捏，不知道你還記不記得？ 那隻小小的黑狗，現在雖然也長的好大了，但還是很可愛捏。唔、要是有什麼事情你再跟我說！」）
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 22:19:44 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261326329463177319" class="chatlog__message-container " data-message-id="1261326329463177319">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:20:31 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「好，謝謝王阿姨！」聽說有狗狗會跟著保護自己，馬上信心十足，「好久沒看到小黑了，不知道他有沒有記得我。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261326779860254810" class="chatlog__message-container " data-message-id="1261326779860254810">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:22:18 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯啊，伊那是看到恁，一定是足歡喜欸！恁細漢時陣常常予伊呷物件、佮伊耍捏，講啥米，伊一定記得你的啦！」
+（「嗯啊，他要是看到你，一定很開心呢！你小時候還常常給他東西吃、跟他玩的說，說什麼呢，他一定記得你的啦！」）
+
+或許是阿姨家裡的小孩也和大多數人一樣，都已經離開家裡，到一棟棟水泥高樓構成的冰冷森林，那些大城市裡頭為了養家糊口認真打拼了，只有逢年過節才會短暫回來一下下吧，那陪伴在身邊的身影已經成了思念的寄託，提到家中養的那隻小狗時，眼前的王阿姨語調中滿是揮之不散的關心疼愛之情。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 22:23:13 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261327144366375046" class="chatlog__message-container " data-message-id="1261327144366375046">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:23:45 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">露出安心的笑容，「那我就趁現在天還亮著，趕快去趕快回來。阿姨掰掰。」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261327633862627328" class="chatlog__message-container " data-message-id="1261327633862627328">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:25:42 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「厚啦厚啦，哇先轉去煮菜了，有需要呷啥貨你再跟佮我講，真正免客氣！」
+（「好啦好啦，我先回去煮菜了，有需要吃什麼你再跟我說，真的不要客氣！」）
+
+阿姨絮絮叨叨地嘮叨了許久以後，這才用沾滿泥土的手揮了揮手，看了看天邊的太陽，意猶未盡的離開。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261327965539536906" class="chatlog__message-container " data-message-id="1261327965539536906">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:27:01 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">送王阿姨離開後，自己也踏出家門，看著太陽為自己打氣。
+「你可以的！安娜！觀音菩薩會保佑你！」
+接著深呼吸三次以後，才往隱約記得的後面墳墓區走去。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261328772993646643" class="chatlog__message-container " data-message-id="1261328772993646643">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:30:13 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雖然夏天的白晝較長，但早已過了正午時分許久，天空中的太陽也朝著中央山脈緩緩進發，東君落下的光輝不似先前那般耀眼奪目，也不似更晚些黃昏的橘紅彩霞，而是金光中帶著一股午後慵懶的氛圍，催眠得人有些昏昏欲睡，徐徐清風穿過門廊，那門邊的風鈴雖已老舊卻還是清脆地叮噹作響，溽暑帶著濕氣的氣流一路拂過雙頰，吹亂你的瀏海與長髮。
+
+將那些收到的蔬菜水果在廚房簡單找了個地方擺放好以後，妳這便踏起腳步朝著墳墓的方向走去，話說起來，墳墓那邊的位置和書房窗戶正對的方向似乎相差不遠就是了，沿路的雜草生長地更加恣意狂放，那凹凹凸凸的路面也由柏油路、開裂的水泥產業道路逐漸轉變為崎嶇不平的泥土小路，好些地方還有些坑坑窪窪的水灘以及枯黃腐爛的落葉，而且單手端著一個盤子的情況下，有些時候你甚至因那亂糟糟的路面而走得有些踉蹌，許是實在太不常有人經過了，縱使穿了長褲，那路邊的鬼針草依舊毫不留情地用帶刺的種子挽留著你的離去。只不過雖是稍顯炎熱的天氣，但走進山道以後，或許是因為那樹林的庇蔭，倒是揮去了難耐的暑氣，又或許是因為剛剛才聽見的，王阿姨講的魔神仔的故事影響，上身穿著的薄薄短袖在風吹過時反倒讓你覺得有幾分微涼。
+
+靠近了墓地以後，還沒走近你便聽見了那在都市裡頭，絕對不會聽見的、竹掃帚掃著落葉，沙沙作響的聲音，墳墓區的生鏽鐵柵欄後，一個兩鬢斑白、上了年紀的男性正百無聊賴地整理著周圍的環境，或許是這裡的管理員吧？在聽見你靠近的聲響以後，他不由得露出了有些不解的神情，停下原本掃地的動作，拿著掃帚疑惑地朝你望了過來。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 22:31:24 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261329245825794061" class="chatlog__message-container " data-message-id="1261329245825794061">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:32:06 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「不好意思，我想說來看看有沒有人來這裡。」
+連忙向眼前的阿伯打招呼。
+「我是住那邊的——」指向身後的透天厝，「聽說前幾天有人跑來我家，應該是從這邊進出的，阿伯你有沒有看到有誰來？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261330104957534298" class="chatlog__message-container " data-message-id="1261330104957534298">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:35:31 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">原本臉上還有些警惕的管理員看了看你的裝扮，又聽見你口中說出的話，不由得啞然失笑，佈滿皺紋的臉龐也露出了缺牙的、有些和藹的笑容，只是看著你的臉，他不免還是楞了一下，仿佛是在腦海中絞盡腦汁、思索了好一會後，也不確定到底有沒有想起你來，這才開口說道。
+
+「哦——你是那個芸帙的姪女啊，我還想說是不是又是哪個外地來的觀光客，不小心迷路跑來這裡了，你好你好。」
+
+「我只是算是這邊的管理員啦，就退休了嘛、也沒什麼事情好做的，所以有時候白天無聊就會來這裡打掃一下路什麼的，不然都要被雜草跟落葉掩埋了捏，而且每年好像都只有清明附近才會有點人，想說還是要偶爾來這邊巡邏一下，怕要是有什麼小偷還是不懂事的小孩來這裡偷東西之類的，而且墳墓裡的人平常說不定也有點孤單，畢竟有一些都還是以前一起聊天的同學、朋友之類的。如果你有什麼需要幫忙的事情的話，我應該還會再掃一下地，等等才要回家吃晚餐，要是有需要，都可以找我的。」
+
+「不過你說的事情嗎....唔、最近一陣子除了我之外都沒有人來這裡捏，小偷應該也不會想跑來這種鳥不生蛋的地方吧，小姐你會不會是聽錯了啊？」
+
+說完之後，他本來要繼續拿起掃帚掃起落葉，但又忍不住停頓了一下，一本正經地朝你說道，那內容倒是與小時候大人們的告誡和王阿姨剛剛說的事情，並沒有太大的差異。
+「唔對了、是說小姐你還是要注意捏，白天這裡雖然感覺有點陰陰的，但基本上就還是還好啦，但晚上就不要隨便跑過來這裡誒，這附近晚上真的有髒東西的，等等天色就要黑了，不要在這邊逗留太久哦。」
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261330565022613657" class="chatlog__message-container " data-message-id="1261330565022613657">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:37:21 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">吞了口口水，「可是我看到家裡有一些有人往這邊跑的痕跡耶⋯⋯阿伯，如果那個人是晚上跑進來的，那會怎麼樣啊？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261331571797921803" class="chatlog__message-container " data-message-id="1261331571797921803">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:41:21 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「誒誒？真的假的...可是這邊又沒什麼東西，路也不好走，來這邊幹嘛啊...？」
+
+聽見你的話以後眼前的歐吉桑搖了搖頭，滿臉困惑的模樣。
+
+「不過要是晚上跑過來的話，唔，這樣我也不會知道是誰欸抱歉...畢竟一般來說太陽下山以前我就回去吃晚餐了，不好意思，幫不上小姐你的忙。」
+
+「啊......只是要是你是指髒東西的話......以前真的有人看到好幾個魔神仔在墓地那邊跳舞還是幹嘛的呢！住附近的李太太有一次走夜路就不小心碰到，她說她遠遠看本來還想說這麼晚了怎麼還有人影在那邊，結果走近一看才發現是個看起來像是站起來的大狗、長的真的很恐怖的怪物，而且身上還散發著腐爛的惡臭，她嚇到連買的菜都丟在地上，生了大半年的病才比較好。我前陣子有一次忘記帶鑰匙，晚上回來拿的時候，也看到有怪怪的人影，好像拿著什麼東西，坐在那邊墓碑上的樣子，我當時嚇得拔腿就跑，應該也是什麼不乾淨的東西......」
+
+說著說著，他似乎是回憶起了一些恐懼的情景，面色鐵青地如此說道。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 22:49:18 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261333805893943368" class="chatlog__message-container " data-message-id="1261333805893943368">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:50:13 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聽著阿伯講述，忍不住打了個冷顫，「沒關係沒關係，謝謝阿伯。那我先回去了——啊，阿伯你要不要吃水果？剛剛王阿姨拿給我好多，我吃不完，給你一些好不好？」</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261335066068517028" class="chatlog__message-container " data-message-id="1261335066068517028">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:55:14 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哦哦好，那樣就好，我知道你們年輕人可能都會覺得這是迷信什麼的，但真的不要不信欸，至少我就、唔......反正盡量不要來這邊啦。」
+聽見你這麼說，大叔拍了拍胸脯，一副放下心來的模樣，只是說著說著，他那又一副欲言又止的口吻，話說到一半又匆匆閤上嘴巴，轉移了話題。
+「不用啦不用啦，水果你吃就好了，我等等回去還要吃晚餐呢，而且我家也種了好多，多到吃不完了，只能寄給在台北工作的小孩......」
+
+「不過你是說你是芸帙的姪女嗎？不是我要說，但他那個人真的有點孤僻捏，住的房子又離大家的屋子很遠，所以大家也都不太認識他，平常幾乎也不會看見他離開屋子，基本上也沒有他跟別人說話的印象，要不是偶爾可能會有幾封信寄到他那邊，所以、唔、你知道的，因為這地方真的沒有很大，大家三三兩兩聊天的時候，這才會知道你叔叔的名字。」
+大概是鄉下無聊的人們閒暇時間只能談天聊些八卦什麼的吧，就連眼前的大叔也不免俗，聊著聊著有些碎嘴地如此說道，雖然最後的口吻乍聽之下似乎對於打探別人的隱私有些不好意思，但那語氣倒是一點也聽不出來他心底有半分這樣子的感覺。
+
+「而且、一般人也不會在過世之前就先弄好自己的墓碑跟墓地吧，這樣不是在咒自己死嗎？就真的很奇怪耶，只是因為也沒有人跟他比較熟，所以也不知道你叔叔他是怎麼想的就是了。」
+他咧起嘴巴笑著說道，門牙處那補上的金牙在說話時特別明顯，又聽見他這麼評論你的親人，不知為何莫名擾得你有幾分心煩意亂。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 22:56:36 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261335550472884375" class="chatlog__message-container " data-message-id="1261335550472884375">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 22:57:09 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雖然心煩意亂，但注意到阿伯話中的重點，「阿伯你說，我叔叔先弄好墓碑跟墓地了喔？可以帶我去看看嗎？」
+是有些獨居的人會先處理好這些事情，但叔叔又不是沒有親人，這麼早弄好有必要嗎？還是⋯⋯他有預感自己會出事？
+好緊張，還是去看一下比較好。</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 22:57:16 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261336305501995169" class="chatlog__message-container " data-message-id="1261336305501995169">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:00:09 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「哎呀，我也覺得很奇怪就是了，不過大概就是那邊啦，你走過去應該就看得到了嗎，應該不難找的。」
+
+聽見你這麼說，他用手簡單朝著墓地的某個方向比了比，便又拿起掃帚，低下頭清掃起落葉來。
+
+「我再掃一下地，等等就要回家了，要是小姐你找不到再跟我說哈！」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 23:01:14 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261336567318970508" class="chatlog__message-container " data-message-id="1261336567318970508">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:01:12 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「好，謝謝餒！」
+鼓起勇氣自己往墓地裡面走去，視線掠過各個墓碑，努力找尋自己叔叔的名字。說起來他會在墓碑上寫哪個名字呢？果然還是全都注意一下比較好吧。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261337302312161472" class="chatlog__message-container " data-message-id="1261337302312161472">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:04:07 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你順著那大叔指的方向走了一小段路，沿路仔細地確認了一下墓碑上的人名，沒走多遠你便看見了一處相比之下較為嶄新的墓碑，看上頭的名字，想來大概就是那大叔口中的、叔叔以前就自己建好的墓碑吧。
+
+與周圍那些有些墓龜、墓埕以及各種有著自己意義的裝飾構造不同，叔叔為自己弄的墓地倒是十分簡樸，甚至幾乎可以稱得上是一無所有，除了一塊純白的大理石碑之外，再沒有其他東西，就連墓碑上的樣式，也沒有什麼多餘的字體，與來時看見那些有些各種金邊或是稱謂的文字不同，只有純黑的楷書，刻印著他的名字——『戴芸帙』，以及其下應該是他選作墓誌銘的，簡短的一段詩句——『面朝大海，春暖花開』，如此而已。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 23:05:22 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261337790306713692" class="chatlog__message-container " data-message-id="1261337790306713692">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:06:03 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——還不知道叔叔為什麼把自己的名字改成這樣呢。
+思緒飄散開來，但沒有妨礙身體的動作，把這塊墓地檢查了一圈。重點確認到底有沒有挖開來埋了東西。
+如果有的話，可能得叫人來幫忙挖了。弱小可憐又無助的OL哭哭。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261337846502002729" class="chatlog__message-container " data-message-id="1261337846502002729">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:06:17 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+請過文學。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261337957478961243" class="chatlog__message-container " data-message-id="1261337957478961243">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:06:43 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">cc 1 藝術與工藝：文學</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261337958443909173" class="chatlog__message-container " data-message-id="1261337958443909173">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">07/12/2024 23:06:43 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+1D100 ≦ 1　
+38 → 失敗：藝術與工藝：文學</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261338900102905876" class="chatlog__message-container " data-message-id="1261338900102905876">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:10:28 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+請過偵察。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261339683909144719" class="chatlog__message-container " data-message-id="1261339683909144719">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:13:35 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">cc 55 偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261339685096128585" class="chatlog__message-container " data-message-id="1261339685096128585">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">07/12/2024 23:13:35 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+1D100 ≦ 55　
+85 → 失敗：偵查</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261340199921651783" class="chatlog__message-container " data-message-id="1261340199921651783">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:15:38 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你搖了搖頭，試圖在腦海中思考著那詩句究竟是誰人所寫、又或者是叔叔自己落筆時留下的字句、而是否又有著什麼特別的涵義呢？只不過想當然爾，這本來就不是你的專長，如果是英文的詩詞的話，說不定還有一絲機會吧，可眼前的詩句究竟在說些什麼、叔叔以此為墓誌銘時心中到底想著什麼、甚至是叔叔為何會改成如今的這個名字，諸如此類的事情，半點也不在你腦袋領略的範疇之中。
+
+一邊在腦海中思來想去，一邊在墓碑周圍簡單地搜尋了一圈，不過你還是看不出此處有半分挖掘或是下葬的痕跡。
+
+走小路過來的路程再加上和剛剛與大叔的交談又耽擱了一些時間，黃昏時分赭紅的晚霞已於林木邊緣緩緩浮現，將穹頂上的片片雲朵染上一層橘紅的顏料，金烏灑落的最後片羽從林蔭間的縫隙投射在手機上，反射以後直直落入你的眼瞳之中，剎那間讓人不由得有些眩目失神，你順手確認了眼下的時間，約莫已經接近酉時，即使是白晝偏長的夏季，再加上下山走回家的時間，距離日落也沒有太多的剩餘了。
+
+只是在低頭確認完時間以後，沉吟思索著是否該是時候踏上回家的路時，你的視線一隅意外看見了距離叔叔的『墓碑』不遠處，似乎有處較為稀疏的樹叢落入了你的眼角餘光之中，像是什麼小徑一般，和周圍茂盛的翠綠灌木顯得略微格格不入。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261340847983693917" class="chatlog__message-container " data-message-id="1261340847983693917">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:18:12 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">看了看天色，再看了看小徑，心中有些為難。
+——如果小黑在這裡的話，或許就有勇氣踏進去了吧。
+但是王阿姨家的黑狗並不在這裡，膽子實在不夠大，只能嘆口氣準備離開。現在這個時間，去王阿姨家吃飯應該不會太晚吧。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261340967835795456" class="chatlog__message-container " data-message-id="1261340967835795456">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:18:41 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+請過LUK。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261341020377845885" class="chatlog__message-container " data-message-id="1261341020377845885">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:18:53 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">cc 40 LUK</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261341021862625381" class="chatlog__message-container " data-message-id="1261341021862625381">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">07/12/2024 23:18:54 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+1D100 ≦ 40　
+36 → 通常成功：LUK</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261342750851469373" class="chatlog__message-container " data-message-id="1261342750851469373">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:25:46 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">恰好就在你內心這麼想著時，你聽見了不遠處傳來了記憶中那熟悉的狗吠聲，雖然比起記憶中，似乎已經低沉了些，但還是一聽就能夠認出來，在看見你以後，那修長的漆黑身軀也立刻朝你撲了過來，在你的腳邊熱情地磨蹭著，頭上那有些粗硬的黑色長毛觸感依舊那樣清晰，不過你倒是沒有看見王阿姨的身影，大概是王阿姨將小黑放出來在附近晃悠的時候，剛好碰見你了吧，不過話說他這已完全長開的身形，再叫做小黑好像已經有些名不副實了呢。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261343012248748126" class="chatlog__message-container " data-message-id="1261343012248748126">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:26:48 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「小黑！你在啊！」開心地伸手摸摸黑狗的毛，「現在該叫你大黑了吧？你長得好大了。」
+「可以陪我去那邊看看嗎？」示意黑狗跟著自己往小徑的方向走。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261343952116777051" class="chatlog__message-container " data-message-id="1261343952116777051">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:30:32 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你開心的聲音在空無一人的墓園中盤亙，微風吹過林木，將上頭搖搖欲墜的枝葉吹得沙沙作響，小心翼翼地撥開樹叢，雖然並不是那麼明顯，但仔細觀察一番，還是能從地上被踩扁枯萎的小草痕跡，以及兩側較為茂盛的林木，看出這似乎是條秘密的通道，枯死的雜草和顯露出來的泥土小路，感覺已經也不是一天兩天的事了，即使不用牽繩，但小黑依舊乖巧地張大嘴巴吐著舌頭，緊緊地跟在你的身側，那溫暖的體溫也帶來了滿滿的安全感。
+
+如果你的方向感沒有錯亂，而且小徑一路都是筆直的話，那麼小徑的方向似乎是朝著家裡頭延伸前行的，並不像你走來墓園時要蜿蜿蜒蜒地繞上那麼大一圈才能爬上來後山墓園這裡。
+
+跟著黑狗沿著被踩出來的小徑朝著山下走去，不知是因為這或許是什麼人日復一日獨自踏出的道路，亦或是沿路並沒有多少泥濘與碎石，走起來倒是比想像中輕鬆上不少，雖然偶爾也有些從小徑兩側恣意伸出的嫩枝攔住你的去路，但也都只是些簡單撥開會彎下身子就能穿過的小阻礙，隨著傍晚輕輕拂過的晚風，林蔭下又不會受到太多曝曬，倒像是有些愜意的散步之旅。
+
+走了沒幾分鐘，撥開最後一點點藤蔓以後，便看見夕陽那耀眼的餘暉像是阿波羅射出的最後一隻箭矢，正巧命中靶心，落入你的瞳仁，在朱紅的夕陽晚霞下，隱約還能看見一輪滿月的淡淡白色輪廓遙掛在天穹上，而在你的正前方，雖然並不是太過意外，但看見你家正巧落在眼前時，還是有種柳暗花明又一村的感覺，而家裡頭書房那扇窗戶正巧就在你的眼前，在從小徑通往屋子的路上，你還可以看見白天時從書房往外看去時，那雜亂無章的泥土印子彎彎曲曲地遍佈，想來剛剛走過的小徑或許也有吧，只不過和那些黃土灰塵混雜在一塊，所以一時之間才沒有察覺。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/12/2024 23:30:41 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261344401842765896" class="chatlog__message-container " data-message-id="1261344401842765896">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:32:20 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「竟然都走出路來了啊⋯⋯」真不可思議，究竟是闖入者走出來的，還是——叔叔自己走出這條路的呢？
+但總之安全回家了，蹲下來摸摸黑狗，「謝謝你陪我回家。換我帶你回家囉！」打算帶著黑狗回王阿姨家。</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1261345861980520470" class="chatlog__message-container " data-message-id="1261345861980520470">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/12/2024 23:38:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">大概是不知道走過多少回了吧，在下山以後，黑狗便閒庭信步地朝著王阿姨家飛快奔去，跟隨著黑狗的身影朝著王阿姨家走了過去，還沒走進屋子，便聞到了隨著晚風迎面而來的炒菜香氣和那鏟子與炒鍋碰撞奏響的樂章。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263835204934438922" class="chatlog__message-container " data-message-id="1263835204934438922">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 20:29:53 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">許是聽見了你的腳步聲，在你敲門以前，便聽見了王阿姨那招牌的大嗓門透過大門傳入耳中，大聲地招呼著你道。
+「啊！戴安娜，你來了啊！快點先進來坐，不要再待在外面吹風著涼了，我再炒個青菜就好了！」
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263835582115614903" class="chatlog__message-container " data-message-id="1263835582115614903">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 20:31:23 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聞到飯菜香氣，就有種安定的感覺，把剛才在墓園的不安感都驅散了。
+心情很好地大聲回答，「馬上來！」就帶著黑狗進了屋子。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263837594219970640" class="chatlog__message-container " data-message-id="1263837594219970640">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 20:39:23 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">走進屋子，便看見餐桌上擺滿了各式各樣、色香味俱全的食物，諸如烤得油花四溢的香腸、塞滿了各種魚丸、蘿蔔的排骨湯、看上去就讓人食指大動的豬腳，還有些在台北見不到的、鯊魚肉炒芹菜之類的佳餚，王伯伯早就坐在餐桌前翻著報紙，看見你進來時也熱情地向你打著招呼、寒暄著你近況如何。
+
+沒等上多久，便看見滿頭大汗的王阿姨端著一旁青翠欲滴的炒山蘇從廚房走了過來，才剛將食物放在桌上，便連珠炮似的講了一大串話。
+
+「歹謝啦，都只是一些家常菜而已，我有叫阮尪趕緊去買菜啦，只是有點太晚了有些攤位都收了，啊不過這些菜都多都是我自己種的，保證有機、無農藥，戴安娜你盡量吃捏，不然看電視上說你們台北的年輕人吼，飲食都不太健康，而且你又這麼瘦，真的不要客氣，多吃一點捏！」
+
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 20:41:14 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263838865555460156" class="chatlog__message-container " data-message-id="1263838865555460156">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 20:44:26 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「這些就很好了啦！阿姨你都不知道，台北很難買到山蘇欸。」
+有些熱炒店有啦，但是旅美好幾年了，再怎麼常見的山菜，在自己眼裡都很罕見。
+「阿伯阿姨，趕快來吃飯啊，好香！阿姨很會煮欸。」
+
+原本沒有打算在這裡過夜的，但能夠吃到這一餐花蓮家常菜，突然覺得住個一晚也沒關係。等等還得回去檢查一下棉被能不能用。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263840232609021966" class="chatlog__message-container " data-message-id="1263840232609021966">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 20:49:52 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「吼啦——死尪賣夠看報紙啦，緊來呷！」
+阿姨坐下以後，還生怕你餓肚子一般，不忘連連往你的碗中夾菜。
+「吼呦，你這樣誇獎阿姨會害羞捏，你吃的開心阿姨就歡喜啊啦，是說你蝦米時陣要回去啊，阿姨早上再去採一些菜給你帶回去台北！」
+
+黑狗也坐在客廳邊上，安靜地吃著那些阿姨煮完剩下的排骨，時不時還能聽見他『嘎吱嘎吱』地啃著骨頭的聲音。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263841190537596932" class="chatlog__message-container " data-message-id="1263841190537596932">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 20:53:40 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「我再巡一下，該鎖的鎖一鎖，明天下午應該就回去了。」雖然想到要大包小包回台北是有點苦惱，但也沒有拒絕王阿姨的好意，這就是熱情好客的在地人嘛，拒絕了反而讓人不開心，「要走之前會再來打招呼。」//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263842466512109599" class="chatlog__message-container " data-message-id="1263842466512109599">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 20:58:45 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「嗯嗯！剛好哇田裡有些空心菜跟小番茄紅了，明天再給你帶回台北捏！」
+在吃飽喝足，阿姨又為你添了幾次飯，直到你真的再也吃不下之後，熱情的王阿姨又拉著你說了好一些話，例如你小時候的趣事以及一些阿公阿嫲的生活瑣事，又再三叮囑你有空記得多回來玩，順便帶妹妹或是男朋友一起回來以後，你這才踏出了王阿姨的家門。
+
+此刻天色早就完全暗了下來，一輪皎潔的明月已緩緩從地平線遠端升起，輝耀的月光灑落在地上，如你曾在麻州看見的霜雪般，在回家的道路上織就一張銀色的長毯，盛夏嘈雜的蟬鳴和嘹亮的蛙唱在耳邊繚繞，奏響熱鬧的音符。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 21:00:23 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263843177371009190" class="chatlog__message-container " data-message-id="1263843177371009190">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:01:34 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雖然覺得很溫馨，但是社交能量有點消耗過度了。
+挺著吃撐的肚子走在回透天厝的路上時，不禁覺得晚上這餐似乎比白天東奔西跑要來的辛苦——但安全許多。
+「等一下整個房子巡過以後，把門窗都鎖一鎖就洗澡睡覺吧。」喃喃自語著接下來的安排，並打了個呵欠，「唉⋯⋯叔叔到底跑到哪裡去了啊⋯⋯」
+還有那些被覬覦的書，到底又是什麼呢？//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263843300830478337" class="chatlog__message-container " data-message-id="1263843300830478337">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:02:03 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+請過靈感。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263843374646038590" class="chatlog__message-container " data-message-id="1263843374646038590">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:02:21 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">cc 60 靈感</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263843376432807966" class="chatlog__message-container " data-message-id="1263843376432807966">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">07/19/2024 21:02:22 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+1D100 ≦ 60　
+100 → 啊！大失敗！：靈感</span>
+
+                    </div>
+
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="question">
+                                <img class="chatlog__emoji chatlog__emoji--small" alt="❓" src="https://twemoji.maxcdn.com/2/svg/2753.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263845268068106314" class="chatlog__message-container " data-message-id="1263845268068106314">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:09:53 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">就在你正想走回家時，注意力倒是意外被窗外地上那些奇怪的泥土痕跡給攫獲了，雖然想著那大概是你跟著狗狗走回來時留下的腳印，但你心中的好奇心卻逼得你忍不住仔細觀察了一下，彎下身子定睛一看，那些泥印顯然是某種動物留下的腳印，雖然看形狀似乎是狗類、亦或是什麼犬科動物留下的足跡，然而當你下意識地伸出手掌，與那些痕跡比較大小時，卻發覺那些腳印的大小和你嬌小的手掌相比，幾乎大了快兩倍有餘，即使是世界上最大的犬科動物，怎麼想也沒有辦法長到這般尺寸吧，縱使小黑現在已經長成了大黑，牠的爪子也沒有這印痕的一半大吧，再聯想起早先時候隔壁王阿姨提及的、關於那『魔神仔』的一些描述，即使是在炎熱的夏季，你全身上下也仿佛有一陣涼風襲來，忍不住打了個寒顫，全身也起了雞皮疙瘩.
+
+縱使你早已確信這世界上或許真的有鬼的存在，可卻從來沒想過只是簡簡單單的一次返鄉行程也會遇到這種事情，就算想要就這麼跑走，身後王阿姨家也早已關上了燈，大概是已經入睡了吧，手機又突然不知為何收不到訊號，雖然在鄉下訊號總是不太好，可當一切事情疊加在一起時，仍不免顯得瘆人無比。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 21:10:06 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263846313049460818" class="chatlog__message-container " data-message-id="1263846313049460818">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:14:02 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">打了個哆嗦，腦中開始忍不住胡思亂想——但她對自己的膽小很有自覺，於是馬上掏出護身符握在手上，一面瑟瑟發抖一面默念南無觀世音菩薩，藉著路燈的亮光快速回到屋子，打算不管三七二十一先把燈全部打開。
+好可怕，希望那個不知道是什麼怪獸的東西看到燈光就不敢過來。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263847519444668449" class="chatlog__message-container " data-message-id="1263847519444668449">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:18:49 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">穿過前門，蕭瑟的晚風在走廊間吹拂而過，乍聽之下仿佛哀婉嗚咽的哭泣聲，眼前的所見一切想當然爾正和早先時候正要仔細四處觀察、卻被王阿姨前來打攪時並無半分不同，走進屋子以後，你連忙將所有房間的燈都給打開，雖然老舊的燈管閃爍明滅了幾次，但那死白的日光燈光線還是勉強為你帶來了一些安全感，書房的房門依舊敞開著，偶爾有幾縷吹過的氣流將那些凌亂的紙頁吹起，那故事與文字中的小人想來也未曾知曉此刻自己正在風中飄蕩吧。
+
+在開燈時，你也順便迅速瞥了一下各個房間，除了書房和主臥室外，其他房間幾乎都沒有什麼有人生活過的痕跡，就連家具都沒留下多少，讓人懷疑或許叔叔還在的時候，可能也只會在這兩個區域活動吧。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 21:19:17 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263848605136195746" class="chatlog__message-container " data-message-id="1263848605136195746">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:23:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">嘆了口氣，看來今天只能睡主臥室或書房了。
+如果在書房打個地鋪，不知道會不會很難睡——畢竟丟了東西的是書房，如果能夠睡在這裡的話，至少有種在守衛家園的感覺，起碼安心一點。
+總之去主臥室搬來了棉被，打算在地上湊合一晚。如果明天還沒辦法解決事情的話，不如就順便整理這裡吧。在心裡一面盤算著大工程，一面簡單把書房地板打掃一下，將那些泥跡擦乾淨後，才把棉被鋪好。
+今天就睡這裡吧。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263849470915907597" class="chatlog__message-container " data-message-id="1263849470915907597">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:26:35 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">和書房那雜亂無章卻充滿生活的氣息相比，主臥室可以說是十分乾淨整潔了，除了床鋪與棉被，和那籠罩在房間的各個角落的厚厚灰塵以外，觸目所及幾乎看不見任何特別的東西，印象中小時候每次回家，祖父母還住在這裡時，那床應該是結婚時訂做的大紅錦被以及床邊那總是放滿各種化妝品、保養品的梳妝台，也早就隨著他們過世被帶走、不知道放到哪裡去了，徒留一絲輪廓在記憶裡頭。
+
+如今的床上也只有簡單的一顆睡了太久有點坍陷的枕頭、以及被折的整整齊齊的如同稿紙一般、本來應該是白色卻已在歲月中有些泛黃的薄薄棉被，幾乎看不出什麼有人生活的痕跡，在你抱起那床棉被正想搬下樓時，一本薄薄的日記本意外從棉被的縫隙間滾落，掉落在地板上。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 21:27:07 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263850075008925728" class="chatlog__message-container " data-message-id="1263850075008925728">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:28:59 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——日記本？
+困惑地撿起來，打開本子試圖弄清楚這是誰的。
+反正不管主人是祖父母還是叔叔，現在都沒辦法阻止她偷看他們的小秘密了。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263852136240906262" class="chatlog__message-container " data-message-id="1263852136240906262">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:37:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">你從地上將日記本輕輕拾起，那日記中的一字一句大概是情緒宣洩而出的流淌吧，雖然字跡十分整齊，但似乎還是少了那麼一絲工整，多了一些波動不定的情緒，從封面的名字來看，這想來是叔叔留下的日記吧。
+
+只是雖然說是日記，不過看起來叔叔似乎是只有想到什麼的時候才會隨手寫上一些，那押上去的日期也是跳來跳去。 但那些內容幾乎都大差不差，多是在抱怨些跟人交流很累，總是看不清其他人表面背後的真實意圖，以及總是無法理解大家拐彎抹角的暗示與隱喻等等。 
+
+從某一篇開始，他倒是寫到他發現附近的一個墓地，平常夜裡幾乎不會有人出沒，是一個絕佳的閱讀所在。那些微風拂過樹梢的響動和明朗澄澈的月光，都使他得以暫時擺脫俗世的紛擾，拋卻紅塵的煩憂。 
+在日期最接近的幾篇裡面，叔叔意外地提及了他在墓地遇見了一些特別的朋友，和他們交流一點也不需要花費心力，自在極了。比起來跟其他人說話根本就像是薛西弗斯的懲罰一樣，是一種永不止息的折磨。
+
+日記尾端就此戛然而止，與其他天的記錄並沒有多少不同，或許是少了一本丟到哪邊，也或許是本來就只是寫到這裡也說不定？
+
+<div class="chatlog__markdown-pre chatlog__markdown-pre--multiline nohighlight">------
+2016.Oct
+隔壁的那對夫妻又在吵架了，真的是煩死人了，整天都聽得到各種大大小小、無關緊要的摩擦與口角，這實在是令人不解，明明應該是因為彼此相愛才在一起的吧，怎麼卻又會為了這麼支微末節的瑣碎事情吵得不可開交呢？婚禮下定下的誓言與往昔的那些深情與包容，是否都會隨著時間煙消雲散呢？即使是婚姻這樣的誓約也不可避免，人與人之間的交際我果然始終還是無法明白。
+
+只不過雖說如此，那日復一日的爭執與噪音還是打攪了我的清眠，夜不成寐，下筆時的靈感也常常被打斷、消失無蹤。只不過也是因為這個契機吧，我找到了一個可以讓我專心寫作、傾心投注在文字與閱讀間的所在，雖然附近的鄰里對那頗有微詞，說那個墓仔埔有些不乾淨的東西，但即使我寫作了那麼多奇幻小說，對這類怪力亂神之事也沒有不信，只不過至少當我坐在那旁邊讀書時，藉著月光與露營燈寫作閱讀時，我得到的是寧靜與安詳。
+
+------
+2017.Feb
+今年冬天並沒有那麼寒冷，雖然有幾次天氣預報都說有寒流來襲，但反正那些冰冷的海風也吹不到這來，這還是不減我獨自去墓仔埔，投身於文字中的閒情逸致，一到晚上就跑到在那邊的生活，不知不覺間也過了好幾個月了呢，或許是那裡的寧靜與絕好的氣氛吧，這段時間靈感總是汩汩浮現，仿佛湧泉一般不止息地冒出。
+
+唔、除了靈感不絕之外，倒是還有一件特別值得記下來的事情，在那個墓仔埔裡頭，我遇到、認識了一個、嗯...有點特別的朋友嗎？他說他就住在墓仔埔裡頭，第一次遇見他時我們彼此都嚇了一大跳呢，我們對彼此為什麼會出現在那裡、在那裡做些什麼都有些好奇，有時會隨口聊些有趣的事情、有時就是靜靜地做著自己的事情，並沒有多做什麼，這樣的感覺好像也不錯呢。
+我想，這或許也可以作為往後下筆的靈感吧。
+
+------
+2019.Jun
+人與人之間的交流，真的是好難呢。前幾天和兄長在電話上又吵了一大架，雖然他打小就很氣我就是了，父母親去世的時候，那應該說是憤怒嗎的情緒好像又更加明顯。但他人即地獄啊，我實在實在無法理解別人在想什麼、無法像是書本裡頭的正常人一樣有著那些親情友情諸如此類的，那些種種我總是感覺不到，說不定別人也感受不到、卻又為了融入而不得不戴上虛偽的假面呢？還是說我本身就是個可笑的殘次品？跟人交際真的好痛苦好困難......
+這世界實在是太過荒謬，不管是人與人之間也好，還是這無常的世事也罷。
+
+------
+2019.Aug
+又和兄長吵架了...不管怎麼樣他就是對我這個耽溺在幻想中的傢伙看不順眼吧？不過這好像也是正常人會有的反應，唔、或許我就不是、也永遠無法成為正常人吧......
+不過聽說姪女考上了美國的大學，那學費應該不便宜吧，稿費這麼多也用不著，哪天偷偷寄過去好了......
+
+------
+2021.Apr
+那奇妙的朋友、陸陸續續與我有些交流呢。談論著他們生活的那個世界、那個被他們稱為『夢幻之域』、總是長年被雲霧所籠罩著的世界，他栩栩如生地介紹著那個神秘而有趣的世界時，總是讓我不免有些好奇，如果能夠去那裡探訪的話，不知會是多麼好玩的事情，而且在那個世界裡，似乎也不需要這種痛苦的人際交流...唔...。
+
+執筆好久的小說終於快要完成了，只不過、結局...結局究竟該如何是好呢...到底要如何為故事畫下句點，直到如今我依舊沒有頭緒......
+
+------
+2021.Jun
+神秘的朋友們吃的東西與我們不太一樣，而且他說他們也不太需要進食的樣子，頂多一天、甚至兩三天吃一餐就好，內容也截然不同。雖然我也問過，他們就不會想吃些新鮮的嗎？但他是這麼回答的：為了不被發現、也為了不打擾到別人，還是別這麼做比較好。
+從這點觀察起來，雖然少了那麼多累人的交際，但在他們之中，應該還是有些獨特的生活規範存在呢。這真是有趣。</div>
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 21:37:33 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263853023285874700" class="chatlog__message-container " data-message-id="1263853023285874700">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:40:42 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">叔叔的文筆優美流暢一如既往，但內容越看越令人頭皮發麻。
+那些半夜才會出現的朋友，肯定不是什麼普通人吧⋯⋯叔叔啊，你讓怕這些東西的姪女好難辦啊⋯⋯
+「怎麼辦⋯⋯」快哭出來了，「難道真的要晚上去一趟嗎，先檢查一下手機電量夠不夠⋯⋯」
+順便翻一下房子裡有沒有手電筒。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263854143433609318" class="chatlog__message-container " data-message-id="1263854143433609318">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:45:09 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">畢竟白天沒用上太多，手機的電量約莫還有一半左右，可以不必擔心猝不及防的沒電，只是若是開啟了手電筒的話，就恐怕電量會消耗地飛快吧。
+
+你在屋子裡頭四處翻找，只不過到處都沒有找到手電筒的蹤跡，倒是在翻找的過程中，在書房書桌的抽屜裡頭，意外找到了一疊厚厚的稿紙，那一行行字跡都是那樣的工整認真、力道仿佛要刻印到紙背一般，目光粗略掃過，看樣子想來應該就是叔叔在日記中提及的，那正在撰寫的小說吧。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 21:45:27 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263854311998492712" class="chatlog__message-container " data-message-id="1263854311998492712">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:45:49 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">——看一下好了。
+像是要逃避出門一般，開始翻看叔叔留下來的稿子。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263855903921147977" class="chatlog__message-container " data-message-id="1263855903921147977">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:52:08 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">窗外銀白色的清澈月光透過玻璃窗灑落，望月於蒼穹上遙遙高掛，隨著暮色逐漸黯淡下來，原本就安靜的村落此刻更加寂寥，聽不見半點人聲，那些曾經會在此刻一起在街道上玩耍、等待被家人叫回家吃晚餐的玩伴們，如今也都和你一樣，一個個搬離村莊，孤身一人踏入都市的水泥叢林之中，走進那霓虹燈鑄就的紛亂之地，在大城市裡頭打拼了吧，眼下只有時不時颳過的晚風將落葉吹起的蕭瑟聲響偶爾傳進耳邊，以及那猖狂的蟬鳴蛙唱，在夜晚的舞台上奏響此起彼落的樂章，記憶中的那些歡聲笑語，此刻真真切切只能停留在記憶中，再也不可復見一二。
+
+如今正是生意盎然的夏夜，窗外蟬鳴陣陣不絕於耳，晚風輕輕拂過樹梢，吹動枝枒沙沙作響作為伴奏，書房裡頭到處壘起了書籍，幾乎找不到落座的地方。你拿起放在抽屜裡的那疊稿紙，這想來應該是叔叔失蹤以前仍筆耕不輟的作品吧，相比起日記那樣簡短的文字，雖然還是尚未完成出版的小說，但篇幅還是長上了不少，雖然同樣是叔叔親筆寫下的文字，但寫在稿紙上也便不似日記那般飄逸隨性，一整天辛苦下來，腿也有些發痠的你仔細地拾起稿紙，穿過走廊在柔軟的沙發上坐下，細細品味起那一個個墨印與其後蘊含的氛圍。 
+
+你將疲憊的身軀沉入鬆軟的沙發裡頭，不經意間還瞥見了沙發角落，那幼時與雅娜在這兒玩耍、嬉笑打鬧時，不小心弄破的布料，依舊與記憶中一般無二。輕輕翻閱起稿紙，將那些墨水刻印下的字字句句放入腦中，相比起日記那直白而豐沛的情感，叔叔在寫小說時的文筆反倒是截然不同，那些恰到好處的描繪與形容將字字句句間的所思所想清晰地傳達到讀者心中、輕盈夢幻卻又不會太過浮誇、咬文嚼字的文藻，以及那些讓事物是那樣的清晰、仿佛躍然紙上的文筆與情節。雖然起初只是想逃避似的翻閱起來，但那樣溫柔平和的故事卻讓你忍不住沉浸其中，一頁又一頁地接著翻閱下去。
+
+小說裡頭講述著一個逃離原生家庭，害怕又厭惡人群喧囂的少年在某天遇見了一個來自另一個世界的男孩，那個神秘的男孩帶領著他去了另一個世界遊玩，在那邊，他不再需要逼迫自己與其他人講話社交、迎合他人的感受，也不會被其他人誤解與敵視。從那以後，少年就常常在下課時分從塵世的喧囂中遁逃，和那個男孩一起遊戲。而在這個過程中，少年也逐漸成長，能夠正常地和其他人社交，原本在學校總是一個人孤伶伶的他，也遇見了一些志同道合、能夠自在相處的知心好友。直到某一天，那個男孩告訴了少年，往返兩個世界的門扉因為能量不夠的緣故，已經到了即將關閉的邊緣，自此以後兩個世界將斷去一切聯繫，在落英紛飛櫻花樹下，男孩詢問著少年是否要同他一塊離去、亦或是留在這個原本的世界。
+
+而故事就斷在這裡，留下一個未完的結局...在最後一頁處，未完待續的結尾還能夠看見一個重重的墨點，許是叔叔同樣為了結局究竟該如何發展而糾結不已吧。
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 21:52:56 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263857167421669407" class="chatlog__message-container " data-message-id="1263857167421669407">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:57:10 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">⋯⋯這怎麼看起來像叔叔的私小說。
+嘆了口氣，把稿紙整理好，放回自己找到的地方。事實上以現在的情形來看，叔叔大概是選了一起離開吧⋯⋯但走之前也不先講一下，太不夠意思了叔叔！
+
+糾結了半天，最後還是得出門。手機電量只要省著點用，大概還是可以順利來回吧⋯⋯晚上是小黑，不，大黑睡覺的時間，不想打擾，就只能沒有保鏢地獨自上路了。
+將護身符掛在脖子上，帶著隨身小包躡手躡腳地——翻出書房的窗！
+想要速去速回的話，走小路比較快吧！白天走過了不會有事的！這樣說服著自己出發。//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 21:57:27 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263857442102444053" class="chatlog__message-container " data-message-id="1263857442102444053">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:58:15 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+請過LUK。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263857497865715886" class="chatlog__message-container " data-message-id="1263857497865715886">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 21:58:28 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">cc 40 LUK</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263857499379990671" class="chatlog__message-container " data-message-id="1263857499379990671">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">07/19/2024 21:58:29 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+1D100 ≦ 40　
+44 → 失敗：LUK</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263858847567843490" class="chatlog__message-container " data-message-id="1263858847567843490">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:03:50 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">清冷的月光如汩汩流水流淌，在窗外的草地上如一片空明積水般灑落。只是在你躡手躡腳，正要推開窗戶，跳出書房的一瞬間，才剛探出頭，一股強烈的、不太對勁的味道瞬間竄進了你的鼻腔，那是你從未聞過的惡臭，就連臭水溝的氣味也不及那古怪氣味的萬一，那是一種朽壞的、腐爛的、肉類的味道，還夾雜著一絲泥土與草地的腥味。映入你眼簾的是一個在月光下的人形剪影——不，那真的能說是人影嗎？
+
+你隔著一層薄薄的玻璃和那事物遙相對望，那個身影那生物和人有些相似，卻又截然不同，它傴僂著背，手裡拿著書一副正要跳進屋內的模樣，披掛在身上的衣物看上去只是僅僅能夠蔽體、破爛不堪的布料，下半身的腿雖然大體上看起來還是人的模樣，但卻有著異常粗壯發達的大腿和有些反弓的關節，腳掌的部分也嚴重變形，乍看之下似乎是蹄的模樣卻有著如犬科動物的利爪。只是在看見你時，它似乎也嚇了一大跳就是了。
+
+在朦朧的月色下，它嘴角邊露出、尖銳勾起的獠牙泛著青白色的反光，猛然一看便是那樣的兇殘可怖，皮膚也是橡膠一般的質感，全身上下都覆蓋著那沒有多少光澤的墨綠色詭異肌膚，除了尖尖豎起的耳朵以外，絕大部分的臉龐都被粗壯的毛髮給遮住了，但即使如此，你匆匆瞥過時依舊能夠感受到那面容的猙獰恐怖。
+
+這究竟是人類、還是什麼東西？紛亂的腦海中，早上聽到、被你一笑置之的名詞驀地湧現——『魔神仔』。
+
+但這種東西不該只是街談巷議間的故事而已嗎？就像是什麼喜馬拉雅雪人或者是尼斯湖水怪一樣，怎麼可能真的存在在這世界上......
+
+請SC。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263859365744742451" class="chatlog__message-container " data-message-id="1263859365744742451">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:05:54 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">.sc 60 0/1D6</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263859367791558677" class="chatlog__message-container " data-message-id="1263859367791558677">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">07/19/2024 22:05:54 +08:00</span>
+                    </div>
+
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(0, 153, 255, 255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author-container">
+                                                    <img class="chatlog__embed-author-icon" src="https://images-ext-1.discordapp.net/external/3Lx0rapR2hJBS4woEUa0_oDMavhu5ifHB9TpeWhte0c/https/user-images.githubusercontent.com/23254376/113255717-bd47a300-92fa-11eb-90f2-7ebd00cd372f.png" alt="Author icon" loading="lazy" onerror="this.style.visibility='hidden'">
+
+                                                        <a class="chatlog__embed-author-link" href="https://www.patreon.com/HKTRPG">
+                                                            <div class="chatlog__embed-author">HKTRPG</div>
+                                                        </a>
+                                            </div>
+
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="chatlog__markdown chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+San Check
+1d100 ≦ 60
+擲出:48 → 成功!
+失去0 → 0點San
+現在San值是60點</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263859671073034280" class="chatlog__message-container " data-message-id="1263859671073034280">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:07:06 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">或許是因為剛才已經透過叔叔的日記與小說認識了這個存在，意外地並不怎麼驚嚇。
+甚至謹慎地打了個招呼，「⋯⋯你好？」//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263860808035860550" class="chatlog__message-container " data-message-id="1263860808035860550">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:11:38 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">雖然你早有一絲預期，並沒有嚇到，但腳步還是免不了一陣踉蹌，被堆積在地上的書本輕輕絆倒，重心一個不穩，雖然很快就恢復了平衡，但在寂靜的夜中，還是發出了不小的響聲，而那窗外的身影，在看見你時，也仿佛受驚似的跳了起來。
+
+正臉與他四目相對的瞬間，你感覺在那猙獰的五官下，卻有一股莫名的、異常熟悉的感覺，如果刨去那些詭異的特徵來看，那怪物隱隱有幾分父親和叔叔的影子。你楞了一下，這才驚覺那個生物和叔叔有著如此多的相似之處...早上整理時遺失的那些書本、五官的線條和隱藏在青綠色瞳孔下的、那總是有些青澀、瑟縮而彷徨的眼神。
+
+在你看到他的那瞬間，他也看到你了。
+
+只見它慌張的扔下手中的書本，頭也不回地一躍而出，在月光下劃出一道長長的身影，三步並作兩步地消失在了樹林之中。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263861018195525743" class="chatlog__message-container " data-message-id="1263861018195525743">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:12:28 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「等、等一下！」匆匆忙忙翻出窗戶，「叔叔！等一下！」
+追著前方身影的腳步往外衝去。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263861627170848799" class="chatlog__message-container " data-message-id="1263861627170848799">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:14:53 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聽見你的聲音，那身影似乎停頓了半晌，下一刻卻又毫不停留、大步流星般地飛馳而去，看見地上那深深淺淺的足跡和窸窸窣窣的樹葉晃動，在跨出窗欄以後，你沒有花費多少力氣，便立刻清楚地觀察到那身影沿著樹林之中那條狹窄的捷徑，往墓園的方向大步逃去了。那是你今天傍晚下山時的小路，想來同樣應是叔叔日記中曾經反復提過的小徑吧，通往一個人寧靜地待著安穩所在的道路。
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263861916787282003" class="chatlog__message-container " data-message-id="1263861916787282003">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:16:02 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">擔心喊叫聲會把附近居民吵醒，於是安靜地順著小路往墓園去，剛才的膽怯已經在不知不覺中消失了。
+畢竟，那可是叔叔啊，叔叔不會傷害自己的。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263862513859166260" class="chatlog__message-container " data-message-id="1263862513859166260">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:18:24 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">沿著傍晚時走下山的小徑，你再次踏上了那凹凸不平的泥土和踩踏下去時沙沙作響的落葉，雖然走在一樣的道路上，但此刻的心情卻與先前截然不同，懷揣著不一樣的心情，明明是相同的路途，卻似乎比當時短了許多。
+
+過不多時，你便走回到了那墓園之中，撥開最後一點擋在面前的枝枒，在寂靜清冷的月色下，那模樣猙獰的怪物正傴僂著背，輕鬆地坐在叔叔那樸實無華的墓碑上，就著銀白的月光和靠在手邊微弱的燭火，以及倏忽即逝、許是螢火蟲的閃爍光點，那身影自然而然地讀著手中剛剛才從房子裡頭盜出來的文字，腳邊還整齊地擺放著幾本書冊，它的動作是那般隨意自然，仿佛司空見慣、時光一如既往一般。
+
+聽見了你穿過樹林時帶起的些許聲響，那非人生物緩緩合上手中的書本，轉過頭朝你望了過來。在看見你的瞬間，他先是張開嘴想說些什麼，話語正要說出口，在嘴邊卻又欲言又止的模樣，隨後才深深吐了口氣，清了清嗓子後，沙啞地開口說道，雖然嗓音間還夾雜著一些怪物的駭人，但那抑揚頓挫卻和記憶中那沉默寡言，每一句話都要字斟句酌，思考再三才能緩緩說出口的叔叔別無二致，緩慢卻又溫柔。
+
+「咳咳——果然是安娜你吶，這麼多年不見，你過的還好嗎？一切都還順利吧，怎麼從美國回來了呢？在那邊過得不適應嗎？」
+
+「唔......雖然是夏天的晚上，但還是要注意一下保暖，帶個薄外套在身上，不然著涼了可就不好了呢，晚上的風還是有那麼一絲涼意的......」
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263863502070874196" class="chatlog__message-container " data-message-id="1263863502070874196">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:22:20 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">在叔叔吐露出熟悉的嗓音時，淚水就不知不覺落了下來。
+「叔、叔叔⋯⋯我好想你⋯⋯！」
+雖然平常生活還是照過，但心裡的某個地方，仍然對突然失蹤的叔叔十分牽掛，乍一看到失蹤的人又回來，情感一激動，眼淚就忍不住了。
+「叔、叔叔呢？過得還好嗎？」抽噎著問。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263864682536763474" class="chatlog__message-container " data-message-id="1263864682536763474">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:27:01 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「啊、啊......抱歉......我真的不是有意要打擾到安娜你的......抱歉給你帶來困擾了呢......」
+
+他滿懷歉意地說著。只是本來下意識地伸出來、想如同那小時候早已忘卻的記憶那樣，輕柔地撫摸你腦袋的手，卻也在伸出的瞬間意識到此刻已不同於往日，粗糙的手掌已被佈滿漆黑長毛的銳利爪子所取代，在半空中停頓了剎那又縮了回去。
+
+「我過得還不錯吧...至少沒有那麼多討厭的事情需要煩憂，也有了更多時間可以沉浸在自己喜歡的文字裡頭，雖然偶爾的確還是會有些時候不是那麼習慣，不過總體來說還算不差吧。倒是安娜你還沒回答我呢？你還好嗎？」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 22:27:33 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263865593891917825" class="chatlog__message-container " data-message-id="1263865593891917825">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:30:39 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">注意到叔叔縮回的手，主動伸出手輕輕放在佈滿長毛的爪子上。
+「叔叔過得好就好了⋯⋯」能看到叔叔過得自在，是最讓人安心的事，「我嗎⋯⋯也不算不好吧，只是美國實在太難生活了，所以打算回來看看。但是叔叔留下來的錢幫了我很多忙——啊，我還在房子裡找到你的稿費。」//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263867368195752048" class="chatlog__message-container " data-message-id="1263867368195752048">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:37:42 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">看見你的動作，那看起來有些猙獰的爪子似乎縮了一下，但下一刻便定格在空氣中，那粗糙的觸感清晰地貼在肌膚上
+
+「啊啊...真的辛苦你了呢，一個人在語言不通的外地生活，想必很累人吧。那些只是一些對我來說排不上場的身外之物而已，如果對安娜有幫助我就很開心了呢......」
+
+聽見你這麼回答，眼前的怪物忍不住微笑起來，只是那咧起的嘴巴和露出的銳利獠牙，在月色下泛著鋒銳的光澤，那血盆大口是溫柔與恐怖二者矛盾的交織，沙啞的聲音從齒縫間傳出。
+
+「唔，竟然還有稿費嗎？這樣的話，就當作是叔叔給你的零用錢好了，去吃點大餐或是買點喜歡的東西，讓自己開心最重要了，唔，雖然我知道安娜是最好的姐姐，不過還是記得分給雅娜一點，啊...不過不要跟她提起我就是了。」
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263868318469587057" class="chatlog__message-container " data-message-id="1263868318469587057">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:41:28 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">用空著的手把臉頰上的眼淚抹去，笑著回答，「我還是會跟雅娜說，是叔叔出錢請客的。因為是叔叔的稿費嘛。」
+「這之後叔叔也都會留在這裡嗎？啊，我不是想打擾叔叔的意思，只是問個安心而已。」怕叔叔馬上就要走了，開始胡言亂語試圖多聊一下天，「今天回來遇到王阿姨，她給了我好多水果，我吃不完。叔叔能吃嗎？要不要給你一些？我還放在屋子裡⋯⋯」//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263869452064133244" class="chatlog__message-container " data-message-id="1263869452064133244">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:45:58 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">聽你這麼一說，眼前的身影苦笑著開口。
+「啊...好吧好吧，我都忘記安娜你也已經長大了，是個成熟有主見的大人了呢......」
+
+聽見你這麼說，眼前的怪物似乎整個人被觸碰到了什麼軟肋，驀地縮了一下，只不過他旋即又斂起厚厚的眼瞼，將原本就傴僂駝背的身子彎的更低了些，令一切心緒流轉都隱藏在軀幹之下，無從辨別，而那明明是粗獷沙啞的聲音，此刻卻似乎微微顫抖著。
+
+「實在不好意思呢，安娜。不過我想，這大概是我們最後一次相見了。據說後山這一帶已經有些開發商看上了，而且似乎也已經有些人注意到了盤踞在這個入口附近的我和我的朋友們、注意到了通往另一個世界的通道的存在，所以為了不被發現或是打擾到，我和我的朋友們決定該是時候把這個入口給封起來，說來大概就是今天了呢，從今以後，這地方就會變得再尋常不過了，只是因為一些始終放不下的執念跟書籍，我才會悄悄在半夜溜回去，回到房子那拿回一些我的書本，打擾到你真的很抱歉......」
+
+「你要多吃一點啦，吃不完就帶回去跟雅娜一起分享吧，雖然也真的好久沒看見她了，不過她應該也會吃得很開心吧...叔叔我就不用了......抱歉...」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 22:46:30 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263870310785093728" class="chatlog__message-container " data-message-id="1263870310785093728">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:49:23 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">拼命搖頭，「叔叔才不會打擾呢！我很高興今天能夠跟叔叔再見一面⋯⋯」忍不住又鼻酸起來。
+「雖然還有好多話想聊，可是叔叔是不是趕時間⋯⋯東西都帶好了嗎？重要的書不要漏掉了。」//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263871374926151782" class="chatlog__message-container " data-message-id="1263871374926151782">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:53:37 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「安娜你的嘴真的很甜呢，只是不管怎麼說，畢竟還是給安娜你帶來了困擾嗎，害的你還得從北部趕回來......讓你多跑這麼一趟、給你添了麻煩又讓你看到我這麼醜陋的一面，無論如何，那些歉意還是無法抹滅的呢。」
+
+叔叔苦澀地笑著說道，聲音漸次低微，許是不知道該再說些什麼、又或許是想說的已經太多了，超出了言語所能容納的極限，只能將一切都盡付於歎息之中。
+
+「嗯...等到月亮西沉，差不多也就是我該離去的時間了，唔...安娜你這孩子說這些話怎麼跟媽她一樣，總是這樣、該說是溫柔還是嘮叨呢......希望我最可愛的安娜，無論是在這裡還是在大洋的彼岸，都能夠過的順心快樂，不要像我一樣......」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 22:54:00 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263872353385971733" class="chatlog__message-container " data-message-id="1263872353385971733">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 22:57:30 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「我會努力過得快樂的，叔叔不要擔心⋯⋯要是知道回來可以看到叔叔，我一定會多回來的！」
+聽到叔叔不是立刻要走，馬上打起精神，「既然還有時間，可以再多聊一下嗎？比方說叔叔拿走的是什麼書啊，喜歡到想要一起帶走。」
+其實也想問叔叔怎麼變成現在的樣子，現在又算是什麼生物，不過感覺有點太冒犯了，還是問點安全的。//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263873983212945408" class="chatlog__message-container " data-message-id="1263873983212945408">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 23:03:59 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「唔、安娜也喜歡讀書嗎？事實上大概就只是些詩集阿、文學阿、甚至是哲學之類的，百無一用的東西而已，就和我這個人一樣呢......」
+
+叔叔輕輕咋了眨眼，自嘲般的說著。
+
+「嘛、與其說是喜歡到想要一起帶走，不如是我這個人啊，除了文字以外，好像就什麼也不剩下了吶......從小到大，我都是那麼一個不盡責的人，也難怪爸爸和哥哥，唔，也就是安娜你的爺爺跟父親，常常對我那樣的生氣，一副恨鐵不成鋼的模樣，雖然我也理解他的想法，但我的的確確就是做不到......」
+//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263874949374808085" class="chatlog__message-container " data-message-id="1263874949374808085">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 23:07:49 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「可是叔叔寫的小說很好看！」連忙回答，「我很喜歡叔叔的文字⋯⋯叔叔一直喜歡著文字到現在，我覺得很厲害！」
+反觀自己過得十分普通，應該才是需要挨罵的對象吧。
+突然想起出門前看到的那篇小說，「對了，叔叔最新的那篇小說⋯⋯想要出版嗎？我可以幫叔叔處理喔。只是結局要叔叔你自己考慮就是了⋯⋯」//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263876291975708702" class="chatlog__message-container " data-message-id="1263876291975708702">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 23:13:09 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「唔...真的很謝謝安娜你的誇獎呢，你這麼說實在是太抬舉了，只不過對於我來說，創作與閱讀是我這渺小的人生中僅存的兩件、唯一有些許意義的事情，而在創作以後，那些作品在我看來就是獨立的個體了，每個人讀到的時候，或許都會有自己的理解方式吧，不過啊、如果我的作品，那孩子它能夠觸動人心、即使只是一點點也好，給予閱讀的人任何一絲共鳴的話，那麼我想他也就不會寂寞了吧...不會僅有我記得、想嘗試了解它，這樣就很足夠了——所以這麼說來，我才應該要謝謝安娜你才對呢......」
+
+叔叔用他那粗糙沙啞、富有磁性的聲音，溫和地娓娓說著。
+
+「那當然沒有問題的。不如說還是我可以麻煩安娜你呢？麻煩你為那個未完的故事譜出你喜歡的、最好的結局？也為你的生活奏響最心儀的樂章？雖然這樣好像又是帶給你這孩子困擾就是了......」
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 23:14:54 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263877181386391654" class="chatlog__message-container " data-message-id="1263877181386391654">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 23:16:41 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">「不會的！能夠得到叔叔的信賴幫叔叔做點事，我很高興喔。」笑了起來，「之後只要看著這本書，我就可以想，啊，叔叔已經去了那個可以和朋友快樂生活的世界了，一定過得很開心吧。那我就可以安心一點了。」
+「不過我想讓看到這個故事的人能夠自由選擇，所以結局⋯⋯大概不會寫得那麼明顯吧。和叔叔一樣選擇離開很好，選擇留下來也很好。」//</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263878607663534171" class="chatlog__message-container " data-message-id="1263878607663534171">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/PDQnrSC.gif" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: rgb(42, 206, 235)" title="ash_hope#0000" data-user-id="428481550510850070">KP（&#120016;&#120060;&#120049;希）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 23:22:21 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">認真地聽著你的話語，叔叔輕輕地笑了笑，待得話語落在地上，那些樹葉間的迴響也逐漸平息，天地間只剩下靜謐的月光無聲地照亮大地，偶然間吹過的微風更平添幾分寂寥，而那輪圓月也快要跌落到樹梢之下，無論你多希望這一刻能夠永恆持續下去，但從不因任何人而有所駐足的時間仍自顧自地流逝，遙遠的天際線上，也泛起了淡淡的魚肚白，仿佛是戲曲終章、行將拉起的最後簾幕。
+
+「再見了......祝福我最親愛的安娜無論過得如何、未來能夠一直開心得活著」
+
+在你被雞鳴驚起轉過頭，看向遠處天際的瞬間，只聽見叔叔的低語在你耳畔迴響，然而等你再次轉過頭時，卻看見那怪物和那些書一起，都在你的視野中，消失地無影無蹤，仿佛未曾出現過似的，初升的朝陽從地平線的邊緣露出了一角，流光驚醒了枝枒上麻雀的烏鴉，它振翅一撲飛到了天空之中，尖銳的鳴叫聲喚醒了沉眠的大地，叔叔不知何時消失在了地上，只有幾個淺淺的足跡、和那些書堆留下的印痕，證明了這一切並非你的幻想。有些人活著，卻與死了沒太大差別，而有些人，或許就是死後方生吧。
+
+等到你恍惚之間走下小山，再次回到叔叔留下的最後一點痕跡、那曾經生活過的老屋時，才發覺或許是因為你早先時候跑出書房時的響動和那滿屋子沒關的電燈，引起了早起散步時王阿姨的注意，找不到人的王阿姨似乎還以為你被魔神仔給抓走了，滿臉驚慌與緊張地四處尋找著，直到你的再次出沒，她連忙緊緊抱住你、又再三確認了你全身上下平安無事，這些騷動才總算得以平息。
+
+這一夜短短的插曲自此作結，你無從確認這究竟只是生命中一閃而過的剎那花火，亦或是某個色彩鮮明的轉捩點，或許直到某天驀然回首時，這一切的意義才會在你面前彰顯吧，正如你許要許久以後才會再次看見童年時那叛逆的自己、跨越千里才會回憶起家鄉的溫暖、體驗過生存線上的臨界點才能知曉內心渴望的生活究竟為何、而披著人皮的怪物與那包覆在醜陋外殼中的赤裸真心、到底是什麼決定成了，人類真正的模樣？
+
+<strong>【尋紙者 The End】</strong>
+//</span>
+
+                            <span class="chatlog__edited-timestamp" title="07/19/2024 23:22:51 +08:00">(edited)</span>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263879632713814196" class="chatlog__message-container " data-message-id="1263879632713814196">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://i.imgur.com/MzNZEuh.png" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="color: #D6ECF0" title="murasaki_haruki#0000" data-user-id="407562829726744578">戴 安娜（紫）</span>
+
+
+                        <span class="chatlog__timestamp">07/19/2024 23:26:26 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve">1D6 SAN回復</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+    <div id="chatlog__message-container-1263879633846403155" class="chatlog__message-container " data-message-id="1263879633846403155">
+        <div class="chatlog__message">
+            <div class="chatlog__message-aside">
+                    <img class="chatlog__avatar" src="https://cdn.discordapp.com/avatars/544462904037081138/826b76664e4c68ff4d29076c48a02bed.png?size=512" alt="Avatar" loading="lazy">
+            </div>
+
+            <div class="chatlog__message-primary">
+                    <div class="chatlog__header">
+                        <span class="chatlog__author" style="" title="HKTRPG#4989" data-user-id="544462904037081138">HKTRPG</span>
+
+                            <span class="chatlog__bot-label">BOT</span>
+
+                        <span class="chatlog__timestamp">07/19/2024 23:26:26 +08:00</span>
+                    </div>
+
+                    <div class="chatlog__content chatlog__markdown">
+                        <span class="chatlog__markdown-preserve"><span class="chatlog__markdown-mention" title="murasaki_haruki#0000">@戴 安娜（紫）</span> 
+1D6：SAN回復
+1[1] = 1</span>
+
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 120 message(s)</div>
+</div>
+
+</body>
+
+</html>
