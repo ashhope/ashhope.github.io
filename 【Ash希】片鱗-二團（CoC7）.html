@@ -1,0 +1,4253 @@
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta property="og:title" content="片鱗（二團）">
+<meta property="og:description" content="">
+<title>片鱗（二團）</title>
+<style>
+h1{ color:white; margin: 5px 0; }
+body{ background:#454752; }
+._subtitle { color:#ddd; margin:5px 0 20px 0; }
+._sectTitle { background:#ddd; margin-top:30px; padding:10px;font-weight:bold;font-size:1.3rem;text-align:center; }
+._hidden { display:none; }
+.center { display:flex; flex-direction:column; align-items:center; }
+#_main { display:flex; flex-direction:column; align-items:end; }
+._script {width: 100%;}
+
+
+._halt { padding:30px 0; }
+._bgImg { text-align: center; }
+._bgImg img { max-width: 800px; }
+._talk { margin:5px 0; display:flex; border:1px solid black; background:#1e1e1e; color:#eee; width:100%; max-width:1080px; border-radius:5px; }
+._leftCol { width:122px; }
+._rightCol { width:calc(100% - 126px); }
+._actorName{ padding:5px 10px; height:20px; font-size:18px; }
+._actorImg { margin:6px; width:110px; height:110px; background-repeat:no-repeat; background-size:cover; background-color:#2a2a2a; }
+._actorWords { margin:5px; background:#2a2a2a; font-size:1.1rem; padding:10px; height:calc(100% - 60px); border-radius:5px; }
+._sectTitle { border-radius:5px; margin-bottom:5px; }
+
+@media only screen and (max-width: 400px) {
+._leftCol { width:100px; }
+._rightCol { width:calc(100% - 100px); }
+._actorImg { margin:35px 0 5px 10px; width: 85px; height: 85px; }
+}
+
+._talk.otherCh { width:calc(50%); text-align:right; margin-left:auto; }
+._talk.otherCh ._leftCol { display:none; }
+._talk.otherCh ._rightCol { width:100%; }
+._talk.otherCh ._actorWords { background:black;color:white; }
+
+._actor_0 ._actorName { color: #03a9f4; }
+._actor_0 ._actorName::after { content:"KP（𝓐𝓼𝓱希）"; }
+._actor_0 ._actorImg { background-image:url(https://i.imgur.com/xZQgF91.gif); } 
+._actor_1 ._actorName { color: #888888; }
+._actor_1 ._actorName::after { content:"喬陸陸"; }
+._actor_1 ._actorImg { background-image:url(); } 
+._actor_2 ._actorName { color: #888888; }
+._actor_2 ._actorName::after { content:"夭小哭"; }
+._actor_2 ._actorImg { background-image:url(); } 
+._actor_3 ._actorName { color: #b4b2e0; }
+._actor_3 ._actorName::after { content:"香西 和樂"; }
+._actor_3 ._actorImg { background-image:url(https://i.imgur.com/b3hcNg5.png); } 
+._actor_4 ._actorName { color: #888888; }
+._actor_4 ._actorName::after { content:"陳立齊"; }
+._actor_4 ._actorImg { background-image:url(); } 
+._actor_5 ._actorName { color: #ff5722; }
+._actor_5 ._actorName::after { content:"東 鳰"; }
+._actor_5 ._actorImg { background-image:url(https://i.imgur.com/yD3SF1y.png); } 
+._actor_6 ._actorName { color: #888888; }
+._actor_6 ._actorName::after { content:""; }
+._actor_6 ._actorImg { background-image:url(); } 
+._actor_7 ._actorName { color: #03a9f4; }
+._actor_7 ._actorName::after { content:"KP（Ash希）"; }
+._actor_7 ._actorImg { background-image:url(https://i.imgur.com/xZQgF91.gif); } 
+._actor_8 ._actorName { color: #ff9800; }
+._actor_8 ._actorName::after { content:"松永義人"; }
+._actor_8 ._actorImg { background-image:url(https://i.imgur.com/HMtcE20.png); } 
+._actor_9 ._actorName { color: #e8d3d1; }
+._actor_9 ._actorName::after { content:"亞門"; }
+._actor_9 ._actorImg { background-image:url(https://i.imgur.com/1XukZEp.png); } 
+._actor_10 ._actorName { color: #888888; }
+._actor_10 ._actorName::after { content:"御子柴 一"; }
+._actor_10 ._actorImg { background-image:url(); } 
+._actor_11 ._actorName { color: #b4b2e0; }
+._actor_11 ._actorName::after { content:"小香"; }
+._actor_11 ._actorImg { background-image:url(); } 
+._actor_12 ._actorName { color: #888888; }
+._actor_12 ._actorName::after { content:"system"; }
+._actor_12 ._actorImg { background-image:url(); } 
+._actor_13 ._actorName { color: #888888; }
+._actor_13 ._actorName::after { content:"Ch.0 序幕"; }
+._actor_13 ._actorImg { background-image:url(); } 
+._actor_14 ._actorName { color: #e91e63; }
+._actor_14 ._actorName::after { content:"奧山百合"; }
+._actor_14 ._actorImg { background-image:url(https://i.imgur.com/0HLwKis.png); } 
+._actor_15 ._actorName { color: #888888; }
+._actor_15 ._actorName::after { content:"Ch.1 邪惡"; }
+._actor_15 ._actorImg { background-image:url(); } 
+._actor_16 ._actorName { color: #888888; }
+._actor_16 ._actorName::after { content:"折木道夫"; }
+._actor_16 ._actorImg { background-image:url(https://i.imgur.com/yj9gREQ.png); } 
+._actor_17 ._actorName { color: #888888; }
+._actor_17 ._actorName::after { content:"Ch. 2 兇惡"; }
+._actor_17 ._actorImg { background-image:url(); } 
+._actor_18 ._actorName { color: #888888; }
+._actor_18 ._actorName::after { content:"Ch. 3 最惡"; }
+._actor_18 ._actorImg { background-image:url(); } 
+._actor_19 ._actorName { color: #888888; }
+._actor_19 ._actorName::after { content:"Ch. 4 奸惡"; }
+._actor_19 ._actorImg { background-image:url(); } 
+._actor_20 ._actorName { color: #888888; }
+._actor_20 ._actorName::after { content:"Ch. 5 醜惡"; }
+._actor_20 ._actorImg { background-image:url(); } 
+._actor_21 ._actorName { color: #888888; }
+._actor_21 ._actorName::after { content:"Ch. 6 罪惡"; }
+._actor_21 ._actorImg { background-image:url(); } 
+._actor_22 ._actorName { color: #888888; }
+._actor_22 ._actorName::after { content:"Ch. 7 善惡"; }
+._actor_22 ._actorImg { background-image:url(); } 
+._actor_23 ._actorName { color: #607d8b; }
+._actor_23 ._actorName::after { content:"加部一誠"; }
+._actor_23 ._actorImg { background-image:url(https://i.imgur.com/2EiUVDk.png); } 
+._actor_24 ._actorName { color: #81c0c0; }
+._actor_24 ._actorName::after { content:"鴉越 旬"; }
+._actor_24 ._actorImg { background-image:url(https://i.imgur.com/NE40J7l.png); } 
+._actor_25 ._actorName { color: #888888; }
+._actor_25 ._actorName::after { content:"七葉"; }
+._actor_25 ._actorImg { background-image:url(); } 
+._actor_26 ._actorName { color: #ddbf78; }
+._actor_26 ._actorName::after { content:"蒂羅尼"; }
+._actor_26 ._actorImg { background-image:url(https://i.imgur.com/qEJVDhd.png); } 
+._actor_27 ._actorName { color: #d8d8d8; }
+._actor_27 ._actorName::after { content:"托皮爾庫斯"; }
+._actor_27 ._actorImg { background-image:url(https://i.imgur.com/Lm9DgKp.png); } 
+._actor_28 ._actorName { color: #607d8b; }
+._actor_28 ._actorName::after { content:"Rua"; }
+._actor_28 ._actorImg { background-image:url(); } 
+._actor_29 ._actorName { color: #888888; }
+._actor_29 ._actorName::after { content:"馬"; }
+._actor_29 ._actorImg { background-image:url(); } 
+._actor_30 ._actorName { color: #a62736; }
+._actor_30 ._actorName::after { content:"伊爾凱"; }
+._actor_30 ._actorImg { background-image:url(https://i.imgur.com/CFOLicP.png); } 
+._actor_31 ._actorName { color: #d8d8d8; }
+._actor_31 ._actorName::after { content:"托皮爾庫斯・沃伊・雅特魯瓦"; }
+._actor_31 ._actorImg { background-image:url(https://i.imgur.com/Lm9DgKp.png); } 
+._actor_32 ._actorName { color: #888888; }
+._actor_32 ._actorName::after { content:"序幕"; }
+._actor_32 ._actorImg { background-image:url(); } 
+._actor_33 ._actorName { color: #3f51b5; }
+._actor_33 ._actorName::after { content:"梅芙塔普"; }
+._actor_33 ._actorImg { background-image:url(https://i.imgur.com/UKPoRTn.png); } 
+._actor_34 ._actorName { color: #888888; }
+._actor_34 ._actorName::after { content:"阿塔克"; }
+._actor_34 ._actorImg { background-image:url(https://i.imgur.com/WkGHu5f.png); } 
+._actor_35 ._actorName { color: #3f51b5; }
+._actor_35 ._actorName::after { content:"暴走的歌姬 梅芙塔普"; }
+._actor_35 ._actorImg { background-image:url(https://i.imgur.com/fNAPna6.png); } 
+._actor_36 ._actorName { color: #d83434; }
+._actor_36 ._actorName::after { content:"鳴鬼 実"; }
+._actor_36 ._actorImg { background-image:url(https://i.imgur.com/02CA5qc.png); } 
+._actor_37 ._actorName { color: #3f51b5; }
+._actor_37 ._actorName::after { content:"不京 寂然"; }
+._actor_37 ._actorImg { background-image:url(); } 
+._actor_38 ._actorName { color: #ff0000; }
+._actor_38 ._actorName::after { content:"鬼龍院 命"; }
+._actor_38 ._actorImg { background-image:url(https://i.imgur.com/MB5hAsU.png); } 
+._actor_39 ._actorName { color: #009688; }
+._actor_39 ._actorName::after { content:"堀内 友定"; }
+._actor_39 ._actorImg { background-image:url(https://i.imgur.com/5Tav4IE.png); } 
+._actor_40 ._actorName { color: #d8e698; }
+._actor_40 ._actorName::after { content:"夏目 瑪麗亞"; }
+._actor_40 ._actorImg { background-image:url(https://i.imgur.com/Msd7nRD.png); } 
+._actor_41 ._actorName { color: #ce0000; }
+._actor_41 ._actorName::after { content:"小畑 裕奨"; }
+._actor_41 ._actorImg { background-image:url(https://i.imgur.com/Su3MrxR.png); } 
+._actor_42 ._actorName { color: #673ab7; }
+._actor_42 ._actorName::after { content:"北村 六郎"; }
+._actor_42 ._actorImg { background-image:url(https://i.imgur.com/RMy4k7D.png); } 
+._actor_43 ._actorName { color: #607d8b; }
+._actor_43 ._actorName::after { content:"近野 史仁"; }
+._actor_43 ._actorImg { background-image:url(https://i.imgur.com/UqTue9r.png); } 
+._actor_44 ._actorName { color: #9c27b0; }
+._actor_44 ._actorName::after { content:"葛原 桂司"; }
+._actor_44 ._actorImg { background-image:url(https://i.imgur.com/Tbkx4vP.png); } 
+._actor_45 ._actorName { color: #888888; }
+._actor_45 ._actorName::after { content:"田中"; }
+._actor_45 ._actorImg { background-image:url(https://i.imgur.com/UVVhFiK.png); } 
+._actor_46 ._actorName { color: #888888; }
+._actor_46 ._actorName::after { content:"房東奶奶"; }
+._actor_46 ._actorImg { background-image:url(https://i.imgur.com/ZO4NRQc.png); } 
+</style>
+</head>
+<body class="center">
+<div class="_hidden">
+<version>hazmole_v1.0</version>
+</div>
+
+<h1>片鱗（二團）</h1>
+<div class="_subtitle"></div>
+
+<div id="_main"><div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">6月28日。<br><br>興許是因為依戀著不捨得離去的梅雨季，今天窗外淅淅瀝瀝的雨聲，也將綻放著的紫陽花打濕了。<br><br>叫醒窩在被窩中你的，並不是溫暖的陽光或是訂好的鬧鐘。而是那即使緊閉房門、堵起耳朵也會聽見、吵醒你的怒吼聲。即使再怎麼不情願，也會闖入你耳中的『那個』是一如既往的、父母親之間震耳欲聾的爭吵聲。聲音在簡陋木造結構的迴蕩下顯得更加難以忍受，自從把你作為童星時賺來的錢揮霍得一乾二淨以後，你們就只能搬來這個罕有人居的郊外居住了，當然，在你的父母看來，這一切都是你的問題，你沒辦法賺到足夠多的錢，全部都是你害的。<br><br>他們像往常一樣，在一樓的客廳使用著言語暴力互相攻擊、用唇槍舌劍毫不留情地攻擊著彼此。今天的爭吵原因似乎是因為那罹患了老年癡呆症的祖母丟了一大筆錢。你房間所在的二樓，都能聽到憤怒的詬罵與怒喊聲。還沒等你完全起身，你便又聽見了玻璃破裂的聲響，可能是母親又砸碎了酒瓶還是花瓶什麼的吧。<br><br>對此感到厭煩的你終究還是起床了。今天是星期一。最差勁的一天、那差勁一周的起點，仿佛地獄般的循環又再一次開始了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……」<br>日復一日的無聊生活。<br>像是電視劇裡一樣的那種經典的破碎悲慘家庭——啊，抱歉，不是電視劇，這是現實。<br><br>嗅著空氣中依舊瀰漫著的那梅雨季特有的潮濕氣味，從被窩裡伸出手腳來，雖然已經忘記內容了，但總感覺自己好像做了個夢……如果能一直睡著該有多好，但學生有學生該盡的本分，就算再不願意，香西和樂仍需要做好自己該盡的本分，嗯，這也是必要的忍耐。<br>躺在床上思考無聊事情的時間才不過五分鐘，又仿佛聽見了樓下傳來的吵罵聲，真是最糟糕的晨間廣播。<br><br>從床上起身，走去浴室打算盥洗一下。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請過 靈感。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=80 INT (1D100&lt;=80) 獎勵、懲罰骰値[0] ＞ 10 ＞ 10 ＞ 極限的成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">昏昏沉沉地從被窩中爬起來，你感覺昨晚似乎做了個夢，雖然想不起那究竟是個什麽樣的夢了，夢的細節也已然有些模糊，但你好像聽見了哥哥的聲音，或許是太想念了吧，在那之後，好像還有個男人和女人的聲音，正在對誰說著「做得很好」、「我會等待著你成熟的那天的」，諸如此類的，意味不明的話語。<br><br>正要起身去浴室洗漱時，你的視野一隅注意到了一旁的書桌，不知為何，有本本來不應該躺在那裡的書被放在桌面上，可你記的很清楚，睡前的桌面並沒有那本書的存在，它應該要安好地擺在書架上的，而且你也不記得最近有讀過或是想翻閱的記憶。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「？ 是忘了放回去嗎。」<br>還在試圖回想夢的內容，就被桌上那本書給吸引了注意力。走近桌前把書拿起來看一看，打算把書放回它該處的位置。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你隨手翻看了一下那本書，它就只是本厚厚的原文奇幻小說而已，不知道是誰買的，此前大概已經被擺在書架上不知道多久了，好像也沒有人閱讀過，只是不知為何，被落在了這裡，就像是被哥哥拋棄在這個家中的你似的。<br><br>順手翻了一下書籍扉頁上的字句，那意味不明的語句『It's ill to loose the bands that God decreed to bind; Still we will be the children of the heather and the wind.』落入你的眼中，腦袋裡頭也想不起來半點有關的東西，大概是真的沒有印象吧，在放回書架上以後，你便又繼續先前的行動。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……？」<br>是哥哥的東西嗎？並沒有特別留意，把書塞回書架後就繼續走向浴室。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">走向浴室簡單的梳洗、整理了一下頭髮以後，看向鏡中的自己，或許是因為做了噩夢吧，眼窩附近有些隱不可察的黑眼圈，顯得有幾分陰鬱。<br><br>盥洗完畢以後，也差不多該是去上學的時間了，你總是爬過欄杆，從靠在二樓走廊邊上窗戶的那梯子進出。雖然從旁人的視角來看，這或許會是一種奇怪的景象吧，但這麼做就不需要下到一樓了，也不用和討厭的親人打上照面了，而且你家的周圍附近也沒有別的住家，來往的行人也不多，因此不會有什麽特別的問題。<br><br>背上沉甸甸的書包，在這梅雨季的尾聲，稀疏的雨點中，你撐著傘，踱步前往了學校。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽著雨滴打在小小的摺疊傘上的聲響，踩著潮濕的路面走在上學的路上。<br>離開了家裡終於讓呼吸順暢了點，但學校也絕不是另人快樂的地方，不過比起家裡或許還是好點吧……這麼想著的同時，也抵達了目的地。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">沈重如鉛塊的心情拖拽著你的步伐，慢慢在街道上走著，腳邊偶爾濺起些許水花和陣陣漣漪，但別無選擇的你還是不得不前去上課。<br><br>在電梯口的鞋櫃那換上室內鞋，置物櫃一如往常地被塞滿了各種垃圾和塗鴉，甚至是將性感的照片P上你的臉之類的、滿是惡意的惡作劇，置物櫃的門上佈滿了各種低俗污穢的文字，字字句句都譏笑嘲諷著你，可眼下你仍得前往等等要上課的教室。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「…………」<br>白癡，P圖的技術也太爛了吧。<br>不想再多看那些東西幾眼，換上鞋子後把置物櫃的門甩上，接著便轉頭走了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在快走到教室的走廊前，聽見不遠處的喧鬧聲，你忍不住停下了麻木的腳步。在那眼前那通往教室的必經之路上，出現了那個你最討厭的家夥。<br><br>難以忍受的幼稚施虐、瞧不起你、將你當作玩具對待的男男女女們。口中總是充斥著各種污言穢語和自以為是的言論，簡直就是一群母豬一樣，那傢伙被幾個一丘之貉的同夥給包圍著，正在走廊上，旁若無人地高聲說著些什麼愚蠢的話題，看見你的身影，那些傢伙又開始低聲譏笑起來，仿佛在嘲諷你一般。<br><br>你會穿過這裡？還是繞遠路離開？<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……。」<br>習慣性地擺起那副虛假的微笑，打算從人群之中快步穿過。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你決定快步從她們身邊經過。可當你走近時，她們卻驀地都安靜了下來，那些灼人的目光一齊盯向了你，審視著你的全身上下，就像是在審視什麼物品一樣，眼神還特別在你的臉龐和私密處刻意地滯留許久。<br><br>在你迅速穿過他們以後，緊接其後傳來的，只有不絕於耳的，令人不快的嘲笑聲與譏諷聲。那個傢伙的、充滿著鄙視的嘲弄聲，毫不遮掩地傳進你的耳朵。<br><br>為了逃避那可怕的目光和噁心的嘲笑，你快步離開他們的視線。也許是因為你滑稽的行為，他和他周圍的共犯們一直用輕蔑與不屑的目光看著你，直到你的身影消失為止。<br><br>明明你什麽也沒做過，可為什麽要被那些傢伙這般無禮對待呢。那針對你而來的滿腔惡意與無理取鬧，今天也沒有半分手下留情。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=65 SAN (1D100&lt;=65) 獎勵、懲罰骰値[0] ＞ 52 ＞ 52 ＞ 通常成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">成功不扣SAN。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">穿過人群後，用手扯了扯臉部那僵住的嘴角，嘆了口氣。<br>算了吧，只要忍耐就好。<br>只要忍到畢業，只要忍到能獨立自主，只要能忍耐——一切都會有轉機。<br><br>……或許吧。<br><br>思考著也不知道會不會有的未來，從走廊的窗戶往外看，果然還是陰天，果然還是下著雨。<br>一切都沒有變化。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你低著頭走進教室裡頭，盡可能得減少自己的存在感，靜靜地坐在自己的座位上。<br><br>鐘聲響起以前的教室十分嘈雜，其他同學們都在歡快地聊著天、進行著微不足道的日常交流，互相開著玩笑，當然，你也一如既往地被忽視著，沒人與你聊天，雖然說加入了學生會，可那些人也只不過是當作呼之即來揮之即去的看板而已，平常也沒有多少人會跟你說話，甚至你也曾聽聞過他們在背後對你的譏刺與耳語。<br><br>觸目所及仍舊是此番一成不變的景象。接著在上課鐘聲敲響以後，老師進來便又開始了無趣的課程。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">上完無趣的數學以後，第二節課是表定的體育課。<br><br>在下課時間，依照慣例你們需要換上體操服，穿上運動鞋，前往室內的體育中心。而那幾個傢伙也一如往常，在廁所迅速地換好自己的衣服以後，便莫名其妙地回到教室來盯著你上下打量，嘴角露出滿是惡意的微笑，目不轉睛地盯著你看。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">無視那群人，趕緊把自己的體操服換上，打算趕快離開這裡。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">儘管你盡可能地無視那些人的存在，可他們在你換衣服時，仍不時發出舔嘴唇或是咂嘴的聲音，看著你的目光也仿佛盯著獵物的猛獸一般，不帶半點保留與閃躲。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在總算換完衣服以後，你也跟著同學前往了運動中心。<br><br>今天的體育上課項目為籃球，那討厭的體育老師在面前趾高氣昂、口沫橫飛地指點著大家，大家等等要按照事先分配好的小組進行比賽。想當然耳，小組裡沒有半個敢同你說話的對象，他們只是用鄙夷的眼神，看著你這個被留下來分到他們這組的成員。在互相嬉戲的小組成員邊上，你就這樣安靜地一個人，等待著比賽順序。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">等上好一段時間，終於輪到你的小組了。即使在這麼不情願，你還是得披上那黃色的小背心，站上那用白色膠帶隔開的場地中間。<br><br>在哨聲響完以後，比賽就開始了。激烈的傳球與吶喊聲，和那些在球場上高速穿梭著的學生們，大家汗水淋漓的臉上都寫滿了認真。場外，其他同學們的加油助威聲也此起彼伏。<br><br>而你呢。在這樣一場眾人揮灑著汗水的愉快比賽中，唯獨你一個人被完全丟下了。無論你的空檔有多少，位置有多麼好，都沒人將目光拋給你，給你傳球。所謂的不被放在眼裡，想來就是這樣的感覺吧。<br><br>你只能跟著來來回回地跟著他們。就像是隔著一層薄膜在世界中活動一樣，除了你之外的一切都在照常進行著。<br><br>就在這時，『砰——』，橘色的籃球打在籃筐上，正巧向你滾拉開過來。你面前沒有半個人防守。簡單帶球跑個幾步然後投球，也許就能輕鬆地投籃得分了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">冷冷的看了滾過來的籃球一眼，接著露出微笑，把球拋給了同隊的其他人。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在你將球傳出去的下個瞬間，你就與另外一個人狠狠地相撞了。<br><br>看樣子似乎是另外一名敵隊的同學試圖前來搶球，阻止你可能的投籃，可你的球明明早就已經傳出手了，那更像是一場惡意的撞人犯規而已。可眼睜睜看著一切發生的老師也沒有吹響哨聲，而那傢伙反倒是在與你笨拙的碰撞過程中，自己重重摔倒在地上了，整個人跌成了狗吃屎。現場倏忽陷入一片寂靜，其他學生們也一臉擔憂地走了過來，當然，不是為了你。<br><br>當然還有些女同學在一旁竊竊私語著，甚至直接對你上下其手起來。<br>「香西同學應該沒受傷吧。」<br>「不知道呢，摸摸看就知道了？」<br>「鈴木同學好過分，我也要摸——」<br>從他們的言行舉止感覺起來，那些傢伙渾然沒有把你當作同學看待，更像是個任他們擺佈的玩具而已。<br><br>而一旁那摔倒的學生好像是扭到了腳，只見他捂著腳踝疼得直皺眉頭，大聲地呻吟著、浮誇到有點像是在作秀一般。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我沒事。」<br>假裝要把身上的塵土拍掉，實際上卻是把那些女人在自己身上的上下其手的手拍掉。<br>令人作嘔。<br><br>儘管如此，香西仍然對著人群笑了笑。<br>「你沒事吧？」他一邊說著，一邊對那位摔倒的同學露出了抱歉的表情——當然，都是演的。<br>事實上他一點都不在乎，但如果不裝出在乎的樣子，接下來有事的人大概就會輪到自己了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">但那傢伙只是毫不留情地大力把你伸出去的手拍掉，不屑地說道。<br>「還不都是你害的嗎？滾開啦你這個虛偽的白癡！」<br>並用滿是怨恨的目光，死死地瞪著你。緊接著，他便被另一個同學攙扶前往醫務室了。在目送他離去的背影時，你聽見周圍傳來一陣子竊竊私語的聲音。<br><br>「剛才是不是那家夥故意撞的啊？」<br>「笑死，根本沒在努力就別出風頭了。」<br>「對阿，真的是死娘娘腔一個。」<br>「只是想被女人摸而已吧，真是令人作嘔。」<br>「真差勁——噁心死了。」<br>「除了那張臉之外，真的一無是處呢...不過手感倒是真的挺不錯的，說不定有在那種、嘿嘿、的地方打工呢。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一陣陣毫不顧忌的，瞧不起和蔑視的聲音，仿佛針一般戳刺著你的心臟，即使早已習慣，還是會有些疼的吧。<br><br>在那些語句之中，最明顯的就是那個傢伙了、那群團夥中的老大。現在回想起來，剛剛那個故意撞你的同學，好像也是那個傢伙身邊的一員。<br><br>你就像是空氣一般，沒有人想靠近你、或是和你搭上哪怕半句話。在體育老師的指示下，下一個隊的比賽即將開始，呆站在原地的你也被他用粗鄙的字句趕出了球場。<br>「打完了就快點出來！便妨礙其他同學了，剛剛撞傷別人，還沒有好好道歉，真是沒教養！」 <br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……是，我很抱歉。」<br><br>在一陣刺痛與麻木感之中，似乎聽見了有人在要求自己這樣說。事到如今，照他人的意思說出違心之論也不是一天兩天的事情了，根本沒什麼差別。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽見這番話，正當你道完歉低著頭，正要走出球場時，你和一個擦肩而過的人迎面撞上了，那惡狠狠的力道，一點也不像是不小心的模樣，你腳步一個踉蹌，身子重重地跌坐在了地上。<br><br>轉過頭一看，只見是最常欺負你的那個傢伙和他身邊的人，像是豬一樣譏諷地看著你、肆意地嘲笑著，緊接著便轉過身子，將你拋在後頭，繼續朝著球場走去。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=65 SAN (1D100&lt;=65) 獎勵、懲罰骰値[0] ＞ 22 ＞ 22 ＞ 困難的成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">成功不扣 SAN。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……抱歉。」<br>雖然對方已經離開，但仍舊反射性的說出抱歉的話語。<br><br>有完沒完啊？<br>煩悶地抓了抓頭，接著從地上坐了起來。<br><br>……想趕快離開這裡。<br><br>究竟什麼時候才能結束。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">(^^♪ 小香ㄉ內心感受：「煩躁」「鬱悶」「不舒服」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">今日遭遇的一切和往日也沒有多少不同，每天就只是重複著這樣的循環，整個人仿佛置身在煉獄一般，究竟，到底會先掙脫這惱人的羅網，亦或是在這泥沼中越陷越深，成為生活這蜘蛛網中的獵物呢。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">【高校生 導入 結束】</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你身處在無垠的、一片黑暗的空間裡頭。上下左右仿佛都是一片虛無，無論你再怎麽極目凝視，你都看不見這份無窮無盡黑暗的終點在哪，周圍實在太黑了，在這無光的所在中，你甚至連自己的身體都看不見一星半點。突然，在這連一步都不敢邁出的無盡黑暗中，你聽到了這樣的聲音，在你耳邊響起。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">『煩躁』、『鬱悶』、『不舒服』</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">不知為何，你莫名的便知曉那個聲音的主人是誰。那孩子的名字是香西 和樂。是個雖然曾經當過童星，但如今平凡無奇的、16歲的高中生。住在城市角落的一間狹窄房子裡，跟父母親和父親那方的祖母住在一起。這個孩子的家庭環境並不舒適，他的父母不是在吵架、便是在打架的路上。<br><br>你知道他有時會被父母遷怒。另外，你也知道，因為種種原因，他在學校時常會感到自卑，也經常受到同儕們的欺負與霸凌。<br><br>在這剎那間，你感受到一股應當是你使命的意念，從你的心底湧現。你的使命是——『保護香西 和樂不受所有恐懼的影響』。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">驀地，你感覺到你的心臟突然沈重而有力地跳了起來，將溫熱的血液送到身體的每個角落。原本一片漆黑的視野，此刻也逐漸明亮了起來，你總算可以稍微看到自己的身體了。<br><br>細碎的雨聲和怦然跳著的心跳聲混雜在一起，不知從某處隱約傳來了這樣的低語——『死了就好了』『我要讓你受盡折磨』。那聲音仿佛浸沒骨髓一般，使得你在不知不覺間，也下意識地重覆念叨起相同的字句——『死了就好了』『我要讓你受盡折磨』。<br><br>在下一刻，心臟仿佛要燃燒起來一般，胸腔中的血液像是熔岩般流淌著。腦海中的情感莫名的鼓噪起來，在躁動之中逐漸變得喧囂、狂暴。<br><br>那些世人稱之為負面的情感——怨懟、仇恨、厭惡、憤怒的感情在心中高聲咆哮著，肆意地宣告著自己的存在。<br><br>如果這都不是瘋狂，那它還能夠被稱為什麽？但這份從骨子裡頭燃燒而出、幾乎要沸騰的瘋狂，能夠賜予你的身體那所謂的自由——現在的你，可以輕而易舉地邁出腳步了。<br><br>腦海中有個宏偉的聲音如此對你說著——<br>『吾於此問汝，汝之名為何？』<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我是......」那聲音就像將自己從深海中扯出的魚鉤一般，使自己從一望無際的鮮紅色的情感中找到了問題的答案「...東鳰。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在你將你的名字化作言語，從唇齒間流露出來的剎那，耳畔也響起不知是何物、東西碎裂的聲響，手心處傳來了黏稠而溫熱的觸感。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">眼前的黑暗忽明忽暗地閃爍著，在幾次明滅以後，眨了眨眼，出現在你眼前的，是人煙稀少的荒涼街道一隅。<br><br>而在你的身前，有個渾身都被猩紅的鮮血給浸沒的女子高中生，正躺倒在柏油路上掙扎地發出哀嚎，手臂也不自覺地抽搐著。他似乎還在茍延殘喘的模樣，因劇痛而扭曲變形的臉上，浮現著痛苦絕望的表情，那被倒灌血液淹沒的喉頭、傳出的嘶啞的求救呼喊聲，好似還追求著最後一點渺茫的希望。<br><br>你的手中握著柄沾滿鮮血的利刃，殘月的微光照在沒有沾染血漬之處，倒映出一抹寒光。從眼下的情況看起來，如果沒有什麼曲折離奇的事的話，應該就是你將他刺傷的吧，雖然，還能有什麼事，可以比眼下的情況更加離奇呢。<br><br>從身邊颳過的寒冷夜風無情地吹拂著，打亂你的鬢髮，毫不留情地試圖從你身上攫走屬於你的體溫。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">雖然並沒有任何依據，但自己在這之前應該是沒有做過這種事的，眼前的景象也許只能用殘忍來形容吧，是的，以常理來說只會出現在螢幕和紙張上程度的殘忍。<br><br>不知為何，自己的心裡異常地平靜，甚至有些戀眷這份連刀刃上鮮血低落的聲音都聽得見的死寂，不禁覺得那發出嘶啞噪音的源頭令自己十分煩躁。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">【殺人鬼 導入 結束】</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">又是討人厭的、繁忙的一天，為了不想回家，面對那些討厭的父母親人，你總是躲在圖書館，待到快要閉館才離開。當和樂你正在趕著回家的路上時，暮色早已浸染了大地，夜幕已籠罩著整座城市，透過傘緣抬頭看向那無光的夜空，下了一整天的、那稀疏的雨幕已經停了。可那殘留在天際之上的雨雲，仍舊如布幕般遮掩著天穹上的點點星子，眼前那路燈早已損壞的道路變得更加漆黑，隱約還彌漫著一陣令人毛骨悚然的氣氛。讓滿身疲憊的你，除了趕快回去那一點也不溫暖的家之外，再也沒什麼多餘的想法。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就在這個瞬間，你突然聽見背後某處傳來了奇怪的聲音。那是屬於人類的、痛苦的呻吟，與從血肉之中拔出刀刃的聲響摻和在一起。當你戰戰兢兢地回頭望去時，在漆黑的電線桿下，你看見了那聲音的真面目。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">站在那兒的，是渾身沾滿血、手持利刃的紫髮男子，和一個倒在血泊之中的女子高中生，他身下的血水與雨夜的積水混雜在一塊，顯得渾濁不堪。<br><br>香西 和樂 <br>請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=65 SAN (1D100&lt;=65) 獎勵、懲罰骰値[0] ＞ 13 ＞ 13 ＞ 極限的成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">成功 扣1 SAN。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你看向倒在地上的那個少女，很快便發現那因痛苦而扭曲的臉龐下的人，正是鎮日欺負你的那個可惡的傢伙。<br><br>另一方面，雖然你完全不認識面前持刀站著的男子，但隱約還是有種熟悉的感覺。不知道為什麼，你有些在意他。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">轉頭望去，突然出現在你眼前的少年便是你所熟悉的香西 和樂。再轉頭看向倒在腳邊的那女高中生以後，你的腦海裡頭這便逐漸浮現回想起這個人對和樂實施過的，種種霸凌與騷擾行為。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">想起面前人遭遇的種種，自己只覺得眼眶有些濕潤，眼角的熱度卻也很快就被冷風吹散。無論如何，那樣的事都不會再有了......。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「——啊。」<br><br>在眼前的，是一片鮮紅的非日常。<br>香西忍不住後退了一步，腳上的學生鞋就這樣毫無防備地踩進了後頭那一大灘水窪裡，因衝擊而被濺起的水花浸濕了自己的襪子，但此刻的香西才管不了那麼多，他只知道自己目睹了不該目睹的一幕。<br>雖然這麼想，但腳卻像是被黏了快乾膠一樣，想動也動不了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「香、香西同學......救、救救......我」<br>那倒在地上的傢伙口中吐著鮮血與白沫，用氣若遊絲的聲音，痛苦地朝你求救著，完全無法將他與平日那趾高氣昂、自以為是的模樣聯想到一塊，出現在你眼前的，不正是你被他們滿是惡意地欺凌嘲弄、肆意地上下其手時，腦海裡頭曾經浮現過的畫面嗎。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「香、香...和樂...！對不起，這都是我的錯，你不要聽！！」鮮紅色的小刀險些從手中滑落，東雖是神情慌張，動作卻不帶拖沓地一腳踩上女高中生的臉，好像這樣就能阻止香西因為自己沒有一刀致命的不謹慎而回想起不好的回憶一樣。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「和、和樂...救我...我...」<br>聽見身邊之人與香西交談起來，在渾身浸滿鮮血的傢伙無助的眼神拋向了你的方向，絕望地呻吟著。<br>「我保證以後不會再、再.....」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">……這是什麼情況？<br>先不說那個女人，為什麼眼前這個殺人犯會知道自己的名字，還表現出一副討好自己的樣子？<br>蹙起眉頭，又向後退了一步。瞄了一眼那個滿身是血的女人，他知道這人是誰，是那個他在心裡厭惡極了的人，是那個沒資格活著的人。<br><br>——他當然不在乎那個人的死活。<br><br>香西抱起自己的書包，將其放在胸前，接著戰戰兢兢的對著眼前的男人說道：<br>「……我會當作沒看到的。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">那傢伙一把鼻涕一把眼淚的，被踩踏過後扭曲的臉蛋，那原本像是惡犬的臉龐現在像是一隻無助的小狗一般，顯得醜陋而可笑，哭著朝你求助道，嘴角處還時不時流出口涎與鮮血混合而成的黏液。<br>「我、救我...拜...託......」<br><br>「我對你、你也沒有多...多不好吧......你忍、忍......心....」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「夠了吧！沒看到他不想理妳嗎！看不見的話要這東西做什麼！？」東抬起那隻壓在女人額頭上的腳，腳後跟向女人的其中一邊眼窩狠狠地踩下，直到鞋跟的一角深深陷進去為止。這樣自然是不夠的，雖然想要她為自己的行為付出更多代價，但不能讓香西受到更多傷害了，這麼想著，東握緊了手中的小刀刺向女人的頸脖。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">隨著鳰的毫不留情的動作，那傢伙此刻終於吐出了最後一口長氣，身體也就此軟倒了下來，像是洩了氣的氣球一般，不再有絲毫動彈的可能，一邊的眼窩深深凹陷了下去，另一側圓睜的眼珠失去了最後一絲希望，幾乎要從眼眶裡頭掉出來一般，無神地望向那一點星子也沒有的夜空，沒有了以前那種咄咄逼人的神態，他張大的嘴巴再也吐不出那些令人作嘔的字句，更別提道歉什麼了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東急忙看向不遠處的香西，神情難掩一絲期待，像是完美完成了口令的寵物一般等著領取應有的獎賞。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……」<br>正當香西想開口說些什麼時，眼前的男人丟下一句話便了解了那人的性命。<br><br>而在女性斷氣的瞬間，香西感受到的不是害怕也不是反感，而是前所未有的寧靜。<br>仿佛持續發出雜音的喇叭終於被拔掉了插頭一般。<br><br>他愣愣地看著那具已經不會再行動的軀體好一陣子，接著才回過神來，警戒盯著眼前的男人。<br>「你……認識我？」<br>雖然感受不到這人對自己有懷抱任何的敵意，但不管怎麼說都在自己的面前殺了人……肯定也不會是什麼正常人吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「比起這種事，和樂現在應該要開心、要笑一下！這個東西已經不能再對你怎麼樣了！我做得很好吧？」<br>「和樂現在可以稍微期待一下明天開始的校園生活了哦？」<br>「啊......但是要迎接明天的話，就得回到和樂那個討厭的家裡去才行......對不起和樂！我不是故意要提起這個的！你快點忘掉！」<br>一點也沒有把香西對自己的警惕放在眼裡，東連珠炮似地自說自話，豪不在乎這是他們兩人之間的第一次見面。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……。」<br>這人是怎樣啊，劈頭就講了一堆，如果不是自己聽錯的話，怎麼感覺他連自己的家庭狀況學校什麼都一清二楚。<br><br>「你是我的跟蹤狂？」<br>特殊狀況下也只能想到這種荒謬的解釋了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「跟蹤狂......？也不用說成這樣吧...但如果和樂覺得是的話那就是了，對的我是跟蹤狂哦！」香西對自己的看法其實並無所謂，就算他懼怕自己也絲毫影響不了自己該做的事。<br><br>東甩了甩刀上的血，隨意地用衣袖充當抹布，發現上面仍有些一時半會兒弄不掉的污漬，索性將整把刀往巷子暗處一扔，刀片敲擊地面的聲音尖銳得彷彿能蓋過雨聲。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">此刻的你既沒有記憶也沒有隨身物品，再加上腦海中那浮現的使命。要投靠的話，就只有眼前這個孩子了，或許該做點什麽讓他站在你這邊才行。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哈啊？」<br>隨口一說的話就這樣輕易的承認打發掉，香西越來越搞不懂這是什麼情況了。<br><br>在對方把凶器的刀往別的地方丟而金屬撞擊聲敲響地面的同時像受驚嚇的貓一樣嚇了一跳，接著才意識到眼前丟了武器的人似乎是真的對自己沒敵意。<br><br>「所以……你殺這個人不會要說也是為了我吧？」<br>他一邊說一邊把抱在胸前的書包放下來，依舊用著懷疑與不信的眼神看著對方。<br>「你是誰？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「是在問我的名字嗎？我是鳰哦，和樂知道這個字嗎？」東伸出食指朝著空氣一筆一劃地寫著自己的名字，卻並不流暢，好像他也是第一天見到這個漢字一樣。「我想想...左邊一個進入的入右邊一個小鳥的鳥......嗯！」<br><br>「今天起我會為了你做任何事的。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在聽見『鳰』這個名字時，明明腦海中沒有任何印象，卻有一股熟悉的感覺湧上心頭。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「鳰……」<br>這是他第一次聽見這個名字，卻有種難以言喻的奇妙感覺。<br><br>「任何事？你是說……」<br>一邊說著一邊看了一眼旁邊那具已經毫無生氣的軀體，香西的腦袋忍不住湧入了一些不好的想法，他搖搖頭，試圖說服自己這不正常。<br><br>「你為什麼要為了我做這些？我是說……我根本不認識你。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">站在那被晚風逐漸拂去體溫的冰冷肉塊之前，背負了這樣無法逃脫的罪愆，如果再這樣呆呆地站著的話，雖然這裡是沒什麼人會經過的市郊，但遲早還是會被路過的人發現，逮捕入獄失去自由、甚至生命的吧，不管是搬走屍體遺棄到別處、或是趕快逃離案發現場，此刻或許應該要做些什麼才好？<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">雖然感覺面前的鳰實在有些危險而詭異，不知道能不能把他丟下，又或者應該庇護他呢？還有在心中揮之不去，那已經有些陌生的、好久沒有聽見的關懷語氣與詞彙。或許、或許應該『查明鳰的真實身份』？<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「和樂好喜歡問問題哦，是學校老師都會喜歡的類型......」<br>「......哈啾！我的意思是......哈...哈...唔...！」<br>答非所問的話還沒說完一句就被接連好幾個噴嚏打斷了自己，東伸手揉了揉鼻子，卻沒發現因為這個動作導致臉上本來不多的血跡現在多了手蹭上去的份變得有些怵目驚心。<br><br>東就這樣半張臉都是血污地笑著，有點不好意思地指著地上的屍體：「我可以回答你但......嘿嘿...我不知道怎麼處理這個。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哈啊……你都不知道了那我怎麼可能會知道。」<br>看東這副感覺少了根筋的樣子，香西無奈的抓抓頭，但卻有種也不能就把人丟在這裡的感覺。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……怎麼辦？附近會有哪裡可以藏的地方嗎？」<br>他把書包用後背包的方式背在背上，接著走近東。<br><br>他當然知道自己這樣做會帶來什麼結果。<br>但不知道為什麼卻感覺自己必須成為這個人的共犯。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就在你們傷腦筋地商討著該做些什麼才好時，不遠處的街角處，你們聽見了小狗吠叫的聲音，朝著你們靠近。<br><br>緊隨其後的，是個男子有些傷腦筋的聲音，似乎是在對著自己的狗這麼說道。<br>「貢太——喂貢太你要去哪裡、走慢一點啦！」<br>看起來好像沒有足夠的時間把屍體搬走藏起來了，如果再留在此地的話，肯定會被發現的吧——不、說不定那隻狗正是因為聞到了血腥味而跑過來的。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「走吧！回家！」<br>外人的聲音越來越近，即便是東也知道現在的樣子被其他人看到有多不好。<br>東不由分說抓起香西的手準備往聲音的反方向跑。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哇、！」<br>被人一把抓走，也顧不及抓好手中的雨傘，就這樣在街道上跑了起來，想當然那些雨滴也就這樣無視於雨傘的存在通通打在了香西的臉上。<br><br>要去哪裡啊？回家？他家？還是我家？我家……有辦法藏這麼大隻的人嗎？啊啊但是，好像怎樣都無所謂了。<br>去哪都行吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你們手拉著手，在昏暗的街道上飛快地奔跑著，仿佛可以就這麼將那些罪孽與殘骸拋在腦後一般，被雨打濕的紫陽花在道路兩側盛開著，濕漉漉的水珠沾染了那瑰麗的藍色與紫色，白天想來肯定格外奇幻動人吧，只是在夜色的籠罩下，太過強烈的顏色反而多了幾縷瘆人。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東就這麼拉著香西，最終在離他家尚有一小段路的地方停下，雖然才剛在雨中那樣不停地跑著，卻一點也沒有疲憊的樣子。<br>「怎麼辦？就這麼回去嗎？還是要我幫你把裡面清空再進去？」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊？清空什麼？」沒理解東的意思，用疑惑的表情看著他。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就在你們三言兩語便決定好要先回到自己家的此刻，突然，手機裡頭的通知聲連續響起，那是來自母親的通知，上頭寫滿了『你什麼時候才要回家』的短消息，回過神來，眼下已經快要九點了，雖然母親早就知道你總是很晚才回家，可如果再不回去的話，身上恐怕又會多幾塊淤青吧。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">『你這死小孩打算什麼時候才要回家』<br>『是不想要這個家了是不是』<br>『好阿，都這樣阿，也不看看是誰花錢，含辛茹苦把你養到這麼大的』<br>『就留我一個人面對你爸那個傢伙，你就是這麼忍心的嗎』<br>『你到底什麼時候才要回來，讓媽媽擔心你很開心是不是』<br>『該回家了吧』<br>令人窒息的通知聲在你耳畔不斷響起，即使不打開熒幕，也能想象出那樣的聲音在耳邊重現，一道接著一道，逼得你喘不過氣來，即使你回覆了訊息，來自母親的訊息卻還是不依不撓的發來，無形的重擔勒在你的脖子上越來越緊，而這是你日復一日、早就該習以為常的遭遇、嗎？<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……」在拿起手機的瞬間，臉色整個暗沉了下來。<br>到底囉嗦什麼啊。只有這種時候才把自己當老媽了嗎？明明想的只是控制我，控制我賺錢，控制我做任何不想做的事情。<br>……我可不是誰的所有品。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">強忍著想把手機直接摔在地上的衝動，香西咬了咬牙，接著點開輸入的畫面，打了句：『在路上了』<br>送出訊息後，他深深的呼吸了一口氣，接著把那口氣緩緩地從肺裡吐出，好讓自己能夠冷靜一些。<br><br>沒事的，這不都習慣了嗎。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......。」<br>感受到還沒放開的那隻手已經起了一些汗，卻不是因運動過後而起的。<br><br>自己剛剛把身上唯一能用的工具給扔掉了，屋子裡不只一個人，要是沒有讓那三人同時斃命的方法，要動手就得挑別的時間。<br><br>眼下沒有實際的辦法，東能做到的，也只是握緊了香西的手。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請在個人頻道過 潛行+60。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1d100 (1D100) ＞ 88</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=80 潛行 (1D100&lt;=80) 獎勵、懲罰骰値[0] ＞ 9 ＞ 9 ＞ 極限的成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">雖然那連綿不絕的陰雨早已停歇，但三不五時仍有幾縷雨珠打在你們的臉上，與淚水、汗水混在一塊，沿著臉頰垂落，在舌尖留下一抹鹹味。在漆黑的夜幕中，被猩紅花瓣妝點著衣裳的你們並肩而行、躲避著那些人多的地方和光亮的所在，偷偷摸摸地朝著皆城家所在的市郊前行著，雖然這附近並沒有什麼住戶和行人，但周圍住宅那時不時傳進耳朵的些許響動，都撥動著你們那因共同犯下此般罪孽而變得敏感的神經、挑逗著你們繃緊的心弦。好在偶爾雖然有些落葉與貓叫的聲響，但終究還是沒有被旁人所發現，好幾次你們都感覺自己要被人發現了，但最後還是悄悄地溜回了宅邸旁邊。<br><br>雖然實際上沒過多久，但緊張刺激的心情仍拉長了心中體感的時間，好不容易，你們總算看見了在黑夜中亮著燈的香西宅。在那雜草叢生的後院，堆滿了各種生鏽的垃圾與雜物附近，輕易便能看見就架在通往樓上窗邊、有些老舊的梯子。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……跟我來，從這裡進去的話不會被注意到。」<br>指了指那二樓窗戶邊上的梯子說道，他總是為了不被家人注意到而習慣從那裡進出屋子，但也是沒想到這個習慣會在這種地方派上用場。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你知道和樂為了不想跟父母有太多照面的機會，總是盡可能地從梯子這裡進出。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你們小心翼翼地爬上了梯子，身下的金屬板隨著重心的移動嘎吱作響，讓人忍不住有幾分提心吊膽，但好在無事發生，總算悄悄地進入了和樂的房間。雖然先前在路上發生了有些驚心動魄的事情，但至少此刻，一切都是順利的...吧......<br><br>沒有開燈的房間一片死寂，只有偶爾樓下傳來的、母親那暴躁的響動穿過層層隔板，進入耳中。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東沒有說話，只是跟著香西的指引順著梯子進入了房間，雖然早就知道他時常只得這樣回房間，還是不免加重了幾分想盡快替香西解決掉這種困境的想法。<br><br>東左顧右盼，最後視線落在了香西的書桌，那邊應該有什麼能用的，不過現在還不是做這些事的時候。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">狹窄的房間內，一個木質的書架靠在墻上，上頭擺滿了各種攝影教學書籍、作品集等等，當然，那些書本都盡可能地被藏在書與書的夾縫之中，否則被母親看到肯定又逃脫不了被怒斥的命運，這是你從好些被扔掉的書中得到的教訓，書桌上散落著幾本教科書，下面還有個小小的抽屜。<br><br>靠近門邊的地方，還有個佈滿灰塵的連身鏡，顯示著其主人平常幾乎沒什麼使用它，倒是在房間的一角，擺放著一個雖然褪色，看起來有些年頭、但卻被保養得很好的相機包包，那是和樂攢了好一陣子的打工錢，才總算忍住心疼買下的物品，買不起更好的相機的你，為了自己明明唯一、卻仍要被阻止的愛好，從二手市場裡翻找來的東西。<br><br>墻上還掛著幾張和樂小時候參加演出時的照片，那是哥哥以前細心珍藏的存在，只不過隨著歲月的流逝，如今都已有些斑駁、泛黃，上頭和樂臉上洋溢著的笑容也早已消失在時光之中，再也看不見了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">進到房間順手把電燈打開後，便拿起手機傳了個訊息通知母親自己已經回到家。<br>把書包和其他東西放到它們該在的位置，接著在床上坐了下來。<br><br>「……雖然是我帶你回來的，但這裡不是什麼舒適的地方，抱歉。」<br>他一邊說一邊把視線放到了自己房間的門口，從薄薄的木門外能不斷聽見母親歇斯底里的噪音，然而這對他而言不過也只是家常便飯罷了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">室內變得明亮以後，東也已經差不多掌握了這間房間內的情況，看著香西坐上床，自己也直接跪坐在本來就站著的地方，因為怕弄髒而離地毯和床都遠遠的。<br><br>東沒有回話，只是用袖子乾淨的地方擦拭著脖子和臉上的雨水和髒污，過分拘謹的樣子跟剛剛在巷子做出那些事的犯人簡直判若兩人。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看對方用衣袖擦身體的樣子，這才回想起來自己也是一副溼答答的狼狽樣子。於是再次站起身來從櫃子裡隨便拿了兩條毛巾，將其中一條披在自己身上，另一條則是丟給了東。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">接住對方扔過來的毛巾，東呆呆地看著手裡乾淨的織品，大概是覺得不捨得弄髒所以又把它折整齊了放在一邊：「我不想弄髒你的東西......我用衣服擦就好了。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">跪坐在房間裡頭，將毛巾折好放到一旁，轉過頭的剎那間，你眼角餘光無意中瞥了一眼門邊的連身鏡，可那明明理應倒映著你樣貌的玻璃，此刻鏡子裡所能看見的，卻被黑乎乎的粗壯觸手給填滿了，那些觸手上頭還散布著一顆顆藍色的眼睛，無數冰冷而瘋狂的視線，目不轉睛地直直注視著你。<br><br>只是在你驚訝地再次看向那鏡子時，先前那幅詭異的景象卻像夢境一般消失的無影無蹤了。在你面前的，只不過是一個沾滿灰塵的、再普通不過的穿衣鏡而已，鏡子中也理所當然地，映照著穿著橘色外套的，你的身影。可你剛才看見的、那到底是？<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「是有差？」覺得莫名其妙。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">房間的角落除了那雖然老舊卻還是被精心保養著的相機以外，還有幾個蒙上了厚厚一層灰塵的獎杯獎座之類的小東西，上頭鍍上去的金箔也褪色脫落，看起來顯得格外老舊，想來也是，父母在乎的也只是以前的你賺到的那些金錢而已，這種沒有辦法賣錢的東西他們只會棄之如敝履吧，要不是哥哥偷偷把這些有著紀念價值的東西藏了起來，恐怕他們早就被丟去回收場了，只不過，哥哥再也受不了這個家，逃離這裡也已經好些年了呢......<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就像沒有聽見一樣，東對香西的聲音毫無反應，反而直直盯著倒置在房間角落的穿衣鏡看。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「？」<br>跟著東的視線方向往穿衣鏡看去：「有什麼東西嗎？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那面鏡子，本來就是和樂的東西嗎？」東起身走向穿衣鏡，把鏡子往下扳檢查了一下它的背面，但怎麼看也看不出有任何奇怪之處。<br><br>端詳了一會兒，東才像回過神一樣急忙後退幾步，慌張得看向香西：「不好意思，我不是故意要碰和樂的東西的，只是......我剛剛在鏡子裡看到奇怪的東西——不...應該是我的問題......不會是和樂的東西的問題，抱歉...。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽見東的話，香西皺起眉頭，這傢伙是不是真的怪怪的？不對，他才剛在自己面前殺了人，很明顯就不是正常人吧。<br>「你看到什麼？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「鏡子裡被黑乎乎的東西占滿，還有很多眼睛...看著我，對不起，我不知道怎麼描述......。」<br>低下頭仔細回想方才的畫面，卻也不知如何用言語拼湊出來。<br>「有、有可能只是血還是灰塵之類的跑進眼睛裡我才會看錯的，說了奇怪的話對不起，你不要在意...我剛剛檢查過了，就只是一面普通的鏡子而已。」東不安地揉著自己的手指，始終沒有把頭再抬起來。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請過 偵查+20。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=60 偵查 (1D100&lt;=60) 獎勵、懲罰骰値[0] ＞ 80 ＞ 80 ＞ 失敗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1d100 (1D100) ＞ 63</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">正在想著先去洗個澡、把身上染上的髒污滌去的同時，和樂意外地注意到，書桌前的抽屜並沒有關好，可你早先時候在離開家以前，可以十分篤定明明已經把抽屜關得嚴嚴實實的了，再仔細查看一番，裡頭就像是被肆意檢查翻動過一般、各種東西都被掃到一旁，顯得有些雜亂。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">不見了。那為了逃離這種地獄，省吃儉用，從各種能省下錢來的管道積攢了許久，裝著你全部積蓄的信封不見了，無論你怎麼翻找，那本來應該塞滿福澤諭吉的錢袋就這麼消失得無影無蹤了，到底是誰......<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">(^^♪ 小香ㄉ內心感受：「錯愕」「憤怒」「不解」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你跟著和樂的目光看向那露出一條縫的抽屜，不知為何，你心中下意識地湧現一股感覺，那裡應該藏著和樂他努力省吃儉用，千辛萬苦積攢下來的一大筆錢，到底是誰做的？<br><br>在你身邊，和樂的眼神裡與他的腦海中，似乎『錯愕』、『憤怒』、『不解』，這一切負面的情緒在他內心交雜，這些痛苦的情緒在你腦海中安靜卻又震耳欲聾地迴響著，讓你忍不住下意識地握緊了拳頭。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……哈？」<br>把抽屜整個拉出來，開始翻找裡面的內容物，不見了？去哪了？被偷了？為什麼？<br>但就算再怎麼翻再怎麼找，也依舊找不到那個應該存在的信封袋，香西盯著被翻得亂七八糟的抽屜，內心頓時充滿了虛無感。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東握住香西的手，想藉此多少安撫他的情緒，但明白香西此時心情的他很清楚這樣做是不夠的。<br>「是誰做的你心裡有數吧，我幫你去拿回來。」<br>東深色的瞳孔裡看不出半點猶豫。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊？你怎麼……」<br>不知道該說你怎麼知道，還是該說你要怎麼做。說到一半的話語就這樣梗在喉嚨之間，沒能得到釋放。<br>「……我不知道是誰做的。」香西把東的手甩開，接著把抽屜用力的關了回去。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「是、是我太過頭了。」感受到香西的憤怒，東的聲音變得小聲起來，視線也從香西身上快速別開。<br>即便自己也不知道為什麼，但內心除了想讓對方知道他可以依賴自己以外已經快要沒有別的想法了。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「喂！和樂，我聽到你回家的聲音了！」<br><br>「你到底要在樓上磨蹭多久，才肯下來吃飯啊，一定要人喊才會主動下來是不是？我說過多少次了！都幾歲的人了！」<br><br>「而且你肯定也不是在讀書吧，是不是又在看你的那些沒有營養的東西了，你快點滾下來！我已經忍受那些東西很久了，再不下來吃飯的話，小心明天我就把他們都給丟掉！還有那台相機還什麼鬼的！別以為我不知道你藏在哪裡！還敢亂花錢買那些沒用的東西啊！」<br><br>就在焦急的此刻，母親那暴躁的大嗓門打斷了你們的對話，傳進了你倆的耳朵，聲音中充斥著滿滿的不耐煩與煩躁。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「嘖、唉……」聽見樓下人的怒吼之後，憤恨的敲了一下桌子，那些被翻出來而零亂擺在桌面的東西們也隨著敲桌的衝擊掉落到了地上，但現在的香西才管不了這麼多，他只是想宣洩這股無從發洩的憤恨及無力感。<br>「肯定是她……」香西煩躁抓了抓頭髮，又再次嘆了口氣，稍微冷靜下來過後，才轉頭看向東。<br>「……看來我得下去樓下一趟了。」<br>他猶豫了一下，接著繼續往下說：「你……會餓嗎？要不要順便幫你拿點什麼東西上來……」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看見東西都散落到地上，東馬上蹲下來想把東西都撿起來收好。<br>「不用了，我——」話都沒說完，肚子就傳出了咕奴奴的聲音：「吃一點就好了......。」<br>本來不想麻煩對方的，但身體實在是一點都不給自己面子，說起來自己就連上次進食是什麼時候都沒有記憶了。<br>東實在太過尷尬，把東西都撿起來以後也沒有站起來，只是抱著那些書本文具繼續蹲在地上。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你走下樓到了餐廳的地方，母親正坐在桌子前面，臉上寫滿不悅、大手大腳地盛著味噌湯，口中還一面焦躁地碎碎唸著。<br><br>「為什麼我一定要照顧那個死老太婆啊......那傢伙到底什麼時候才要去死一死，像是蛆蟲一樣寄生在這個家很開心嗎......」<br>你知道，你的母親，香西 英子，自從嫁到這個家庭，將姓氏變成香西以後，諸如家務、育兒、看護等瑣碎的雜食都仿佛應盡的義務一般，被強行堆積在她的身上，祖母幸惠失智症的惡化使得情況更為加劇。而這一切長期的婚後虐待早已讓她的精神變得脆弱不堪、一塌糊塗，於是，你也便自然而然的成為了母親身上，對於這一切壓力的宣洩之處。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">桌子上擺放著幾盒已經冷掉乾癟的炸雞，大概是從快打烊的超市裡買回來的打折品吧，除此之外就只有些簡單的醃製小菜和你最討厭的燉煮花椰菜，而且你也十分清楚，母親一定知道這是你最討厭的蔬菜的。<br><br>聽見你走下樓梯的聲音，母親斜眼看向了你，眼神中寫滿了不耐煩，口中那尖銳而歇斯底里的叫喊更是如同尖針一般，刺穿你的耳膜。<br>「都已經不是小孩子的人了，做事還一定要別人教嗎？回到家就快點過來幫忙不會啊？賺不到錢的賠錢玩意，之前的試鏡怎麼都沒有上！是不是你又不夠努力、不夠認真了！真的受不了...」<br>只聽她一面碎碎唸著，還一面冷笑著繼續譏諷道。<br><br>「你這孩子可真是幸福啊，什麼都不用做，只要張開嘴等著就可以吃晚餐了，真的把你的母親當成這個家的奴隸是不是！什麼都不學，就學了這個跟你父親一個德行的糟糕事情，你可還真是會啊。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「而且也不看看現在都幾點了，我等你吃飯等到都這個時間了，怎麼樣，讓你的母親餓肚子，這種事情也讓你很自豪是不是，就是因為你的緣故，我都只能吃這些冷掉的飯菜！真是的！」<br><br>雖然她口中這麼說著，可你卻清楚的知道，母親明明知曉你的放學時間、知道你會在圖書館待上一陣子，知道你肯定沒辦法在正常的晚餐時間回到家的，可她就偏偏還是這麼說、這麼做了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請丟 1D3。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在和樂走出房門，正要下樓的剎那，你的視野俄頃便被一片黑暗給吞噬了，就連張大嘴巴，最後想發出聲音的一刻也都沒來得及，意識便仿佛沉進無底的深淵之中，就此中斷。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D3 (1D3) ＞ 3</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「抱歉，媽媽。我開動了。」<br>聽著母親碎碎念講著那一堆自己已經聽過好幾百次的抱怨，拉開了餐桌的椅子坐了下來，桌上擺滿了全是不怎麼煽動食慾的料理，但想當然不吃會更麻煩，所以香西還是拿起了筷子將那些配菜夾進了自己的飯碗裡——當然，也包括了那自己最討厭的花椰菜。<br>不吃更麻煩、不吃更麻煩。所以要忍耐……一邊想著，一邊把那綠色的花椰菜在碗裡剁碎成小塊狀，接著放進嘴裡，硬是吞了下去。<br>難吃。就算沒經過咀嚼，噁心的味道還是存留在口腔裡，揮之不去。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在母親不絕於耳的念叨聲中，你默默地幫忙盛飯，吃起了那些早已冷掉的晚餐。落座以後，一如既往的、讓人難受想逃離的晚飯時間就開始了，飯菜早已冷去，吃在嘴中一點也沒辦法帶來任何幸福感，就連唾液都不願為此多分泌一星半點，母親的碎念聲像是背景音樂一般滔滔不絕，空氣就像是凝結了一般沉重、讓人窒息。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">而當你在好不容易忍著胃部翻湧的噁心感，嚥下那難吃至極的花椰菜，正想默默地伸出筷子，夾一塊炸雞來吃時，母親的斥責聲又再次在你耳邊響起。<br><br>「你倒是多吃點青菜阿，我這麼認真準備的食物，你就只想吃你自己想吃的東西，把剩下的留給你的母親是不是，你這傢伙可還真是孝順啊！」<br><br>「多吃點花椰菜阿，要講才會做是不是？而且都不說話是怎麼樣，啞巴是不是，這麼不想理媽媽是不是？再吃炸雞要是你臉上長了痘痘，下次試鏡又沒過怎麼辦，你有沒有多想想？這點小事也辦不好嗎？要不是因為你，我們怎麼會搬來這裡！」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……是，我會多吃一點。」有完沒完啊。<br>聽著母親的怒罵，安分的又夾了一口花椰菜放進碗裡。<br><br>「我只是有點累了……最近都在準備試鏡。」<br>才怪。<br>他早就不在乎試鏡的事情了，也沒在報名，只是隨便找了個藉口試圖搪塞過去。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">即使你聽從著母親的要求，放棄了原本筷子上的炸雞，嚥下那因冷去而更加讓人作嘔的花椰菜，可她的斥責仍然持續不斷，並沒有因此停歇。<br><br>「而且每次都這麼晚回來，就是想讓你媽跟那個難搞的死傢伙待在一塊就對了是不是！？你累了？你累難道媽媽我就不累嗎？你就不能多替媽媽想一點嗎？」<br><br>「說話阿！作業有沒有好好寫、在學校有沒有好好跟同學相處、什麼東西都要我主動問才會說是不是，我到底是養了個兒子，還是養了一個機器人啊！整天就只知道擺弄著你那破玩意兒！試鏡試鏡、最後還不是都沒有賺錢！到底什麼時候才會上啊！」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「有、有……」<br>為了不多惹母親，也不說多餘的話，就只是默默地吃著飯，接著一個一個回答。<br>有寫作業。有跟人好好相處。有在準備試鏡。有關心媽媽——<br>——嘛，當然都是騙人的。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就在此刻，玄關處傳來了一陣響動，大概是父親回來了吧。<br><br>「他怎麼老是在這種奇怪的時間回來......」<br>眼前的母親深深皺起眉頭，才剛剛閉上的嘴巴又再次發起牢騷。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">渾身散發著酒氣、一聲不吭的父親走進了屋內，就這麼徑直朝著冰箱走去，即使身上那濃烈的酒味隔著好幾公尺都能夠竄進你的鼻腔了，他卻還是自顧自地又拿出一罐冰鎮的生啤酒，站在冰箱前喝了起來，在一口將啤酒飲盡以後，『哐當』，金屬罐子被他隨意拋到一旁，裡頭褐黃色的液體還灑落些許在地板上。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽見他的腳步聲，不知為何，或許是心理作用使然吧，你身上的那些被炙熱的煙蒂給燙出的疤痕與前些日子拳打腳踢的淤青，那些痛楚又再次隱隱生疼。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在喝完啤酒以後，他又從角落拿出了燒酒，搭配上冰箱裡頭的冰塊，坐在餐桌邊上自飲自斟，像是喝白開水一般一口接著一口。<br><br>而母親就瞪著你的父親許久，最終再也忍受不住，聲音像是炸裂的音響般在你耳旁爆炸開來。<br>「喂！你什麼時候才願意討論養老院的事情，都跟你說過幾次了！」<br><br>而父親卻只是仿佛事不關己一般，淡淡地回了一句。<br>「過陣子再說吧，我最近很忙呢。」<br>說完又繼續大口灌起自己的酒。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「過陣子是什麼時候！都跟你說過多少次了！！你每次都是這樣，只是想推卸這些責任，讓我照顧你媽對吧！我是你的傭人是不是！」<br><br>「就說了過陣子啊！我最近很忙聽不懂是不是、你這個笨蛋女人，我辛苦賺錢養你們幾個，回到家還要跟你講這些有的沒的！鬧夠了沒啊！」<br><br>父母扯著嗓子，高聲互相對罵著，明明早就應該要習慣的，可那些尖銳的話語仍然像是一把又一把的利箭，冰冷地刺穿你的腦門，把你扎的像是刺猬一樣，大腦也忍不住開始隱隱作痛起來，<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在一片漆黑、看不見任何東西的意識中，你感覺耳畔逐漸開始響起一陣陣急促的敲擊聲。再仔細一聽，你便明白那是心臟在胸腔裡頭跳動的聲音。<br><br>身體不自覺地顫抖著，一股莫名躁動的情感湧上腦門，在你心頭愈發強烈。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">唉。<br>又多一個。<br><br>快速的把碗裡剩餘的飯塞進嘴裡，打算趁著兩人爭執時趕快離開飯桌。<br>至於東的飯……雖然有點抱歉，但還是晚點再幫他帶上去吧，畢竟現在的時機不太好。<br>一邊想著，一邊緩慢的移動，準備離開。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「別以為只有你痛苦啊！你這臭女人，以為這個家是靠誰在養，是誰賺錢的啊！？」<br><br>「你這隻豬才是！我嫁進來是給你當傭人還是奴隸是不是，而且還要侍寢的那種， 你這王八蛋究竟想把我當成奴隸到什麼時候！！」<br><br>「吵死了！你鬧夠了沒有，每天都聽你講一樣的事情！！煩煩煩、煩死了！別跟我扯這些有的沒的！」<br>因為怒氣與酒精而漲紅了臉的父親聽見母親的聲音，也不甘示弱地大聲喊叫著，說話時拳頭還惡狠狠地砸著桌子。桌上的那些碗筷和杯子都被那力量給弄倒了，味噌湯灑在了桌上，沿著桌緣弄髒了正想偷偷溜走的你身上那剛剛才擦乾的衣物。<br><br>眼前的母親整個人完全陷入了歇斯底里的狀態，用手捂著臉，哭鬧著摔著桌上的東西，除了尖叫以外，卻什麽也說不出來。<br><br>見到這樣的情景，父親又變本加厲了幾分。<br>「閉嘴！欠扁是不是！一定要逼我揍你才能安靜嗎！」<br>父親唾沫橫飛地叫囂著，整個人熊熊站了起來，作勢一副要尋找什麼，毆打下去的模樣。<br><br>這難道不是地獄嗎，眼前這一切和地獄的區別又在哪裡？<br><br>雖然並不是今天才開始的，但這種環境，無論如何也無法習慣。<br><br>請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=64 SAN (1D100&lt;=64) 獎勵、懲罰骰値[0] ＞ 71 ＞ 71 ＞ 失敗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">失敗扣1D3 SAN。<br>另外再幫我丟個1D3。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D3 (1D3) ＞ 3</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一陣作嘔的心情都上來了。<br>對，雖然早該習慣了，但還是習慣不來。<br>感覺自己就像是被丟進了真空袋裡面，周遭的空氣正在緩慢地被抽乾，沒辦法好好的呼吸。<br>但誰會在乎呢？沒人會在乎。<br>或許，直到這群人死了自己才能獲得真正能夠喘息的空間吧。<br><br>強忍著胃酸朝喉嚨上衝的不適感，香西依舊打算離開那裡。<br>想趕快回到能呼吸的地方。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">反正在這裡待著也沒什麽意義，又聯想到以前那些一想起來就隱隱作痛的回憶，為了不刺激到那名為父母親的兩人，你打算就趁此時機悄悄溜走。<br><br>可正當你打算悄悄離開座位、回去房間時，母親那如地獄般冰冷的話語便精準地傳到了你的耳邊。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你想去哪？」<br>「你能逃跑可真好啊。我可就都逃不掉呢。」<br>「你知道為什麽嗎？就是因為有了你的存在！直到你畢業長大之前，我都不能離開這個家！你這個傢伙根本就只是我的枷鎖而已！」<br>「把你生下來就是為了將我束縛在這房子裡！你們這些小孩根本就是詛咒啊啊啊！快找個地方去吧！快點消失阿！滾得越遠越好！反正也沒有人在乎我阿！啊啊啊、誰來讓我自由啊！」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請丟 1D3。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D3 (1D3) ＞ 2</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在聽見母親的話語時，一種莫名的感覺侵襲了你的大腦。你感覺到至今為止，早就一直在被侵蝕的什麽東西、在晃動中開始逐漸崩潰瓦解，崩塌成不成模樣的廢墟。但你無法理解那陌生的感覺到底算是什麽，可你再也無法多加思考的腦袋，早已被某種襲上心頭的衝動取而代之。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">(^^♪ 小香ㄉ內心感受：「對啊」「那我消失不就好了」「怎樣都好」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">『自暴自棄』、『那我消失不就好了』、『怎樣都好』<br>你聽見了和樂的聲音。他的那些喃喃自語將你從深淵之中撈起，讓你徹底清醒，此刻你的意識已經完全清晰了。<br><br>回過神來，你已經來到了屋子的一樓，就站在楯的旁邊。手裡頭握著一把鋒銳的利刃，那閃著寒光的刀尖，直直指向了楯的父母。<br><br>『必須要保護和樂。讓他遠離所有恐懼，和這一切的無理取鬧。』<br>心臟在猛然跳動著，仿佛在宣示著這才是你存在的理由一般。<br><br>『要保護他，必須要排除這一切障礙』<br>現在的你，腦海中只剩下了這個想法，即使你十分清楚，這或許就是所謂的瘋狂吧，但你仍然對此深信不疑。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">突然，一抹寒芒從你眼角閃過，你的視野一隅，注意到了站在你的身邊，手中拿著利刃的東，他的眼神中充斥的只有殺意，那露出的表情和先前與你交談時的溫和一點也沾不上邊，看起來就像是剛從地獄走出的惡鬼一般，他慢悠悠地朝著那名為你的『父母』的傢伙走了過去。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">講的好像是我的錯一樣。<br>就沒問過我同不同意被生下來嗎？<br><br>啊啊、對，或許母親說的對。<br>自己趕快消失的要好。<br>這才是最快的。<br>畢竟要等畢業、要等能夠離家、要等父母親這群可憎的人死去可真是太久了——</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">想到這裡，才發現旁邊站了一個人。<br>是東。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊、」<br><br>——說不定不用等這麼久了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東像是眼裡只看得見目標一樣徑直朝著香西的父母走去，也許現在在他的視角裡那只是兩塊因變質壞死該被處分掉的豬肉。<br>我為什麼不早點下手呢？白白讓他遭受這些。這麼想著，東沒有猶豫地擒住和樂母親的脖子，將她壓在了桌上。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請過鬥毆 成功值為90（在主頻道）<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=90 鬥毆 (1D100&lt;=90) 獎勵、懲罰骰値[0] ＞ 86 ＞ 86 ＞ 通常成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你他媽是誰——」<br>女子的話語還未完全落下，她的氣管便被緊緊扼住，緊接著，東便用力地揮下手中那銳利的鋒刃，在空中呼嘯而過的金屬發出乾淨的破空聲，下一剎那，利刃與脂肪接觸的聲音倒是不如那些電影演出中響亮，更像是用力刺穿一個內裡是血肉與骨骼的氣球一般，『啪——』，除了頸骨碎裂的聲音外，倒是有幾分發悶。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">人體的結構一點也不如想象中結實，在下一剎那，香西 英子的頭便有些歪垂，折成了一個不科學的形狀，像是足球一般從脖頸上滾了下來，在地板上滾了幾圈，直到撞到和樂的腳邊才停止，她剩餘的整個身體重重地跪在地上，此刻才慢悠悠地軟倒了下來，朱紅色的鮮血與乳黃色的脂肪在半空中飛濺，混雜在一起，噴濺在一旁每個人的身上與器物上，落在和雄的臉頰上、落在東的胸前、落在遙控器的按鍵上，當然，也落在和樂那白皙清秀的臉蛋上頭。而躺在地上的，那張曾經囂張癲狂的表情早在被斬落的一瞬轉為痛苦與驚駭的扭曲，總是噴出污言穢語的嘴角，如今也只能吐出一點點白沫與氣泡。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">被嚇得不知所措，臉色蒼白卻又因酒精而紅白交雜的父親整個人無力地跌坐下去，斜斜倚靠在冰箱門上，一臉不知所措的模樣，剛剛原本和英子對罵時，手中順手抄起的酒瓶也『哐當』一聲，落在木頭地板上，即使幾片鋒利的碎片割破了他的小腿，可他仍無暇顧及，驚恐至極的他只能目瞪口呆地跪坐在地上，嘴角結結巴巴地吐出幾個零碎的話語，顫抖的手指驚恐地指著你們的方向。<br>「怪、怪物......噁..心...」<br>緊接著他又仿佛無能狂怒一般，口中噴出著接連不斷的污言穢語。<br>「渣滓、賤貨、死遠一點啊啊啊」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一旁剛剛被父親打開的電視仍不識趣地播放著最後的那個節目，畫面上是棒球比賽的轉播，賽評與轉播隨著球賽發展的激烈評論聲傳入你們耳朵，與眼前的畫面相比，是那樣的突兀而可笑。<br>「啊啊啊，這球好像咬到紅心了！飛得很高很遠，會出去嗎！！？是、是全壘打！！剛剛村上選手砍出了一隻逆轉了比賽的滿貫全壘打！！」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">處理完其中一人後，東緩緩直起身板看向辱罵聲的源頭，一張臉已然濺滿了腥紅色的戰果，看不清此人本來的相貌。<br><br>他跨過地上倒著的女人走向香西的父親，就算踩在了餐具尖銳的碎片上也像一點感覺也沒有，剛剛還像頭惡犬一般對著家人張牙無爪的男人現在在東的面前就如同初生羊犢，是隨時都能輕易奪取生命的東西。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請過鬥毆 成功值為90（在主頻道）<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=90 鬥毆  (1D100&lt;=90) 獎勵、懲罰骰値[0] ＞ 55 ＞ 55 ＞ 通常成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">香西站在一旁，愣愣地看著這一切發生。<br>在某些液體濺到自己臉上時，他也只是朝臉摸了下，意外的溫暖、黏稠。<br>他從桌上的面紙盒中抽了一張面紙，把臉上的東西擦掉。接著走到了離餐桌有些距離的沙發上坐下。<br><br>這是他第一次見到自己父親這種狼狽的樣子。<br>感覺就像是在看電視劇。<br>像是電視劇裡一樣的那種經典的殺人慘案現場——啊，抱歉，不是電視劇，這是現實。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「去...去死，你、你們都是噁心的渣滓....滾去死啊啊啊啊——」<br>即使半點傷害也沒有，但跪坐在地上的男子仍不住隨手抓起手邊抅得著的任何器物，朝東扔了過來，碗底還有些許殘餘的味噌湯、那吃完炸雞的骨頭、還有破碎的瓷盤，當然還有空掉的酒瓶，一個個如雨點般砸在東的身上，口中還不住喃喃念著，與往日那囂張跋扈的模樣截然不同，此刻的和雄就像是隻只能狺狺狂吠的吉娃娃，沒有半點殺傷力，只是不住地叫喚著。<br>「你們都去死去死去死去死啊啊啊啊！！！」<br>他口齒不清的嘴邊，那因驚嚇流淌而出的白沫與酒精混雜在一起，仿佛嘔吐物一般沿著那滿是鬍渣的下巴滴落。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">揮出手中暗紅色的刀，刀上濕潤的鮮血就像潤滑油一般使刀子順暢地刺入了男人的臉頰——並不是要害，而是在宣告這僅僅只是開始。<br><br>東餘光看見香西去沙發上坐下了便轉頭看了一眼，面上一半都被血糊蓋住了但大約仍然能辨識出他朝香西瞇著眼笑了，像是在跟他說「等我一下」。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">如果有人看過屠宰場殺雞的場面，那大概與眼前的場景相差無幾吧，東熟練地抓住男子的頭髮，先是試試手感的一刀朝著臉頰插了下去，緊接著又輕車熟路地用匕首隔斷那頸上的動脈，刀子在他身上肆意揮舞，仿佛精靈一般，只不過，是血腥的那種，汩汩鮮血從脖子泉湧而出，像是噴泉一般，打濕了東的衣服，還有幾顆血珠濺在和樂的臉龐上。<br><br>「怪、怪物......」<br>垂死的男子口中最後也只吐出這樣的話語，不知是對著殺死他的東，又或者是那坐在附近的和樂如此說道。那兩人的鮮血與體液在地上形成一個個大大小小的水窪，空氣中，如今只瀰漫著濃濃的鐵鏽味，在垂死之際，那總是自以為是的傢伙下半身也被黃色的液體給浸濕了，明明總是一副大男人的做派，但在此刻卻也尿濕了褲子，讓人不免覺得有些可笑，這些強烈的腥騷味與血腥味在空氣中混雜在一起，將父親帶進來的酒精臭味給排斥開來，鮮血浸濕了東握著匕首的手，濕漉漉到有些拿不穩了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">如此瘋狂而褻瀆的場景，那曾經只出現在恐怖片中的情況，此刻活生生地出現在和樂的眼前，雖然自己小時候也曾經出演過類似的戲碼，記得那時還被欺騙說只是歡樂的喜劇，卻在拍攝時被恐怖的橋段給嚇哭，當時的父母親還在一旁快樂數著錢呢，比起你會不會嚇到，究竟能夠獲得多少鈔票才是他們更關心的吧，可比起拍攝時上那為了配合劇情而有些浮誇的畫面，視覺、嗅覺、聽覺，這一切發生在現實中的感覺帶給你劇烈的衝擊，這是無論如何，即使想象了多少次，親眼看見時仍會顫抖不已的恐怖日常。<br><br>香西 和樂<br>請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=61 SAN (1D100&lt;=61) 獎勵、懲罰骰値[0] ＞ 11 ＞ 11 ＞ 極限的成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">成功扣1SAN。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">『不夠，還沒結束......和樂祖母的房間好像就在這前面。從以前開始，家庭氣氛經常是因為祖母而惡化，惡劣的婆媳關係、對和雄過分的溺愛，這一切的一切，因此和樂才會被父母當作壓力的宣泄口，每天感到自卑，從而痛苦不堪。這也是讓和樂痛苦的主要原因之一，無論如何也不能原諒......』<br>一道聲音如此在你心中響起。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">用褲管粗略地擦擦浸滿鮮血的刀，他的工作還沒有結束。<br><br>東像發現違禁品的緝毒犬一樣堅定地直直走向前面緊閉著門的房間。為什麼那傢伙還能夠好好地活到了那個歲數呢？<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">要不是那些噴濺在自己臉上的溫暖液體，他真的有種感覺自己在看一齣戲。<br>但視線裡那些紅的白的黃的液體、空氣中瀰漫的血腥味，都一再告訴自己這是現實。<br><br>儘管看著眼前殘暴血腥的殺人現場，香西卻不怎麼感到動搖。<br>感覺好像自己已經期待已久似的。<br><br>餘光瞧見東走到另一個房門口，他選擇了閉上雙眼。<br>深吸了一口氣，接著吐氣。<br><br>能夠呼吸的感覺真好。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你打開了那通往祖母房間的門，推開門的瞬間便看見一個滿臉皺紋的老婦人坐在靠椅上，眼神呆呆滯地看著電視的方向。她似乎一點也沒察覺到家裡剛剛發生的，那慘絕人寰的慘劇一般，即使聽見了開門的聲音，也沒有半點想轉頭的模樣，只是用銳利的聲音高聲呼喝道。<br>「英子！你這個賤貨！我的晚餐呢！」<br><br>請過偵查。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D100 (1D100) ＞ 21</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">祖母的臥房裡頭堆積著各種垃圾與雜物，在那些散落在地上的雜物中，東一眼就看見了一個莫名感覺十分眼熟的，白色的信封，那厚厚的信封邊緣因為長年累月的使用而有些微小的破損，那裡頭正裝著和樂這麼多年下來，省吃儉用為了逃離這個地獄的金錢，信封的正面還用原子筆，歪歪斜斜地寫著兩個大字『我的』，而你清楚地知道，和樂從來沒在信封上寫過這樣的字，他的字跡也不是長這樣的，或許正是她擅自進入你的房間，把它當成自己的東西給偷走了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">為什麼這些人都能如此理直氣壯地這樣對待和樂呢，東想不明白，也不需要想明白。<br><br>他輕輕應了老人的問話：「今天的晚餐被英子搞砸了。」語畢便將老人連人帶椅踢倒在地，居高臨下地注視著她。<br><br>「和你一樣什麼都做不好啊。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你是哪裡來的賤貨！快點滾出去，叫英子那婊子送晚餐過——啊」<br>話說到一半，她滿口污言穢語的嘴便被東給打斷了，整個人重重從躺椅上飛了下來。<br><br>「你、你這個垃圾，他媽是怎樣.....」<br>轉身從地上爬起，看著你渾身染紅的模樣，她的聲音不免帶了幾分顫抖，不過態度卻還是那樣依然故我。<br>「渣、渣滓——」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">香西攤在沙發上，斜眼看著東走進自己祖母的房間。<br>他當然知道東會做什麼，但那又怎麼樣呢，事到如今，一個兩個還是三個都沒什麼不同了。<br>聽著那些來自老女人的吵雜聲，他又再次閉上了眼睛。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東反手握刀，在老人還沒站穩之前直接了當地朝她的頸脖開了一道口，那口說淺不淺說深不深，大概正好是不至於讓人斃命的程度，但就這麼放著不管的話也會在數分鐘後死於出血或窒息吧。<br><br>似是祝賀一般，噴出的血在地上撒出了一道宛如聖誕燈串一樣漂亮的圖案，有些濺到了那枚不屬於老人的信封上。<br><br>東有些回過神，就這麼放著在地上嗆血掙扎的老人不管，把信封撿起來並試圖擦掉上面的血跡。想當然都是徒勞，信封上的深紅越抹越開，直到蓋住了上面寫著的、幾筆歪歪扭扭的字跡。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">直到你揮下利刃的那一刻，那老人才用不可置信的眼神看著你，遍佈皺紋的手掌緊緊地捂住那鮮血不斷汩汩流出的傷口，因疼痛而扭曲的嘴角似乎想說些什麼，但最終只化作唇邊與血液混雜在一起的、泡泡一般的白沫，眼珠也像是死魚一般瞪大卻無神。<br><br>「你...你...」<br><br>就像是殺死一隻早就已經半死不活、苟延殘喘的昆蟲一般，你那早已染血的刀子輕鬆地戳穿了滿是皺紋的皮膚，就像是一顆水球一般，裡頭的血肉輕而易舉地從裂口處流淌開來，軟爛的臟器與不絕的血液從皮囊裡頭流出來，除了對兒子外、似乎吐不出半點好話的嘴巴就此閉上，令人憎惡的眼神也黯淡了下來，癡愚地看向了天花板。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東把刀子放開任由它落在原處，兩手拿著那枚信封快步朝客廳走去，他此刻表情就如同一個剛結束快樂的夏令營後見到來接自己的父母的孩子一般，揣不住滿腔的歡喜想與家人分享。<br><br>「和樂的東西我拿回來了！」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「東西？什麼東西……」<br>聽見一陣雀躍的腳步聲，香西這才張開那雙緊閉的眼睛。<br>看著眼前的男人拿著一個紅色的信封袋，他困惑了一下，把信封袋接過後才發現到那紅色的信封袋之所以是紅色並不是因為本身的印刷，而是因為被血水給染紅才會是這樣。<br>注意到這個事實的同時，他瞪大了眼睛，下意識的鬆手讓那包信封掉到了地上。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在鬆手以前，你下意識地瞥了一眼那通紅的信封，你一眼就認出來， 雖然已經沾滿了猩紅的鮮血，但那正是先前不知被誰給偷走的、那你積攢了好久才存下來的錢，在滿目的緋紅底下，還有遮掩不住的、想來大概是祖母所寫的『我的』，那歪歪扭扭的字體。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">回過神來，經歷了這一切，即使你只是旁觀之人，可此時的你仍舊有些氣喘吁吁、心臟不自覺地飛速跳動著。剛剛無力的身體，如今力氣似乎也逐漸湧回身體裡頭，可你的指尖仍在微微顫抖著。雖然過去在遭受痛苦、被各種虐待時，確實曾經無數次想過要是家人與同學就像是電影裡頭，那樣被殺死、消失在這世間就好了，但當此般情景真的出現在眼前時，你仍不免有些顫栗。<br><br>你望向東那對異色的雙瞳，似乎蘊含著瘋狂的眼睛。可你也隱隱察覺，他的眼瞳中似乎還包含著另一層意味。<br><br>請過靈感。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=80 INT (1D100&lt;=80) 獎勵、懲罰骰値[0] ＞ 90 ＞ 90 ＞ 失敗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">WOW</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看著東那滿是混沌的眼睛，你不清楚他腦子裡頭究竟在想些什麽，但你能夠確信地知曉，他並不是為了純粹的愉悅或是快樂而做出殺人的舉動，也不是反社會人格什麼的。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在這樣日常又非日常的生活中，只有一直亮著的電視，熒光管與平時一樣發著有些刺眼的光芒。<br><br>祖母房間裡頭的電視，那畫面上仍然是棒球比賽的轉播。此刻依舊在播報著那場先前已經被逆轉的比賽，此刻已經到了第九局的下半，兩個人出局滿壘滿球數、天堂與地獄只有一線之隔的情況。<br><br>處於絕境的代打站在本壘注視著前方。離關門只差最後一步的投手也筆直地盯著本壘板。在觀眾的喧鬧聲中，投手終於舉起了球棒。面對著身後沒有後路的擊球手，棒球像箭矢一般投出。伴隨著清脆的聲響，打者用力地甩棒，把球給打回來了。那紅色縫線的小白球在空中劃出一道漂亮的弧線，越過了遠方全壘打的大墻。會場充滿熱烈的歡呼聲。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東對和樂的態度感到有些困惑，明明會讓和樂痛苦的存在都已經被自己抹除了，卻仍舊無法在和樂的臉上找到一絲絲的喜悅。<br><br>信封掉在了地上，東只好將它撿起又塞回和樂的手中，手上的鮮血也微微蹭上了和樂的手。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……」那包紅色的信封被再度塞回自己手中，香西皺起眉頭，這次把那包信封打開看了看裡面……看起來內容物似乎沒怎麼少，他鬆了一口氣。<br><br>確認完信封的內容物過後，香西重新看回眼前的東。<br><br>那人身上沾滿了血和其他本應流動在人體內的液體，見到東的那副模樣後，香西這才感覺剛剛視若無睹的腥臭味一鼓作氣衝上了自己的鼻腔，同時也為自己帶來了強烈的反胃感。<br>還來不及遮住嘴巴，那些才剛吞下去的晚飯及胃酸就這樣無情的湧了出來，不偏不倚的落在了面前的東身上。<br><br>真是糟透了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就算被吐了一身東也像一點感覺也沒有，只是著急地湊近詢問和樂的狀況，卻沒意識到自己現在太靠近和樂只會造成反效果。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你……先不要靠近我。」右手一邊推開東，左手則是摀住嘴，免得吐出更多東西。雖然感覺都已經吐完了⋯⋯</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東被和樂的手抵著，視線往自己身上看去，有一小朵一小朵沒消化乾淨的花椰菜正在順應著地心引力緩緩往下爬......。<br><br>「啊、」東這才有種自己闖了禍的感覺，快快地退開了一大步距離，又抖抖自己的衣服想把這些不該出現在身上的液體都抖下來。<br>「和樂有沒有......乾淨的衣服，我這樣好像......弄不掉...。」雖然覺得很不好意思還是這麼開口詢問了，只得越說越小聲。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「有是有……」香西把視線從東身上移開，免得增加更多反胃感。<br>他從沙發上站起身，接著說：「你直接去浴室洗澡吧⋯⋯我上去拿換洗衣服給你。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東左望右看一樓的滿室狼藉，好像是在猶豫什麼，就算被香西叫去浴室也遲遲沒有動身。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">起身準備離開客廳的香西也在同時間和東一樣注意到了一樓的慘狀，這才補了一句：「……你跟我一起上來吧。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東點點頭跟上了香西，不過始終小心保持著剛剛的距離。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">回到二樓房間後，看見自己的那沒有任何鮮紅色的房間突然感覺到了一絲安心，這也讓香西意識到自己剛才其實一刻也不想待在一樓那空間。<br>他走近衣櫃，接著挑了一件尺寸較大的衣服丟給了跟在自己身後的東。<br>「浴室在旁邊，可以直接用沒關係。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請過POW。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=65 POW (1D100&lt;=65) 獎勵、懲罰骰値[0] ＞ 68 ＞ 68 ＞ 失敗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D100  (1D100) ＞ 60</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在衣櫃中幫東找衣服時，你注意到自己身上濺滿了鮮血，雖然親眼目睹了剛剛的情況，身上沾染血跡也是蠻合理的，可那血跡的分佈，卻又莫名地有幾分像是你就是那下手之人一般。<br><br>但眨了眨眼，再仔細一看的瞬間，那些血就像幻覺一樣，消失得無影無蹤，只剩下原本就落在你身上的血痕。而你也無從明白，剛才那到底是怎麽回事？找了好一會，你才找到哥哥離家時忘記帶走的幾件衣物，東應該勉強塞的下吧。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在等待著和樂拿衣服給你時，某個剎那，你發現自己的身體好像瞬間有幾分模糊、消失在空氣中一般，整個人仿佛變成了一個除了思考，思考也都不會的透明人。除此之外，頭也傳來一陣強烈的痛楚。<br><br>在那劇烈的疼痛中，『我、我是不是某種東西的一部分？』，這樣古怪的想法不知為何從腦袋裡頭冒了出來。只是俄頃，你的頭痛又好了起來，仿佛一切都從未發生過。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">一瞬間的視力模糊差點讓東沒有接好香西的拋過來的乾淨衣物，東舒了一口氣，同時慶幸自己剛剛上樓前有把手上的不乾淨用屁股位置的褲子擦擦好(只有那部分沒沾上東西了)。<br><br>「和樂身上也......你不洗嗎？」剛剛的怪異感覺讓東現在有些微妙地不安，不是很想自己一個人待在別的空間，於是便在踏進浴室前回頭詢問了和樂。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「晚點吧，你先去。」<br>香西聳聳肩，接著把身上的制服脫掉，坐到了地上。<br>脫下制服的同時，他也順道摸了摸自己身上的襯衫，很正常……那剛剛的幻覺是怎麼回事？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我會洗快點！」東努力把剛剛的感受都拋到腦後，帶著換洗衣物進了浴室。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在目送東走進浴室以後，他的聲音隔著那廉價的白色塑膠門清晰地傳來，間而還有陣陣水花聲，在這簡陋破舊的房子裡頭，那隔音差到即使你看不見他的身影，卻幾乎能夠想象到他的一舉一動。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">坐在自己房間，一邊思考。<br>……現在該怎麼辦？<br><br>雖然不是自己實際下手的，但不管怎麼說，自己也是刻意視而不見了一場可怕的殺人現場。<br>他並不難想像人在殺了人之後會遭遇什麼樣的事情——逃亡，通緝，被捕，審判……還有更多的地獄。<br>說實話，他並不確定這些地獄是否有比今天之前的地獄要好，但他明白現在的喘息不過只是一時的逃避而已。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">……那麼東呢？<br>老實說香西直到現在也並不是很明白，為什麼東要為他做這麼多。或許只要自己張嘴，東或許也會很樂意幫自己頂下所有的罪過吧。<br>但這樣是不行的，他搖搖頭。不知道為什麼，感覺自己不能做出這種事情。<br>他和東是共犯，是命運共同體。<br>既然如此，不想被問罪的話就只有兩種選擇了——逃、或者是……。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">扳開浴室的水龍頭，溫暖的熱水從蓮蓬頭源源不斷地灑下，淋在皮膚上的感覺說實在和新鮮的血液也沒有太大的區別。東仔細地清洗自己，身上已經乾掉變成黑褐色的血跡大概是下午那個女高中生的，搞成這樣還是出生到現在頭一回——雖然說也沒有今天以前的記憶就是了——。<br><br>也不知道到底花了多長時間，終於是把自己整理成不會讓和樂再吐一次的程度了。東乾乾淨淨出了浴室，一下子就看見自己換下來那坨慘兮兮的髒衣服......等會兒應該得找地方處理掉吧。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">浴室裡頭的水聲終於結束，緊接著傳來簌簌的聲響，想來東此刻正在穿上和樂遞給他的，那哥哥遺留在房間裡頭的衣服吧，正如你今晨時也會將樓下母親的舉動聽的一清二楚一樣，雖然，那被稱作母親的人，此刻已經再也沒辦法呼吸就是了，做工粗糙的木質墻壁擋不住半點聲音。<br><br>隨後，和樂你便看見他頂著一頭濕漉漉的深紫色秀髮推開了浴室的門，還有幾縷劉海結成一綹在耳邊垂落，隱隱還可見頰上那因洗浴過熱水而染上的一層淡淡紅霞，不常見的雙瞳顏色在洗滌過後更顯明亮而通透。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽見有人走出浴室的聲音，這才從漫長的思考中回過神來。<br>看著東又是一副濕漉漉的樣子，香西感覺有些好笑，簡直就像一條洗完澡的狗。<br>他站起身來，打算從旁邊拿了條乾淨的毛巾丟給對方，這時，看見穿著自己哥哥衣服的東，他突然想起了自己似乎忽略了很重要的事情。<br><br>說起來，這件事應該要跟哥哥報備嗎？處在和自己類似立場的哥哥……應該能夠理解自己吧？<br><br>香西抓著手上的毛巾，又獨自思考了起來。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">香西抓著手上的毛巾，又獨自思考了起來。<br><br>——不……這些事不能讓哥哥知道，不能把他牽扯進來。<br><br>沉思了許久過後，他才抬起頭，把手上的毛巾遞給眼前的東：「……我去洗澡。吹風機在桌子旁邊，你可以隨便用。」<br><br>在把東帶進這個家裡的那刻起，自己就該為現在發生的這一切負責。他暗自下了這樣的決心。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">和樂在浴室裡仰起頭，任由蓮蓬頭中溫暖的水柱滌去身上的那些髒污，同時也想讓那流過的清水，理清腦海裡頭紛亂難明的思緒，在潺潺的水花聲中，即使再怎麼想將剛剛發生的一切暫且拋在腦後，可接下來該何去何從依舊擾亂著他的心懷，不絕的流水也無法洗刷那親眼目睹的，一切都被染上紅色的畫面。<br><br>『或許該逃跑嗎？』『可又能跑到哪裡呢？即使有車......』『或許就朝著郊外一路前進吧，能跑多遠是多遠，說不定還能看見那波光粼粼的湛藍大海？』<br>諸如此類的各種想法，在和樂的腦袋裡頭翻湧不止，晦澀難明。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">帶著各種複雜情緒淋浴完後，香西走出浴室。<br>看見東正用著自己的吹風機吹頭，有一種難以言喻的感覺，感覺自己好像已經很久沒有同輩？或是朋友？待在自己房間了……不，要說的話或許一次也沒有吧。他本來就沒什麼朋友。<br>雖然連能不能稱呼這人是朋友也有待審議就是了。<br><br>香西一邊用毛巾擦著頭髮，一邊坐到了房間地上。<br><br>「說起來……你還會餓嗎？」<br>想起剛剛發生那一些事情過於急促，自己也沒能帶食物上來給東吃，自己吃的部分也全吐掉了……</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">聽到香西這麼問，東關掉了吹風機。本來就挺餓的，雖說剛才礙於場面聲音味道都有點讓人想不起這回事，但總歸是消耗了不少能量，洗好澡之後一聽到餓這個字感覺肚子又要開始鬧起來了。<br><br>「可以吃得下一頭牛」東笑得開朗。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那、出去吃？」<br><br>香西回想起自己回家路途，總是會經過一台賣拉麵到深夜的餐車。每次經過，那香味總是會讓自己不自覺的流口水。<br>但，不知道算好事還是壞事，母親總是會準備自己的飯菜，他幾乎沒有任何機會能夠享用外食。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「好啊！」說起拉麵，東的眼睛頓時閃閃發光，濃厚的湯底、軟嫩的叉燒、筋道的麵體......拉麵的每一樣美味之處在腦海一一浮現......。<br><br>明明知道拉麵是什麼味道，卻不知道自己是誰呢。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">雖然每次晚上路過時，那熬了許久的高湯飄散在空氣中的香味，以及稍微炙燒過的叉燒香氣總是會在你鼻尖徘徊逗留，仿佛要勾引你一般，可一想到要是去吃了的話，就算回到家裡頭還是吃了晚餐，恐怕媽媽一聞到衣服上的味道，便又會暴跳如雷，說些『你都沒在意飲食管理試鏡怎麼辦』『亂吃外面的東西對得起媽媽我嗎』之類的話語，便被迫打消了進去的念頭。<br><br>思即於此，你們簡單地收拾好了東西以後，便決定將那幾具業已冰冷的軀體拋在腦後，先去拉麵屋吃點什麼吧，至於下一步要怎麼辦，或許也就交由吃完的自己去決定了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">走出門外，即使那惱人的梅雨已然停歇，可夜晚的穹頂依舊被濃濃的陰翳鉛雲給籠罩著，就連最耀眼的天狼星都看不見絲毫蹤跡，呈現在眼前的，就是這麼一幅星月無光的繪卷。周圍的住宅是一片悄然無聲，也沒有多少入住的人家，即使有，在三更半夜的此刻，恐怕也早已入睡了吧。除了三不五時從屋簷滴落的水珠敲打在地板和瓦片上的聲音外，就再也沒有更多的聲音落入你們耳中了，久未修繕的路燈也都黯淡著，只有幾盞還苟延殘喘著，在夜幕中閃爍不定、忽明忽滅。附近唯一比較穩定的光源，大概也就只有家門口對面的那台自動販賣機了吧——之所以記得這個，是因為那眼下躺在客廳地板上的傢伙，有好幾次酒醉都會抱怨著那台機器怎麼沒有賣啤酒、冰箱裡頭的不是他喜歡的款式云云，而此等小事往往又會是另一場夢魘的開端，間奏是各種物品在爭吵中被摔碎的聲響，直到其中一個人醉倒在地或是受傷逃離現場才會宣告落幕，當然，在那之後，和樂與和良往往就會變成敗者傾瀉怒氣的對象，身上又再次增添幾筆或青或紅的印記。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在接過和樂手中的安全帽，正要跨上後座時，你不知為何一陣寒毛倒豎，驀地感覺到一股不知道源頭來自何方的可怕目光。<br><br>只是下一剎那，你便發覺，那詭異的灼人目光好像是從腳下傳來的，小心翼翼地往足邊一瞧，那兒有的只是一個水坑而已。而且再定睛一看就再感覺不到視線了，仿佛剛剛的感覺只不過是一場幻覺。不過雖然如今已經感覺不到盯著你的那古怪目光了，但比起『被注視著』，或許用『被盯上了』的感覺來形容好像更加確切吧，在你心中湧現的，就是如此這般，令人不適的感覺。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">外頭已然是漆黑一片，這也不意外，畢竟已經是深夜時分。<br>回想了一下攤車的位置，距離這邊有一點距離，那乾脆還是騎車去吧。安全帽……應該是有兩個吧。<br><br>「我去牽車過來。你在這裡等我一下。」<br><br>一邊說著，一邊走到停車的地方，把那台哥哥留給自己的機車從停車棚裡牽了出來。最近沒有怎麼騎，應該還能發動吧？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">和樂居然會騎機車...！除了殺了他爹媽以外東第一次感到有點興奮。和和樂在深夜騎車出去吃拉麵就好像普通朋友一樣呢！除了我殺了他爹媽以外。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">確認引擎能發動，油箱也還有足夠的油後，香西直接騎上車，騎到了東的面前。<br>「上車吧。這是我第一次載人……但我會騎慢點的。」<br>一邊說，一邊把另一頂安全帽遞給了對方。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">接過香西的安全帽歡快地戴上扣好，正準備要上座的一瞬間，一股冷意由下而上竄過全身，東瞪大了眼睛盯著腳邊的小水漥，直到這個舉動變得比不自然更加不自然以後才眨了眨眼，重新扶著香西的肩膀跨上機車後座。<br><br>就算手指末梢仍因為剛剛的感覺有些麻痺而失溫，但東還是決定不告訴香西這些與他無關的事，好不容易才解決掉他的問題，要是因為自己的一些不切實際的幻覺讓他覺得麻煩的話也太沒有眼力見了。<br>現在最重要的，是拉麵才對！<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">隨著油門的催動，引擎的轟鳴聲與暗夜中那獵獵風聲在耳邊響起，在高速移動的物體上，和樂的幾縷淡紫色髮絲從安全帽的一角露了出來，隨著氣流飄蕩著，偶爾還有幾絲刮在身後東的臉頰上頭，輕輕地瘙著癢，身下的鋼鐵巨獸迅速前進著，仿佛這樣就能夠將那些煩惱與憂愁都拋在腦後，身上感受到的、只有颯颯的冷風與身邊人帶來的、那體溫溫暖的觸感。<br><br>騎了一小段路，你們便來到了那拉麵的推車之前，時間也已經不早了，當你們正要入座時，可以看見有好些客人已經吃飽喝足，身前的生啤酒空空如也，正要結賬離開了，只不過看見你們走近，老闆仍舊熱情地吆喝著、歡迎著你們。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">停好車後，香西站在店門口前，愣愣聽著老闆的吆喝聲。<br>雖然說是自己提出要來的，但……現在真的是悠哉吃拉麵的時候嗎？自己剛剛可是經歷了一場慘絕人寰的殺人現場。<br>然而，就在腦袋又開始胡思亂想的同時，嗅到美味拉麵味道的香西的肚子很誠實的發出了『咕～』的聲音。<br><br>……行吧，吃飯皇帝大。吃飽了再來想該怎麼辦。<br><br>這麼想著，他跨開步伐走近了推車，找了個位子坐下來。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">菜單上頭就是最基本的豚骨拉面以及各種加點的叉燒、溏心蛋等配料，當然，還有那些上班族下班以後必不可少的啤酒等飲料，雖然一看見那飲料的廠牌，和樂不免又想起那被遺留在家裡的、該稱作父親的那個人，身上總是瀰漫著的酒臭味。剛拉開坐下，老闆的吆喝與那十分濃郁、一聞就仿佛身體都暖和起來的香氣便迎面而來。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東跟著香西進到了推車的布簾內，從自己對這種環境的陌生感判斷自己應該此前是沒有來過這種地方的。 接下來應該只要向老闆點單就好了吧？<br><br>「您好，我想要豚骨拉麵特大碗加溏心蛋！」很好！很有氣勢地喊出來了，這樣應該不會被覺得是第一次來這種地方的小白吧！<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我一樣一份豚骨拉麵……加叉燒，普通份量就好。」聽見東的喊單，自己也跟著有樣學樣。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「好咧！」<br>似是回應著你的點餐，老闆一面大力甩著熱騰騰還冒著蒸汽的麵條，一面熱切地大聲回應著東道。<br><br>沒過多久，兩碗冒著豚骨香氣的拉麵便端到了你們面前，乳白色的濃稠湯汁上，蔥花與叉燒仿佛不用錢似的堆成了一座小山，一旁的溏心蛋也因為有加菜的關係，鋪了好多個，看起來讓人食指大動，即使是普通分量的大小，看上去也是那樣的豐盛，拉麵的湯頭是那樣的濃郁，卻不帶半分騷味和油膩的感覺，麵條的軟硬也是恰到好處，Q彈爽口卻又不至於太過軟爛。<br><br>「啊，是剛補習回來的嗎？辛苦了呢，這兩瓶可樂就當大叔請你們喝的。」<br>在上菜以後，老闆又從冰箱裡頭拿出兩罐冰鎮的可樂，玻璃的瓶身上還冒著沁涼的水珠。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哇！謝謝老闆！」看到端上來的大碗拉麵和可樂的東就像狗看到骨頭一樣眼睛閃閃發光，能吃到這麼豐盛的飯那麼先前的一切努力都值得了！<br><br>東拿起一組需要拆開的免洗筷，卻不得要領地讓其中一支只剩下一半能用，他慌忙看向和樂又看向老闆，好像沒有人注意到自己這項小小的失敗。因為拆壞了就再拿一個新的筷子好像有點太浪費了，這麼想著東只好在那根只剩半截的筷子找好受力點勉強拿來用。<br><br>外頭的冷風被簾子抵擋著進不來，在這屋台內只有令人放鬆的熱氣。溫暖的熱湯和麵條順著食道進入胃部，東此刻非常明白為什麼世上需要有深夜餐車這種東西存在。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">才在被端到自己眼前那碗豐盛的拉麵給香得流口水，又看見老闆又多拿了兩瓶可樂出來，放到自己面前。<br>感覺自己已經很久沒被這樣對待了，香西瞪大了眼，一時之間不知道該如何反應。<br>「謝謝……。」<br>雖然自己並不是剛補習回來的，也不是什麼好學生，但現在就老實的接受別人的善意吧。<br><br>道完謝後，他伸手把可樂和拉麵拿到自己面前，接著動起筷子吃了起來。<br>……好溫暖。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「不客氣不客氣——」<br>老闆瞇起眼睛笑著回答道。<br><br>鮮美的湯頭隨著你飲下的動作流進喉頭，整個身子也仿佛被那股暖流給席捲了，霎時間一掃先前感受到的各種煩惱與寒涼，至少在吃下這些食物時，可以暫且忘記那些痛苦吧......<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">將碗底的最後一點湯汁也都一飲而盡以後，時間似乎已經接近了老闆的打烊時間，其他客人們一個接著一個離去，吧檯後頭的老闆也開始收拾起那些餐具和廚房。<br><br>儘管先前的美食似乎暫時撫慰了受傷的心靈，可在短暫的溫暖以後，你們仍舊要面對那現實的酷寒。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">吃飽喝足過後，香西很順其自然的回到了剛才停車的位子打算牽車，但在拿起安全帽的同時，他又想起，牽車後……要去哪？<br>要回家嗎？不……說實話，實在不太想回去。<br>那還能去哪？<br>……還能，逃去哪？<br><br>僅憑他自己的腦袋實在無法想出個好辦法來，於是他抬頭看向在自己身旁的東，接著說：<br>「……接下來，該怎麼辦？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">雖然不知道現在該去哪裡，不過記得在通往市郊海濱的道路上，還有一家二十四小時營業的遊戲中心，在哥哥，和良，還沒離開以前，有幾次你們在爭執前夕趁機溜出家裡時，便是在那兒打發無事可做的時光的，只是隨著歲月流逝和設施的老化，再加上現在的人們更加喜歡手機遊戲帶來的光影刺激以後，聽說再過上一陣子，那棟遊戲中心大概就要關門大吉，從此熄燈打烊，變成其他的建築了吧，去那裡又或者去海邊看日出，說不定都還不錯嗎...至少、可以暫時逃離眼下的處境，逃得越遠越好......<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東大概明白香西的擔憂。<br><br>如果這個社會的運轉方式和自己認知的一樣的話，香西家中的那種慘狀估計不用多久就會被鄰居查覺到並且報警吧，而唯一生還下來且不見蹤跡的他自然就成了第一嫌疑人，反正到時候只要自己自首就天下太平了，香西應該不需要太擔心這些事才對。<br><br>但是在那之前的時間又該怎麼度過呢？自己這宛如今天才剛降生於世上的記憶顯然幫不上忙。於是又把問題拋回給了香西。<br><br>「和樂有什麼想去的地方嗎？」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「不……」香西思考了一下，接著搖了搖頭。<br>說起來，看這傢伙殺人殺得這麼順手，大概也不是第一次做這種事了吧……？不知道他之前都是怎麼逃離法網的。<br><br>想到這裡，不知怎地他突然回想起自己以前和哥哥去過的遊戲中心。在那裡，他可以和哥哥一起逃避那沉悶不悅的家庭……比起自己的家，那個吵雜的遊戲中心或許才是自己和哥哥的『避風港』吧。<br><br>這麼想著，就感覺有些懷念了。不知道那裡現在是什麼樣子。<br>既然也不知道自己和東能逃到什麼時候，乾脆就把這些有回憶的場所都去一遍吧。<br>彷彿像是世界末日的前一天一樣。<br><br><br>「雖然有點奇怪，但你喜歡……玩遊戲嗎？」<br>說出來自己都覺得有些荒謬，他的眼神瞥向了別處。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「遊戲...?」東一邊玩安全帽的釦子一邊努力思考這兩個字，不懂香西這時候為什麼要問喜不喜歡遊戲什麼的。<br><br>「如果是撲克牌之類的話......」說完又急忙補上一句：「但我可能很久沒有玩過了！為什麼問這個？」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「就是……附近有個能玩的地方。」越說越心虛，都死了三個人了現在還有心情玩嗎？<br>看著對方疑惑的樣子，最後香西放棄了思考。<br><br>「算了，別問那麼多。走了。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東疑惑地俯身向前說話時，那口中吐出的聲音與溫熱的氣流莫名地刮瘙著和樂的耳朵，過去落入耳中的往往總是那些冰冷的斥責嘲弄和兇狠的咒罵詛咒，上次有人這樣溫柔的對和樂說話，究竟要追溯到何時了呢？輕柔的話語就像是羽毛一般，輕輕地撫著和樂有些倉皇的心坎。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">機車在道路上飛速行駛著，除了車燈照射到的地方以外，前方視野所及盡是一片漆黑，靠在一起的兩人，接下來的命運，又會前往何方呢？<br><br>機車在遊戲中心附近停了下來，那建築的外墻在歲月沖刷下早已有些斑駁，用油漆粉刷上去的一些廣告也已褪色脫落，廣告看板上歡笑著的人們在夜幕之中顯得格外瘆人，正前方的霓虹燈招牌也有好些個字已經有些殘破，一幅年久失修的模樣，在寒風中忽明忽暗的。<br><br>走進遊戲中心裡頭，那玻璃自動門一打開，迎接著你們的便是那五光十色的燈影和各種喧鬧的遊戲機台、此起彼落的廉價特效聲在耳畔不斷逡巡，只不過都到了眼下的時間，整棟建築物裡頭似乎沒剩下多少人逗留的模樣，好些吊在頭頂的日光燈也陳舊不堪佈滿了灰塵，在空間裡頭留下一片又一片的巨大陰影，原本應該白淨反著光的地板早就不知道經歷了多少事物、又有多少人在此留下恣意的歡笑和意外翻倒的飲料，也染上了一層不知成分為何的灰色。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">從進門開始東就像鄉巴佬一樣東張西望，電子遊戲機發出的光和刺耳的機械音效對他來說再新鮮不過。<br><br>「原來遊戲廳裡面長這樣！」<br>他只顧著到處看那些會發出聲音的機台和那上面誇張的殭屍圖畫，差點就忘了跟上香西的腳步。<br><br>「和樂喜歡來這裡嗎？」<br>東趕忙走近香西，有些不好意思地發問。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「也不算是喜歡吧，就是以前偶爾會來。」<br>香西沒有特別留意到處亂跑亂看的東，而是也環顧著整個遊戲中心。要說懷念是挺懷念的，但這樣一看還真是變得有些破舊了，再加上或許是自己也在逐漸成長，以前覺得又大又寬廣，像是一整個全新的世界一般的遊戲中心，在現在的香西眼裡看上去不過就是普通遊樂場所。<br><br>「你有什麼想玩的嗎？」<br>他摸了摸口袋那包裝滿了自己儲蓄的信封，想著放縱一下應該也無妨吧。<br><br>反正也不知道能逃到什麼時候。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東此時的注意力全集中在一旁射擊外星人的遊戲機上，延遲了三秒才接收到香西的提問。<br>「啊、嗯！我想想......。」他的視線從香西的臉又回到那台機身龐大並配著兩把槍，且不停在發出怪物悲鳴聲的射擊遊戲上。<br>「那個也是能玩的嗎？」他指著那台機器看向香西詢問。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「嗯？喔……是啊。」要說真不愧是殺人魔，果然會對這種暴力的遊戲感興趣嗎。<br>香西走進那台遊戲機台，投了幾個硬幣進去遊戲機裡，接著拿起了那兩把槍，一把拿在自己手上，另一把則是反手朝著東的方向，示意要人接過去。<br>「記得這可以兩個人玩吧，嗯。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">凌晨時分的遊戲中心，就連工作人員都沒看到幾個，畢竟再過不久可能就要結束營業了吧，沒有多少顧客的情況下那些開支也都盡可能被節約下來了，至少你放眼望去，除了東和和樂兩人之外，就再也看不到其他人了。<br><br>周圍五光十色、不停閃耀著的遊戲機台燈光，照射在你們倆身上，還有那爛俗的音樂，重複在耳邊循環播放著，又增添了這偌大卻無人空間的寂寥與空虛感。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東難掩興奮地從香西手裡接過那把塑膠槍，酷炫的造型加上比想像中更加沉甸的重量讓他情不自禁把槍翻來翻去欣賞。<br>「我還沒用過槍呢......」他小聲喃喃。<br><br>隨著一聲代表著遊戲開始的機械音響起，東握好槍柄，眼睛也被閃爍著五顏六色的電子螢幕映照得閃閃發光。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你們坐在那外表破敗，看起來已經有些年歲的遊戲機台前，那是個被看起來像是槍戰遊戲的遊戲機，外側還有著許多僵屍、鬼怪之類恐怖怪物的插圖，雖然都已經有些斑駁褪色，但這應該是以前男孩子之間十分流行的那種，只要拿起塑膠製成的假槍，就可以隨著射擊時的震動與刺耳的各種音效，讓人體驗仿佛身曆其境的射擊、從四面八方襲來的諸多僵屍與怪物的遊戲吧，手中的槍隨著你們扣下扳機，在熒幕上發出一道又一道的光束，將那些惹人厭的怪物仿佛雜草一般打倒，記得這過往也曾經風靡一時，不管什麼時候，都要排上好一段時間才能玩到，下課時也總能聽見同學們相約去玩的主意，不過當然的，和樂總是被冷落的那個 ，可在哥哥離家以前，也曾拉著你一起排隊、就為了能玩上一會。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請過DEX。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D100  (1D100) ＞ 33</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=70 DEX (1D100&lt;=70) 獎勵、懲罰骰値[0] ＞ 62 ＞ 62 ＞ 通常成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在震耳欲聾的特效槍炮聲與瘆人的背景音樂中，你們很快開始了一場新的遊戲，看著迎面而來的那些妖魔鬼怪，長大嘴巴朝著你們撲來的僵屍，還有隨著扣下扳機的動作，和剛剛真實發生的情狀相比顯得那般虛假的血液噴濺特效，雖然在這種情景下怎麼想都感覺有些不真實，但，距離上次有人陪你一起玩耍，那已經是多久以前了呢？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在吵吵鬧鬧中的你們倆，就像是長不大的孩子一樣，不，應該說現在不也還是個孩子嗎？只是從不知何時起，被那些痛苦覆上了一層業已結痂的疤痕，忘記了微笑的模樣而已。<br><br>在鬧騰還有兩個人手腳時不時互相撞到一起之下，儘管你們一開始還有些不習慣，但很快地就莫名有了絕佳的默契與配合，仿佛心有靈犀一般，很快地便漸入佳境，即使後面的關卡越來越難，你們卻反倒更加得心應手了，那宛如潮水襲來的僵尸們，在你們的扳機扣動下，一個接著一個地被畫面中代表著你們自己的人物給輕而易舉地收拾乾淨，在你們都沒想到時，便打到了關底，戰勝了大BOSS。<br><br>在機台的熒幕上面，顯示著你們最後得到的分數刷新的記錄，隨後便出現了讓你們得以填寫名字的虛擬鍵盤，雖然距離遊戲中心的最後一天可能也沒有多久了，但至少此刻，你們還能留下一些屬於你們的印記？<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">沒想到過了這麼久，自己居然還會記得怎麼玩這些吵吵鬧鬧的遊戲。<br>香西看著螢幕上顯示著大大的『YOU WIN』文字，突然感覺忘記了之前所有在煩惱的事情。<br>他難得露出了放鬆的笑容，將手掌打開，朝向了站在自己旁邊的東。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東看到斗大的像素字體顯現在螢幕上，還沒反應過來這代表什麼便看向和自己並肩作戰的香西，他正向自己舉著手掌，東頓時笑顏逐開，和香西來了個大大的擊掌，就是手勁沒太控制好，發出了響亮到不正常的拍擊聲。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「等等等很痛。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「抱、抱歉！！！」東趕忙放下玩具槍兩手握住那隻被自己拍紅的手掌揉了揉，與香西的友情勝利擊掌行動宣告失敗。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「沒事。別揉了。」甩了甩被揉的那隻手。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東有些尷尬地收回手，尋找能轉移話題的目標。<br>「這個要輸入名字的...和樂想寫什麼呢？」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「嗯？」香西看了一眼螢幕，這才發現那機台似乎正在等待著玩家輸入名字以記到排行榜上，但老實說他也並不是很在意這種東西，問他要輸入什麼，他還真的不知道。<br>「輸你的名字不就好了？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「機會難得！就寫和樂的名字吧！」<br>東操作著機檯上的按鈕，但因為不懂操作辦法連點了好幾個A，想消除又不知道怎麼搞得直接點了確定。<br>「怎、怎麼辦！我們變成AAAAA了...」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……也行吧。」香西看著排行榜最上方那斗大的『AAAAA』，不禁苦笑了一下。<br>「反正留下名字也不太好，將錯就錯。」他聳聳肩。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">請過 POW。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=65 POW (1D100&lt;=65) 獎勵、懲罰骰値[0] ＞ 99 ＞ 99 ＞ 失敗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D100  (1D100) ＞ 65</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">正當你歡快地遊玩完機台，正要從上頭走下來時，一道仿佛雷擊般的疼痛倏忽襲上腦門，還等你整個腦袋疼痛得像是要裂開來一般。陣陣低沈刺耳的噪音在腦海中仿佛回響，刺激的你更加不堪，身體也不由得冒出了冷汗。<br><br>可在那雜音給你帶來的痛苦中，你隱約發覺到，那雜音並不是毫無意義的噪音，而有著什麼人說話的聲音——「幹得漂亮」「我會等你成熟」，在痛苦之中，你聽到了這樣的聲音。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就在你聳了聳肩，眨眼的那一剎那，卻驀地瞥見熒幕中本來應該倒映著的、那原來應該在那裡的東的身影，轉眼之間便消失不見了，熒光幕上、只有你蒼白的臉在昏暗的光線下投射在上頭。可當你連忙再度環顧四周，試圖尋找東的蹤影時，不知不覺間，他又驀地回到了你的身邊。只是雖然是熟悉的人影，身上也穿著一模一樣的衣服，可此時他的臉卻像被麥克筆塗鴉一樣，被亂七八糟地塗黑，除了一團漆黑以外，再看不見五官。<br><br>你嚇得連忙眨了眨眼睛，再定睛一看，這才發覺眼前東的的臉又恢復到原來的模樣了，仿佛剛剛所見的一切只是幻覺一場。<br><br>請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=60 SAN (1D100&lt;=60) 獎勵、懲罰骰値[0] ＞ 82 ＞ 82 ＞ 失敗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">失敗扣 1 SAN。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……？！」不太正常的景象在香西眼裡只出現了幾秒，隨後便恢復到一切正常。他不禁揉了揉眼，伸手摸了摸眼前的東，確認剛剛看見的只是幻覺一場。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東本想接著找下一個感興趣的遊戲，但腦袋突如其來的疼痛感讓他一個差點沒站穩，東只得扶著太陽穴忍受這股怪異的疼痛，等到腦中的雜音逐漸被遊戲中心吵雜的聲音取代回來，他發現香西的手正撫過自己的臉頰。<br>「和樂你剛剛...說了什麼嗎...？」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……不，沒說什麼。」下意識的捏了一下東的臉。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你指尖傳來的、東臉龐那溫熱而真實的觸感，順著手臂的神經傳回到腦袋裡頭，讓你原本嚇出冷汗的身體、稍微有了些許安慰、原本的恍惚與詭異感也因而轉瞬即逝。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「好痛痛痛、！」東的臉頰被揪紅了一小塊，不過也拜此所賜有些清醒了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你剛剛是怎麼了，生病？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東回想剛剛的狀況，不想讓香西多慮還是覺得不告訴他。<br>「我只是有點不舒服，而已！」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「這樣？」香西抬頭看著東，除了確認對方的狀況以外，也在回想自己剛剛看見的奇怪景象。那到底是怎麼回事？<br><br>「還要繼續玩嗎？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我想出去了...」明明剛才都還能忍受的遊戲中心的吵雜聲現在對東來說有些無法忍受，讓他出於本能地說出想離開的要求。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那走吧。」香西點點頭，畢竟也只是繞路來順便看看而已，他也沒有那種一定要玩個過癮的心情。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">正在快步走出遊戲中心時，胡思亂想著的和樂一個沒注意，腳步一陣踉蹌，腳掌踩到了不知道是誰扔在這裡的，一般已經有些發黃的文庫本小說，身體也差點因此重重摔倒。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">沒注意到腳下有東西，香西一把抓住旁邊的東的衣服，這才免於摔個狗吃屎。<br>「什麼啊……」站穩腳步後，他彎下腰，撿起那本差點害自己摔倒的罪魁禍首。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">將那書本撿起一看，你發現是本名為「化身博士（Strange Case of Dr Jekyll and Mr Hyde）」的小說。<br><br>請過圖書館。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=65 圖書館使用 (1D100&lt;=65) 獎勵、懲罰骰値[0] ＞ 91 ＞ 91 ＞ 失敗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">雖然這書名你似乎有點印象，可打開一看，掃視了幾眼以後，你感覺自己好像又不曾閱讀過一般，對這本書的內容沒有更多的記憶了。<br><br>只不過，在和樂翻閱著那文庫本時，意外發覺中間還夾著張紙條，隨著你翻閱的動靜，從書本的夾縫中飛了出來。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">紙條上如此寫著。<br><br>解離性障礙以前被稱為癔病，常常是由無意識積累的心理創傷和壓抑的欲望達到極限的結果，這會導致精神上的障礙。而離解性同一性障礙（多重人格障礙）便是離解性障礙的症狀之一，是指兩個或多個明顯區別於他人的人格，同時存在於一個人身上的狀態。<br><br>解離性障礙是指將本人無法忍受的狀況，當成他人的事來看待，或者把痛苦當下的感情和記憶相互分離，使其無法回憶起來，從而避免心靈受到傷害而引起的障礙，而解離性同一性障礙便是其中最嚴重的狀況，分開的感情和記憶會成長形成另一個人格。也可以說是人體面對到壓力時，本能防衛反應的過度表現。<br><br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……？」香西拿起從那本書中掉落下來的紙條，翻了又翻，是書的主人做的筆記嗎？<br>他把那張紙條放回了書裡。接著不知怎麼的，無意識的抬頭看了東一眼。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「？」<br>東歪頭對香西的視線表達疑問。<br>「不走了嗎？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">……沒可能吧。<br><br>「抱歉。走吧。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">正當你們走出遊戲中心的玻璃大門時，一輛重型機車的轟鳴聲自遠方接近，那艷紅色的機車上，一個苗條的身影穿著一身帥氣的連聲機車服，頭上還戴著一頂全罩式的安全帽，將整張臉裹得嚴嚴實實的。<br><br>只不過原本就要這麼呼嘯而過的機車在路過遊戲中心時，似乎是看到了楯的樣子，連忙一個甩尾，整輛機車在你們面前剎住，在高速行駛之下，胎皮甚至冒起了些許白煙，只見車上的女子一面跳了下來，一面摘下頭上的安全帽，一頭深褐色的秀髮從金屬罩下露了出來，白皙姣好的臉蛋也隨之浮現，只見面容精緻的她甩了甩腦袋，開朗地笑著對楯說道。<br>「誒...晚上好呀，這不是香西和樂同學嗎？怎麼這麼時間還逗留在遊戲中心裡頭呢？已經長大了、變成淘氣的孩子了呀？」<br><br>如果沒記錯的話，她是和樂你中學時的化學老師，名字記得是叫做「赤羽」的模樣，雖然印象不是很深刻，但她對學生們總是很熱情，雖然不是你的班導嗎，但也曾制止過幾次那些惡劣同學的不當行為。只不過這些年過去，她好像一點都沒有老去就是了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊……老師您好。」香西看向眼前的人，有禮貌的點了點頭。<br>但他的內心其實相當慌張。在這種時候遇到認識的人可不太好……打個招呼就趕快走吧。<br><br>「今天剛好跟朋友出來散個心，而已。」<br>他擺出笑容，掩飾起心中的動搖。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「誒？香西同學真的一切都還好、有需要老師的協助嗎？」<br>畢竟是凌晨出現在這種地方，赤羽老師忍不住親切地詢問道。<br><br>「不過跟朋友？香西同學現在不是一個人嗎？是朋友先離開了嗎？」<br>不知為何，她好像完全沒有注意到一旁站立著的東。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「…………」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……欸？」<br><br>他轉頭看向隔壁的東。<br>怎麼回事？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">只不過，在她又再次看向你的同時，她好像注意到了什麼，眉頭深深地蹙起，注視著你的臉龐，認真地開口詢問道。<br><br>「唔，不過，香西同學。你會有一種被什麼東西給注視著、被盯上的感覺嗎？」<br>「不是什麼偷窺狂之類的哦，不管怎麼說，那都不是好事，不如說、非常、非常的糟糕的。」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「…………什麼意思？」<br>香西的視線再次放回赤羽身上，他無法理解赤羽的意思，也無法理解現在是什麼狀況。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「雖然老師這麽說，香西同學你可能會以為老師我喝醉了，但你被一個超級~可怕的怪物盯上了！」<br>雖然語調有點浮誇，但老師的表情卻是一副非常認真的模樣。<br>「不過這是真的哦！那個可怕的妖怪，會以人類內心的痛苦為自己的食糧……說的難聽一點，就是呀、它喜歡瘋狂呢，會出現在那些精神狀態虛弱的人身邊的。」<br><br>「香西同學最近有遇到什麽困擾的事情嗎？老師會幫你的~」<br><br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「怪物？你到底在說什麼？」<br><br>香西下意識的後退了一步。不知道為什麼，他感覺不能再繼續聽下去了，再知道更多……就越會發覺自己不想知道的事情。<br><br>但，逃避這些事情又能逃避多久呢？他真的能和人求助嗎？<br>如果求助有用的話，又為什麼會落得現在這種局面呢？<br><br>他困惑的皺起眉頭，視線在東和赤羽之間徘徊。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「嗯嗯怪物！是個有很多眼睛的、奇怪的怪物！那傢伙以人們的瘋狂與痛苦為食......香西同學肯定也有感覺吧？」<br>赤羽老師又重複了一次，十分認真地說道。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東一時沒有辦法理解兩人的對話，看到香西動搖的樣子，他扶住了香西的一邊手臂。<br>「和樂，你們在說什麼？我不是一直都在這裡嗎？」<br>他轉而面對這個叫赤羽的女人：「不好意思，如果沒有事的話我們要走了！請不要擋在這裡。」<br>雖然說得堅定，但是聲音卻有些沒控制好的走調。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">他似乎完全沒有發覺站在一旁的東，只是自顧自的說道。<br><br>「真的沒有感覺嗎？唔，好吧。不過如果有需要的話，香西同學你隨時可以打老師的電話的！」<br>赤羽老師歪頭思索了半晌，隨後繼續說道。<br>「不過老師先告訴你要怎麽做可以，才趕走那個怪物好了！只要你忘記內心的痛苦就可以了！只要這樣做，怪物就會對你失去興趣，自己離開的！」<br><br>「啊！這樣好了，老師啊，有一直珍藏著的東西想借給香西同學！吶，給你！」<br>她一邊說著，一邊從從包里拿出一個手掌大小的白色立方體，交給了和樂。<br><br>「這個很厲害哦！如果想要忘記什麼討厭的事情，只要向它許願，就能夠馬上忘記的，全部的全部都會忘得一幹二淨！有時候在工作中遇到不愉快的事情時，老師也會偷偷使用它的。」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">雖然聽見了旁邊的東說著想走了之類的話，但香西仍然站在原地，他困惑的看著手中被塞來的奇怪的立方體，手撫過那物體的表面，一點也感受不出這東西有多厲害。<br>「這又是什麼？」<br><br>能用這東西來忘記內心的痛苦？<br>聽赤羽講的好像很簡單，但是真有這麼方便的事嗎？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「就像老師剛剛說的，是可以忘記一切煩惱的東西呢！老師自己也常常使用它的！香西同學也可以試試看哦。」<br><br>話說到一半，只見老師看了看自己的手錶，又連忙說道。<br>「呀，我好像該去載我男友上班了，那麼香西同學如果有什麼問題隨時都可以找老師的哦！然後不管有沒有用，之後都要記得還給老師我呢~那麼就先再見啦，掰掰——」<br><br>語畢，她便匆匆戴上安全帽，英姿颯爽地跨上了機車，朝著市中心狂飆而去。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">如果和樂使用了這個東西，他身上那瘋狂引發的防衛反應，包括你自己在內的痛苦，或許都能夠忘記吧。而和樂也許也得以藉此讓他自己，得以免受那些盯上你的怪物牽連。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「和樂你......相信她的話嗎？」東沒有鬆開抓著香西手臂的手，反而像害怕被甩開一樣，有越抓越緊的趨勢。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「什麼話……」<br>香西抬頭看向東，又看向赤羽離開的方向。<br><br>為什麼那人一副沒有看見東的樣子？東……是真的存在嗎？<br>如果不是的話，那自己所見到的所經歷過的又都是什麼？<br><br>他的腦袋頓時閃過自己家中那慘絕人寰的殺人現場。<br><br>如果東不存在的話，<br>那不就，代表——<br><br><br>「……我不相信。」<br>怎麼可能會相信。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「對、對吧......。」<br>明明自己是來幫助和樂的，還殘留在記憶裡的血與肉的溫熱觸感也可以證明這一點，怎麼會到頭來反而成為了禍害呢？<br><br>一個突然出現並丟下一堆奇怪話語就走的女人，無論說了什麼都很難讓人信服吧。但是只要一回想從擁有記憶以來就不停遇到的，那些不知來自何人的聲音、轉瞬即逝的怪異感......。<br><br>他伸手覆上了香西手中的白色立方體，並把它往香西的懷裡推。<br><br>「這個東西，先收好吧。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……嗯。」<br>香西抬頭看著東，接著把手上的立方體放進了口袋裡。<br><br><br>兩人站在馬路旁邊，這時突然一陣風吹來，帶著潮濕的鹹味，香西這才意識到原來這裡離海邊已經不遠。<br><br>說起海，就是生命的起源，海孕育著龐大的生命力，同時也帶有一股吸引人的魔性……彷彿只要看著海，就能感受到自己的所有思考都是如此渺小。<br><br>「……要去看海嗎？」<br>等到回過神時，他已經脫口而出了這句話。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看著香西收好了立方體，東像鬆了一口氣一樣把手垂下。<br><br>他也感受到了那陣風，夜晚海風的味道、被吹到臉上搔著自己臉頰的髮絲，無一不在證明自己是一個活生生的人類，東努力用著所有感官去體會。<br><br>在和樂的痛苦完全消失之前，再待一會兒吧。<br>「走吧。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你們騎上那車身的鈑金已經有些破損、可處處仍可見其主人精心保養的機車，狹窄的座位幾乎容不下兩個人同時舒適的坐著，坐在後頭的東必須得緊緊抓著前頭的和樂，才不至於從因那顛簸崎嶇的路面而時不時震蕩起伏的車上跌落，一路朝著東方騎行著，清晨時分耳邊颳過的強風撩亂了你們的髮絲，在呼嘯而過的氣流聲中，你們除了彼此的語句，再也聽不見更多的聲響，海風中還夾雜著淡淡的鹹味，在高速前進著的同時，周圍的空氣仿佛包裹了你們一般，形成一個獨屬於你們二人的微小世界，雖然朝陽還要好一會才會升起，可遠處道路前方，那海灘附近的天際線邊已泛起一抹淡淡的魚肚白。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">沒過多久，於霏微的晨光中，機車在沙灘旁邊緩緩停下，腳下踩著的砂礫隨著你們的腳步，在耳邊沙沙作響，清晨偌大的海濱除了你們倆以外空無一人，湛藍的海水規律地拍打著海岸，潮起、潮落，濺起的浪花在海面上最後化為一個個白色的泡沫、漸次消亡，又被下一道浪潮給拍打在岸上，不知不覺間，暖黃色的朝日已從海平面上緩緩浮現，溫柔的晨光映照在紺碧的海面上，此般波光粼粼的景象，想必無論是誰的心靈，都會在如此夢幻的光景下被洗滌乾淨吧。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">踩在黃白色的沙粒上，香西看向那漫無邊際的藍色大海，現在這時間附近也沒有任何人，他感受到了一股前所未有的寧靜。<br>5月的海風從寒冷逐漸轉變得溫暖，顯示著季節的轉換，他並不討厭冬天的海邊，但是更喜歡現在這樣適中的氣溫。<br><br>距離天亮還有一點時間，就這麼逃避現實也不錯吧。<br><br>他把自己的鞋子脫掉，踩在波浪打上沙灘的交際線上。<br>雖然說已經正在逐漸增溫，但海水對自己來說，果然還是有些冰冷。<br><br>「喂，你要不要也來踩踩水？機會難得。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東本來還在離水邊有些距離的地方呆呆地望著遙遠的海平線，聽到香西的聲音他順著看過去，香西已經拎著鞋子站在浪花夠得著的沙灘上了，清晨的海邊沒有任何人工照明，香西的身影彷彿要融入那抹還未完全升起的鵝黃色中。<br>雖然沒有任何概念，但東覺得這副景象也許就是本該屬於香西和樂的青春吧。<br><br>沒有讓香西等太久，東也脫掉自己的膠靴，將過長的褲管捲起，一起踏進岸邊淺淺的海水中。<br>輕柔的浪花時不時拍上他的腳背，又帶著那些被捲上的沙粒回到大海中，觸感奇妙，這也是自己從未體會過的。<br><br>要是自己能繼續這樣以人類的身分和和樂一直在一起，接下來一定還會接觸到更多新奇的事物吧。這麼想著，東開始對那些被帶走的細小沙粒產生了一絲留戀。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">香西看著東脫掉靴子，踩在海中的樣子，有一種無法言喻的奇妙感覺。<br>感覺一切都不太像真實。從幾個小時前的命案現場，再到剛剛的遊戲廳，最後是現在這片寧靜的海岸。<br><br>「……感覺全世界好像只剩我們兩個似的。」<br>他盯著沖向自己腳邊的海水，像是自言自語一般地說道。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在金色的晨曦之中，任由輕柔的海風拂著你的面頰，在如此舒適愜意、仿佛可以忘卻一切煩憂的景致下，和樂不經意瞥向了身旁的東，只見他的身影在逐漸亮起的蒼穹下驀地顯得有些虛幻。瞬間，你把手伸向東，試圖再次觸摸他的臉頰，確認他的存在。可你的手劃過天空，只撈起一片空蕩蕩的空氣，卻觸碰不到任何實物。無論你再怎麽努力、試圖去觸碰東，可你的手都像是接觸幻影一般，全數撲空。<br><br>此刻，雖然先前早有預料，可眼下你已切切實實地意識到了，東這個人自始至終根本不存在，唯一存在的，只有你自己的肉體。你看著眼前的東，那個在朦朧的晨光中有些虛幻的存在，只見他似乎還沒意識到一般，依舊講著自己的話語——又或者，只不過是你自己的話語？<br><br>所謂的東，或許也只不過是與你這個人格相悖離的另一種人格、另一種思考回路而已。東就是你內心那無處宣洩瘋狂的化身罷了，你不過就是為了在所有令人窒息的壓力面前保護自己，才造就了東這個片鱗。<br><br>請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=59 SAN (1D100&lt;=59) 獎勵、懲罰骰値[0] ＞ 36 ＞ 36 ＞ 通常成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">成功 扣 1 SAN。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……不對，要也是『只剩我一個人』。嗎。」<br>香西自嘲的笑了一下。<br><br>腳下的海水沖刷著自己的腳，但卻沒有沖上東的腳，就算有的話，那肯定也是自己的幻覺吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你是香西和樂先生沒錯吧。我們懷疑你是某起連環謀殺案的嫌疑犯。現在麻煩和我們走一趟了。」<br><br>就在此刻，你的身後傳來了嚴肅冷峻的聲音。回頭看，面前站著幾個人，其中一個正在向你展示著手中的警察手冊，其他幾個人身上也都穿著深藍色的警察制服，正滿眼戒備地盯著你的動作，只不過卻沒有半個人像是有看見你身邊東的模樣，每個人的瞳孔之中，都只有你的存在。<br><br>「在此我宣讀您的權力，您有權保持沉默......」他絮絮叨叨地唸起些文字，只是他究竟在說些什麼，你或許已經不怎麼在乎了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……」<br>香西看著眼前的警察，又轉頭看向站在原地的東。<br>他對著東，對著就算是在別人眼中是一團空氣的東——伸出了手。<br><br>「……走吧。」<br>他的語氣像是放棄了，又像是得到了解放一樣，聽上去很平靜。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「好。」<br><br>東看著香西反映不出任何東西的瞳孔，他也伸出手想覆上對方的。<br>兩隻手僅僅只是重疊到了一起罷了，算不上真正的牽住，但掌心仍舊傳來些許溫暖的觸感，就算全都是錯覺也無妨了。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">或許是幻覺，亦或是和樂你的腦子裡頭、潛意識生出來的，想要安慰你的產物，明明就是摸著空無一物的空氣，可你伸出手時，卻依稀可以感受到指尖末端，那人傳來的體溫以及淡淡的、微妙的觸感，好像真的碰到了什麼人，真的有什麼人此時此刻陪伴在你身邊，告訴著眼下的你和以前那被大家給遺棄在一旁時並不相同、並非孤身一人一般。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">但這一切又如何呢？<br><br>警察們冷漠地銬起了和樂，無論身邊的東做出了什麼動作，可此刻唯一能夠聽見的人，也就只有此刻已經仿佛行尸走肉一般的和樂而已。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">那將和樂銬起來的金屬手銬上，在眼角餘光中，好像也倒映著你們兩個人的模樣，可誰又能夠保證，看到的這些並不是只是和樂你自己那些虛妄的幻覺呢？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就這樣，你被塞進警車裡頭，被那行駛著的車輛送往了一個你從未知曉的去處，或許是少年拘留所之類的吧，反正，去哪裡好像也沒有那麼重要了。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">香西盯著自己被銬上的手腕。<br><br>他其實早有預感會變成這樣，就在當他無視目睹東的第一次犯行時，就在潛意識中覺得自己無法成為旁觀者。<br>而現在手腕上冰冷的觸感也正在無情的告訴他：何止自己無法成為旁觀者，他甚至早已是當事人。<br>是那個源頭的，罪魁禍首。<br><br>但是，不知道該怎麼說，也有種莫名的『原來是這樣啊』的感覺。他早就知道就算是擅長忍耐的自己，在這種環境中生活也遲早有一天會崩潰，就只是……時間早晚的問題而已。<br><br>但他沒有想到的是，自己居然幻想出了一個人格，一個能夠代替自己做骯髒事的人格？現在仔細想想，還是挺荒謬的。<br>再想逃避現實也該適可而止吧，他想。<br><br>他的視線飄向坐在身旁的東，接著用警察聽不見的音量小聲地說了句：<br>「……抱歉。」<br>如果自己是源頭的話，那還真是有些對不起他。<br><br>明明我才是殺人犯。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「為什麼這麼說，這不是和樂的錯。」<br><br>東也輕聲地回應，他撫上香西臉側的髮絲，動作溫和地讓人無法分辨究竟有沒有真的觸碰到。<br>「做了那些事的人從一開始就不是香西和樂，是東鳰啊。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……說不定你才是香西和樂，我是東鳰也不一定。」不知怎的，突然覺得有些好笑，他輕輕笑了一聲。<br><br>「那，你要陪我到最後嗎？不管到天涯海角？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看到香西的笑容，東本來還有些迷茫的情緒一瞬間全消失了。<br><br>「我一開始就是這麼打算的啊！和樂不會一點都沒看出來吧？」<br>就連這樣輕鬆的玩笑也能夠說出口了。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……是這樣嗎。那我確實是，有些太晚發現了啊。」<br><br>他閉上雙眼，感受著車子的搖晃。<br><br>剛才那舒服的海風，彷彿還殘留在鼻腔中。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">【幾天後】<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">待在暗無天日的拘留所裡頭，看不見外頭的景色，那用來辨別日光和月光也都幾乎被隔絕在外，時間的流逝感在眼下顯得格外模糊而漫長，時光仿佛跟空氣一起，凝滯停留了一般，除了那些法警們的呼喝以外，就只有不知道是誰留下來的、總是摻雜著諸多沙沙雜訊的收音機，能夠勉強提醒你眼下的時間了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">不知過了多久，你聽見收音機裡頭傳來了這樣的新聞報導。<br><br>日前在路上刺殺自己同班同學，繼而又將家裡所有人都滅口的男子高中生在羈押庭上進行了初步的審判。根據記者的調查，本案的嫌疑犯似乎曾經在許多電影中都有參與演出，早年是在影視界出名的童星，然而後來因為經紀人問題而逐漸減少了戲份、慢慢地過氣。由於種種原因，法院指派的律師指稱案發時，該名少年當時處在精神不穩定的狀況，不能夠與一般的正常狀況一概而論，況且又是未成年的身份，再加上過去遭遇的一些問題，以此為理由進行辯護，因此審判變得有些困難，再加上前不久的醫生鑒定，認為該名少年的確有精神障礙的問題，可以想見接下來的審判過程恐怕會聚焦於此，變得困難重重。<br><br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">對於如此可怕的滅門慘案，網路上也有不少人表達了意見，在輿論上引起了不小的迴響，諸如<br><br>『殺人就該償命！這種窮凶極惡的反社會人格不能放出來禍害世界』<br>『現在是每個人只要殺完人說自己有精神病就無罪了是不是，司法在哪裡？正義在哪裡！？』<br>『啊不就未成年好棒棒，還有精神病buff上好上滿呢，早知道我也趁成年以前、嘿嘿』</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">『我當年也是被父母打罵長大的阿，我也沒像這個人一樣！為什麼不公佈這種敗類的性命！』<br>另外，也有不具名的、據說是該名少年的同學在記者們的採訪發表了一些留言。<br>『他好像常常都一副自己是大明星，一副自以為是的樣子，都不跟我們有太多交集呢。』<br>『那個人一直都陰沉陰沉、怪怪的，好像沒什麼戲份之後就每天一個人在角落，跟大家都不太好的樣子，會發生這種事情也不意外嗎？被他殺的人好可憐......』<br>『我還在廁所看過他手上有、啊、就是那種痕跡啦，說不定他平常就是這樣演練的嗎？』<br>『霸凌？我們哪裡有霸凌他，大家都只是跟他玩而已，被他捅死的人也是，本來是個熱心的好同學的，誰想到好心沒有好報。』<br>另外學校的老師們也都說校園裡頭沒有任何霸凌問題，對於發生這樣的憾事感到很遺憾，雖然偶爾還是有幾則訴說你遭遇的霸凌情況、還有家裡頭各種問題的真實留言夾雜在其中，但轉瞬就像是被洪水沖走一般，不留半點痕跡。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">話說回來，明明就是在身上那麼大的東西，不過警察們就像是對東視而不見一般，不管搜身過多少次，也總是忽視了那麼大的一個存在，從來沒有從你身上搜出那赤羽老師送給你的，白色的奇怪立方體。<br><br>不知過了多久，你聽見法警拿著警棍，在鐵欄杆上敲打的聲音，口中還粗魯地喊著。<br>「你們這些死鬼，該閉嘴睡覺，不要再假裝精神病在那邊喃喃自語了，會被判刑就是會被判刑，沒有差的！」<br><br>隨後，他便關上了牢房裡頭的日光燈，將你們、又或者是你，留在了闃寂無聲的黑暗之中，在一片漆黑裡頭，你只覺得有些瘆人，可卻難以辨別那究竟是那奇怪的存在、亦或是周圍的氛圍帶來的幻覺而已。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">不知何時，你突然發覺，有個人影站在你簡陋的床邊，那人穿著一身印著複雜圖案的奇怪長袍，身形十分地古怪，也不知究竟是怎麼跑進牢房裡頭的，明明門還安穩的上著鎖，這裡也沒有窗戶什麼的，就這麼硬生生地憑空出現了。<br><br>即使你再怎麼極目想看清楚他兜帽下的面容，可他的臉被隱藏在那幽深的帽簷底下，仿佛看不見半點星子的夜晚，將所有光線給吸收了，就連輪廓都看不見一星半點。<br><br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在這幾天內，香西不是偶爾和東聊聊天，就是睡覺。<br>其實在刑務所的生活意外的也沒怎麼痛苦，甚至可能是自己這幾年來最能平靜的一段時間。至少自己不是一個人（但嚴格來說，可能是一個人就是了）。<br><br>直到某天，他突然注意到有個人影在床邊，起初香西還以為是自己的錯覺，但是當東也對那人影有所反應後，他才意識到是真的有個人站在那兒。<br><br>「……？ 是誰？」<br>他露出警戒的表情，看向那人影。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東起身擋在香西面前，他從來就不在乎別人看不看得見自己，即使在現在變成這樣他的職責也沒有改變。<br>「你從哪裡進來的？現在已經是熄燈時間了！」他沒好氣地詢問面前的陌生人，但因為怕自己聲音太大會害香西被罵，所以即便是面對這種狀況，也只能盡量壓低音量。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「你是 香西 和樂嗎？」<br>那男子、不、應該說是那傢伙用沙啞的嗓音，並沒有回答問題，而是如此詢問著你道，畢竟你連他的性別都難以確認。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……是。」<br>他看了一眼檔在自己面前的東，在內心吐槽熄燈時間是重點嗎？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在你回答之後，他才回答起了你們的問題。<br><br>「就算我告訴你我是誰、我從哪邊進來的，那對你們來說又有什麼意義嗎？反正你們既不知道也不重要，不是麼。」<br><br>你們可以注意到，他在回話時，用了複數的『你們』，而不是只有『你』。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「那，你為什麼在這？」<br>香西露出困惑的表情，這人是怎麼回事啊，說起來是人嗎？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我現在在這裡只是因為欠了你哥哥一個人情，不得不在此而已，如果你不需要的話，那我也就只能這麼跟你的哥哥，和良這麼說了。」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我哥？什麼意思？」<br>聽見那人的話，香西的語氣也跟著急躁了起來。<br>說起來，哥哥已經知道自己的事了嗎？……不對，不可能不知道吧。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「大概就是協助你，讓你擺脫刑罰、離開這個空間什麼的吧？反正他也只說是幫助你？當然，這一切端看你如何選擇就是了。」<br><br>「如果離開這個空間、又或者離開這個世界，去往另一個能夠安穩生活的地方，對你來說有幫助的話，我能夠帶你離開。我想，這可能就是和良希望我做的吧。」<br>那傢伙冷冷地、不帶絲毫感情地開口。<br>「當然，如果逃離這些罪愆對你來說不是救贖，只會讓你更痛苦的話，我也可以現在直接離開這裡的。」<br><br>「還是和良要我處理的是糾纏在你附近的那東西？哎......真是麻煩。」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「糾纏在我附近的東西……」<br>香西想起赤羽老師曾說過，自己附近有很多眼睛的可怕東西，是在說這個嗎？<br><br>「……要怎麼處理？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「要逃離那個邪神的話，嗯......除了忘掉你內心的瘋狂之外，把一切都扔得一乾二淨之外，就再也別無他法了吶，這才是最根本的解決之道。」<br><br>「畢竟如果他真的襲擊你的話，你可是赤手空拳、束手無策的呢，我恐怕也幫不上什麼忙就是了。不過，你似乎也已經有了相對應的有效手段了呢。不過，如果你真的想要選擇正面面對那邪神的話，你也得抱持著相應的覺悟才行。」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「忘掉我內心的瘋狂……」<br>香西不由自主的瞄了一眼檔在自己面前的東，內心的瘋狂……指的難道是東嗎？<br>但是忘了東什麼的，自己可不想……畢竟雖然說是自己幻想出來的人格，他也是這世上唯一會全心全意支持自己的人。<br><br>「難道……不能帶著他一起走嗎？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「如果那是你的選擇的話，我也不會干涉你的。」<br><br>眼前的身影並沒有因為你的語氣而多了半分憐憫，而是語氣不輕不重地、淡漠地回答道。<br><br>「不過正如我剛剛所說的一樣，如果你真的做出了這樣的決定，那麼你最好也有了與之相應的覺悟。」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東看著香西猶豫的樣子，本來還堅定著的眼神一下子黯淡了下來，他的雙手垂在兩邊，沒有去看香西的臉。<br><br>「那樣對和樂是最好的吧......我會在這裡本身就是不正常的事。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「什麼……你真的覺得這樣對我是好的嗎？少說謊了！」<br><br>不知怎的，看見東這放棄的樣子，香西內心湧起了一股莫名的激動。<br>他走到東的面前，直視著東的眼睛。<br><br>「不是說了要和我一起待到最後嗎？我明明……都已經做好了覺悟。」<br>就算是黑暗的未來也好，只要兩個人一起，說不定就能改變命運……他明明對此是深信不疑的，現在卻要自己忘記東嗎？</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東第一次看見香西這麼激動有些被嚇住了，但他仍舊對自己已經下的決定不死心，用比香西更大聲的音量辯論著。<br>「只要我在的話無論如何和樂都無法真正的自由的！」<br><br>「到頭來我什麼都沒做到，就連一起分擔痛楚也不被允許，這樣的話不如......。」<br>東放緩語速，但眼神裡已經沒有先前的消極。<br>「忘了我吧和樂，你的人生還很漫長，不能被困在這裡。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「如何？你們決定好了嗎？」<br>眼前的男人聽著你們的討論，雖然沒有什麼不耐煩的意思，但還是淡淡地問道。<br><br>「還是要我先送你們離開呢？」<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「離開……離開這裡嗎？」<br>香西看向男子，又看向東。<br><br>待在這裡的話，就是等著被法律問罪……但是就像東所說的，他的人生應該還很長。如果要問他想不想待在這的話，那肯定是不想。<br><br>他點了點頭，但又接著說：「……他也要一起走。」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「看來那就是你的選擇了呢，不過、這也與我無關就是了。」<br>那人輕輕地說道。<br><br>在你總算下定決心前往另一個世界以後，身前那帶著兜帽的神秘傢伙淡淡地點了點頭，緊接著只見他將手伸向了墻壁，墻壁轉瞬便像是泥土一般，開始大幅歪斜、扭曲變形成一個漩渦狀的結構，在漩渦的深處，是團看不清盡頭的、無垠無光的漆黑。<br><br>「你想如何處理你自己的瘋狂，處理那位，接下來，就由你自己決定了呢。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「啊對了，和良好像還要我給你這個，剛剛忘記了，真是抱歉。」<br>雖然話是這麼說，可他還是那副雲淡風輕的口氣，一點歉意也沒有的模樣，並遞了一張小紙片給你，上頭是哥哥那熟悉的字跡，只是或許是因為激動的情緒吧，有些地方的墨水都有些溢色了，好些地方還有不知什麼留下的、或許是淚痕的印記吧。<br><br>『和樂對不起...哥哥只是希望讓你可以快樂的，我以為我來得及的，結果我還是太遲了嗎...對不起......對不起......讓和樂你受苦了......』</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「吶，門已經形成了。接著只要穿過它就好了。這鑰匙就當做你的餞別禮吧，欠下的人情，這樣差不多也算是還完了吧。」<br><br>他這麼說著，一面將一把輝銀的鑰匙遞給了和樂。在收下鑰匙、手指碰觸到那物體的瞬間，關於這鑰匙的功用便神奇地在剎那湧上心頭，在你的心中清晰呈現。<br><br>在說完並將東西交給你以後，那傢伙在眨眼間，便從你們的眼前消失得無影無蹤了，就像他來時一樣，沒有留下半點痕跡。唯一留下的，只有和樂手中的鑰匙，和那墻壁上神秘的漩渦，證明了他曾經的到訪。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……走吧。」香西握了握手上的鑰匙，轉頭對東伸出手。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「......好。」<br>不知道自己的話香西究竟有沒有聽進去，但還是伸手握住了他的。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在你們手牽著手縱身一躍，跳進那神秘漩渦之中的瞬間，一股難以言喻的奇妙感覺和晦暗難明的黑暗籠罩著全身，但在俄頃以後，眨了眨眼，等到回過神來的剎那，你們已經站在從沒見過的陌生海邊了，也許，這裡就是另一個世界吧。<br><br>手中那熟悉的觸感依舊沒有變化、那牽著手、陪伴在你身邊之人，此刻依舊站在你的身邊。<br><br>和樂 SAN-1。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_12">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">[ 香西 和樂 ] SAN : 58 → 57</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哈哈……還真的出來了。」看著眼前一望無際的大海，他感到了前所未有的自由，不禁大聲笑了出來。<br>大概直到這時，香西才感受到自己真正意義的得到了解放。放下那些有的沒的，甚至也放下了奪取人性命的罪惡感，此刻的他感覺什麼都能做到。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在擁擠陰暗的牢房待了好幾天，一下子來到這麼開闊的地方令東有點不適應，剛剛還因為牽著手而有些溫暖的掌心如今被海風降低了溫度。<br><br>他第一次覺得身旁的香西看起來如此自由，彷彿此刻連地心引力也抓不住他。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">香西把鞋子脫掉，直接丟到了一旁。<br>他走進被波浪沖刷著留下痕跡的岸邊，感受著海水的溫度。明明前幾天也有來海邊，此刻的感覺卻和那時完全不一樣。真是不可思議。<br>他的靈魂彷彿抽離了身體，在這裡，他可以自由的放開自己。<br><br>他將手伸進海水裡，撈起一掌的深藍朝站在旁邊東潑去。<br>「你還佇在那裡幹嘛？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哇！等、等一下！應該還有更重要的事要做吧...！？」被潑了一手冰涼的海水，東瞇起眼睛本能地抬起手臂遮擋，雖然完全來不及了。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「哈哈哈！跟落水狗一樣！」看著被自己的行動弄得全身溼答答的東，香西放聲大笑，卻沒有注意到另一道更大的波浪正在朝自己襲來。<br>他一時沒注意到，就這樣被波浪給絆倒了腳步，跌坐在了溫暖的海水裡。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「和樂沒事吧？」東想去扶起半身泡水的香西，卻沒想到腳下的砂石被海浪一撥動，自己也沒穩住好重心地往下摔，海水濺了一身，全身上下已經找不到一處是乾的了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">只是，縱使那些罪愆已被和樂拋卻在腦後、留在前一個世界，可那沉甸甸地壓在心上的雲翳，不知從何而來的，冰冷地窺視著你的眼神，卻絲毫沒有減輕幾分，反倒是更加沉重了些。身邊溫暖的海水，也沒辦法滌去那縈繞在身周、目光中的寒意。在這朝陽升起的至暗時刻，即使跨越了無盡的空間，卻還是擺脫不了的怪物，仿佛也暗示著這眼下的歡快終將抵達其盡頭，到了最後，你仍舊得做出，屬於你自己的、最後的選擇。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">在兩人摔進海裡的同時，一直放在香西口袋裡的那個白色立方體也滾了出來。<br>說起來，赤羽老師說了要把東西還給他，但現在似乎也沒辦法再見到那個人了。<br><br>而他自己，大概也用不到這東西了。<br><br>他拿起那顆立方體，一刻也沒猶豫的，丟向身旁的蔚藍大海裡。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">看見香西往海中拋出了個東西，等到他反應過來那是什麼時，遠處的海水已經高高濺起東西落入的水花。<br><br>「你在做什麼！？」東慌了，他不顧一切地想要往水深處走去，卻被越來越高的浪花制止住步伐，他只能被迫往後退，最後一屁股跌回剛剛的地方。<br><br>「為什麼......？」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「反正也用不到了。」看著東慌張地想找回那東西，香西卻一臉無所謂。<br><br>「你不是說了，會跟我到天涯海角嗎？反悔了？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「我......我沒有...。」東垂眼低下了頭。<br>他果然不會照自己說的做，但東怎麼也沒想到他會就這樣乾脆俐落地把立方體扔掉。<br><br>「但是這樣一來和樂...你會被怪物給...。」<br>回想起那天不斷出現的、被控制被監視的束縛感，東還想做最後的掙扎，但轉頭看見香西的眼神，他又變得畏畏縮縮。<br>「沒有和樂想的這麼簡單的...一定。」<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">就在此刻，你們聽見了大海的深處，傳來了波濤湧動的聲響，在海平面的遠處，似乎有著什麼正在騷動的模樣。<br><br>在那難以忽視的情境下，你們不由得將原本逗留在彼此身上的目光轉向那漆黑的海面。只見遠處的水面正仿佛沸騰一般，翻滾膨脹著。大大小小的水花與氣泡不絕地從水下浮現，這詭異的光影讓人不由得懷疑是否還身處在夢境或是幻覺裡頭，可當你們眨了眨眼，再次認真望向漆黑的大海時，只見那翻湧的範圍益發擴大，一個難以想象究竟有多大的身影，從水面下仿佛拔山倒樹般浮現。<br><br>那怪物有著好像能夠吸收一切光影的漆黑身軀，在那碩大的軀幹上，數不盡的藍色眼睛盛放著鬼火似的光暈，即使距離有些遙遠，可你們依舊能夠清楚地感覺到，那些閃爍的眼瞳正仿佛打量唾手可得的獵物般凝視著你們。數不清的觸手扭曲交雜著，粗大的肢體上還沾滿了黏稠的液體，蠕動時那詭異瘆人的聲音不絕於耳。<br><br>你們的身體仿佛被打開了那作為生物本能的開關，被掠食者盯上似的，幾乎動彈不得，除了身邊人的體溫還能稍稍安慰自己以外，露在外頭的四肢只剩下一片冰涼。在那壓倒性的存在面前，你們心裡頭唯一能夠升起的想法，或許只有敬畏、害怕、絕望、還有仿佛蠟燭火光般的些許溫暖吧。<br><br>請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=57 SAN (1D100&lt;=57) 獎勵、懲罰骰値[0] ＞ 77 ＞ 77 ＞ 失敗</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=57 SAN (1D100&lt;=57) 獎勵、懲罰骰値[0] ＞ 15 ＞ 15 ＞ 困難的成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk otherCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">你在一片漆黑之中悠悠醒轉過來。<br><br>眼前什麽都看不見，腳下也沒有踩到實物的感覺。但你能夠感覺到心臟在胸腔裡頭不停的跳動，仿佛宣示著自己存活的證明一般。突然間，你意識到手裡頭似乎握著一個隱隱的東西，緊緊握著、嗑得你有些生疼，那似乎是那把神秘人給與和樂的，銀色的、神秘鑰匙。<br><br>奇怪的念頭開始在你在大腦裡頭打轉。如果說，這把鑰匙的能力，是能夠自由移動到另一個地方，甚至移動到另一個世界、另一個時間的話。那麽，如果是由你這個人格，這個片鱗來使用的話，是不是也能夠許下移動到真實世界的、諸如此類的願望？<br><br>使用或不使用由你來決定。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">和樂 請過LUK。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=65 LUK (1D100&lt;=65) 獎勵、懲罰骰値[0] ＞ 34 ＞ 34 ＞ 通常成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">和樂<br>請SC。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">CC&lt;=57 SAN (1D100&lt;=57) 獎勵、懲罰骰値[0] ＞ 32 ＞ 32 ＞ 通常成功</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">成功扣1D10 SAN。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D10  (1D10) ＞ 8</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_12">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">[ 香西 和樂 ] SAN : 57 → 49</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D10  (1D10) ＞ 1</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東緊緊握著出現在手裡的銀色鑰匙，雖然不知道自己也能不能夠像和樂一樣使用它，但現如今到了這個地步也只有試試了，就算是自己一廂情願也好，這是最後能保護和樂的機會了。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">那黑夜般的身體就像海嘯一樣襲來，就這麼淹沒吞噬了你們。無法呼吸的窒息感，難以承受的神經。驀地，你們仿佛斷線一般地，突然失去了意識。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「誒，你們兩個沒事吧？還好嗎？」<br>朦朧之間，你隱約聽見了一個少女的呼喚聲。緊接著，是海鳥的鳴叫聲和海浪拍打著沙灘的聲音。迷迷糊糊地睜開眼睛，你發現你此刻正躺在沙灘上，面前一個戴著草帽的黑髮少女正滿臉擔心地，焦急地地注視著你們倆。<br><br>「啊、你們醒了......有需要幫你們叫救護車嗎？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">突然，和樂看見了躺在旁邊的，同樣此刻才悠悠醒轉的鳰。<br><br>此刻他的樣子再也不是有些虛無的幻影了，灼熱的陽光打在他身上，在沙地上留下清晰的影子。只要伸出手，就能直接觸碰到他，甚至能感受到他身上的體溫、還有呼吸時流動的氣流，你們依舊身處在原本失去意識時的沙灘上，只是如今已過了破曉時分，那燦爛的太也陽已然升起。</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">而在這一瞬間，鳰也確切地感覺到自己已經真實地存在於這個世界上了，那些觸感是那樣的清晰、甚至隱約還有幾分陌生。冰冷的海風帶著些許鹽分，拂過你的鬢角，吹拂著你的長髮，腳邊細沙的觸感也是那樣的清楚。<br><br>在你們牽著手，兩個人的身體中央，一把斷成兩半的銀鑰匙掉在了地上。<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「……啊？」香西睜開眼，看見的便是另一片完全不一樣的風景。<br>他猛然坐起，摸了摸自己身體，又轉頭看了看身邊，看見那個熟悉的身影，不知怎的鬆了口氣。<br><br>「沒事吧？」</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">東慢慢撐起自己的身體，頭還有些疼痛，但不再是因為不知從何而來的異樣感，只是單純被早上的海風吹的頭痛而已。<br>「咦......」東坐起身，呆呆地盯著自己沾滿砂粒的兩隻手，連回話都忘了。<br></div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">「誒...你們倆怎麼了？是撞到頭了嗎？算了，我還是先幫你們叫救護車吧。」<br>雖然看著你們呆愣的模樣，似乎還是有些不解，但那名少女依舊好心地為你們撥打了緊急電話。<br><br>雖然沒有了身份證明，沒有人能夠證明你們倆的身份。今後的你們要怎麽在這樣的世界活下去呢？這或許也會是個問題吧。不過，無論你們想怎麽活下去，都將是你們的自由了呢。因為你正是為了能夠自由地活著，自在地呼吸著空氣，而與身邊的人一起踏入這個世界的，就算可能會遇到一些困難，但有身邊的人一起陪伴、一起面對的話，或許也就不是那麼令人煩惱了吧。<br><br>回過神來時，世界已經從六月過渡到七月了。那曾經盛放的紫陽花如今也已枯萎了，糾纏在身邊的濕氣也消失了，青色的天穹上萬里無雲，是個許久未見的好天氣呢。四處都刮起了乾燥燠熱的風。好像有些什麽東西被你們拋在了身後。<br><br>全新的夏日、全新的人生開始了。<br><br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_0">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">【片鱗 The End】<br>//</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_3">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D10+5 (1D10+5) ＞ 5[5]+5 ＞ 10</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_12">
+<div class="_leftCol">
+<div class="_actorImg _hidden"></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">[ 香西 和樂 ] SAN : 49 → 59</div>
+</div>
+</div></div><!--EOS-->
+<div class="_script" data-type="talk">
+<div class="_talk mainCh _actor_5">
+<div class="_leftCol">
+<div class="_actorImg "></div>
+</div>
+<div class="_rightCol">
+<div class="_actorName"></div>
+<div class="_actorWords">1D10+5  (1D10+5) ＞ 5[5]+5 ＞ 10</div>
+</div>
+</div></div><!--EOS--></div>
+</body>
+</html>
