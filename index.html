@@ -1,52 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
   <head>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
-<style>
-
-h1.n {
-    display:inline;
-    font-family: 'Noto Serif JP', serif;
-    font-weight: 900;
-}    
-.n {
-    display:inline-block;
-    font-family: 'Noto Serif JP', serif;
-    font-weight: 900;
-}  
-a {
-    text-decoration:none;
-} 
-a:hover {
-    text-decoration:none;
-}
-.btn {
-    border: 2px solid #0099CC;
-    border-radius: 6px; 
-    padding: 16px 32px;
-    text-align: center;
-    display: inline-block;
-    font-size: 20px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-weight: 500;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    background-color: white; 
-    color: black; 
-}
-.btn:hover {
-      background-color: #008CBA;
-      color: white;
-}
-</style>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+JP:wght@400;500;600;700;900&family=Huninn&family=IM+Fell+English:ital@0;1&family=Kaisei+Decol:wght@400;500;700&family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="design-b.css">
     <title>Ash希的TRPG團錄集中區</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
   </head>
   <body>
+
+    <header class="site-header">
+      <div class="site-header__copy">
+        <p class="site-header__title"><span class="site-header__name">𝓐𝓼𝓱</span>希的<span class="site-header__log">TRPG Log</span></p>
+        <p class="site-header__dedication">Dedicated to all my lovely PL.</p>
+      </div>
+      <img class="box-accent" src="site-assets/design-b/paperbox.gif" alt="">
+    </header>
+
+    <aside class="side-art side-art--left" aria-hidden="true">
+      <img class="side-art__image" src="site-assets/design-b/banner-left.png" alt="">
+      <img class="side-result" src="site-assets/design-b/critical-success.png" alt="">
+    </aside>
+    <aside class="side-art side-art--right" aria-hidden="true">
+      <img class="side-art__image" src="site-assets/design-b/banner-right.png" alt="">
+      <img class="side-result" src="site-assets/design-b/critical-failure.png" alt="">
+    </aside>
+    <figure class="top-banner" aria-hidden="true">
+      <img class="top-banner__image" src="site-assets/design-b/banner-top.png" alt="">
+      <img class="pixel-accent" src="site-assets/design-b/pixel-portrait.gif" alt="">
+    </figure>
+    <div class="outcome-pair" aria-hidden="true">
+      <img src="site-assets/design-b/critical-success.png" alt="">
+      <img src="site-assets/design-b/critical-failure.png" alt="">
+    </div>
 
     <h1 class="n">2020.Jun. —— 鬼屋（The Haunting）</h1>
     <a class="btn" href="【Ash希】鬼屋（CoC7）.html">團錄</a>
@@ -257,10 +246,26 @@ a:hover {
     <h2 class="n">　Credit to <a href="https://www.plurk.com/sventovyd">伊里</a> </h2>
     <br><br>
 
-    <h1 class="n">2025.Mar. —— 無盡食欲（もっと食べたい）</h1>
-    <a class="btn" href="https://docs.google.com/document/d/17djwM_CNwIyE9_NkUlqXlxxJrqDiKGqw3W2uRgPUBKs/edit?tab=t.0#heading=h.w1qhjmbkc8mk">團錄</a>
-    <h2 class="n">　Credit to <a href="https://www.plurk.com/sventovyd">伊里</a> </h2>
-    <br><br>
+    <script src="design-b.js"></script>
 
+    <!--
+      新增團錄：複製下方區塊到要放置的位置。若照目前新增方式排列，貼在最後一筆團錄後、design-b.js 載入標籤之前。
+      將日期、標題、連結網址與按鈕文字替換成實際資料；文件放在網站根目錄時，連結填檔名即可，外部文件則填完整網址。
+      日期格式沿用 YYYY.Mon.，例如三字母月份加句點；現有樣式也能辨識 June、July 等完整月份。
+
+      <h1 class="n">YYYY.Mon. —— 團錄標題</h1>
+      <a class="btn" href="團錄檔名或完整網址">團錄</a>
+      <br><br>
+
+      同一團錄有多個資源時，在同一標題下增加按鈕：
+      <a class="btn" href="角色導入檔名或完整網址">角色導入</a>
+      <a class="btn" href="其他文件檔名或完整網址">其他文件</a>
+      <br><br>
+
+      需要 Credit 時，接在相關連結後面；有連結的寫法：
+      <h2 class="n">　Credit to <a href="Credit網址">Credit 名稱</a></h2>
+      沒有連結時可直接寫：
+      <h2 class="n">　Credit to Credit 名稱</h2>
+    -->
   </body>
 </html>

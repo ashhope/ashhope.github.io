@@ -1,0 +1,326 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: #eee9df;
+}
+
+body {
+  width: 100%;
+  margin: 0 auto !important;
+  padding: 20px 6vw 5rem;
+  background: #eee9df;
+  color: #262a27;
+  font: 17px/1.75 "Noto Sans TC", sans-serif;
+  overflow-x: clip;
+}
+
+.site-header {
+  position: relative;
+  padding: 0 0 14px;
+  border-bottom: 1px solid #b9b8ac;
+}
+
+.site-header__copy {
+  width: fit-content;
+  max-width: calc(100% - 74px);
+  margin: 0 auto;
+}
+
+.site-header__title {
+  margin: 0;
+  color: #262a27;
+  font: 700 clamp(27px, 1.35vw, 35px)/1.25 "LXGW WenKai TC", "Noto Serif TC", serif;
+  letter-spacing: .015em;
+  text-align: center;
+}
+
+.site-header__name {
+  font-family: "Segoe UI Symbol", "Cambria Math", serif;
+  font-weight: 400;
+}
+
+.site-header__log {
+  margin-left: .18em;
+  font-family: "IM Fell English", Georgia, serif;
+  font-weight: 700;
+}
+
+.site-header__dedication {
+  width: 100%;
+  margin: .25rem 0 0;
+  color: #68685f;
+  font: italic 16px/1.4 "IM Fell English", Georgia, serif;
+  text-align: right;
+}
+
+h1.n {
+  display: block !important;
+  width: 100%;
+  max-width: 100%;
+  margin: 1.6rem 0 .35rem !important;
+  padding: .7rem 0 0 !important;
+  border-top: 1px solid #b9b8ac !important;
+  border-bottom: 0 !important;
+  color: #262a27;
+  font: 700 clamp(24px, 1.3vw, 34px)/1.5 "LXGW WenKai TC", "Noto Serif TC", serif !important;
+  letter-spacing: .015em;
+  overflow-wrap: anywhere;
+}
+
+.title-date {
+  white-space: nowrap;
+  font-family: "IM Fell English", Georgia, serif;
+  font-weight: 700;
+}
+
+.title-year {
+  font-size: 1.22em;
+  font-weight: 700;
+}
+
+.title-date-separator {
+  display: inline-block;
+  margin: 0 .12em;
+}
+
+.title-month {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.title-en {
+  font-family: "IM Fell English", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: .015em;
+}
+
+.title-parenthetical {
+  white-space: nowrap;
+}
+
+.title-ja {
+  font-family: "Kaisei Decol", "Noto Serif JP", serif;
+  font-weight: 700;
+  letter-spacing: .025em;
+}
+
+.title-paren {
+  font-family: "LXGW WenKai TC", "Noto Serif TC", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+h2.n {
+  display: block;
+  margin: .15rem 0 1.4rem;
+  color: #68685f;
+  font: 15px/1.65 "Noto Sans TC", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.btn {
+  display: inline-block;
+  margin: 2px 7px 7px 0 !important;
+  padding: 6px 14px !important;
+  border: 1px solid #46617c !important;
+  border-radius: 999px !important;
+  background: #f5f1e9 !important;
+  color: #294661 !important;
+  font: 21px/1.4 "Huninn", "Noto Sans TC", sans-serif !important;
+  text-align: center;
+  transition: background-color .16s ease, color .16s ease;
+}
+
+a.btn:hover {
+  background: #294661 !important;
+  color: #f5f1e9 !important;
+}
+
+a:focus-visible {
+  outline: 3px solid #bd754c;
+  outline-offset: 3px;
+}
+
+body > br {
+  display: none;
+}
+
+.top-banner,
+.side-art,
+.outcome-pair {
+  margin: 0;
+  padding: 0;
+}
+
+.top-banner {
+  position: relative;
+  width: 100%;
+  margin: 16px auto 0;
+}
+
+.top-banner__image {
+  display: block;
+  width: 100%;
+  max-width: 1080px;
+  height: clamp(230px, 21vw, 350px);
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: center 43%;
+  mix-blend-mode: multiply;
+}
+
+.pixel-accent,
+.box-accent {
+  position: absolute;
+  z-index: 2;
+  object-fit: contain;
+}
+
+.pixel-accent {
+  top: 8%;
+  right: 3%;
+  width: 54px;
+  height: 54px;
+  animation: float-gently 4.4s ease-in-out infinite;
+}
+
+.box-accent {
+  bottom: 8%;
+  top: 50%;
+  right: 0;
+  bottom: auto;
+  left: auto;
+  width: 48px;
+  height: 48px;
+  transform: translateY(-50%);
+  image-rendering: pixelated;
+}
+
+.side-art {
+  display: none;
+  mix-blend-mode: multiply;
+}
+
+.side-art__image,
+.side-result {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.side-result {
+  margin-top: 8px;
+}
+
+.outcome-pair {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 1.6rem auto 2rem;
+}
+
+.outcome-pair img {
+  display: block;
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+@keyframes float-gently {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+@media (min-width: 651px) and (max-width: 1499px) {
+  body {
+    width: min(86vw, 1000px);
+    padding: 20px 0 5rem;
+  }
+
+  .top-banner__image {
+    height: clamp(220px, 25vw, 310px);
+  }
+
+  .pixel-accent {
+    position: fixed;
+    top: 57vh;
+    right: calc((100vw - min(86vw, 1000px))/2 - 18px);
+    width: clamp(68px, 5vw, 88px);
+    height: auto;
+  }
+}
+
+@media (min-width: 1500px) {
+  body {
+    width: min(1600px, calc(100vw - 29vw - 48px));
+    padding: 20px 0 5rem;
+  }
+
+  .side-art {
+    position: fixed;
+    z-index: 0;
+    top: 2vh;
+    bottom: 10vh;
+    display: flex;
+    width: min(12.5vw, 22vh, 320px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+
+  .side-art--left { left: 2vw; }
+  .side-art--right { right: 2vw; }
+
+  .pixel-accent {
+    position: fixed;
+    top: 57vh;
+    right: calc((100vw - min(1600px, calc(100vw - 29vw - 48px)))/2 - 24px);
+    width: clamp(82px, 4.2vw, 108px);
+    height: auto;
+  }
+
+  .outcome-pair { display: none; }
+}
+
+@media (max-width: 650px) {
+  body { padding: 14px 6vw 3rem; }
+
+  h1.n {
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    margin: 1.2rem 0 .25rem !important;
+    padding-top: .6rem !important;
+    font-size: 20px !important;
+    line-height: 1.5 !important;
+  }
+
+  h2.n { font-size: 14px; }
+  .site-header { padding-bottom: 11px; }
+  .site-header__title { font-size: 25px; }
+  .site-header__dedication { font-size: 14px; }
+  a.btn { padding: 4px 10px !important; font-size: 17px !important; }
+  .top-banner { margin-top: 14px; }
+  .top-banner__image { height: auto; max-width: 100%; }
+  .pixel-accent { top: 30%; right: 7%; width: 58px; height: 58px; }
+  .outcome-pair { gap: 3px; margin: 2.5rem auto 1.5rem; }
+  .outcome-pair img { width: 88px; height: 88px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-accent { animation: none; }
+}
